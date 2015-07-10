@@ -5,4 +5,4 @@
  * @author Saleh
  *
  */
-package edu.concordia.lantern;
+package edu.concordia.app.main;

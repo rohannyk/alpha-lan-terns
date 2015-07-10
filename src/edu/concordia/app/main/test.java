@@ -1,4 +1,4 @@
-package edu.concordia.lantern;
+package edu.concordia.app.main;
 
 public class test {
 
