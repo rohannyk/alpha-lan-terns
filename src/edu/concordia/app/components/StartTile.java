@@ -14,6 +14,7 @@ public class StartTile {
   public Vector<String> edgecolour = new Vector<String>(4);
   
   {
+	 
         edgecolour.addElement("RED");
 	    edgecolour.addElement("WHITE");
 	    edgecolour.addElement("BLUE");
