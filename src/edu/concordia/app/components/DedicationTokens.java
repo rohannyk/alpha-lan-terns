@@ -22,7 +22,7 @@ public class DedicationTokens {
 		// creating array of Component objects to hold dedication tokens for four of same color
 		Tokens[] dedicationComponent_4 = new Tokens[8];
 	
-		// initializing Component objects for tokens with four of same color
+		// initializing Component objects for tokens with four of same color cards
 		dedicationComponent_4[0] = new Tokens(8,0);
 		dedicationComponent_4[1] = new Tokens(7,4);
 		dedicationComponent_4[2] = new Tokens(7,0);
