@@ -146,130 +146,130 @@ public LakeTiles(){
 		tile18.addElement(new Boolean(false));
 			
 		Vector tile19 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("BLACK"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREEN"));
-		tile1.addElement(new Boolean(false));
+		tile19.addElement(new String("BLUE"));
+		tile19.addElement(new String("BLACK"));
+		tile19.addElement(new String("WHITE"));
+		tile19.addElement(new String("GREEN"));
+		tile19.addElement(new Boolean(false));
 		
 		Vector tile20 = new Vector(4);
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new Boolean(true));
+		tile20.addElement(new String("RED"));
+		tile20.addElement(new String("GREY"));
+		tile20.addElement(new String("RED"));
+		tile20.addElement(new String("ORANGE"));
+		tile20.addElement(new Boolean(true));
 		
 		Vector tile21 = new Vector(4);
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new Boolean(true));
+		tile21.addElement(new String("ORANGE"));
+		tile21.addElement(new String("BLUE"));
+		tile21.addElement(new String("WHITE"));
+		tile21.addElement(new String("ORANGE"));
+		tile21.addElement(new Boolean(true));
 		
 		Vector tile22 = new Vector(4);
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new Boolean(true));
+		tile22.addElement(new String("RED"));
+		tile22.addElement(new String("GREY"));
+		tile22.addElement(new String("WHITE"));
+		tile22.addElement(new String("PURPLE"));
+		tile22.addElement(new Boolean(true));
 		
 		Vector tile23 = new Vector(4);
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("GREEN"));
-		tile1.addElement(new Boolean(true));
+		tile23.addElement(new String("PURPLE"));
+		tile23.addElement(new String("BLUE"));
+		tile23.addElement(new String("PURPLE"));
+		tile23.addElement(new String("GREEN"));
+		tile23.addElement(new Boolean(true));
 		
 		Vector tile24 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new Boolean(false));
+		tile24.addElement(new String("BLUE"));
+		tile24.addElement(new String("RED"));
+		tile24.addElement(new String("WHITE"));
+		tile24.addElement(new String("GREY"));
+		tile24.addElement(new Boolean(false));
 		
 		Vector tile25 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREEN"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new Boolean(false));
+		tile25.addElement(new String("BLUE"));
+		tile25.addElement(new String("WHITE"));
+		tile25.addElement(new String("GREEN"));
+		tile25.addElement(new String("PURPLE"));
+		tile25.addElement(new Boolean(false));
 		
 		Vector tile26 = new Vector(4);
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new Boolean(true));
+		tile26.addElement(new String("GREY"));
+		tile26.addElement(new String("WHITE"));
+		tile26.addElement(new String("GREY"));
+		tile26.addElement(new String("WHITE"));
+		tile26.addElement(new Boolean(true));
 		
 		Vector tile27 = new Vector(4);
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new Boolean(false));
+		tile27.addElement(new String("PURPLE"));
+		tile27.addElement(new String("GREY"));
+		tile27.addElement(new String("WHITE"));
+		tile27.addElement(new String("ORANGE"));
+		tile27.addElement(new Boolean(false));
 		
 		Vector tile28 = new Vector(4);
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new Boolean(true));
+		tile28.addElement(new String("ORANGE"));
+		tile28.addElement(new String("BLUE"));
+		tile28.addElement(new String("ORANGE"));
+		tile28.addElement(new String("BLUE"));
+		tile28.addElement(new Boolean(true));
 		
 		Vector tile29 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new Boolean(true));
+		tile29.addElement(new String("BLUE"));
+		tile29.addElement(new String("RED"));
+		tile29.addElement(new String("WHITE"));
+		tile29.addElement(new String("GREY"));
+		tile29.addElement(new Boolean(true));
 		
 		Vector tile30 = new Vector(4);
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new Boolean(false));
+		tile30.addElement(new String("RED"));
+		tile30.addElement(new String("ORANGE"));
+		tile30.addElement(new String("PURPLE"));
+		tile30.addElement(new String("WHITE"));
+		tile30.addElement(new Boolean(false));
 		
 		Vector tile31 = new Vector(4);
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new Boolean(false));
+		tile31.addElement(new String("PURPLE"));
+		tile31.addElement(new String("PURPLE"));
+		tile31.addElement(new String("GREY"));
+		tile31.addElement(new String("PURPLE"));
+		tile31.addElement(new Boolean(false));
 		
 		Vector tile32 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new Boolean(false));
+		tile32.addElement(new String("BLUE"));
+		tile32.addElement(new String("WHITE"));
+		tile32.addElement(new String("ORANGE"));
+		tile32.addElement(new String("RED"));
+		tile32.addElement(new Boolean(false));
 		
 		Vector tile33 = new Vector(4);
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new Boolean(false));
+		tile33.addElement(new String("RED"));
+		tile33.addElement(new String("WHITE"));
+		tile33.addElement(new String("GREY"));
+		tile33.addElement(new String("ORANGE"));
+		tile33.addElement(new Boolean(false));
 		
 		Vector tile34 = new Vector(4);
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("RED"));
-		tile1.addElement(new Boolean(false));
+		tile34.addElement(new String("ORANGE"));
+		tile34.addElement(new String("GREY"));
+		tile34.addElement(new String("PURPLE"));
+		tile34.addElement(new String("RED"));
+		tile34.addElement(new Boolean(false));
 		
 		Vector tile35 = new Vector(4);
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("GREY"));
-		tile1.addElement(new String("ORANGE"));
-		tile1.addElement(new Boolean(false));
+		tile35.addElement(new String("BLUE"));
+		tile35.addElement(new String("PURPLE"));
+		tile35.addElement(new String("GREY"));
+		tile35.addElement(new String("ORANGE"));
+		tile35.addElement(new Boolean(false));
 		
 		Vector tile36 = new Vector(4);
-		tile1.addElement(new String("WHITE"));
-		tile1.addElement(new String("GREEN"));
-		tile1.addElement(new String("PURPLE"));
-		tile1.addElement(new String("BLUE"));
-		tile1.addElement(new Boolean(false));
+		tile36.addElement(new String("WHITE"));
+		tile36.addElement(new String("GREEN"));
+		tile36.addElement(new String("PURPLE"));
+		tile36.addElement(new String("BLUE"));
+		tile36.addElement(new Boolean(false));
 		
 		}
 }
