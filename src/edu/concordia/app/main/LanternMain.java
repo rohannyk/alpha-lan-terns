@@ -7,12 +7,16 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import edu.concordia.app.model.GameConfiguration;
+import edu.concordia.app.model.GameInstance;
 /**
  * @author Team E
  */
@@ -46,12 +50,14 @@ public class LanternMain extends JFrame implements ActionListener {
 	private ImageIcon icon;
 	
 	private JButton newGame, loadGame, exitGame;
+	
+	private static int playerNumber;
 
 	/**
 	 * Constructor for an LanternMain.
 	 */
 	public LanternMain() {
-		// TODO Auto-generated constructor stub
+		
 		super("LANTERN:The Harvest Festival");
 		
 		//Exit frame on close
@@ -105,7 +111,9 @@ public class LanternMain extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		LanternMain mainObj = new LanternMain();
 		
-		//createAndShowGui(mainObj);
+		System.out.println("test main "+playerNumber);
+		
+		//mainObj.createAndShowGui(mainObj);
 		
 //		//Exit frame on close
 //		mainObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -178,6 +186,22 @@ public class LanternMain extends JFrame implements ActionListener {
 		if(selectedAction.equals("New Game")){
 			System.out.println(selectedAction);
 			setVisible(false);
+			
+			int playerNumber = getInputNoOfPlayers();
+			
+			//FetchPlayerNumber playerNumberObj = new FetchPlayerNumber();
+			//playerNumber = playerNumberObj.getNumberOfPlayers();
+			
+			// ask user for number of players
+			//set number of players value
+			//int playerNumber = FetchNumOfPlayers();
+			
+			System.out.println("test main "+playerNumber);
+			
+			GameConfiguration config = new GameConfiguration(playerNumber);
+			
+			GameInstance gameObj = new GameInstance(config);
+						
 		}
 		
 		if(selectedAction.equals("Load Game")){
@@ -189,6 +213,49 @@ public class LanternMain extends JFrame implements ActionListener {
 			System.exit(0);
 		}
 		
+	}
+	
+//	public int FetchNumOfPlayers(){
+//		FetchPlayerNumber playerNumberObj = new FetchPlayerNumber();
+//		playerNumber = playerNumberObj.getNumberOfPlayers();
+//		System.out.println("test main "+playerNumber);
+//		
+//		if(playerNumber >= 2){
+//			//playerNumberObj.dispose();
+//		}
+//		
+//		return playerNumber;
+//	}
+	
+	/**
+	 * Gets the user to input a valid no of players (no of players between 2 and 4)
+	 * @return The no of players as input by the user (validated).
+	 */
+	public int getInputNoOfPlayers(){
+		int maxPlayers = 4;
+		int input;
+						
+	    Scanner scanner = new Scanner(System.in);
+	    
+		do {
+			System.out.print("Please enter the no of players (between 2 and " + maxPlayers + ") :");
+			while (!scanner.hasNextInt()) {
+				System.out.println("Invalid input! Please try again:");
+				scanner.next();
+				System.out.print("Please enter the no of players (between 2 and " + maxPlayers + ") :");
+			}
+			
+			input = scanner.nextInt();
+			
+			if(input < 0 || input > maxPlayers){
+				System.out.println("Input must be within the specified range! Please try again:");
+			}
+			
+		} while (input < 2 || input > maxPlayers);
+		
+		scanner.close();
+		
+		return input;
 	}
 
 }
