@@ -3,6 +3,8 @@
  */
 package edu.concordia.app.components;
 
+import java.util.Vector;
+
 /**
  * @author Team E
  * this class is for creating the stacks for dedication tokens 
@@ -16,6 +18,14 @@ public class DedicationTokens {
 
 	// default constructor
 	public DedicationTokens(){}
+	
+	private Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
+	
+	private Vector<Tokens> dedicationTokenSix = new Vector<Tokens>();
+	
+	private Vector<Tokens> dedicationTokenSeven = new Vector<Tokens>();
+	
+	private Vector<Tokens> genericDedicationTokens = new Vector<Tokens>();
 	
 	public void initializeDedicationComponents(){
 	
@@ -69,5 +79,66 @@ public class DedicationTokens {
 		dedicationComponent_extra[1] = new Tokens(4,0);
 		dedicationComponent_extra[2] = new Tokens(4,0);
 	}
+
+	/**
+	 * @return the dedicationTokenFour
+	 */
+	public Vector<Tokens> getDedicationTokenFour() {
+		return dedicationTokenFour;
+	}
+
+	/**
+	 * @param dedicationTokenFour the dedicationTokenFour to set
+	 */
+	public void setDedicationTokenFour(Vector<Tokens> dedicationTokenFour) {
+		this.dedicationTokenFour = dedicationTokenFour;
+	}
+
+	/**
+	 * @return the dedicationTokenSix
+	 */
+	public Vector<Tokens> getDedicationTokenSix() {
+		return dedicationTokenSix;
+	}
+
+	/**
+	 * @param dedicationTokenSix the dedicationTokenSix to set
+	 */
+	public void setDedicationTokenSix(Vector<Tokens> dedicationTokenSix) {
+		this.dedicationTokenSix = dedicationTokenSix;
+	}
+
+	/**
+	 * @return the dedicationTokenSeven
+	 */
+	public Vector<Tokens> getDedicationTokenSeven() {
+		return dedicationTokenSeven;
+	}
+
+	/**
+	 * @param dedicationTokenSeven the dedicationTokenSeven to set
+	 */
+	public void setDedicationTokenSeven(Vector<Tokens> dedicationTokenSeven) {
+		this.dedicationTokenSeven = dedicationTokenSeven;
+	}
+
+	/**
+	 * @return the genericDedicationTokens
+	 */
+	public Vector<Tokens> getGenericDedicationTokens() {
+		return genericDedicationTokens;
+	}
+
+	/**
+	 * @param genericDedicationTokens the genericDedicationTokens to set
+	 */
+	public void setGenericDedicationTokens(Vector<Tokens> genericDedicationTokens) {
+		this.genericDedicationTokens = genericDedicationTokens;
+	}
+	
+	//create getter and setter to get dedicated components
+	//problem to remove particular token object from array
+	
+	
 
 }
