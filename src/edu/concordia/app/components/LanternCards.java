@@ -1,5 +1,7 @@
 package edu.concordia.app.components;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * This class is used to create the Lantern Cards
@@ -11,8 +13,16 @@ package edu.concordia.app.components;
  */
 public class LanternCards {
 	
+	/**
+	 * The color of the Lantern Card
+	 */
 	private Color color;
-	public int numberOfCards;
+	
+	
+	/**
+	 * The number of color lantern cards
+	 */
+	private int numberOfCards;
 	
 	/**
 	 * Default constructor
@@ -33,6 +43,18 @@ public class LanternCards {
 	}
 	
 	/**
+	 * Constructor specifying the color of the Lantern Card. 
+	 * A tile of with a valid color can be created with this constructor.
+	 * @param c An enum type of type 'Color'. 
+	 * It can have the values RED, BLUE, etc as per the definition of the enum TileType.
+	 * @param noOfColoredCards The number of cards for particular color.
+	 */
+	public LanternCards(Color c, int noOfColoredCards){
+		this.color = c;
+		this.numberOfCards = noOfColoredCards;
+	}
+	
+	/**
 	 * Gets the color of the Lantern Cards
 	 * @return The type of the tile (as a enum 'Color' object).
 	 */
@@ -47,6 +69,7 @@ public class LanternCards {
 		RED, ORANGE, PURPLE, WHITE , BLUE, BLACK, GREEN;
 	}
 
+	@XmlAttribute
 	/**
 	 * @return the numberOfCards
 	 */
@@ -60,6 +83,5 @@ public class LanternCards {
 	public void setNumberOfCards(int numberOfCards) {
 		this.numberOfCards = numberOfCards;
 	}
-	
-	
+		
 }
