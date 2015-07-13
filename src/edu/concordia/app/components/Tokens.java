@@ -7,6 +7,15 @@ package edu.concordia.app.components;
  *
  */
 public class Tokens {
+	
+	
+	
+	/**
+	 * 
+	 */
+	public Tokens() {
+		
+	}
 	public Tokens(int value, int dots) {
 		super();
 		this.value = value;
