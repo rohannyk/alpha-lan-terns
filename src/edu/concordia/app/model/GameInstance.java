@@ -73,14 +73,30 @@ public class GameInstance {
 	/**
 	 * 
 	 */
-	private FavorTokens gameFavorTokens;
+	//private FavorTokens gameFavorTokens;
+	private int gameFavorToken = 20;
 	
-	//@XmlElementWrapper(name="dedicationTokens")
-	//@XmlElement(name="dedicationToken")
+	
+	//@XmlElementWrapper(name="gameDedicationTokens")
+	@XmlElement(name="gameDedicationToken")
 	/**
 	 * 
 	 */
 	private DedicationTokens dedicationTokens;
+	
+	private static int gameRedLanternCardCount = 0;
+	
+	private static int gameBlueLanternCardCount = 0;
+	
+	private static int gameOrangeLanternCardCount = 0;
+	
+	private static int gameBlackLanternCardCount = 0;
+	
+	private static int gamePurpleLanternCardCount = 0;
+	
+	private static int gameWhiteLanternCardCount = 0;
+	
+	private static int gameGreenLanternCardCount = 0;
 	
 	/**
 	 * 
@@ -96,7 +112,7 @@ public class GameInstance {
 		this.config = config;
 		this.noOfPlayers = config.NUM_OF_PLAYERS;
 		//gameTileSuite = config.GAME_TOTAL_TILE_SUITE;
-		gameFavorTokens = new FavorTokens();
+		//gameFavorTokens = new FavorTokens();
 		
 		initializeGameData();
 	}
@@ -110,16 +126,16 @@ public class GameInstance {
 		initializeLanternCards();
 		
 		//initialize favor tokens
-		initializeFavorTokens();
+		//initializeFavorTokens();
 		
 		initializeGameTiles();
 		
 		initializeDedicationTokens();
 		
 		//shuffle lake tiles
-		Vector<LakeTiles> shuffledTiles= shuffleTiles(gameTileSuite);
+		//Vector<LakeTiles> shuffledTiles= shuffleTiles(gameTileSuite);
 		
-		gameTilesDrawPile = initializeDrawPileTiles(shuffledTiles);
+		//gameTilesDrawPile = initializeDrawPileTiles(shuffledTiles);
 		
 		
 		//initialize dedicated tokens
@@ -132,7 +148,10 @@ public class GameInstance {
 	private void initializePlayers(){
 		
 		playersList = new Players[config.NUM_OF_PLAYERS];
-		System.out.println("test no. of players "+ playersList.length);
+		for (int i = 0; i < playersList.length; i++) {
+			playersList[i] = new Players(config,i+1);
+		}
+		//System.out.println("test no. of players "+ playersList.length);
 	}
 	
 	private void initializeLanternCards(){
@@ -146,13 +165,14 @@ public class GameInstance {
 		
 	}
 	
-	private void initializeFavorTokens(){
+	/*private void initializeFavorTokens(){
 		//default tokens of new game
-		gameFavorTokens.setFavtoken(20);
-	}
+		gameFavorTokens.setFavtokenCount(20);
+	}*/
 	
 	private void initializeDedicationTokens() {
-		setDedicationTokens(config.DEDICATION_TOKENS);
+		dedicationTokens = config.DEDICATION_TOKENS;
+		//setDedicationTokens(config.DEDICATION_TOKENS);
 	}
 	
 	private void initializeGameTiles(){
@@ -206,18 +226,32 @@ public class GameInstance {
 		this.playerCurrentTurn = playerCurrentTurn;
 	}
 
+//	/**
+//	 * @return the dedicationTokens
+//	 */
+//	public DedicationTokens getDedicationTokens() {
+//		return dedicationTokens;
+//	}
+//
+//	/**
+//	 * @param dedicationTokens the dedicationTokens to set
+//	 */
+//	public void setDedicationTokens(DedicationTokens dedicationTokens) {
+//		this.dedicationTokens = dedicationTokens;
+//	}
+
 	/**
-	 * @return the dedicationTokens
+	 * @return the gameFavorToken
 	 */
-	public DedicationTokens getDedicationTokens() {
-		return dedicationTokens;
+	public int getGameFavorToken() {
+		return gameFavorToken;
 	}
 
 	/**
-	 * @param dedicationTokens the dedicationTokens to set
+	 * @param gameFavorToken the gameFavorToken to set
 	 */
-	public void setDedicationTokens(DedicationTokens dedicationTokens) {
-		this.dedicationTokens = dedicationTokens;
+	public void setGameFavorToken(int gameFavorToken) {
+		this.gameFavorToken = gameFavorToken;
 	}
 
 //	/**

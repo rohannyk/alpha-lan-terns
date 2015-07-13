@@ -69,6 +69,8 @@ public class GameConfiguration {
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
 	protected final DedicationTokens DEDICATION_TOKENS;
+	
+	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 
 	/**
 	 * Default constructor for GameConfiguration class.
@@ -112,68 +114,108 @@ public class GameConfiguration {
 	private Vector<LakeTiles> initializeDefaultTileSuite() {
 		Vector<LakeTiles> tileVector = new Vector<LakeTiles>();
 
-		tileVector.add(new LakeTiles(TileColor.GREEN.toString(),
+		tileVector.add(new LakeTiles(1, TileColor.GREEN.toString(),
 				TileColor.ORANGE.toString(), TileColor.BLUE.toString(),
-				TileColor.BLACK.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.GREEN.toString(), TileColor.RED
+				TileColor.BLACK.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(2, TileColor.GREEN.toString(), TileColor.RED
 				.toString(), TileColor.GREEN.toString(), TileColor.GREEN
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.RED.toString(), TileColor.PURPLE
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(3, TileColor.RED.toString(), TileColor.PURPLE
 				.toString(), TileColor.BLACK.toString(), TileColor.GREEN
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.WHITE.toString(),
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(4, TileColor.WHITE.toString(),
 				TileColor.BLACK.toString(), TileColor.BLACK.toString(),
-				TileColor.ORANGE.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.ORANGE.toString(),
+				TileColor.ORANGE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(5, TileColor.ORANGE.toString(),
 				TileColor.ORANGE.toString(), TileColor.PURPLE.toString(),
-				TileColor.ORANGE.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.RED.toString(), TileColor.PURPLE
+				TileColor.ORANGE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(6, TileColor.RED.toString(), TileColor.PURPLE
 				.toString(), TileColor.GREEN.toString(), TileColor.BLUE
-				.toString(), false));
+				.toString(), false, 0, 0, 0, 0));
 
-		tileVector.add(new LakeTiles(TileColor.WHITE.toString(),
+		tileVector.add(new LakeTiles(7, TileColor.WHITE.toString(),
 				TileColor.GREEN.toString(), TileColor.GREEN.toString(),
-				TileColor.ORANGE.toString(), true));
-		tileVector.add(new LakeTiles(TileColor.WHITE.toString(), TileColor.BLUE
+				TileColor.ORANGE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(8, TileColor.WHITE.toString(), TileColor.BLUE
 				.toString(), TileColor.BLUE.toString(), TileColor.BLACK
-				.toString(), true));
-		tileVector.add(new LakeTiles(TileColor.BLUE.toString(), TileColor.RED
+				.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(9, TileColor.BLUE.toString(), TileColor.RED
 				.toString(), TileColor.PURPLE.toString(), TileColor.WHITE
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.RED.toString(), TileColor.RED
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(10, TileColor.RED.toString(), TileColor.RED
 				.toString(), TileColor.GREEN.toString(), TileColor.BLACK
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.GREEN.toString(),
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(11, TileColor.GREEN.toString(),
 				TileColor.WHITE.toString(), TileColor.RED.toString(),
-				TileColor.ORANGE.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.RED.toString(), TileColor.RED
+				TileColor.ORANGE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(12, TileColor.RED.toString(), TileColor.RED
 				.toString(), TileColor.GREEN.toString(), TileColor.GREEN
-				.toString(), true));
+				.toString(), true, 0, 0, 0, 0));
 
-		tileVector.add(new LakeTiles(TileColor.BLACK.toString(), TileColor.BLUE
+		tileVector.add(new LakeTiles(13, TileColor.BLACK.toString(), TileColor.BLUE
 				.toString(), TileColor.PURPLE.toString(), TileColor.BLUE
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.ORANGE.toString(),
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(14, TileColor.ORANGE.toString(),
 				TileColor.WHITE.toString(), TileColor.PURPLE.toString(),
-				TileColor.WHITE.toString(), true));
-		tileVector.add(new LakeTiles(TileColor.GREEN.toString(), TileColor.BLUE
+				TileColor.WHITE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(15, TileColor.GREEN.toString(), TileColor.BLUE
 				.toString(), TileColor.BLUE.toString(), TileColor.ORANGE
-				.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.WHITE.toString(),
+				.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(16, TileColor.WHITE.toString(),
 				TileColor.GREEN.toString(), TileColor.WHITE.toString(),
-				TileColor.RED.toString(), false));
-		tileVector.add(new LakeTiles(TileColor.PURPLE.toString(),
+				TileColor.RED.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(17, TileColor.PURPLE.toString(),
 				TileColor.GREEN.toString(), TileColor.PURPLE.toString(),
-				TileColor.RED.toString(), true));
-		tileVector.add(new LakeTiles(TileColor.BLUE.toString(), TileColor.GREEN
+				TileColor.RED.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(18, TileColor.BLUE.toString(), TileColor.GREEN
 				.toString(), TileColor.RED.toString(), TileColor.BLACK
-				.toString(), false));
+				.toString(), false, 0, 0, 0, 0));
+		
+		tileVector.add(new LakeTiles(19, TileColor.BLUE.toString(), TileColor.GREEN.toString(), TileColor.BLACK
+				.toString(), TileColor.WHITE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(20, TileColor.RED.toString(), TileColor.ORANGE.toString(), TileColor.BLACK
+				.toString(), TileColor.RED.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(21, TileColor.ORANGE.toString(), TileColor.ORANGE.toString(), TileColor.BLUE
+				.toString(), TileColor.WHITE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(22, TileColor.RED.toString(), TileColor.PURPLE.toString(), TileColor.BLACK
+				.toString(), TileColor.BLACK.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(23, TileColor.PURPLE.toString(), TileColor.GREEN.toString(), TileColor.BLUE
+				.toString(), TileColor.PURPLE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(24, TileColor.BLUE.toString(), TileColor.BLACK.toString(), TileColor.RED
+				.toString(), TileColor.WHITE.toString(), false, 0, 0, 0, 0));
+		
+		tileVector.add(new LakeTiles(25, TileColor.BLUE.toString(), TileColor.PURPLE.toString(), TileColor.WHITE
+				.toString(), TileColor.GREEN.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(26, TileColor.BLACK.toString(), TileColor.WHITE.toString(), TileColor.WHITE
+				.toString(), TileColor.BLACK.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(27, TileColor.PURPLE.toString(), TileColor.ORANGE.toString(), TileColor.BLACK
+				.toString(), TileColor.WHITE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(28, TileColor.ORANGE.toString(), TileColor.BLUE.toString(), TileColor.BLUE
+				.toString(), TileColor.ORANGE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(29, TileColor.BLUE.toString(), TileColor.BLACK.toString(), TileColor.RED
+				.toString(), TileColor.WHITE.toString(), true, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(30, TileColor.RED.toString(), TileColor.WHITE.toString(), TileColor.ORANGE
+				.toString(), TileColor.PURPLE.toString(), false, 0, 0, 0, 0));
+		
+		tileVector.add(new LakeTiles(31, TileColor.PURPLE.toString(), TileColor.PURPLE.toString(), TileColor.PURPLE
+				.toString(), TileColor.BLACK.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(32, TileColor.BLUE.toString(), TileColor.RED.toString(), TileColor.WHITE
+				.toString(), TileColor.ORANGE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(33, TileColor.RED.toString(), TileColor.ORANGE.toString(), TileColor.WHITE
+				.toString(), TileColor.BLACK.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(34, TileColor.ORANGE.toString(), TileColor.RED.toString(), TileColor.BLACK
+				.toString(), TileColor.PURPLE.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(35, TileColor.BLUE.toString(), TileColor.ORANGE.toString(), TileColor.PURPLE
+				.toString(), TileColor.BLACK.toString(), false, 0, 0, 0, 0));
+		tileVector.add(new LakeTiles(36, TileColor.WHITE.toString(), TileColor.BLUE.toString(), TileColor.GREEN
+				.toString(), TileColor.PURPLE.toString(), false, 0, 0, 0, 0));
+		
 		return tileVector;
 	}
 
 	private DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
 
-		DedicationTokens dedicationTokens = new DedicationTokens();
+//		DedicationTokens dedicationTokens = new DedicationTokens();
 
 		Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
 
@@ -302,11 +344,14 @@ public class GameConfiguration {
 		default:
 			break;
 		}
+		
+		DedicationTokens dedicationTokens = new DedicationTokens(dedicationTokenFour, dedicationTokenSix, 
+				dedicationTokenSeven, genericDedicationTokens);
 
-		dedicationTokens.setDedicationTokenFour(dedicationTokenFour);
-		dedicationTokens.setDedicationTokenSix(dedicationTokenSix);
-		dedicationTokens.setDedicationTokenSeven(dedicationTokenSeven);
-		dedicationTokens.setGenericDedicationTokens(genericDedicationTokens);
+//		dedicationTokens.setDedicationTokenFour(dedicationTokenFour);
+//		dedicationTokens.setDedicationTokenSix(dedicationTokenSix);
+//		dedicationTokens.setDedicationTokenSeven(dedicationTokenSeven);
+//		dedicationTokens.setGenericDedicationTokens(genericDedicationTokens);
 
 		return dedicationTokens;
 	}
