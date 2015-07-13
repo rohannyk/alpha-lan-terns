@@ -12,12 +12,16 @@ public class LakeTiles {
 
 	}
 	
-
+	private int tilesId;
 	private String topColor;
 	private String leftColor;
 	private String rightColor;
 	private String bottomColor;
 	private boolean platform;
+	private int topTileId;
+	private int bottomTileId;
+	private int leftTileId;
+	private int rightTileId;
 
 	/**
 	 * @param topColor
@@ -26,23 +30,20 @@ public class LakeTiles {
 	 * @param bottomColor
 	 * @param platform
 	 */
-	public LakeTiles(String topColor, String leftColor, String rightColor,
-			String bottomColor, boolean platform) {
+	public LakeTiles(int tilesId, String topColor, String leftColor, String rightColor,
+			String bottomColor, boolean platform, int topTileId, int bottomTileId, int leftTileId, int rightTileId) {
 		
 		this.topColor = topColor;
 		this.leftColor = leftColor;
 		this.rightColor = rightColor;
 		this.bottomColor = bottomColor;
 		this.platform = platform;
+		this.topTileId = topTileId;
+		this.bottomTileId = topTileId;
+		this.leftTileId = topTileId;
+		this.rightTileId = topTileId;
 	}
 
-
-	/**
-	 * An enum type having the seven colors
-	 */
-	public enum Color {
-		RED, ORANGE, PURPLE, WHITE, BLUE, BLACK, GREEN;
-	}
 
 	
 
@@ -303,6 +304,98 @@ public class LakeTiles {
 		tile36.addElement(new Boolean(false));
 
 	}
+
+	/**
+	 * @return the tilesId
+	 */
+	public int getTilesId() {
+		return tilesId;
+	}
+
+	/**
+	 * @param tilesId the tilesId to set
+	 */
+	public void setTilesId(int tilesId) {
+		this.tilesId = tilesId;
+	}
+
+	/**
+	 * @return the topTileId
+	 */
+	public int getTopTileId() {
+		return topTileId;
+	}
+
+
+
+
+	/**
+	 * @param topTileId the topTileId to set
+	 */
+	public void setTopTileId(int topTileId) {
+		this.topTileId = topTileId;
+	}
+
+
+
+
+	/**
+	 * @return the bottomTileId
+	 */
+	public int getBottomTileId() {
+		return bottomTileId;
+	}
+
+
+
+
+	/**
+	 * @param bottomTileId the bottomTileId to set
+	 */
+	public void setBottomTileId(int bottomTileId) {
+		this.bottomTileId = bottomTileId;
+	}
+
+
+
+
+	/**
+	 * @return the leftTileId
+	 */
+	public int getLeftTileId() {
+		return leftTileId;
+	}
+
+
+
+
+	/**
+	 * @param leftTileId the leftTileId to set
+	 */
+	public void setLeftTileId(int leftTileId) {
+		this.leftTileId = leftTileId;
+	}
+
+
+
+
+	/**
+	 * @return the rightTileId
+	 */
+	public int getRightTileId() {
+		return rightTileId;
+	}
+
+
+
+
+	/**
+	 * @param rightTileId the rightTileId to set
+	 */
+	public void setRightTileId(int rightTileId) {
+		this.rightTileId = rightTileId;
+	}
+
 
 
 
