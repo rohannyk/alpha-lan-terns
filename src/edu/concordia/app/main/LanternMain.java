@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.concordia.app.components.DedicationTokens;
+import edu.concordia.app.components.LanternCards;
+import edu.concordia.app.components.Tokens;
+import edu.concordia.app.controller.GameController;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 /**
@@ -60,48 +65,50 @@ public class LanternMain extends JFrame implements ActionListener {
 		
 		super("LANTERN:The Harvest Festival");
 		
-		//Exit frame on close
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createAndShowGui();
 		
-		 JPanel mainPanel = new JPanel();
-	     mainPanel.setLayout(new FlowLayout());
-
-        JLabel defaultLabel = new JLabel();
-        //defaultLabel.setPreferredSize(new Dimension(630, 500));
-        //getContentPane().add(mainPanel, BorderLayout.CENTER);
-        
-        newGame  = new JButton("New Game");
-        loadGame  = new JButton("Load Game"); 
-        exitGame = new JButton("Exit Game");
-
-        icon = createImageIcon(gameImageFile, imageCaption);
-        
-        defaultLabel.setIcon(icon);
-        
-        
-        add(defaultLabel, BorderLayout.CENTER);
-        add(mainPanel, BorderLayout.SOUTH);
-        
-        // Add buttons to panel
-        mainPanel.add(newGame);
-        mainPanel.add(loadGame);
-        mainPanel.add(exitGame);
-        
-        //Add event listener to buttons
-        newGame.addActionListener(this);
-        loadGame.addActionListener(this);
-        exitGame.addActionListener(this);
-        
-       
-        
-        //position the window
-        setBounds(350,100,2000,1000);
-     // this centers the frame on the screen
-        //setLocationRelativeTo(null);
-
-        //Display the window.
-        pack();
-        setVisible(true);
+//		//Exit frame on close
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		
+//		 JPanel mainPanel = new JPanel();
+//	     mainPanel.setLayout(new FlowLayout());
+//
+//        JLabel defaultLabel = new JLabel();
+//        //defaultLabel.setPreferredSize(new Dimension(630, 500));
+//        //getContentPane().add(mainPanel, BorderLayout.CENTER);
+//        
+//        newGame  = new JButton("New Game");
+//        loadGame  = new JButton("Load Game"); 
+//        exitGame = new JButton("Exit Game");
+//
+//        icon = createImageIcon(gameImageFile, imageCaption);
+//        
+//        defaultLabel.setIcon(icon);
+//        
+//        
+//        add(defaultLabel, BorderLayout.CENTER);
+//        add(mainPanel, BorderLayout.SOUTH);
+//        
+//        // Add buttons to panel
+//        mainPanel.add(newGame);
+//        mainPanel.add(loadGame);
+//        mainPanel.add(exitGame);
+//        
+//        //Add event listener to buttons
+//        newGame.addActionListener(this);
+//        loadGame.addActionListener(this);
+//        exitGame.addActionListener(this);
+//        
+//       
+//        
+//        //position the window
+//        setBounds(350,100,2000,1000);
+//     // this centers the frame on the screen
+//        //setLocationRelativeTo(null);
+//
+//        //Display the window.
+//        pack();
+//        setVisible(true);
 	}
 
 	/**
@@ -127,37 +134,54 @@ public class LanternMain extends JFrame implements ActionListener {
 //        mainObj.setVisible(true);
 	}
 	
-	//private static JFrame createAndShowGui(LanternMain mainObj){
-//		//Exit frame on close
-//				mainObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//				
-//				
-//
-//		        JLabel defaultLabel = new JLabel();
-//		        defaultLabel.setPreferredSize(new Dimension(375, 200));
-//		        mainObj.getContentPane().add(defaultLabel, BorderLayout.CENTER);
-//
-//		        JPanel mainPanel = new JPanel();
-//		        mainPanel.setLayout(new FlowLayout());
-//		        
-//		        
-//                icon = createImageIcon(imagedir + imageFileNames[i], imageCaptions[i]);
-//		        
-//		        mainObj.add(defaultLabel, BorderLayout.CENTER);
-//		        mainObj.add(mainPanel, BorderLayout.SOUTH);
-//		        
-//		       
-//		        
-//		        //position the window
-//		        //mainObj.setBounds(500,100,2000,1000);
-//		     // this centers the frame on the screen
-//		        mainObj.setLocationRelativeTo(null);
-//
-//		        //Display the window.
-//		        mainObj.pack();
-//		        mainObj.setVisible(true);
-//		return mainObj;
-	//}
+	/**
+	 * Create starting GUI of Lantern Game with three option
+	 * New game, Load game and exit game.
+	 */
+	private  void createAndShowGui(){
+		//Exit frame on close
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
+				 JPanel mainPanel = new JPanel();
+			     mainPanel.setLayout(new FlowLayout());
+
+		        JLabel defaultLabel = new JLabel();
+		        //defaultLabel.setPreferredSize(new Dimension(630, 500));
+		        //getContentPane().add(mainPanel, BorderLayout.CENTER);
+		        
+		        newGame  = new JButton("New Game");
+		        loadGame  = new JButton("Load Game"); 
+		        exitGame = new JButton("Exit Game");
+
+		        icon = createImageIcon(gameImageFile, imageCaption);
+		        
+		        defaultLabel.setIcon(icon);
+		        
+		        
+		        add(defaultLabel, BorderLayout.CENTER);
+		        add(mainPanel, BorderLayout.SOUTH);
+		        
+		        // Add buttons to panel
+		        mainPanel.add(newGame);
+		        mainPanel.add(loadGame);
+		        mainPanel.add(exitGame);
+		        
+		        //Add event listener to buttons
+		        newGame.addActionListener(this);
+		        loadGame.addActionListener(this);
+		        exitGame.addActionListener(this);
+		        
+		       
+		        
+		        //position the window
+		        setBounds(350,100,2000,1000);
+		     // this centers the frame on the screen
+		        //setLocationRelativeTo(null);
+
+		        //Display the window.
+		        pack();
+		        setVisible(true);
+	}
 	
 	/**
      * Creates an ImageIcon if the path is valid.
@@ -196,11 +220,20 @@ public class LanternMain extends JFrame implements ActionListener {
 			//set number of players value
 			//int playerNumber = FetchNumOfPlayers();
 			
-			System.out.println("test main "+playerNumber);
+			//System.out.println("test main "+playerNumber);
 			
 			GameConfiguration config = new GameConfiguration(playerNumber);
 			
 			GameInstance gameObj = new GameInstance(config);
+			
+			new GameController(config, gameObj).saveGameToFile("/Users/lovepreet/save.xml");
+			
+			GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
+			
+			Vector<LanternCards> lanternCardsVector = gameInstance.gameLanternSuite;
+			System.out.println(lanternCardsVector);
+			//Vector<Tokens> tokensFour = dTokens.getDedicationTokenFour();
+			//System.out.println(tokensFour);
 						
 		}
 		
