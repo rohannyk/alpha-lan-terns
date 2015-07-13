@@ -1,6 +1,7 @@
 package edu.concordia.app.components;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 
 /**
@@ -54,6 +55,7 @@ public class LanternCards {
 		this.numberOfCards = noOfColoredCards;
 	}
 	
+	@XmlAttribute(name="cardColor")
 	/**
 	 * Gets the color of the Lantern Cards
 	 * @return The type of the tile (as a enum 'Color' object).
@@ -83,5 +85,6 @@ public class LanternCards {
 	public void setNumberOfCards(int numberOfCards) {
 		this.numberOfCards = numberOfCards;
 	}
-		
+	
+	
 }
