@@ -71,5 +71,14 @@ public class TestModel {
 		assertEquals(gc4.DEDICATION_TOKENS,30);
 		
 	 }	
-	
+	 
+	//Test GameConfiguration when created without parameters
+	 public void testGameConfigurationWoParameters()
+	 {
+		 GameConfiguration gc1= new GameConfiguration();
+		 assertEquals(gc1.NUM_OF_PLAYERS,4);
+		 assertEquals(gc1.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,8);
+		 assertEquals(gc1.DEDICATION_TOKENS,30);
+	 }
+	 
 }
