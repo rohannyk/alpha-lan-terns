@@ -54,7 +54,8 @@ public class GameConfiguration {
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_SEVEN = 9;
 
-	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 27;
+	// changed Game_TOTAL_NO_Dedicated_TOKEN to 30
+	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 30;
 
 	// protected int[] gameDedicatedTokenFour = {8,7,6,6,5,4,3,2,1};
 	//
@@ -68,7 +69,8 @@ public class GameConfiguration {
 
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
-	protected final DedicationTokens DEDICATION_TOKENS;
+	//DedicationTokens changed to public from protected
+	public final DedicationTokens DEDICATION_TOKENS;
 	
 	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 

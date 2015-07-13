@@ -60,7 +60,15 @@ public class TestModel {
 		assertEquals(gc3.NUM_OF_PLAYERS,3);
 		assertEquals(gc4.NUM_OF_PLAYERS,4);
 		
+		assertEquals(gc1.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,8);
+		assertEquals(gc2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,5);
+		assertEquals(gc3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,7);
+		assertEquals(gc4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,8);
 		
+		assertEquals(gc1.DEDICATION_TOKENS,30);
+		assertEquals(gc2.DEDICATION_TOKENS,21);
+		assertEquals(gc3.DEDICATION_TOKENS,27);
+		assertEquals(gc4.DEDICATION_TOKENS,30);
 		
 	 }	
 	
