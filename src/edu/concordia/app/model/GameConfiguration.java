@@ -20,42 +20,46 @@ public class GameConfiguration {
 	/**
 	 * The number of players of the game.
 	 */
-	public final int NUM_OF_PLAYERS;
+	public final int NUM_OF_PLAYERS; // No of players playing the game
 
-	public final int NUM_OF_TILES_IN_DRAW_STACK;
+	public final int NUM_OF_TILES_IN_DRAW_STACK; // no of tiles in drawstack
 
-	public final int TOTAL_TILE_CARDS = 36;
+	public final int TOTAL_TILE_CARDS = 36; // Total no of tile cards in game
 
-	public final int START_TILE = 1;
+	public final int START_TILE = 1; // Start tile which determines which player starts game
 
-	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;
+	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR; // no of lantern cards for each color 
 
-	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56;
+	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56; // total lantern cards
 
-	protected static int GAME_BLACK_LANTERN_CARDS = 8;
+	protected static int GAME_BLACK_LANTERN_CARDS = 8; // black color lantern cards
 
-	protected static int GAME_BLUE_LANTERN_CARDS = 8;
+	protected static int GAME_BLUE_LANTERN_CARDS = 8; // blue color lantern cards
 
-	protected static int GAME_GREEN_LANTERN_CARDS = 8;
+	protected static int GAME_GREEN_LANTERN_CARDS = 8;// green color lantern cards
 
-	protected static int GAME_ORANGE_LANTERN_CARDS = 8;
+	protected static int GAME_ORANGE_LANTERN_CARDS = 8;// orange color lantern cards
 
-	protected static int GAME_PURPLE_LANTERN_CARDS = 8;
+	protected static int GAME_PURPLE_LANTERN_CARDS = 8;//purple color lantern cards
 
-	protected static int GAME_RED_LANTERN_CARDS = 8;
+	protected static int GAME_RED_LANTERN_CARDS = 8;// red color lantern cards
 
-	protected static int GAME_WHITE_LANTERN_CARDS = 8;
+	protected static int GAME_WHITE_LANTERN_CARDS = 8; // white color lantern cards
 
-	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3;
+	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3; // generic dedicated tokens
+	
+	/*
+	 * The variables defined below are not concrete. Need to look at it when all scanned copies are available
+	 */
 
-	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_FOUR = 9;
+	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_FOUR = 9; 
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_SIX = 9;
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_SEVEN = 9;
 
-	// changed Game_TOTAL_NO_Dedicated_TOKEN to 30
-	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 30;
+	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 30;// changed Game_TOTAL_NO_Dedicated_TOKEN to 30
+	
 
 	// protected int[] gameDedicatedTokenFour = {8,7,6,6,5,4,3,2,1};
 	//
@@ -65,14 +69,14 @@ public class GameConfiguration {
 	//
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
-	public final int TOTAL_FAVOR_TOKEN = 20;
+	public final int TOTAL_FAVOR_TOKEN = 20; // total favor tokens
 
-	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
+	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE; // total tile suite
 
 	//DedicationTokens changed to public from protected
 	public final DedicationTokens DEDICATION_TOKENS;
 	
-	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
+	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3; // deal tile size initially for a player 
 
 	/**
 	 * Default constructor for GameConfiguration class.
@@ -93,7 +97,7 @@ public class GameConfiguration {
 
 		if (!(numberOfPlayers >= 2 && numberOfPlayers <= 4)) {
 			System.out.println("Invalid no of players. Reset value to 4.");
-			numberOfPlayers = 4;
+			numberOfPlayers = 4;// if no of players are not between 2 to 4 then set it to 4.
 		}
 
 		NUM_OF_PLAYERS = numberOfPlayers;

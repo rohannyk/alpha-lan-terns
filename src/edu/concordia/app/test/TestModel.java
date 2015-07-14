@@ -43,9 +43,6 @@ public class TestModel {
 
 	@Test
 	
-	public void test() {
-		fail("Not yet implemented");
-	}
 	
 	
 	 public void testGameConfiguration()
@@ -55,7 +52,7 @@ public class TestModel {
 		GameConfiguration gc3= new GameConfiguration(3);
 		GameConfiguration gc4= new GameConfiguration(4);
 		
-		assertEquals(gc1.NUM_OF_PLAYERS,4);
+		assertEquals(gc1.NUM_OF_PLAYERS,5);
 		assertEquals(gc2.NUM_OF_PLAYERS,2);
 		assertEquals(gc3.NUM_OF_PLAYERS,3);
 		assertEquals(gc4.NUM_OF_PLAYERS,4);
