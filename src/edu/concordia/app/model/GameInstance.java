@@ -45,7 +45,7 @@ public class GameInstance {
 	/**
 	 * The array to store the player objects.
 	 */
-	private Players[] playersList;
+	public Players[] playersList;
 	
 	@XmlElementWrapper(name="drawPileTiles")
 	@XmlElement(name="tile")
