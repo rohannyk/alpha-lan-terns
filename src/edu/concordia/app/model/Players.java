@@ -24,22 +24,27 @@ public class Players {
 	private GameConfiguration config;
 	
 	@XmlAttribute
-	public int playerNumber; // player number
+	public int playerNumber;
 	
 	@XmlAttribute
-	public int playerScore; // score of player
+	public int playerScore;
 	
-	@XmlElement(name="currentLakeTile")
+	private String faceColor;
+	
+	@XmlAttribute
+	/**
+	 * The player position during the game
+	 */
+	private String playerPosition;
+	
+	//@XmlElement(name="currentLakeTile")
 	private Vector<LakeTiles> currentLakeTilesHold = new Vector<LakeTiles>();
 	
 	//@XmlElement(name="playerDedicationTokens")
 	private DedicationTokens dedicationTokens;
 	//LanternCards lanternCards;
 	
-	/*
-	 * variables defined below are used to keep track of lantern card colors which player holds 
-	 */
-	private int playerRedLanternCardCount = 0;  
+	private int playerRedLanternCardCount = 0;
 	
 	private int playerBlueLanternCardCount = 0;
 	
@@ -55,9 +60,7 @@ public class Players {
 	
 	//--------
 	
-	/*
-	 * attributes defined below keep track of dedication tokens for a player
-	 */
+	
 	private Vector<Tokens> dedicationTokenFour;
 	
 	private Vector<Tokens> dedicationTokenSix;
@@ -103,9 +106,10 @@ public class Players {
 	 * @param config
 	 * @param playerNumber
 	 */
-	public Players(GameConfiguration config, int playerNumber) {
+	public Players(GameConfiguration config, int playerNumber, String playerPosition) {
 		this.config = config;
 		this.playerNumber = playerNumber;
+		this.playerPosition = playerPosition;
 		
 		playerDealTiles = new Vector<LakeTiles>(config.PLAYER_LAKE_TILE_DEAL_SIZE);
 //		setPlayerDealTiles(new Vector<LakeTiles>(config.PLAYER_LAKE_TILE_DEAL_SIZE));
@@ -364,6 +368,24 @@ public class Players {
 	 */
 	public void setDedicationTokens(DedicationTokens dedicationTokens) {
 		this.dedicationTokens = dedicationTokens;
+	}
+
+
+
+	/**
+	 * @return the currentLakeTilesHold
+	 */
+	public Vector<LakeTiles> getCurrentLakeTilesHold() {
+		return currentLakeTilesHold;
+	}
+
+
+
+	/**
+	 * @param currentLakeTilesHold the currentLakeTilesHold to set
+	 */
+	public void setCurrentLakeTilesHold(Vector<LakeTiles> currentLakeTilesHold) {
+		this.currentLakeTilesHold = currentLakeTilesHold;
 	}
 
 
