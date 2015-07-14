@@ -2,6 +2,7 @@
  * 
  */
 package edu.concordia.app.test;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import edu.concordia.app.model.*;
 import edu.concordia.app.controller.*;
+import edu.concordia.app.main.LanternMain;
 import edu.concordia.app.components.*;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -22,323 +24,39 @@ import org.junit.Test;
 public class TestController {
 
 	GameInstance gi;
-	GameController gc;
+	GameConfiguration gc;
+	LanternMain lm;
 	
 	@Before
 	public void setUp(){
-		gc = new GameController();
+		gc = new GameConfiguration();
+		gi = new GameInstance();
+		lm = new LanternMain();
 	}
 	
 	@After
 	public void tearDown(){
 		gc = null;
 		gi = null;
+		lm = null;
 	}
 
 	
 	
 	@Test
 	/**
-	 * Tests the game loading from file functionality
+	 * The test checks the number of players entered by the user
 	 */
 	 
-	public void testLoadGame() {
+	public void testNoOfPlayers() {
 
-		String file1 = "test_file1.xml";
-		String file2 = "test_file2.xml";
-		String file3 = "test_file3.xml";
+		int noOfPlayers = lm.getInputNoOfPlayers();
+		gi = new GameInstance(new GameConfiguration(noOfPlayers));
 		
-		//not yet done
+		assertTrue(gi.playersList.length == noOfPlayers);
+	}
 	}
 		
 		
 		
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
