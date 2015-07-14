@@ -7,58 +7,83 @@ import java.util.Vector;
 
 /**
  * @author Team E
- * DedicationTokens class is for creating the stacks for dedication tokens 
+ * this class is for creating the stacks for dedication tokens 
  * there are 30 dedication tokens and divided into four groups
  * first group of tokens are for four same color cards
  * second group of tokens are for three pair of same color cards
  * third group of tokens are for seven different color of cards
- * fourth group of tokens are generic
+ * fourth group of tokens are extra
  */
-public class DedicationTokens 
-{	
-	// Vector for dedication tokens for four same color cards
-	private Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
+public class DedicationTokens {
+
 	
-	// Vector for dedication tokens for three pair of same color cards
-	private Vector<Tokens> dedicationTokenSix = new Vector<Tokens>();
 	
-	// Vector for dedication tokens for seven different color of cards
-	private Vector<Tokens> dedicationTokenSeven = new Vector<Tokens>();
+//	private Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
+//	
+//	private Vector<Tokens> dedicationTokenSix = new Vector<Tokens>();
+//	
+//	private Vector<Tokens> dedicationTokenSeven = new Vector<Tokens>();
+//	
+//	private Vector<Tokens> genericDedicationTokens = new Vector<Tokens>();
 	
-	// Vector for dedication tokens for generic cards
-	private Vector<Tokens> genericDedicationTokens = new Vector<Tokens>();
+	private Vector<Integer> dedicationTokenFour = new Vector<Integer>();
 	
-	// variables for the sizes for the four different group of dedication tokens
+	private Vector<Integer> dedicationTokenSix = new Vector<Integer>();
+	
+	private Vector<Integer> dedicationTokenSeven = new Vector<Integer>();
+	
+	private Vector<Integer> genericDedicationTokens = new Vector<Integer>();
+	
+	
+	/**
+	 * 
+	 */
 	private int dedicationTokenFourSize;
+	
+	
+	/**
+	 * 
+	 */
 	private int dedicationTokenSixSize;
+	
+	
+	/**
+	 * 
+	 */
 	private int dedicationTokenSevenSize;
+	
+	
+	/**
+	 * 
+	 */
 	private int genericDedicationTokensSize;
 	
 	
-	/**
-	* Constructor
-	*/
-	public DedicationTokens(){
+	
+	
+		/**
+		 * Default Constructor
+		 */
+		public DedicationTokens(){
 			
-		dedicationTokenFourSize = dedicationTokenFour.size();
-		dedicationTokenSixSize = dedicationTokenSix.size();
-		dedicationTokenSevenSize = dedicationTokenSeven.size();
-		genericDedicationTokensSize = genericDedicationTokens.size();
-	}
+			dedicationTokenFourSize = dedicationTokenFour.size();
+			dedicationTokenSixSize = dedicationTokenSix.size();
+			dedicationTokenSevenSize = dedicationTokenSeven.size();
+			genericDedicationTokensSize = genericDedicationTokens.size();
+		}
 	
 	/**
-	* @param dedicationTokenFour
-	* @param dedicationTokenSix
-	* @param dedicationTokenSeven
-	* @param genericDedicationTokens
-	*/
-	public DedicationTokens(Vector<Tokens> dedicationTokenFour,
-							Vector<Tokens> dedicationTokenSix,
-							Vector<Tokens> dedicationTokenSeven,
-							Vector<Tokens> genericDedicationTokens) 
-	{
+		 * @param dedicationTokenFour
+		 * @param dedicationTokenSix
+		 * @param dedicationTokenSeven
+		 * @param genericDedicationTokens
+		 */
+		public DedicationTokens(Vector<Integer> dedicationTokenFour,
+				Vector<Integer> dedicationTokenSix,
+				Vector<Integer> dedicationTokenSeven,
+				Vector<Integer> genericDedicationTokens) {
 			
-			// initialize vectors
+			//Initialize vectors
 			this.dedicationTokenFour = dedicationTokenFour;
 			this.dedicationTokenSix = dedicationTokenSix;
 			this.dedicationTokenSeven = dedicationTokenSeven;
@@ -69,119 +94,66 @@ public class DedicationTokens
 			dedicationTokenSixSize = dedicationTokenSix.size();
 			dedicationTokenSevenSize = dedicationTokenSeven.size();
 			genericDedicationTokensSize = genericDedicationTokens.size();
-	}
-
-	public void initializeDedicationComponents(){
-	
-		// creating array of Component objects to hold dedication tokens for four of same color
-		Tokens[] dedicationComponent_4 = new Tokens[8];
-	
-		// initializing Component objects for tokens with four of same color cards
-		dedicationComponent_4[0] = new Tokens(8,0);
-		dedicationComponent_4[1] = new Tokens(7,4);
-		dedicationComponent_4[2] = new Tokens(7,0);
-		dedicationComponent_4[3] = new Tokens(6,0);
-		dedicationComponent_4[4] = new Tokens(6,3);
-		dedicationComponent_4[5] = new Tokens(5,0);
-		dedicationComponent_4[6] = new Tokens(5,3);
-		dedicationComponent_4[7] = new Tokens(5,0);
-		dedicationComponent_4[8] = new Tokens(4,0);
-	
-		// creating array of Component objects to hold dedication tokens for three pair of same color
-		Tokens[] dedicationComponent_6 = new Tokens[8];
-	
-		// initializing Component objects for tokens with three pair of same color
-		dedicationComponent_6[0] = new Tokens(9,0);
-		dedicationComponent_6[1] = new Tokens(8,4);
-		dedicationComponent_6[2] = new Tokens(8,0);
-		dedicationComponent_6[3] = new Tokens(7,3);
-		dedicationComponent_6[4] = new Tokens(7,0);
-		dedicationComponent_6[5] = new Tokens(6,3);
-		dedicationComponent_6[6] = new Tokens(6,0);
-		dedicationComponent_6[7] = new Tokens(5,0);
-		dedicationComponent_6[8] = new Tokens(5,0);
-
-		// creating array of Component objects to hold dedication tokens for cards of seven different color
-		Tokens[] dedicationComponent_7 = new Tokens[8];
-	
-		// initializing Component objects for tokens with cards of seven different color
-		dedicationComponent_7[0] = new Tokens(10,0);
-		dedicationComponent_7[1] = new Tokens(9,0);
-		dedicationComponent_7[2] = new Tokens(9,0);
-		dedicationComponent_7[3] = new Tokens(8,4);
-		dedicationComponent_7[4] = new Tokens(8,0);
-		dedicationComponent_7[5] = new Tokens(7,3);
-		dedicationComponent_7[6] = new Tokens(7,0);
-		dedicationComponent_7[7] = new Tokens(6,0);
-		dedicationComponent_7[8] = new Tokens(5,0);
-	
-		// creating array of Component objects to hold dedication tokens for cards of extra dedication tokens
-		Tokens[] dedicationComponent_extra = new Tokens[2];
-	
-		// initializing Component objects for tokens with cards of extra dedication tokens
-		dedicationComponent_extra[0] = new Tokens(4,0);
-		dedicationComponent_extra[1] = new Tokens(4,0);
-		dedicationComponent_extra[2] = new Tokens(4,0);
-	}
+		}
 
 	/**
-	 * @return the dedicationTokenFour, which is a Vector of Tokens type 
+	 * @return the dedicationTokenFour
 	 */
-	public Vector<Tokens> getDedicationTokenFour() {
+	public Vector<Integer> getDedicationTokenFour() {
 		return dedicationTokenFour;
 	}
 
 	/**
-	 * @param dedicationTokenFour, the Vector of Tokens type dedicationTokenFour to set
+	 * @param dedicationTokenFour the dedicationTokenFour to set
 	 */
-	public void setDedicationTokenFour(Vector<Tokens> dedicationTokenFour) {
+	public void setDedicationTokenFour(Vector<Integer> dedicationTokenFour) {
 		this.dedicationTokenFour = dedicationTokenFour;
 	}
 
 	/**
-	 * @return the dedicationTokenSix, which is a Vector of Tokens type
+	 * @return the dedicationTokenSix
 	 */
-	public Vector<Tokens> getDedicationTokenSix() {
+	public Vector<Integer> getDedicationTokenSix() {
 		return dedicationTokenSix;
 	}
 
 	/**
-	 * @param dedicationTokenSix, the Vector of Tokens type dedicationTokenSix to set
+	 * @param dedicationTokenSix the dedicationTokenSix to set
 	 */
-	public void setDedicationTokenSix(Vector<Tokens> dedicationTokenSix) {
+	public void setDedicationTokenSix(Vector<Integer> dedicationTokenSix) {
 		this.dedicationTokenSix = dedicationTokenSix;
 	}
 
 	/**
-	 * @return the dedicationTokenSeven, which is a Vector of Tokens type
+	 * @return the dedicationTokenSeven
 	 */
-	public Vector<Tokens> getDedicationTokenSeven() {
+	public Vector<Integer> getDedicationTokenSeven() {
 		return dedicationTokenSeven;
 	}
 
 	/**
-	 * @param dedicationTokenSeven, the Vector of Tokens type dedicationTokenSeven to set
+	 * @param dedicationTokenSeven the dedicationTokenSeven to set
 	 */
-	public void setDedicationTokenSeven(Vector<Tokens> dedicationTokenSeven) {
+	public void setDedicationTokenSeven(Vector<Integer> dedicationTokenSeven) {
 		this.dedicationTokenSeven = dedicationTokenSeven;
 	}
 
 	/**
-	 * @return the genericDedicationTokens, which is a Vector of Tokens type
+	 * @return the genericDedicationTokens
 	 */
-	public Vector<Tokens> getGenericDedicationTokens() {
+	public Vector<Integer> getGenericDedicationTokens() {
 		return genericDedicationTokens;
 	}
 
 	/**
-	 * @param genericDedicationTokens, the Vector of Tokens type genericDedicationTokens to set
+	 * @param genericDedicationTokens the genericDedicationTokens to set
 	 */
-	public void setGenericDedicationTokens(Vector<Tokens> genericDedicationTokens) {
+	public void setGenericDedicationTokens(Vector<Integer> genericDedicationTokens) {
 		this.genericDedicationTokens = genericDedicationTokens;
 	}
 
 	/**
-	 * @return the dedicationTokenFourSize of int type
+	 * @return the dedicationTokenFourSize
 	 */
 	public int getDedicationTokenFourSize() {
 		return dedicationTokenFourSize;
@@ -195,7 +167,7 @@ public class DedicationTokens
 	}
 
 	/**
-	 * @return the dedicationTokenSixSize of int type
+	 * @return the dedicationTokenSixSize
 	 */
 	public int getDedicationTokenSixSize() {
 		return dedicationTokenSixSize;
@@ -209,7 +181,7 @@ public class DedicationTokens
 	}
 
 	/**
-	 * @return the dedicationTokenSevenSize of int type
+	 * @return the dedicationTokenSevenSize
 	 */
 	public int getDedicationTokenSevenSize() {
 		return dedicationTokenSevenSize;
@@ -223,7 +195,7 @@ public class DedicationTokens
 	}
 
 	/**
-	 * @return the genericDedicationTokensSize of int type
+	 * @return the genericDedicationTokensSize
 	 */
 	public int getGenericDedicationTokensSize() {
 		return genericDedicationTokensSize;
@@ -235,8 +207,15 @@ public class DedicationTokens
 	public void setGenericDedicationTokensSize(int genericDedicationTokensSize) {
 		this.genericDedicationTokensSize = genericDedicationTokensSize;
 	}
+
+	
+	
+	
+	
 	
 	//create getter and setter to get dedicated components
 	//problem to remove particular token object from array
 	
+	
+
 }

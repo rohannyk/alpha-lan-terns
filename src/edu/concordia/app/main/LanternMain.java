@@ -230,8 +230,8 @@ public class LanternMain extends JFrame implements ActionListener {
 			
 			GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
 			
-			Vector<LanternCards> lanternCardsVector = gameInstance.gameLanternSuite;
-			System.out.println(lanternCardsVector);
+			//Vector<LanternCards> lanternCardsVector = gameInstance.gameLanternSuite;
+			//System.out.println(lanternCardsVector);
 			//Vector<Tokens> tokensFour = dTokens.getDedicationTokenFour();
 			//System.out.println(tokensFour);
 						
