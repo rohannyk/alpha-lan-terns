@@ -7,54 +7,58 @@ import java.util.Vector;
 
 /**
  * @author Team E
- * this class is for creating the stacks for dedication tokens 
+ * DedicationTokens class is for creating the stacks for dedication tokens 
  * there are 30 dedication tokens and divided into four groups
  * first group of tokens are for four same color cards
  * second group of tokens are for three pair of same color cards
  * third group of tokens are for seven different color of cards
- * fourth group of tokens are extra
+ * fourth group of tokens are generic
  */
-public class DedicationTokens {
-
-	
-	
+public class DedicationTokens 
+{	
+	// Vector for dedication tokens for four same color cards
 	private Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
 	
+	// Vector for dedication tokens for three pair of same color cards
 	private Vector<Tokens> dedicationTokenSix = new Vector<Tokens>();
 	
+	// Vector for dedication tokens for seven different color of cards
 	private Vector<Tokens> dedicationTokenSeven = new Vector<Tokens>();
 	
+	// Vector for dedication tokens for generic cards
 	private Vector<Tokens> genericDedicationTokens = new Vector<Tokens>();
 	
+	// variables for the sizes for the four different group of dedication tokens
 	private int dedicationTokenFourSize;
 	private int dedicationTokenSixSize;
 	private int dedicationTokenSevenSize;
 	private int genericDedicationTokensSize;
 	
 	
-		/**
-		 * Default Constructor
-		 */
-		public DedicationTokens(){
+	/**
+	* Constructor
+	*/
+	public DedicationTokens(){
 			
-			dedicationTokenFourSize = dedicationTokenFour.size();
-			dedicationTokenSixSize = dedicationTokenSix.size();
-			dedicationTokenSevenSize = dedicationTokenSeven.size();
-			genericDedicationTokensSize = genericDedicationTokens.size();
-		}
+		dedicationTokenFourSize = dedicationTokenFour.size();
+		dedicationTokenSixSize = dedicationTokenSix.size();
+		dedicationTokenSevenSize = dedicationTokenSeven.size();
+		genericDedicationTokensSize = genericDedicationTokens.size();
+	}
 	
 	/**
-		 * @param dedicationTokenFour
-		 * @param dedicationTokenSix
-		 * @param dedicationTokenSeven
-		 * @param genericDedicationTokens
-		 */
-		public DedicationTokens(Vector<Tokens> dedicationTokenFour,
-				Vector<Tokens> dedicationTokenSix,
-				Vector<Tokens> dedicationTokenSeven,
-				Vector<Tokens> genericDedicationTokens) {
+	* @param dedicationTokenFour
+	* @param dedicationTokenSix
+	* @param dedicationTokenSeven
+	* @param genericDedicationTokens
+	*/
+	public DedicationTokens(Vector<Tokens> dedicationTokenFour,
+							Vector<Tokens> dedicationTokenSix,
+							Vector<Tokens> dedicationTokenSeven,
+							Vector<Tokens> genericDedicationTokens) 
+	{
 			
-			//Initialize vectors
+			// initialize vectors
 			this.dedicationTokenFour = dedicationTokenFour;
 			this.dedicationTokenSix = dedicationTokenSix;
 			this.dedicationTokenSeven = dedicationTokenSeven;
@@ -65,7 +69,7 @@ public class DedicationTokens {
 			dedicationTokenSixSize = dedicationTokenSix.size();
 			dedicationTokenSevenSize = dedicationTokenSeven.size();
 			genericDedicationTokensSize = genericDedicationTokens.size();
-		}
+	}
 
 	public void initializeDedicationComponents(){
 	
@@ -121,63 +125,63 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenFour
+	 * @return the dedicationTokenFour, which is a Vector of Tokens type 
 	 */
 	public Vector<Tokens> getDedicationTokenFour() {
 		return dedicationTokenFour;
 	}
 
 	/**
-	 * @param dedicationTokenFour the dedicationTokenFour to set
+	 * @param dedicationTokenFour, the Vector of Tokens type dedicationTokenFour to set
 	 */
 	public void setDedicationTokenFour(Vector<Tokens> dedicationTokenFour) {
 		this.dedicationTokenFour = dedicationTokenFour;
 	}
 
 	/**
-	 * @return the dedicationTokenSix
+	 * @return the dedicationTokenSix, which is a Vector of Tokens type
 	 */
 	public Vector<Tokens> getDedicationTokenSix() {
 		return dedicationTokenSix;
 	}
 
 	/**
-	 * @param dedicationTokenSix the dedicationTokenSix to set
+	 * @param dedicationTokenSix, the Vector of Tokens type dedicationTokenSix to set
 	 */
 	public void setDedicationTokenSix(Vector<Tokens> dedicationTokenSix) {
 		this.dedicationTokenSix = dedicationTokenSix;
 	}
 
 	/**
-	 * @return the dedicationTokenSeven
+	 * @return the dedicationTokenSeven, which is a Vector of Tokens type
 	 */
 	public Vector<Tokens> getDedicationTokenSeven() {
 		return dedicationTokenSeven;
 	}
 
 	/**
-	 * @param dedicationTokenSeven the dedicationTokenSeven to set
+	 * @param dedicationTokenSeven, the Vector of Tokens type dedicationTokenSeven to set
 	 */
 	public void setDedicationTokenSeven(Vector<Tokens> dedicationTokenSeven) {
 		this.dedicationTokenSeven = dedicationTokenSeven;
 	}
 
 	/**
-	 * @return the genericDedicationTokens
+	 * @return the genericDedicationTokens, which is a Vector of Tokens type
 	 */
 	public Vector<Tokens> getGenericDedicationTokens() {
 		return genericDedicationTokens;
 	}
 
 	/**
-	 * @param genericDedicationTokens the genericDedicationTokens to set
+	 * @param genericDedicationTokens, the Vector of Tokens type genericDedicationTokens to set
 	 */
 	public void setGenericDedicationTokens(Vector<Tokens> genericDedicationTokens) {
 		this.genericDedicationTokens = genericDedicationTokens;
 	}
 
 	/**
-	 * @return the dedicationTokenFourSize
+	 * @return the dedicationTokenFourSize of int type
 	 */
 	public int getDedicationTokenFourSize() {
 		return dedicationTokenFourSize;
@@ -191,7 +195,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSixSize
+	 * @return the dedicationTokenSixSize of int type
 	 */
 	public int getDedicationTokenSixSize() {
 		return dedicationTokenSixSize;
@@ -205,7 +209,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSevenSize
+	 * @return the dedicationTokenSevenSize of int type
 	 */
 	public int getDedicationTokenSevenSize() {
 		return dedicationTokenSevenSize;
@@ -219,7 +223,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the genericDedicationTokensSize
+	 * @return the genericDedicationTokensSize of int type
 	 */
 	public int getGenericDedicationTokensSize() {
 		return genericDedicationTokensSize;
@@ -235,6 +239,4 @@ public class DedicationTokens {
 	//create getter and setter to get dedicated components
 	//problem to remove particular token object from array
 	
-	
-
 }
