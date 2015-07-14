@@ -20,46 +20,41 @@ public class GameConfiguration {
 	/**
 	 * The number of players of the game.
 	 */
-	public final int NUM_OF_PLAYERS; // No of players playing the game
+	public final int NUM_OF_PLAYERS;
 
-	public final int NUM_OF_TILES_IN_DRAW_STACK; // no of tiles in drawstack
+	public final int NUM_OF_TILES_IN_DRAW_STACK;
 
-	public final int TOTAL_TILE_CARDS = 36; // Total no of tile cards in game
+	public final int TOTAL_TILE_CARDS = 36;
 
-	public final int START_TILE = 1; // Start tile which determines which player starts game
+	public final int START_TILE = 1;
 
-	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR; // no of lantern cards for each color 
+	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;
 
-	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56; // total lantern cards
+	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56;
 
-	protected static int GAME_BLACK_LANTERN_CARDS = 8; // black color lantern cards
+	protected static int GAME_BLACK_LANTERN_CARDS = 8;
 
-	protected static int GAME_BLUE_LANTERN_CARDS = 8; // blue color lantern cards
+	protected static int GAME_BLUE_LANTERN_CARDS = 8;
 
-	protected static int GAME_GREEN_LANTERN_CARDS = 8;// green color lantern cards
+	protected static int GAME_GREEN_LANTERN_CARDS = 8;
 
-	protected static int GAME_ORANGE_LANTERN_CARDS = 8;// orange color lantern cards
+	protected static int GAME_ORANGE_LANTERN_CARDS = 8;
 
-	protected static int GAME_PURPLE_LANTERN_CARDS = 8;//purple color lantern cards
+	protected static int GAME_PURPLE_LANTERN_CARDS = 8;
 
-	protected static int GAME_RED_LANTERN_CARDS = 8;// red color lantern cards
+	protected static int GAME_RED_LANTERN_CARDS = 8;
 
-	protected static int GAME_WHITE_LANTERN_CARDS = 8; // white color lantern cards
+	protected static int GAME_WHITE_LANTERN_CARDS = 8;
 
-	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3; // generic dedicated tokens
-	
-	/*
-	 * The variables defined below are not concrete. Need to look at it when all scanned copies are available
-	 */
+	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3;
 
-	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_FOUR = 9; 
+	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_FOUR = 9;
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_SIX = 9;
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN_SEVEN = 9;
 
-	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 30;// changed Game_TOTAL_NO_Dedicated_TOKEN to 30
-	
+	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 27;
 
 	// protected int[] gameDedicatedTokenFour = {8,7,6,6,5,4,3,2,1};
 	//
@@ -69,14 +64,13 @@ public class GameConfiguration {
 	//
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
-	public final int TOTAL_FAVOR_TOKEN = 20; // total favor tokens
+	public final int TOTAL_FAVOR_TOKEN = 20;
 
-	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE; // total tile suite
+	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
-	//DedicationTokens changed to public from protected
-	public final DedicationTokens DEDICATION_TOKENS;
+	protected final DedicationTokens DEDICATION_TOKENS;
 	
-	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3; // deal tile size initially for a player 
+	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 
 	/**
 	 * Default constructor for GameConfiguration class.
@@ -97,7 +91,7 @@ public class GameConfiguration {
 
 		if (!(numberOfPlayers >= 2 && numberOfPlayers <= 4)) {
 			System.out.println("Invalid no of players. Reset value to 4.");
-			numberOfPlayers = 4;// if no of players are not between 2 to 4 then set it to 4.
+			numberOfPlayers = 4;
 		}
 
 		NUM_OF_PLAYERS = numberOfPlayers;
@@ -223,127 +217,203 @@ public class GameConfiguration {
 
 //		DedicationTokens dedicationTokens = new DedicationTokens();
 
-		Vector<Tokens> dedicationTokenFour = new Vector<Tokens>();
+		Vector<Integer> dedicationTokenFour = new Vector<Integer>();
 
-		Vector<Tokens> dedicationTokenSix = new Vector<Tokens>();
+		Vector<Integer> dedicationTokenSix = new Vector<Integer>();
 
-		Vector<Tokens> dedicationTokenSeven = new Vector<Tokens>();
+		Vector<Integer> dedicationTokenSeven = new Vector<Integer>();
 
-		Vector<Tokens> genericDedicationTokens = new Vector<Tokens>();
+		Vector<Integer> genericDedicationTokens = new Vector<Integer>();
 
 		switch (numberOfPlayers) {
 
 		case 2:
 
 			// dedication token four
-			dedicationTokenFour.add(new Tokens(8, 0));
-			dedicationTokenFour.add(new Tokens(7, 0));
-			dedicationTokenFour.add(new Tokens(6, 0));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(4, 0));
+			dedicationTokenFour.add(8);
+			dedicationTokenFour.add(7);
+			dedicationTokenFour.add(6);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(4);
+			
+//			dedicationTokenFour.add(new Tokens(8, 0));
+//			dedicationTokenFour.add(new Tokens(7, 0));
+//			dedicationTokenFour.add(new Tokens(6, 0));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(4, 0));
 
 			// dedication token six
-			dedicationTokenSix.add(new Tokens(9, 0));
-			dedicationTokenSix.add(new Tokens(8, 0));
-			dedicationTokenSix.add(new Tokens(7, 0));
-			dedicationTokenSix.add(new Tokens(6, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
+			dedicationTokenSix.add(9);
+			dedicationTokenSix.add(8);
+			dedicationTokenSix.add(7);
+			dedicationTokenSix.add(6);
+			dedicationTokenSix.add(5);
+			dedicationTokenSix.add(5);
 
 			// dedication token seven
-			dedicationTokenSeven.add(new Tokens(10, 0));
-			dedicationTokenSeven.add(new Tokens(9, 0));
-			dedicationTokenSeven.add(new Tokens(8, 0));
-			dedicationTokenSeven.add(new Tokens(7, 0));
-			dedicationTokenSeven.add(new Tokens(6, 0));
-			dedicationTokenSeven.add(new Tokens(5, 0));
+			dedicationTokenSeven.add(10);
+			dedicationTokenSeven.add(9);
+			dedicationTokenSeven.add(8);
+			dedicationTokenSeven.add(7);
+			dedicationTokenSeven.add(6);
+			dedicationTokenSeven.add(5);
+			
+//			dedicationTokenSeven.add(new Tokens(10, 0));
+//			dedicationTokenSeven.add(new Tokens(9, 0));
+//			dedicationTokenSeven.add(new Tokens(8, 0));
+//			dedicationTokenSeven.add(new Tokens(7, 0));
+//			dedicationTokenSeven.add(new Tokens(6, 0));
+//			dedicationTokenSeven.add(new Tokens(5, 0));
 
 			// generic dedication token
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
+			
+//			genericDedicationTokens.add(new Tokens(4, 0));
+//			genericDedicationTokens.add(new Tokens(4, 0));
+//			genericDedicationTokens.add(new Tokens(4, 0));
 
 			break;
 
 		case 3:
 
 			// dedication token four
-			dedicationTokenFour.add(new Tokens(8, 0));
-			dedicationTokenFour.add(new Tokens(7, 0));
-			dedicationTokenFour.add(new Tokens(6, 3));
-			dedicationTokenFour.add(new Tokens(6, 0));
-			dedicationTokenFour.add(new Tokens(5, 3));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(4, 0));
+			dedicationTokenFour.add(8);
+			dedicationTokenFour.add(7);
+			dedicationTokenFour.add(6);
+			dedicationTokenFour.add(6);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(4);
+			
+//			dedicationTokenFour.add(new Tokens(8, 0));
+//			dedicationTokenFour.add(new Tokens(7, 0));
+//			dedicationTokenFour.add(new Tokens(6, 3));
+//			dedicationTokenFour.add(new Tokens(6, 0));
+//			dedicationTokenFour.add(new Tokens(5, 3));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(4, 0));
 
 			// dedication token six
-			dedicationTokenSix.add(new Tokens(9, 0));
-			dedicationTokenSix.add(new Tokens(8, 0));
-			dedicationTokenSix.add(new Tokens(7, 3));
-			dedicationTokenSix.add(new Tokens(7, 0));
-			dedicationTokenSix.add(new Tokens(6, 3));
-			dedicationTokenSix.add(new Tokens(6, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
+			dedicationTokenSix.add(9);
+			dedicationTokenSix.add(8);
+			dedicationTokenSix.add(7);
+			dedicationTokenSix.add(7);
+			dedicationTokenSix.add(6);
+			dedicationTokenSix.add(6);
+			dedicationTokenSix.add(5);
+			dedicationTokenSix.add(5);
+			
+//			dedicationTokenSix.add(new Tokens(9, 0));
+//			dedicationTokenSix.add(new Tokens(8, 0));
+//			dedicationTokenSix.add(new Tokens(7, 3));
+//			dedicationTokenSix.add(new Tokens(7, 0));
+//			dedicationTokenSix.add(new Tokens(6, 3));
+//			dedicationTokenSix.add(new Tokens(6, 0));
+//			dedicationTokenSix.add(new Tokens(5, 0));
+//			dedicationTokenSix.add(new Tokens(5, 0));
 
 			// dedication token seven
-			dedicationTokenSeven.add(new Tokens(10, 0));
-			dedicationTokenSeven.add(new Tokens(9, 0));
-			dedicationTokenSeven.add(new Tokens(8, 3));
-			dedicationTokenSeven.add(new Tokens(8, 0));
-			dedicationTokenSeven.add(new Tokens(7, 3));
-			dedicationTokenSeven.add(new Tokens(7, 0));
-			dedicationTokenSeven.add(new Tokens(6, 0));
-			dedicationTokenSeven.add(new Tokens(5, 0));
+			dedicationTokenSeven.add(10);
+			dedicationTokenSeven.add(9);
+			dedicationTokenSeven.add(8);
+			dedicationTokenSeven.add(8);
+			dedicationTokenSeven.add(7);
+			dedicationTokenSeven.add(7);
+			dedicationTokenSeven.add(6);
+			dedicationTokenSeven.add(5);
+			
+//			dedicationTokenSeven.add(new Tokens(10, 0));
+//			dedicationTokenSeven.add(new Tokens(9, 0));
+//			dedicationTokenSeven.add(new Tokens(8, 3));
+//			dedicationTokenSeven.add(new Tokens(8, 0));
+//			dedicationTokenSeven.add(new Tokens(7, 3));
+//			dedicationTokenSeven.add(new Tokens(7, 0));
+//			dedicationTokenSeven.add(new Tokens(6, 0));
+//			dedicationTokenSeven.add(new Tokens(5, 0));
 
 			// generic dedication token
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
 
 			break;
 
 		case 4:
 
 			// dedication token four
-			dedicationTokenFour.add(new Tokens(8, 0));
-			dedicationTokenFour.add(new Tokens(7, 4));
-			dedicationTokenFour.add(new Tokens(7, 0));
-			dedicationTokenFour.add(new Tokens(6, 3));
-			dedicationTokenFour.add(new Tokens(6, 0));
-			dedicationTokenFour.add(new Tokens(5, 3));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(5, 0));
-			dedicationTokenFour.add(new Tokens(4, 0));
+			
+			dedicationTokenFour.add(8);
+			dedicationTokenFour.add(7);
+			dedicationTokenFour.add(7);
+			dedicationTokenFour.add(6);
+			dedicationTokenFour.add(6);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(5);
+			dedicationTokenFour.add(4);
+			
+//			dedicationTokenFour.add(new Tokens(8, 0));
+//			dedicationTokenFour.add(new Tokens(7, 4));
+//			dedicationTokenFour.add(new Tokens(7, 0));
+//			dedicationTokenFour.add(new Tokens(6, 3));
+//			dedicationTokenFour.add(new Tokens(6, 0));
+//			dedicationTokenFour.add(new Tokens(5, 3));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(5, 0));
+//			dedicationTokenFour.add(new Tokens(4, 0));
 
 			// dedication token six
-			dedicationTokenSix.add(new Tokens(9, 0));
-			dedicationTokenSix.add(new Tokens(8, 4));
-			dedicationTokenSix.add(new Tokens(8, 0));
-			dedicationTokenSix.add(new Tokens(7, 3));
-			dedicationTokenSix.add(new Tokens(7, 0));
-			dedicationTokenSix.add(new Tokens(6, 3));
-			dedicationTokenSix.add(new Tokens(6, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
-			dedicationTokenSix.add(new Tokens(5, 0));
+			dedicationTokenSix.add(9);
+			dedicationTokenSix.add(8);
+			dedicationTokenSix.add(8);
+			dedicationTokenSix.add(7);
+			dedicationTokenSix.add(7);
+			dedicationTokenSix.add(6);
+			dedicationTokenSix.add(6);
+			dedicationTokenSix.add(5);
+			dedicationTokenSix.add(5);
+			
+//			dedicationTokenSix.add(new Tokens(9, 0));
+//			dedicationTokenSix.add(new Tokens(8, 4));
+//			dedicationTokenSix.add(new Tokens(8, 0));
+//			dedicationTokenSix.add(new Tokens(7, 3));
+//			dedicationTokenSix.add(new Tokens(7, 0));
+//			dedicationTokenSix.add(new Tokens(6, 3));
+//			dedicationTokenSix.add(new Tokens(6, 0));
+//			dedicationTokenSix.add(new Tokens(5, 0));
+//			dedicationTokenSix.add(new Tokens(5, 0));
 
 			// dedication token seven
-			dedicationTokenSeven.add(new Tokens(10, 0));
-			dedicationTokenSeven.add(new Tokens(9, 4));
-			dedicationTokenSeven.add(new Tokens(9, 0));
-			dedicationTokenSeven.add(new Tokens(8, 3));
-			dedicationTokenSeven.add(new Tokens(8, 0));
-			dedicationTokenSeven.add(new Tokens(7, 3));
-			dedicationTokenSeven.add(new Tokens(7, 0));
-			dedicationTokenSeven.add(new Tokens(6, 0));
-			dedicationTokenSeven.add(new Tokens(5, 0));
+			dedicationTokenSeven.add(10);
+			dedicationTokenSeven.add(9);
+			dedicationTokenSeven.add(9);
+			dedicationTokenSeven.add(8);
+			dedicationTokenSeven.add(8);
+			dedicationTokenSeven.add(7);
+			dedicationTokenSeven.add(7);
+			dedicationTokenSeven.add(6);
+			dedicationTokenSeven.add(5);
+			
+//			dedicationTokenSeven.add(new Tokens(10, 0));
+//			dedicationTokenSeven.add(new Tokens(9, 4));
+//			dedicationTokenSeven.add(new Tokens(9, 0));
+//			dedicationTokenSeven.add(new Tokens(8, 3));
+//			dedicationTokenSeven.add(new Tokens(8, 0));
+//			dedicationTokenSeven.add(new Tokens(7, 3));
+//			dedicationTokenSeven.add(new Tokens(7, 0));
+//			dedicationTokenSeven.add(new Tokens(6, 0));
+//			dedicationTokenSeven.add(new Tokens(5, 0));
 
 			// generic dedication token
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
-			genericDedicationTokens.add(new Tokens(4, 0));
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
+			genericDedicationTokens.add(4);
 
 			break;
 
@@ -353,6 +423,8 @@ public class GameConfiguration {
 		
 		DedicationTokens dedicationTokens = new DedicationTokens(dedicationTokenFour, dedicationTokenSix, 
 				dedicationTokenSeven, genericDedicationTokens);
+		
+		
 
 //		dedicationTokens.setDedicationTokenFour(dedicationTokenFour);
 //		dedicationTokens.setDedicationTokenSix(dedicationTokenSix);
