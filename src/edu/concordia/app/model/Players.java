@@ -24,10 +24,10 @@ public class Players {
 	private GameConfiguration config;
 	
 	@XmlAttribute
-	public int playerNumber;
+	public int playerNumber; // player number
 	
 	@XmlAttribute
-	public int playerScore;
+	public int playerScore; // score of player
 	
 	@XmlElement(name="currentLakeTile")
 	private Vector<LakeTiles> currentLakeTilesHold = new Vector<LakeTiles>();
@@ -36,7 +36,10 @@ public class Players {
 	private DedicationTokens dedicationTokens;
 	//LanternCards lanternCards;
 	
-	private int playerRedLanternCardCount = 0;
+	/*
+	 * variables defined below are used to keep track of lantern card colors which player holds 
+	 */
+	private int playerRedLanternCardCount = 0;  
 	
 	private int playerBlueLanternCardCount = 0;
 	
@@ -52,7 +55,9 @@ public class Players {
 	
 	//--------
 	
-	
+	/*
+	 * attributes defined below keep track of dedication tokens for a player
+	 */
 	private Vector<Tokens> dedicationTokenFour;
 	
 	private Vector<Tokens> dedicationTokenSix;
