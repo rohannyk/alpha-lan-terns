@@ -14,17 +14,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
-//import edu.concordia.app.components.LanternCards.Color;
+
 
 @XmlRootElement
 /**
  * @author TEAM E
+ * Class to create the game object for the lantern game
  *
  */
 public class GameInstance {
 
+	// variable for the game configuration
 	private GameConfiguration config;
 	
+	// variable for default lantern card size
 	private int defaultLanternCardSize;
 	
 	
@@ -34,7 +37,7 @@ public class GameInstance {
 	 * 1 - 4 for players
 	 */
 	private Players playerCurrentTurn;
-//	private int playerCurrentTurn;
+	//	private int playerCurrentTurn;
 	
 	private Players gameStartPlayer;
 	
@@ -82,7 +85,6 @@ public class GameInstance {
 	 */
 	private Vector<LakeTiles> gameTileSuite;
 	
-//	Lantern Card Class
 //	@XmlElementWrapper(name="lanternCardSuite")
 //	@XmlElement(name="lanternCard")
 //	/**
@@ -102,7 +104,7 @@ public class GameInstance {
 	//@XmlElementWrapper(name="gameDedicationTokens")
 	//@XmlElement(name="gameDedicationToken")
 	/**
-	 * 
+	 * object variable for DedicationTokens
 	 */
 	private DedicationTokens dedicationTokens;
 	
@@ -113,70 +115,70 @@ public class GameInstance {
 	
 	//@XmlElement(name="GameRedLanterCard")
 	/**
-	 * 
+	 * count for the red lantern cards for the board
 	 */
 	private  int gameRedLanternCardCount = 0;
 	
 	//@XmlElement(name="GameBlueLanternCard")
 	/**
-	 * 
+	 * count for the blue lantern cards for the board
 	 */
 	private  int gameBlueLanternCardCount = 0;
 	
 	//@XmlElement(name="GameOrangeLanternCard")
 	/**
-	 * 
+	 * count for the orange lantern cards for the board
 	 */
 	private  int gameOrangeLanternCardCount = 0;
 	
 	//@XmlElement(name="GameBlackLanternCard")
 	/**
-	 * 
+	 * count for the black lantern cards for the board
 	 */
 	private  int gameBlackLanternCardCount = 0;
 	
 	//@XmlElement(name="GamePurpleLanternCard")
 	/**
-	 * 
+	 * count for the purple lantern cards for the board
 	 */
 	private  int gamePurpleLanternCardCount = 0;
 	
 	//@XmlElement(name="GameWhiteLanternCard")
 	/**
-	 * 
+	 * count for the white lantern cards for the board
 	 */
 	private  int gameWhiteLanternCardCount = 0;
 	
 	//@XmlElement(name="GameGreenLanternCard")
 	/**
-	 * 
+	 * count for the green lantern cards for the board
 	 */
 	private  int gameGreenLanternCardCount = 0;
 	
 	//next dedication token track
 	
-		/**
-		 * The next value of dedication token with four coins logo
-		 */
-		private int nextDedicationTokenFour;
+	/**
+	* The next value of dedication token with four coins logo
+	*/
+	private int nextDedicationTokenFour;
 		
 		
-		/**
-		 * The next value of dedication token with six coins logo
-		 */
-		private int nextDedicationTokenSix;
+	/**
+	* The next value of dedication token with six coins logo
+	*/
+	private int nextDedicationTokenSix;
 		
 		
-		/**
-		 * The next value of dedication token with seven coins logo
-		 */
-		private int nextDedicationTokenSeven;
+	/**
+	* The next value of dedication token with seven coins logo
+	*/
+	private int nextDedicationTokenSeven;
 		
 		
-		/**
-		 * The next value of generic dedication token
-		 */
-		private int nextGenericDedicationToken;
+	/**
+	* The next value of generic dedication token
+	*/
+	private int nextGenericDedicationToken;
 	
 	/**
 	 * 
@@ -186,7 +188,7 @@ public class GameInstance {
 	}
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public GameInstance(GameConfiguration config) {
 		this.config = config;
@@ -198,6 +200,9 @@ public class GameInstance {
 		initializeGameData();
 	}
 	
+	/**
+	 * initializing the game data
+	 */
 	private void initializeGameData(){
 		
 		//initialize players of the game
@@ -244,7 +249,7 @@ public class GameInstance {
 	}
 	
 	/**
-	 * @param gameStartTile2
+	 * this method assign lantern cards to the players according to the lake tile colors
 	 */
 	private void assignLanternCards() {
 		Players[] totalPlayers = playersList;
@@ -297,6 +302,7 @@ public class GameInstance {
 	}
 
 	/**
+	 * this method determines the player who will start the game
 	 * @param playersList2
 	 * @return
 	 */
@@ -340,6 +346,7 @@ public class GameInstance {
 	}*/
 
 	/**
+	 * this method deals the lake tiles to players, 3 cards to each player
 	 * @param shuffledTiles The shuffled Lake Tiles
 	 * @return The remaining shuffled tiles after the deal
 	 */
@@ -401,6 +408,9 @@ public class GameInstance {
 		//System.out.println("test no. of players "+ playersList.length);
 	}
 	
+	/**
+	 * Initialize the lantern cards of the game.
+	 */
 	private void initializeLanternCards(){
 		
 		/*gameLanternSuite = new Vector<LanternCards>();
@@ -431,6 +441,9 @@ public class GameInstance {
 		gameFavorTokens.setFavtokenCount(20);
 	}*/
 	
+	/**
+	 * Initialize the dedication tokens of the game.
+	 */
 	private void initializeDedicationTokens() {
 		dedicationTokens = config.DEDICATION_TOKENS;
 		
@@ -447,6 +460,9 @@ public class GameInstance {
 		//setDedicationTokens(config.DEDICATION_TOKENS);
 	}
 	
+	/**
+	 * Initialize the lake tiles of the game.
+	 */
 	private void initializeGameTiles(){
 		this.gameTileSuite = config.GAME_TOTAL_TILE_SUITE;
 		
@@ -459,7 +475,7 @@ public class GameInstance {
 		gameStartTile = startTile;
 	}
 	
-	/** This class get colors of start tile and assign face colors to each player
+	/** This method get colors of start tile and assign face colors to each player
 	 * @param gameStartTile
 	 */
 	private void playStartTile(LakeTiles gameStartTile){
@@ -534,11 +550,15 @@ public class GameInstance {
 		 setPlayersList(playersList);
 	}
 	
+	/** This method retunrs the player who will start the game
+	 * @param gameStartTile
+	 */
 	private Players getStartPlayer(Players[] playersList){
 		return gameStartPlayer;
 		
 	}
 	
+	// get a random player number for the start
 	private int getRandomNumber(int playerNum){
 		
 		Random randomNumbers=new Random(0);
@@ -559,7 +579,12 @@ public class GameInstance {
 		Collections.shuffle(tiles);
 		return tiles;
 	}
-
+	
+	/**
+	 * method for the draw pile lake tiles
+	 * @param tiles The vector containing shuffled lake tiles.
+	 * @return Return the vector containing draw pile lake tiles.
+	 */
 	private Vector<LakeTiles> initializeDrawPileTiles(Vector<LakeTiles> shuffledTiles) {
 		List<LakeTiles> tileDrawList= shuffledTiles.subList(0, config.NUM_OF_TILES_IN_DRAW_STACK);
 		
@@ -807,21 +832,5 @@ public class GameInstance {
 	public void setGameTilesDrawPile(Vector<LakeTiles> gameTilesDrawPile) {
 		this.gameTilesDrawPile = gameTilesDrawPile;
 	}
-
-//	/**
-//	 * @return the gameLanternSuite
-//	 */
-//	public Vector<LanternCards> getGameLanternSuite() {
-//		return gameLanternSuite;
-//	}
-//
-//	/**
-//	 * @param gameLanternSuite the gameLanternSuite to set
-//	 */
-//	public void setGameLanternSuite(Vector<LanternCards> gameLanternSuite) {
-//		this.gameLanternSuite = gameLanternSuite;
-//	}
-	
-	
 
 }
