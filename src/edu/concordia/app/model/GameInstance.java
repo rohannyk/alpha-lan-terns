@@ -27,7 +27,7 @@ public class GameInstance {
 
 	private GameConfiguration config;
 	
-	private int defaultLanternCardSize;
+	public int defaultLanternCardSize;
 	
 	/**
 	 * the variable to hold current player
@@ -51,10 +51,11 @@ public class GameInstance {
 	
 	@XmlElementWrapper(name="drawPileTiles")
 	@XmlElement(name="tile")
+	
 	/**
 	 * The vector to store the lake tiles for doing the draw.
-	 */
-	private Vector<LakeTiles> gameTilesDrawPile;
+	 */ 
+	public Vector<LakeTiles> gameTilesDrawPile;
 	
 	//@XmlElementWrapper(name="tileSuite")
 	//@XmlElement(name="tile")

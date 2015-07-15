@@ -65,10 +65,12 @@ public class GameConfiguration {
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
 	public final int TOTAL_FAVOR_TOKEN = 20;
+	
+	public int noOfDrawTileInStack = 0;
 
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
-	protected final DedicationTokens DEDICATION_TOKENS;
+	public final DedicationTokens DEDICATION_TOKENS;
 	
 	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 
@@ -444,7 +446,7 @@ public class GameConfiguration {
 	 */
 
 	private int calculateNoOfDrawTile(int numberOfPlayers) {
-		int noOfDrawTileInStack = 0;
+		
 		switch (numberOfPlayers) {
 		case 2:
 			noOfDrawTileInStack = 16;
