@@ -19,31 +19,31 @@ public class GameConfiguration {
 	/**
 	 * The number of players of the game.
 	 */
-	public final int NUM_OF_PLAYERS;
+	public final int NUM_OF_PLAYERS;// no of players playing game
 
-	public final int NUM_OF_TILES_IN_DRAW_STACK;
+	public final int NUM_OF_TILES_IN_DRAW_STACK;// no of tiles in drawstack
 
-	public final int TOTAL_TILE_CARDS = 36;
+	public final int TOTAL_TILE_CARDS = 36;// total tiles
 
-	public final int START_TILE = 1;
+	public final int START_TILE = 1;// start tile to indicate which players starts
 
-	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;
+	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;// total no of lantern cards
 
 	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56;
 
-	protected  int GAME_BLACK_LANTERN_CARDS = 8;
+	protected  int GAME_BLACK_LANTERN_CARDS = 8;// black lantern cards
 
-	protected  int GAME_BLUE_LANTERN_CARDS = 8;
+	protected  int GAME_BLUE_LANTERN_CARDS = 8;// blue lantern cards
 
-	protected  int GAME_GREEN_LANTERN_CARDS = 8;
+	protected  int GAME_GREEN_LANTERN_CARDS = 8;// green lantern cards
 
-	protected  int GAME_ORANGE_LANTERN_CARDS = 8;
+	protected  int GAME_ORANGE_LANTERN_CARDS = 8;// ornage lantern cards
 
-	protected  int GAME_PURPLE_LANTERN_CARDS = 8;
+	protected  int GAME_PURPLE_LANTERN_CARDS = 8;//purple lantern cards
 
-	protected  int GAME_RED_LANTERN_CARDS = 8;
+	protected  int GAME_RED_LANTERN_CARDS = 8;// red lantern cards
 
-	protected  int GAME_WHITE_LANTERN_CARDS = 8;
+	protected  int GAME_WHITE_LANTERN_CARDS = 8;// white lantern cards
 
 	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3;
 
@@ -63,7 +63,7 @@ public class GameConfiguration {
 	//
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
-	public final int TOTAL_FAVOR_TOKEN = 20;
+	public final int TOTAL_FAVOR_TOKEN = 20;// toal favor tokens
 
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
