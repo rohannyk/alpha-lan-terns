@@ -65,12 +65,12 @@ public class TestComponents {
 			
 			GameConfiguration c4 = new GameConfiguration(4);
 			
-		GameInstance gi4 = new GameInstance(c4);
-		
+			GameInstance gi4 = new GameInstance(c4);
+			Vector<LakeTiles> vlt = gi4.getGameTilesDrawPile();
 			
-			assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, gi4.gameTilesDrawPile.size());
-			assertFalse(gi4.gameTilesDrawPile.size()==10);
-			assertNotNull(gi4.gameTilesDrawPile.size());
+			assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+			assertFalse(vlt.size()==10);
+			assertNotNull(vlt.size());
 			
 		}
 	
@@ -84,9 +84,10 @@ public class TestComponents {
 			
 		GameConfiguration c3 = new GameConfiguration(3);
         GameInstance gi3 = new GameInstance(c3);
-	    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, gi3.gameTilesDrawPile.size());
-		assertFalse(gi3.gameTilesDrawPile.size()==10);
-		assertNotNull(gi3.gameTilesDrawPile.size());
+        Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
+	    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+		assertFalse(vlt.size()==10);
+		assertNotNull(vlt.size());
 		
 		}
 		
@@ -100,9 +101,10 @@ public class TestComponents {
 			
 		GameConfiguration c2 = new GameConfiguration(2);
 	    GameInstance gi2 = new GameInstance(c2);
-	   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, gi2.gameTilesDrawPile.size());
-		assertFalse(gi2.gameTilesDrawPile.size()==10);
-		assertNotNull(gi2.gameTilesDrawPile.size());
+	    Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
+	   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+		assertFalse(vlt.size()==10);
+		assertNotNull(vlt.size());
 		
 		       
 		}
