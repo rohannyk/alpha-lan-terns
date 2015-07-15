@@ -68,7 +68,7 @@ public class TestComponents {
 		GameInstance gi4 = new GameInstance(c4);
 		
 			
-			assertEquals(c4.noOfDrawTileInStack, gi4.gameTilesDrawPile.size());
+			assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, gi4.gameTilesDrawPile.size());
 			assertFalse(gi4.gameTilesDrawPile.size()==10);
 			assertNotNull(gi4.gameTilesDrawPile.size());
 			
@@ -84,7 +84,7 @@ public class TestComponents {
 			
 		GameConfiguration c3 = new GameConfiguration(3);
         GameInstance gi3 = new GameInstance(c3);
-	    assertEquals(c3.noOfDrawTileInStack, gi3.gameTilesDrawPile.size());
+	    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, gi3.gameTilesDrawPile.size());
 		assertFalse(gi3.gameTilesDrawPile.size()==10);
 		assertNotNull(gi3.gameTilesDrawPile.size());
 		
@@ -100,7 +100,7 @@ public class TestComponents {
 			
 		GameConfiguration c2 = new GameConfiguration(2);
 	    GameInstance gi2 = new GameInstance(c2);
-	   	assertEquals(c2.noOfDrawTileInStack, gi2.gameTilesDrawPile.size());
+	   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, gi2.gameTilesDrawPile.size());
 		assertFalse(gi2.gameTilesDrawPile.size()==10);
 		assertNotNull(gi2.gameTilesDrawPile.size());
 		
