@@ -123,19 +123,5 @@ public class TestComponents {
 	   // System.out.println(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 		}
 		
-		
-	
-		public void testConfigWithDedicationTokensFour3()
-		
-		{
-			
-		GameConfiguration c3= new GameConfiguration(3);
-	    GameInstance gi3= new GameInstance(c3);
-	    
-	    assertEquals(c3.DEDICATION_TOKENS, gi3.getNextDedicationTokenFour());
-		
-	   //System.out.println(c3.DEDICATION_TOKENS);
-	  
-		}
-		
+				
 }
