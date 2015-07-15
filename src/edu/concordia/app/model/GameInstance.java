@@ -47,7 +47,7 @@ public class GameInstance {
 	/**
 	 * The array to store the player objects.
 	 */
-	private Players[] playersList;
+	public Players[] playersList;
 	
 	@XmlElementWrapper(name="drawPileTiles")
 	@XmlElement(name="tile")
@@ -248,7 +248,12 @@ public class GameInstance {
 	/**
 	 * Initialize the players of the game.
 	 */
-	private void initializePlayers(){
+	private void initializePlayersReturn(){
+		
+		initializePlayers();	
+	}
+
+	private Players[] initializePlayers(){
 		
 		playersList = new Players[config.NUM_OF_PLAYERS];
 		
@@ -261,7 +266,9 @@ public class GameInstance {
 			for (int i = 0; i < playersList.length; i++) {
 				playersList[i] = new Players(config,i+1, playerPositions[i]);
 			}
-		}		
+		}	
+		
+		return playersList;
 		
 		/*for (int i = 0; i < playersList.length; i++) {
 			System.out.println(playersList[i]);
