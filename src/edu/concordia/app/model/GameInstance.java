@@ -50,7 +50,7 @@ public class GameInstance {
 	/**
 	 * The array to store the player objects.
 	 */
-	private Players[] playersList;
+	public Players[] playersList;
 	
 	/**
 	 * @return the playersList
