@@ -71,7 +71,7 @@ public class GameInstance {
 	/**
 	 * The vector to store the lake tiles for doing the draw.
 	 */
-	public Vector<LakeTiles> gameTilesDrawPile;
+	private Vector<LakeTiles> gameTilesDrawPile;
 	
 	
 
