@@ -16,6 +16,7 @@ import edu.concordia.app.components.LanternCards.Color;
 import edu.concordia.app.components.Tokens;
 
 /**
+ * This class contains information about players
  * @author Team E
  *
  */
@@ -30,9 +31,9 @@ public class Players {
 
 
 	@XmlAttribute
-	public int playerScore;
+	public int playerScore;// score of player 
 	
-	private String faceColor;
+	private String faceColor;// player facing current lake tile color
 	
 	@XmlAttribute
 	/**
@@ -45,7 +46,8 @@ public class Players {
 	
 	//@XmlElement(name="playerDedicationTokens")
 	private DedicationTokens dedicationTokens;
-	//LanternCards lanternCards;
+	
+	//count oflantern cards;
 	
 	private int playerRedLanternCardCount = 0;
 	
@@ -61,7 +63,6 @@ public class Players {
 	
 	private int playerGreenLanternCardCount = 0;
 	
-	//--------
 	
 	
 	private Vector<Tokens> dedicationTokenFour;

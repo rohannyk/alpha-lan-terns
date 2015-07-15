@@ -15,13 +15,11 @@ import edu.concordia.app.controller.GameController;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 /**
+ * This is the main Class
  * @author Team E
  */
 
-/**
- * This is the main GUI class.
- */
-//public class LanternMain extends JFrame implements ActionListener {
+
 public class LanternMain implements ActionListener {
 	
 	/**
