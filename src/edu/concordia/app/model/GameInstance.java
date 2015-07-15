@@ -5,6 +5,7 @@ package edu.concordia.app.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -12,10 +13,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import edu.concordia.app.components.DedicationTokens;
-import edu.concordia.app.components.FavorTokens;
 import edu.concordia.app.components.LakeTiles;
-import edu.concordia.app.components.LanternCards;
-import edu.concordia.app.components.LanternCards.Color;
 //import edu.concordia.app.components.LanternCards.Color;
 
 @XmlRootElement
@@ -27,7 +25,8 @@ public class GameInstance {
 
 	private GameConfiguration config;
 	
-	public int defaultLanternCardSize;
+	private int defaultLanternCardSize;
+	
 	
 	/**
 	 * the variable to hold current player
@@ -37,30 +36,49 @@ public class GameInstance {
 	private Players playerCurrentTurn;
 //	private int playerCurrentTurn;
 	
+	private Players gameStartPlayer;
+	
+	private LakeTiles gameStartTile;
+	
 	/**
 	 * The variable holds the number of players
 	 */
 	private int noOfPlayers;
 	
-	@XmlElementWrapper(name="playersList")
-	@XmlElement(name="player")
+	//@XmlElementWrapper(name="playersList")
+	//@XmlElement(name="player")
 	/**
 	 * The array to store the player objects.
 	 */
-	public Players[] playersList;
-	
-	@XmlElementWrapper(name="drawPileTiles")
-	@XmlElement(name="tile")
+	private Players[] playersList;
 	
 	/**
+	 * @return the playersList
+	 */
+	public Players[] getPlayersList() {
+		return playersList;
+	}
+
+	/**
+	 * @param playersList the playersList to set
+	 */
+	public void setPlayersList(Players[] playersList) {
+		this.playersList = playersList;
+	}
+
+	//@XmlElementWrapper(name="drawPileTiles")
+	//@XmlElement(name="tile")
+	/**
 	 * The vector to store the lake tiles for doing the draw.
-	 */ 
-	public Vector<LakeTiles> gameTilesDrawPile;
+	 */
+	private Vector<LakeTiles> gameTilesDrawPile;
 	
+	
+
 	//@XmlElementWrapper(name="tileSuite")
 	//@XmlElement(name="tile")
 	/**
-	 * The vector to store the complete 36 lake tile.
+	 * The vector to store the complete 36 lake tile and start tile.
 	 */
 	private Vector<LakeTiles> gameTileSuite;
 	
@@ -82,7 +100,7 @@ public class GameInstance {
 	
 	
 	//@XmlElementWrapper(name="gameDedicationTokens")
-	@XmlElement(name="gameDedicationToken")
+	//@XmlElement(name="gameDedicationToken")
 	/**
 	 * 
 	 */
@@ -93,47 +111,47 @@ public class GameInstance {
 	 */
 	private Vector<LakeTiles> currentLakeTilesArrangement = new Vector<LakeTiles>();
 	
-	@XmlElement(name="GameRedLanterCard")
+	//@XmlElement(name="GameRedLanterCard")
 	/**
 	 * 
 	 */
-	private static int gameRedLanternCardCount = 0;
+	private  int gameRedLanternCardCount = 0;
 	
-	@XmlElement(name="GameBlueLanternCard")
+	//@XmlElement(name="GameBlueLanternCard")
 	/**
 	 * 
 	 */
-	private static int gameBlueLanternCardCount = 0;
+	private  int gameBlueLanternCardCount = 0;
 	
-	@XmlElement(name="GameOrangeLanternCard")
+	//@XmlElement(name="GameOrangeLanternCard")
 	/**
 	 * 
 	 */
-	private static int gameOrangeLanternCardCount = 0;
+	private  int gameOrangeLanternCardCount = 0;
 	
-	@XmlElement(name="GameBlackLanternCard")
+	//@XmlElement(name="GameBlackLanternCard")
 	/**
 	 * 
 	 */
-	private static int gameBlackLanternCardCount = 0;
+	private  int gameBlackLanternCardCount = 0;
 	
-	@XmlElement(name="GamePurpleLanternCard")
+	//@XmlElement(name="GamePurpleLanternCard")
 	/**
 	 * 
 	 */
-	private static int gamePurpleLanternCardCount = 0;
+	private  int gamePurpleLanternCardCount = 0;
 	
-	@XmlElement(name="GameWhiteLanternCard")
+	//@XmlElement(name="GameWhiteLanternCard")
 	/**
 	 * 
 	 */
-	private static int gameWhiteLanternCardCount = 0;
+	private  int gameWhiteLanternCardCount = 0;
 	
-	@XmlElement(name="GameGreenLanternCard")
+	//@XmlElement(name="GameGreenLanternCard")
 	/**
 	 * 
 	 */
-	private static int gameGreenLanternCardCount = 0;
+	private  int gameGreenLanternCardCount = 0;
 	
 	//next dedication token track
 	
@@ -193,6 +211,7 @@ public class GameInstance {
 		
 		initializeGameTiles();
 		
+		//initialize dedicated tokens
 		initializeDedicationTokens();
 		
 		//shuffle lake tiles
@@ -205,10 +224,121 @@ public class GameInstance {
 		gameTilesDrawPile = initializeDrawPileTiles(shuffledTilesAfterDeal);
 		
 		System.out.println("deal size"+gameTilesDrawPile.size());
-		//initialize dedicated tokens
+		
+		//reveal all color of start tile
+		//set face color to each player
+		playStartTile(gameStartTile);
+		
+		//determine the start player and also current player
+		gameStartPlayer = determineStartPlayer(playersList);
+		
+		if(gameStartPlayer == null){
+			System.out.println("start player is null.");
+		}
+		
+		//assign lantern cards to players and remove from game stack
+		assignLanternCards();
+		
+		//chooseStartTileOrientation();
 		
 	}
 	
+	/**
+	 * @param gameStartTile2
+	 */
+	private void assignLanternCards() {
+		Players[] totalPlayers = playersList;
+		
+		for (int i = 0; i < totalPlayers.length; i++) {
+			Players player = totalPlayers[i];
+			String lanternColor = player.getFaceColor();
+			
+			if(lanternColor.equals("RED")){
+				//increment player lantern count
+				player.setPlayerRedLanternCardCount(1);
+				
+				//set game lantern count
+				int redCount = getGameRedLanternCardCount();
+				redCount = redCount - 1;
+				this.setGameRedLanternCardCount(redCount);
+				
+			}else if(lanternColor.equals("WHITE")){
+				
+				//increment player lantern count
+				player.setPlayerWhiteLanternCardCount(1);
+				
+				//set game lantern count
+				int whiteCount = getGameWhiteLanternCardCount();
+				whiteCount = whiteCount - 1;
+				this.setGameWhiteLanternCardCount(whiteCount);
+				
+			}else if(lanternColor.equals("BLACK")){
+				
+				//increment player lantern count
+				player.setPlayerBlackLanternCardCount(1);
+				
+				//set game lantern count
+				int blackCount = getGameBlackLanternCardCount();
+				blackCount = blackCount - 1;
+				this.setGameBlackLanternCardCount(blackCount);
+				
+			}else if(lanternColor.equals("BLUE")){
+
+				//increment player lantern count
+				player.setPlayerBlueLanternCardCount(1);
+				
+				//set game lantern count
+				int blueCount = getGameBlueLanternCardCount();
+				blueCount = blueCount - 1;
+				this.setGameBlueLanternCardCount(blueCount);
+			}
+		}
+		
+	}
+
+	/**
+	 * @param playersList2
+	 * @return
+	 */
+	private Players determineStartPlayer(Players[] playersList2) {
+		Players startPlayer = null;
+		
+		for (int i = 0; i < playersList2.length; i++) {
+			Players playerCheck = playersList2[i];
+			//System.out.println(playerCheck.getFaceColor()+" "+playerCheck.getPlayerNumber());
+			if(playerCheck.getFaceColor().equals("RED")){
+			startPlayer = playerCheck;
+			//playerCurrentTurn = playerCheck;
+			setPlayerCurrentTurn(playerCheck);
+			}
+		}
+		//System.out.println("check "+getPlayerCurrentTurn().getPlayerNumber());
+		return startPlayer;
+	}
+
+	/**
+	 * 
+	 */
+	/*private void chooseStartTileOrientation() {
+
+		// int Random = (int)(Math.random()*3);
+		// System.out.println(Random);
+		
+		int startPlr = noOfPlayers;
+
+		Random randomGenerator = new Random();
+
+		//choose random numbers between 0 - 3
+		int randomInt = randomGenerator.nextInt(startPlr - 1);
+		
+		//increase random numbers by 1 to choose range 1 - 4
+		int startPlayer = randomInt + 1;
+		
+		gameStartPlayer = new Players();
+		
+
+	}*/
+
 	/**
 	 * @param shuffledTiles The shuffled Lake Tiles
 	 * @return The remaining shuffled tiles after the deal
@@ -230,8 +360,8 @@ public class GameInstance {
 			player.setCurrentLakeTilesHold(playerTiles);
 		}
 		
-		Vector<LakeTiles> shuffledTilesAfterDeal = shuffledTiles;
-		int shuffledTilesSize = shuffledTiles.size();
+//		Vector<LakeTiles> shuffledTilesAfterDeal = shuffledTiles;
+//		int shuffledTilesSize = shuffledTiles.size();
 		
 		System.out.println("final shuffled tiles size"+shuffledTiles.size());
 		
@@ -248,12 +378,7 @@ public class GameInstance {
 	/**
 	 * Initialize the players of the game.
 	 */
-	private void initializePlayersReturn(){
-		
-		initializePlayers();	
-	}
-
-	private Players[] initializePlayers(){
+	private void initializePlayers(){
 		
 		playersList = new Players[config.NUM_OF_PLAYERS];
 		
@@ -266,9 +391,7 @@ public class GameInstance {
 			for (int i = 0; i < playersList.length; i++) {
 				playersList[i] = new Players(config,i+1, playerPositions[i]);
 			}
-		}	
-		
-		return playersList;
+		}		
 		
 		/*for (int i = 0; i < playersList.length; i++) {
 			System.out.println(playersList[i]);
@@ -326,6 +449,105 @@ public class GameInstance {
 	
 	private void initializeGameTiles(){
 		this.gameTileSuite = config.GAME_TOTAL_TILE_SUITE;
+		
+		//remove start tile from tile suite
+		LakeTiles startTile =  gameTileSuite.remove(0);
+		
+		//System.out.println("start tile "+startTile.getTopColor());
+		
+		// set start tile of game
+		gameStartTile = startTile;
+	}
+	
+	/** This class get colors of start tile and assign face colors to each player
+	 * @param gameStartTile
+	 */
+	private void playStartTile(LakeTiles gameStartTile){
+		
+		int playerNum = noOfPlayers;
+		
+		String firstColor = gameStartTile.getTopColor();
+		String secondColor = gameStartTile.getLeftColor();
+		String thirdColor = gameStartTile.getRightColor();
+		String fourthColor = gameStartTile.getBottomColor();
+		
+		
+		
+		if (playerNum == 2) {
+			int number = getRandomNumber(playerNum);
+
+			if (number == 0) {
+				playersList[number].setFaceColor(firstColor);
+				playersList[1].setFaceColor(fourthColor);
+			}else{
+				playersList[number].setFaceColor(firstColor);
+				playersList[0].setFaceColor(fourthColor);
+			}
+		} else if(playerNum == 3){
+			int number = getRandomNumber(playerNum);
+			
+			if (number == 0) {
+				playersList[number].setFaceColor(firstColor);
+				playersList[1].setFaceColor(thirdColor);
+				playersList[2].setFaceColor(fourthColor);
+			}else if (number == 1) {
+				playersList[0].setFaceColor(secondColor);
+				playersList[number].setFaceColor(firstColor);
+				playersList[2].setFaceColor(thirdColor);
+			}else if (number == 2){
+				playersList[0].setFaceColor(fourthColor);
+				playersList[1].setFaceColor(secondColor);
+				playersList[number].setFaceColor(firstColor);
+			}
+			
+		}else if(playerNum == 4){
+			int number = getRandomNumber(playerNum);
+			
+			if (number == 0) {
+				playersList[number].setFaceColor(firstColor);
+				playersList[1].setFaceColor(thirdColor);
+				playersList[2].setFaceColor(fourthColor);
+				playersList[3].setFaceColor(secondColor);
+			}else if (number == 1) {
+				playersList[0].setFaceColor(secondColor);
+				playersList[number].setFaceColor(firstColor);
+				playersList[2].setFaceColor(thirdColor);
+				playersList[3].setFaceColor(fourthColor);
+			}else if (number == 2){
+				playersList[0].setFaceColor(fourthColor);
+				playersList[1].setFaceColor(secondColor);
+				playersList[number].setFaceColor(firstColor);
+				playersList[3].setFaceColor(thirdColor);
+			}else if (number == 3) {
+				playersList[0].setFaceColor(thirdColor);
+				playersList[1].setFaceColor(fourthColor);
+				playersList[2].setFaceColor(secondColor);
+				playersList[number].setFaceColor(firstColor);
+			}
+		}
+			
+
+		
+		// add start tile to vector contains played lake tiles
+		currentLakeTilesArrangement.addElement(gameStartTile);
+		
+		 setPlayersList(playersList);
+	}
+	
+	private Players getStartPlayer(Players[] playersList){
+		return gameStartPlayer;
+		
+	}
+	
+	private int getRandomNumber(int playerNum){
+		
+		Random randomNumbers=new Random(0);
+				
+		//int random = 1 + randomNumbers.nextInt(4); // number between 1 to 4
+		int random = randomNumbers.nextInt(playerNum);  //number between 0 to 3
+		System.out.println("RANDOM NUMBER "+random);
+		
+		return random;
 	}
 	
 	/**
@@ -375,19 +597,19 @@ public class GameInstance {
 		this.playerCurrentTurn = playerCurrentTurn;
 	}
 
-//	/**
-//	 * @return the dedicationTokens
-//	 */
-//	public DedicationTokens getDedicationTokens() {
-//		return dedicationTokens;
-//	}
-//
-//	/**
-//	 * @param dedicationTokens the dedicationTokens to set
-//	 */
-//	public void setDedicationTokens(DedicationTokens dedicationTokens) {
-//		this.dedicationTokens = dedicationTokens;
-//	}
+	/**
+	 * @return the dedicationTokens
+	 */
+	public DedicationTokens getDedicationTokens() {
+		return dedicationTokens;
+	}
+
+	/**
+	 * @param dedicationTokens the dedicationTokens to set
+	 */
+	public void setDedicationTokens(DedicationTokens dedicationTokens) {
+		this.dedicationTokens = dedicationTokens;
+	}
 
 	/**
 	 * @return the gameFavorToken
@@ -457,6 +679,133 @@ public class GameInstance {
 	 */
 	public void setNextGenericDedicationToken(int nextGenericDedicationToken) {
 		this.nextGenericDedicationToken = nextGenericDedicationToken;
+	}
+
+	/**
+	 * @return the gameRedLanternCardCount
+	 */
+	public  int getGameRedLanternCardCount() {
+		return gameRedLanternCardCount;
+	}
+
+	/**
+	 * @param gameRedLanternCardCount the gameRedLanternCardCount to set
+	 */
+	public  void setGameRedLanternCardCount(int gameRedLanternCardCount) {
+		this.gameRedLanternCardCount = gameRedLanternCardCount;
+	}
+
+	/**
+	 * @return the gameBlueLanternCardCount
+	 */
+	public  int getGameBlueLanternCardCount() {
+		return gameBlueLanternCardCount;
+	}
+
+	/**
+	 * @param gameBlueLanternCardCount the gameBlueLanternCardCount to set
+	 */
+	public  void setGameBlueLanternCardCount(int gameBlueLanternCardCount) {
+		this.gameBlueLanternCardCount = gameBlueLanternCardCount;
+	}
+
+	/**
+	 * @return the gameOrangeLanternCardCount
+	 */
+	public  int getGameOrangeLanternCardCount() {
+		return gameOrangeLanternCardCount;
+	}
+
+	/**
+	 * @param gameOrangeLanternCardCount the gameOrangeLanternCardCount to set
+	 */
+	public  void setGameOrangeLanternCardCount(int gameOrangeLanternCardCount) {
+		this.gameOrangeLanternCardCount = gameOrangeLanternCardCount;
+	}
+
+	/**
+	 * @return the gameBlackLanternCardCount
+	 */
+	public  int getGameBlackLanternCardCount() {
+		return gameBlackLanternCardCount;
+	}
+
+	/**
+	 * @param gameBlackLanternCardCount the gameBlackLanternCardCount to set
+	 */
+	public  void setGameBlackLanternCardCount(int gameBlackLanternCardCount) {
+		this.gameBlackLanternCardCount = gameBlackLanternCardCount;
+	}
+
+	/**
+	 * @return the gamePurpleLanternCardCount
+	 */
+	public  int getGamePurpleLanternCardCount() {
+		return gamePurpleLanternCardCount;
+	}
+
+	/**
+	 * @param gamePurpleLanternCardCount the gamePurpleLanternCardCount to set
+	 */
+	public  void setGamePurpleLanternCardCount(int gamePurpleLanternCardCount) {
+		this.gamePurpleLanternCardCount = gamePurpleLanternCardCount;
+	}
+
+	/**
+	 * @return the gameWhiteLanternCardCount
+	 */
+	public  int getGameWhiteLanternCardCount() {
+		return gameWhiteLanternCardCount;
+	}
+
+	/**
+	 * @param gameWhiteLanternCardCount the gameWhiteLanternCardCount to set
+	 */
+	public  void setGameWhiteLanternCardCount(int gameWhiteLanternCardCount) {
+		this.gameWhiteLanternCardCount = gameWhiteLanternCardCount;
+	}
+
+	/**
+	 * @return the gameGreenLanternCardCount
+	 */
+	public  int getGameGreenLanternCardCount() {
+		return gameGreenLanternCardCount;
+	}
+
+	/**
+	 * @param gameGreenLanternCardCount the gameGreenLanternCardCount to set
+	 */
+	public  void setGameGreenLanternCardCount(int gameGreenLanternCardCount) {
+		this.gameGreenLanternCardCount = gameGreenLanternCardCount;
+	}
+
+	/**
+	 * @return the currentLakeTilesArrangement
+	 */
+	public Vector<LakeTiles> getCurrentLakeTilesArrangement() {
+		return currentLakeTilesArrangement;
+	}
+
+	/**
+	 * @param currentLakeTilesArrangement the currentLakeTilesArrangement to set
+	 */
+	public void setCurrentLakeTilesArrangement(
+			Vector<LakeTiles> currentLakeTilesArrangement) {
+		this.currentLakeTilesArrangement = currentLakeTilesArrangement;
+	}
+	
+	/**
+	 * @return the gameTilesDrawPile
+	 */
+	public Vector<LakeTiles> getGameTilesDrawPile() {
+		return gameTilesDrawPile;
+	}
+
+	/**
+	 * @param gameTilesDrawPile the gameTilesDrawPile to set
+	 */
+	public void setGameTilesDrawPile(Vector<LakeTiles> gameTilesDrawPile) {
+		this.gameTilesDrawPile = gameTilesDrawPile;
 	}
 
 //	/**
