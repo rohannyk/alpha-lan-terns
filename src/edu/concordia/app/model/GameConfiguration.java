@@ -7,7 +7,6 @@ import java.util.Vector;
 
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
-import edu.concordia.app.components.Tokens;
 
 /**
  * This class contain the configuration parameters of Lantern Game.
@@ -32,19 +31,19 @@ public class GameConfiguration {
 
 	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56;
 
-	protected static int GAME_BLACK_LANTERN_CARDS = 8;
+	protected  int GAME_BLACK_LANTERN_CARDS = 8;
 
-	protected static int GAME_BLUE_LANTERN_CARDS = 8;
+	protected  int GAME_BLUE_LANTERN_CARDS = 8;
 
-	protected static int GAME_GREEN_LANTERN_CARDS = 8;
+	protected  int GAME_GREEN_LANTERN_CARDS = 8;
 
-	protected static int GAME_ORANGE_LANTERN_CARDS = 8;
+	protected  int GAME_ORANGE_LANTERN_CARDS = 8;
 
-	protected static int GAME_PURPLE_LANTERN_CARDS = 8;
+	protected  int GAME_PURPLE_LANTERN_CARDS = 8;
 
-	protected static int GAME_RED_LANTERN_CARDS = 8;
+	protected  int GAME_RED_LANTERN_CARDS = 8;
 
-	protected static int GAME_WHITE_LANTERN_CARDS = 8;
+	protected  int GAME_WHITE_LANTERN_CARDS = 8;
 
 	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3;
 
@@ -65,12 +64,10 @@ public class GameConfiguration {
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
 	public final int TOTAL_FAVOR_TOKEN = 20;
-	
-	public int noOfDrawTileInStack = 0;
 
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
-	public final DedicationTokens DEDICATION_TOKENS;
+	protected final DedicationTokens DEDICATION_TOKENS;
 	
 	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 
@@ -116,6 +113,9 @@ public class GameConfiguration {
 	private Vector<LakeTiles> initializeDefaultTileSuite() {
 		Vector<LakeTiles> tileVector = new Vector<LakeTiles>();
 
+		tileVector.add(new LakeTiles(0, TileColor.RED.toString(),
+				TileColor.BLUE.toString(), TileColor.WHITE.toString(),
+				TileColor.BLACK.toString(), false, 0, 0, 0, 0));
 		tileVector.add(new LakeTiles(1, TileColor.GREEN.toString(),
 				TileColor.ORANGE.toString(), TileColor.BLUE.toString(),
 				TileColor.BLACK.toString(), false, 0, 0, 0, 0));
@@ -215,7 +215,7 @@ public class GameConfiguration {
 		return tileVector;
 	}
 
-	public DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
+	private DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
 
 //		DedicationTokens dedicationTokens = new DedicationTokens();
 
@@ -446,7 +446,7 @@ public class GameConfiguration {
 	 */
 
 	private int calculateNoOfDrawTile(int numberOfPlayers) {
-		
+		int noOfDrawTileInStack = 0;
 		switch (numberOfPlayers) {
 		case 2:
 			noOfDrawTileInStack = 16;
