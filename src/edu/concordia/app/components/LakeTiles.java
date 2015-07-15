@@ -41,6 +41,7 @@ public class LakeTiles {
 	public LakeTiles(int tilesId, String topColor, String leftColor, String rightColor,
 			String bottomColor, boolean platform, int topTileId, int bottomTileId, int leftTileId, int rightTileId) {
 		
+		this.tilesId =tilesId;
 		this.topColor = topColor;
 		this.leftColor = leftColor;
 		this.rightColor = rightColor;
