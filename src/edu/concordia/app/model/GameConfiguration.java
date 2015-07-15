@@ -444,7 +444,7 @@ public class GameConfiguration {
 	 *            The no of players in the game.
 	 * @return Returns the no of tiles in the draw stack.
 	 */
-	public int noOfDrawTileInStack = 0;
+	//public int noOfDrawTileInStack = 0;
 	private int calculateNoOfDrawTile(int numberOfPlayers) {
 		int noOfDrawTileInStack = 0;
 		switch (numberOfPlayers) {
