@@ -24,7 +24,7 @@ public class Players {
 	private GameConfiguration config;
 	
 	//@XmlAttribute
-	public int playerNumber;
+	private int playerNumber;
 	
 
 
