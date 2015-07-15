@@ -23,9 +23,12 @@ public class Players {
 
 	private GameConfiguration config;
 	
-	@XmlAttribute
+	//@XmlAttribute
 	public int playerNumber;
 	
+
+
+
 	@XmlAttribute
 	public int playerScore;
 	
@@ -390,21 +393,39 @@ public class Players {
 
 
 
-//	/**
-//	 * @return the playerNumber
-//	 */
-//	public int getPlayerNumber() {
-//		return playerNumber;
-//	}
-//
-//
-//
-//	/**
-//	 * @param playerNumber the playerNumber to set
-//	 */
-//	public void setPlayerNumber(int playerNumber) {
-//		this.playerNumber = playerNumber;
-//	}
+	/**
+	 * @return the playerNumber
+	 */
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+
+
+	/**
+	 * @param playerNumber the playerNumber to set
+	 */
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
+
+
+
+	/**
+	 * @return the faceColor
+	 */
+	public String getFaceColor() {
+		return faceColor;
+	}
+
+
+
+	/**
+	 * @param faceColor the faceColor to set
+	 */
+	public void setFaceColor(String faceColor) {
+		this.faceColor = faceColor;
+	}
 
 
 
