@@ -5,10 +5,13 @@ package edu.concordia.app.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Vector;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 
@@ -40,7 +43,8 @@ public class TestLakeTiles {
 		
 		GameConfiguration c4 = new GameConfiguration(4);
 		GameInstance gi4 = new GameInstance(c4);
-		assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, gi4.gameTilesDrawPile.size());
+		Vector<LakeTiles> vlt = gi4.getGameTilesDrawPile();
+		assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
 		
 	}
 	
@@ -51,7 +55,8 @@ public class TestLakeTiles {
 		
 	GameConfiguration c3 = new GameConfiguration(3);
     GameInstance gi3 = new GameInstance(c3);
-    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, gi3.gameTilesDrawPile.size());
+    Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
+    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
 	}
 	
 	
@@ -60,7 +65,8 @@ public class TestLakeTiles {
 		
 	GameConfiguration c2 = new GameConfiguration(2);
     GameInstance gi2 = new GameInstance(c2);
-   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, gi2.gameTilesDrawPile.size());
+    Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
+   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
 	       
 	}
 	
