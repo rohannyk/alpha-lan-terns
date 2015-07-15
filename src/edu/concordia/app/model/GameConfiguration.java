@@ -215,7 +215,7 @@ public class GameConfiguration {
 		return tileVector;
 	}
 
-	private DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
+	public DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
 
 //		DedicationTokens dedicationTokens = new DedicationTokens();
 

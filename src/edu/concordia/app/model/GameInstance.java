@@ -25,7 +25,7 @@ public class GameInstance {
 
 	private GameConfiguration config;
 	
-	private int defaultLanternCardSize;
+	public int defaultLanternCardSize;
 	
 	//@XmlElement
 	/**
@@ -71,7 +71,7 @@ public class GameInstance {
 	/**
 	 * The vector to store the lake tiles for doing the draw.
 	 */
-	private Vector<LakeTiles> gameTilesDrawPile;
+	public Vector<LakeTiles> gameTilesDrawPile;
 	
 	
 
