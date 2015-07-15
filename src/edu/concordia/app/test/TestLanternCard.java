@@ -45,7 +45,7 @@ public class TestLanternCard {
 	GameConfiguration c3= new GameConfiguration(3);
     GameInstance gi3= new GameInstance(c3);
     
-  assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi3.defaultLanternCardSize);
+  assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi3.getDefaultLanternCardSize());
 	
     //System.out.println(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
@@ -58,7 +58,7 @@ public class TestLanternCard {
 	GameConfiguration c4= new GameConfiguration(4);
     GameInstance gi4= new GameInstance(c4);
     
-  assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi4.defaultLanternCardSize);
+  assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi4.getDefaultLanternCardSize());
 	
     //System.out.println(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
@@ -71,7 +71,7 @@ public class TestLanternCard {
 	GameConfiguration c2= new GameConfiguration(2);
     GameInstance gi2= new GameInstance(c2);
     
-  assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi2.defaultLanternCardSize);
+  assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi2.getDefaultLanternCardSize());
 	
    // System.out.println(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}

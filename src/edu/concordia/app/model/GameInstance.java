@@ -25,7 +25,7 @@ public class GameInstance {
 
 	private GameConfiguration config;
 	
-	public int defaultLanternCardSize;
+	private int defaultLanternCardSize;
 	
 	//@XmlElement
 	/**
@@ -876,6 +876,20 @@ public class GameInstance {
 	 */
 	public void setPlayerPositions(String[] playerPositions) {
 		this.playerPositions = playerPositions;
+	}
+
+	/**
+	 * @return the defaultLanternCardSize
+	 */
+	public int getDefaultLanternCardSize() {
+		return defaultLanternCardSize;
+	}
+
+	/**
+	 * @param defaultLanternCardSize the defaultLanternCardSize to set
+	 */
+	public void setDefaultLanternCardSize(int defaultLanternCardSize) {
+		this.defaultLanternCardSize = defaultLanternCardSize;
 	}
 	
 	
