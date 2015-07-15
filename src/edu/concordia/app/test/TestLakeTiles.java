@@ -40,7 +40,7 @@ public class TestLakeTiles {
 		
 		GameConfiguration c4 = new GameConfiguration(4);
 		GameInstance gi4 = new GameInstance(c4);
-		assertEquals(c4.noOfDrawTileInStack, gi4.gameTilesDrawPile.size());
+		assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, gi4.gameTilesDrawPile.size());
 		
 	}
 	
@@ -51,7 +51,7 @@ public class TestLakeTiles {
 		
 	GameConfiguration c3 = new GameConfiguration(3);
     GameInstance gi3 = new GameInstance(c3);
-    assertEquals(c3.noOfDrawTileInStack, gi3.gameTilesDrawPile.size());
+    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, gi3.gameTilesDrawPile.size());
 	}
 	
 	
@@ -60,9 +60,8 @@ public class TestLakeTiles {
 		
 	GameConfiguration c2 = new GameConfiguration(2);
     GameInstance gi2 = new GameInstance(c2);
-   	assertEquals(c2.noOfDrawTileInStack, gi2.gameTilesDrawPile.size());
+   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, gi2.gameTilesDrawPile.size());
 	       
 	}
 	
-
 }
