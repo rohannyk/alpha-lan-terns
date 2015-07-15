@@ -12,7 +12,8 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ TestComponents.class, TestController.class})
+@SuiteClasses({ TestDedicationTokens.class, TestFavorTokens.class, TestLakeTiles.class, 
+				TestPlayers.class})
 public class AllTests {
 
 }
