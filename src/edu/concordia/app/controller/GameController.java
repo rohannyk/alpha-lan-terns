@@ -48,12 +48,29 @@ public class GameController {
 		this.gameInstance = gameInstance;
 	}
 	
+	public String getFileName(){
+		System.out.println("Please enter file name : ");
+		String s = null;
+		try{
+		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+		    s = bufferRead.readLine();
+	 
+		    System.out.println(s);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return s;
+	}
+	
 	/**
 	 * @param gameFile
 	 */
 	public void saveGameToFile(String fileName){
 		File file;
-		
+		//fileName = getFileName();
 		/*System.out.println("Please enter file name : ");
 		 
 		try{
@@ -86,7 +103,7 @@ public class GameController {
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			
-			marshaller.marshal(this.gameInstance, System.out);
+			//marshaller.marshal(this.gameInstance, System.out);
 			marshaller.marshal(this.gameInstance, gameFile);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -117,6 +134,8 @@ public class GameController {
 		} catch (Exception e) { 
 			e.printStackTrace();
 		}
+		
+		this.gameInstance = gameInstance;
 		
 		return gameInstance;
 	}

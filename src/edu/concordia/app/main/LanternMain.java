@@ -14,12 +14,15 @@ import javax.swing.JButton;
 import edu.concordia.app.controller.GameController;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
+import edu.concordia.app.model.Players;
 /**
- * This is the main Class
  * @author Team E
  */
 
-
+/**
+ * This is the main GUI class.
+ */
+//public class LanternMain extends JFrame implements ActionListener {
 public class LanternMain implements ActionListener {
 	
 	/**
@@ -77,11 +80,13 @@ public class LanternMain implements ActionListener {
 		System.out.println("Press 1 to Load saved Game.");
 		System.out.println("Press 2 to Exit Game.");
 		
+		GameController gameController = null;
+		
 		int input;
 		
 		Scanner scanner = new Scanner(System.in);
 	   int response = scanner.nextInt();
-		//do {
+		
 			
 			if(response == 0){
 				
@@ -94,70 +99,49 @@ public class LanternMain implements ActionListener {
 				GameInstance gameObj = new GameInstance(config);
 								
 				
-				GameController gameControl = new GameController(config, gameObj);
+				 gameController = new GameController(config, gameObj);
 				
-				gameControl.showTextMode();
+				 gameController.showTextMode();
 				
-				
-				
-				//do{
-				
-				System.out.println("Please enter your choice:");
-				
-				System.out.println("3:Do you want to save the game?(yes/no)");
-				
-				System.out.println("4:Show game state in text mode.");
-				
-				//get choice for save or show text mode
-				//scanner = new Scanner(System.in);
-				//int stateDecision = scanner.nextInt();
-				
-//				System.out.print("Please enter your choice:");
-//				while (!scanner.hasNextInt()) {
-//					System.out.println("Invalid input! Please try again:");
-//					scanner.next();
-//					System.out.print("Please enter your choice:");
-//				}
 
-//				if(stateDecision == 3){
-//					System.out.println("save");
-//				}
-				
-				
-				   
-				//}while(gameLoop);
-				
-				//gameControl.saveGameToFile("/Users/lovepreet/save.xml");
 				
 				//GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
 				
 			}else if(response == 1){
 				
-			}else if(response == 2){
+				gameController =  new GameController();
+				String fileName = mainObj.getLoadFileName();
 				
+				GameInstance instance = gameController.loadGameFromFile(fileName);
+//				GameInstance instance = gameController.loadGameFromFile("/Users/lovepreet/save.xml");
 				
-				   System.exit(0);
-				//gameLoop = false;
-				//break;
-			}
+				/*Players[] play = instance.getPlayersList();
+				for (int j = 0; j < play.length; j++) {
+					Players p = play[j];
+					System.out.println(p.getPlayerNumber());
+					System.out.println(p.getFaceColor());
+				}*/
+				//System.out.println(i);
+				
+				gameController.showTextMode();
+				
+		} else if (response == 2) {
+
+			System.exit(0);
+		}
 			
-//			scanner = new Scanner(System.in);
-//			System.out.print("Please enter your choice:");
-//			while (!scanner.hasNextInt()) {
-//				System.out.println("Invalid input! Please try again:");
-//				scanner.next();
-//				System.out.print("Please enter your choice:");
-//			}
+			scanner.close();
 			
-			//input = scanner.nextInt();
+			/*String userResponse = mainObj.getSaveInput();
 			
-//			if(input < 0 || input > maxPlayers){
-//				System.out.println("Input must be within the specified range! Please try again:");
-//			}
 			
-		//} while (gameLoop);
+			
+			if(userResponse.equals("yes")){
+			
+				gameController.saveGameToFile("/Users/lovepreet/save.xml");
+			}*/
 		
-		scanner.close();
+		
 	}
 	
 	/**
@@ -345,6 +329,89 @@ public class LanternMain implements ActionListener {
 		scanner.close();
 		
 		return input;
+	}
+	
+	/**
+	 * Gets the user to input file name for loading.
+	 * @return The file name to be loaded by user.
+	 */
+	public String getLoadFileName(){
+		int maxPlayers = 4;
+		String input;
+		int inputSize;
+						
+	    Scanner scanner = new Scanner(System.in);
+	    
+		do {
+			System.out.print("Please enter the file to load :");
+			while (!scanner.hasNextLine()) {
+				System.out.println("Invalid input! Please try again:");
+				scanner.next();
+				System.out.print("Please enter the file to load :");
+			}
+			
+			input = scanner.nextLine();
+			inputSize = input.length();
+			
+			if(inputSize == 0){
+				System.out.println("Please enter the file to load :");
+			}
+			
+		} while (inputSize == 0);
+		
+		scanner.close();
+		
+		return input;
+	}
+	
+	/**
+	 * Gets the user to input file name for loading.
+	 * @return The file name to be loaded by user.
+	 */
+	public String getSaveInput(){
+		
+		String stringValue;
+		int intInputValue;
+		//do{
+		do{
+		System.out.println("Please enter your choice:");
+		
+		System.out.println("3:Do you want to save the game?(yes/no)");
+		
+		Console c = System.console();
+		
+		stringValue = c.readLine();
+		intInputValue = Integer.valueOf(stringValue);
+		}while(stringValue.length() == 0);
+		
+		/*int maxPlayers = 4;
+		String input;
+		int inputSize;
+						
+	    Scanner scanner = new Scanner(System.in);
+	    
+		do {
+			System.out.print("Please enter the file to load :");
+			while (!scanner.hasNextLine()) {
+				System.out.println("Invalid input! Please try again:");
+				scanner.next();
+				System.out.print("Please enter the file to load :");
+			}
+			
+			input = scanner.nextLine();
+			inputSize = input.length();
+			
+			if(inputSize == 0){
+				System.out.println("Please enter the file to load :");
+			}
+			
+		} while (inputSize == 0);
+		
+		scanner.close();
+		
+		return input;*/
+		
+		return stringValue;
 	}
 
 }
