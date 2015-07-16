@@ -3,7 +3,7 @@ package edu.concordia.app.components;
 import java.util.Vector;
 
 /**
- * this class is to create the lake tile object, the lake tile have four colors
+ * This class is to create the lake tile object, the lake tile have four colors
  * and some of the lake tiles have a platform marker,again lake tile can have adjacent
  * top/bottom/left/right lake tile 
  * @author Team E
@@ -27,16 +27,16 @@ public class LakeTiles {
 	private int rightTileId;		// variable for tile's right adjacent tile's id
 
 	/**
-	 * Constructor
-	 * @param topColor
-	 * @param leftColor
-	 * @param rightColor
-	 * @param bottomColor
-	 * @param platform
-	 * @param topTileId
-	 * @param bottomTileId
-	 * @param leftTileId
-	 * @param rightTileId
+	 * This constructor will set the fields of LakeTiles class.
+	 * @param topColor The top color of lake tile.
+	 * @param leftColor The left color of lake tile.
+	 * @param rightColor The right color of lake tile.
+	 * @param bottomColor The bottom color of lake tile.
+	 * @param platform The platform of lake tile.
+	 * @param topTileId The top tile id of lake tile.
+	 * @param bottomTileId The top bottom id of lake tile.
+	 * @param leftTileId The top left id of lake tile.
+	 * @param rightTileId The top right id of lake tile.
 	 */
 	public LakeTiles(int tilesId, String topColor, String leftColor, String rightColor,
 			String bottomColor, boolean platform, int topTileId, int bottomTileId, int leftTileId, int rightTileId) {
@@ -57,7 +57,7 @@ public class LakeTiles {
 	
 
 	// initializing colors and platform marker for the lake tiles
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/*@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initializeTiles() {
 
 		// set the values for vector for tile 1
@@ -348,10 +348,10 @@ public class LakeTiles {
 		tile36.addElement(new String("BLUE"));
 		tile36.addElement(new Boolean(false));
 
-	}
+	}*/
 
 	/**
-	 * getter for tiles id
+	 * The getter method for tiles id
 	 * @return the tilesId
 	 */
 	public int getTilesId() {
@@ -359,7 +359,7 @@ public class LakeTiles {
 	}
 
 	/**
-	 * setter for tiles id
+	 * The setter method for tiles id
 	 * @param tilesId the tilesId to set
 	 */
 	public void setTilesId(int tilesId) {
@@ -367,7 +367,7 @@ public class LakeTiles {
 	}
 
 	/**
-	 * getter for tiles id for the top tile
+	 * The getter method for tiles id of the top tile
 	 * @return the topTileId
 	 */
 	public int getTopTileId() {
@@ -378,7 +378,7 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for tiles id for the top tile
+	 * The setter method for tiles id of the top tile
 	 * @param topTileId the topTileId to set
 	 */
 	public void setTopTileId(int topTileId) {
@@ -387,7 +387,7 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for tiles id for the bottom tile
+	 * The getter method for tiles id of the bottom tile
 	 * @return the bottomTileId
 	 */
 	public int getBottomTileId() {
@@ -396,8 +396,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for tiles id for the bottom tile
-	 * @param bottomTileId the bottomTileId to set
+	 * The setter method for tiles id of the bottom tile
+	 * @param bottomTileId The bottomTileId to set
 	 */
 	public void setBottomTileId(int bottomTileId) {
 		this.bottomTileId = bottomTileId;
@@ -405,7 +405,7 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for tiles id for the left tile
+	 * The getter method for tiles id of the left tile
 	 * @return the leftTileId
 	 */
 	public int getLeftTileId() {
@@ -414,8 +414,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for tiles id for the left tile
-	 * @param leftTileId the leftTileId to set
+	 * The setter method for tiles id of the left tile
+	 * @param leftTileId The leftTileId to set
 	 */
 	public void setLeftTileId(int leftTileId) {
 		this.leftTileId = leftTileId;
@@ -423,8 +423,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for tiles id for the right tile
-	 * @return the rightTileId
+	 * The getter method for tiles id of the right tile
+	 * @return The rightTileId
 	 */
 	public int getRightTileId() {
 		return rightTileId;
@@ -432,8 +432,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for tiles id for the right tile
-	 * @param rightTileId the rightTileId to set
+	 * The setter method for tiles id of the right tile
+	 * @param rightTileId The rightTileId to set
 	 */
 	public void setRightTileId(int rightTileId) {
 		this.rightTileId = rightTileId;
@@ -441,8 +441,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for the top color for the tile
-	 * @return the topColor, string type
+	 * The getter method for the top color for the tile
+	 * @return the topColor
 	 */
 	public String getTopColor() {
 		return topColor;
@@ -450,8 +450,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for the top color for the tile
-	 * @param topColor the topColor to set
+	 * The setter method for the top color of the tile
+	 * @param topColor The topColor to set
 	 */
 	public void setTopColor(String topColor) {
 		this.topColor = topColor;
@@ -460,8 +460,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for the left color for the tile
-	 * @return the leftColor, string type
+	 * The getter method for the left color of the tile
+	 * @return The leftColor
 	 */
 	public String getLeftColor() {
 		return leftColor;
@@ -470,8 +470,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for the left color for the tile
-	 * @param leftColor the leftColor to set
+	 * The setter method for the left color of the tile
+	 * @param leftColor The leftColor to set
 	 */
 	public void setLeftColor(String leftColor) {
 		this.leftColor = leftColor;
@@ -480,8 +480,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for the right color for the tile
-	 * @return the rightColor, string type
+	 * The getter method for the right color of the tile
+	 * @return The rightColor
 	 */
 	public String getRightColor() {
 		return rightColor;
@@ -490,8 +490,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for the right color for the tile
-	 * @param rightColor the rightColor to set
+	 * The setter method for the right color of the tile
+	 * @param rightColor The rightColor to set
 	 */
 	public void setRightColor(String rightColor) {
 		this.rightColor = rightColor;
@@ -500,8 +500,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter for the bottom color for the tile
-	 * @return the bottomColor
+	 * The getter method for the bottom color of the tile
+	 * @return The bottomColor
 	 */
 	public String getBottomColor() {
 		return bottomColor;
@@ -510,8 +510,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter for the bottom color for the tile
-	 * @param bottomColor the bottomColor to set
+	 * The setter method for the bottom color of the tile
+	 * @param bottomColor The bottomColor to set
 	 */
 	public void setBottomColor(String bottomColor) {
 		this.bottomColor = bottomColor;
@@ -519,8 +519,8 @@ public class LakeTiles {
 
 
 	/**
-	 * getter method for the platform for the tile
-	 * @return the platform
+	 *The getter method for the platform of the tile
+	 * @return The platform
 	 */
 	public boolean isPlatform() {
 		return platform;
@@ -528,8 +528,8 @@ public class LakeTiles {
 
 
 	/**
-	 * setter method for the platform for the tile
-	 * @param platform the platform to set
+	 * The setter method for the platform of the tile
+	 * @param platform The platform to set
 	 */
 	public void setPlatform(boolean platform) {
 		this.platform = platform;

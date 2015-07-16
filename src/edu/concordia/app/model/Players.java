@@ -16,7 +16,7 @@ import edu.concordia.app.components.LanternCards.Color;
 import edu.concordia.app.components.Tokens;
 
 /**
- * This class contains information about players
+ * This class contains information about the lantern game players.
  * @author Team E
  *
  */
@@ -25,52 +25,105 @@ public class Players {
 	private GameConfiguration config;
 	
 	//@XmlAttribute
+	/**
+	 * The number of the player.
+	 */
 	private int playerNumber;
 	
 
 
 
 	@XmlAttribute
-	public int playerScore;// score of player 
+	/**
+	 * The score of the player.
+	 */
+	public int playerScore; 
 	
+	
+	/**
+	 * The color of lake tile the 
+	 */
 	private String faceColor;// player facing current lake tile color
 	
 	@XmlAttribute
 	/**
-	 * The player position during the game
+	 * The player position during the game.
 	 */
 	private String playerPosition;
 	
 	//@XmlElement(name="currentLakeTile")
+	
+	
+	/**
+	 * The lake tiles holded by the player.
+	 */
 	private Vector<LakeTiles> currentLakeTilesHold = new Vector<LakeTiles>();
 	
 	//@XmlElement(name="playerDedicationTokens")
+	
+	
+	/**
+	 * The dedication tokens of player of the game.
+	 */
 	private DedicationTokens dedicationTokens;
 	
 	//count oflantern cards;
 	
+	/**
+	 * The count of Red Lantern cards of player
+	 */
 	private int playerRedLanternCardCount = 0;
 	
+	/**
+	 * The count of Blue Lantern cards of player
+	 */
 	private int playerBlueLanternCardCount = 0;
 	
+	/**
+	 * The count of Orange Lantern cards of player
+	 */
 	private int playerOrangeLanternCardCount = 0;
 	
+	/**
+	 * The count of Black Lantern cards of player
+	 */
 	private int playerBlackLanternCardCount = 0;
 	
+	/**
+	 * The count of Purple Lantern cards of player
+	 */
 	private int playerPurpleLanternCardCount = 0;
 	
+	/**
+	 * The count of White Lantern cards of player
+	 */
 	private int playerWhiteLanternCardCount = 0;
 	
+	/**
+	 * The count of Green Lantern cards of player
+	 */
 	private int playerGreenLanternCardCount = 0;
 	
 	
 	
+	/**
+	 * The vector to store General dedication tokens with four dedications  for player.
+	 */
 	private Vector<Tokens> dedicationTokenFour;
 	
+	/**
+	 * The vector to store General dedication tokens with six dedications for player.
+	 */
 	private Vector<Tokens> dedicationTokenSix;
 	
+	/**
+	 * The vector to store General dedication tokens with seven dedications for player.
+	 */
 	private Vector<Tokens> dedicationTokenSeven;
 	
+	/**
+	 * The vector to store generic dedication tokens for player.
+	 */
 	private Vector<Tokens> genericDedicationToken;
 	
 	//-----
@@ -85,6 +138,9 @@ public class Players {
 	
 	//private FavorTokens favorToken;
 	
+	/**
+	 * The number of favor tokens holded by player.
+	 */
 	private int playerFavorToken;
 	
 	//private boolean starPlayerMarker;
@@ -107,8 +163,11 @@ public class Players {
 	
 
 	/**
-	 * @param config
-	 * @param playerNumber
+	 * Players constructor initialize player with player number,
+	 * player position and GameConfiguration object.
+	 * @param config GameConfiguration class object
+	 * @param playerNumber The player number in the game
+	 * @param playerPosition The player position in the game.
 	 */
 	public Players(GameConfiguration config, int playerNumber, String playerPosition) {
 		this.config = config;
@@ -129,7 +188,7 @@ public class Players {
 	}
 	
 	/**
-	 * 
+	 * This method will initialize the lantern cards in the LanterCards class.
 	 */
 	private void intializeLanternCards() {
 		playerLanternSuite = new Vector<LanternCards>();

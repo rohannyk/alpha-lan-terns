@@ -19,31 +19,67 @@ public class GameConfiguration {
 	/**
 	 * The number of players of the game.
 	 */
-	public final int NUM_OF_PLAYERS;// no of players playing game
+	public final int NUM_OF_PLAYERS;
 
-	public final int NUM_OF_TILES_IN_DRAW_STACK;// no of tiles in drawstack
+	/**
+	 * The no of tiles in drawstack.
+	 */
+	public final int NUM_OF_TILES_IN_DRAW_STACK;
 
-	public final int TOTAL_TILE_CARDS = 36;// total tiles
+	/**
+	 * Total number of tiles cards except start lake tile. 
+	 */
+	public final int TOTAL_TILE_CARDS = 36;
 
-	public final int START_TILE = 1;// start tile to indicate which players starts
+	/**
+	 * The start tile to indicate which players starts
+	 */
+	public final int START_TILE = 1;
 
-	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;// total no of lantern cards
+	/**
+	 * The total no of lantern cards for every color.
+	 */
+	public final int NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;
 
+	/**
+	 * The default total number of lantern cards in the game.
+	 */
 	public final int DEFAULT_TOTAL_LANTERN_CARDS = 56;
 
-	protected  int GAME_BLACK_LANTERN_CARDS = 8;// black lantern cards
+	/**
+	 * The black lantern cards of game.
+	 */
+	protected  int GAME_BLACK_LANTERN_CARDS = 8;
 
-	protected  int GAME_BLUE_LANTERN_CARDS = 8;// blue lantern cards
+	/**
+	 * The blue lantern cards of game.
+	 */
+	protected  int GAME_BLUE_LANTERN_CARDS = 8;
 
-	protected  int GAME_GREEN_LANTERN_CARDS = 8;// green lantern cards
+	/**
+	 * The green lantern cards  of game.
+	 */
+	protected  int GAME_GREEN_LANTERN_CARDS = 8;
 
-	protected  int GAME_ORANGE_LANTERN_CARDS = 8;// ornage lantern cards
+	/**
+	 * The orange lantern cards of game.
+	 */
+	protected  int GAME_ORANGE_LANTERN_CARDS = 8;
 
-	protected  int GAME_PURPLE_LANTERN_CARDS = 8;//purple lantern cards
+	/**
+	 * The purple lantern cards of game.
+	 */
+	protected  int GAME_PURPLE_LANTERN_CARDS = 8;
 
-	protected  int GAME_RED_LANTERN_CARDS = 8;// red lantern cards
+	/**
+	 * The red lantern cards of game.
+	 */
+	protected  int GAME_RED_LANTERN_CARDS = 8;
 
-	protected  int GAME_WHITE_LANTERN_CARDS = 8;// white lantern cards
+	/**
+	 * The white lantern cards of game.
+	 */
+	protected  int GAME_WHITE_LANTERN_CARDS = 8;
 
 	protected static int GAME_GENERIC_DEDICATED_TOKEN = 3;
 
@@ -63,12 +99,24 @@ public class GameConfiguration {
 	//
 	// protected int[] gameGenericDedicatedToken = {4,3,2};
 
-	public final int TOTAL_FAVOR_TOKEN = 20;// toal favor tokens
+	/**
+	 * The total favor tokens of the game
+	 */
+	public final int TOTAL_FAVOR_TOKEN = 20;
 
+	/**
+	 * The total lake tiles of the game.
+	 */
 	public final Vector<LakeTiles> GAME_TOTAL_TILE_SUITE;
 
+	/**
+	 * The dedication tokens.
+	 */
 	protected final DedicationTokens DEDICATION_TOKENS;
 	
+	/**
+	 * The deal size of cards given to each player.
+	 */
 	protected final int PLAYER_LAKE_TILE_DEAL_SIZE = 3;
 
 	/**
@@ -83,8 +131,8 @@ public class GameConfiguration {
 	}
 
 	/**
-	 * @param numberOfPlayers
-	 *            The number of players of the game.
+	 * @param numberOfPlayers The number of players of the game.
+	 * This constructor will set the game configuration according to number of players.
 	 */
 	public GameConfiguration(int numberOfPlayers) {
 
@@ -101,14 +149,16 @@ public class GameConfiguration {
 	}
 
 	/**
-	 * An enum type having the seven colors
+	 * The enum type having the seven colors
 	 */
 	public enum TileColor {
 		RED, ORANGE, PURPLE, WHITE, BLUE, BLACK, GREEN;
 	}
 
 	/**
-	 * 
+	 * @return The vector containing 36 lake tiles and one start lake tile.
+	 * This method initializes the lake tile suit 
+	 * containing 36 lake tiles and one start lake tile.
 	 */
 	private Vector<LakeTiles> initializeDefaultTileSuite() {
 		Vector<LakeTiles> tileVector = new Vector<LakeTiles>();
@@ -215,6 +265,11 @@ public class GameConfiguration {
 		return tileVector;
 	}
 
+	/**
+	 * @param numberOfPlayers The number of players in the game.
+	 * @return The dedication tokens according to game rules.
+	 * This method return the dedication tokens according to the game rules.
+	 */
 	public DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
 
 //		DedicationTokens dedicationTokens = new DedicationTokens();

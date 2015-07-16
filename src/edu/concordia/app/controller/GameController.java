@@ -26,20 +26,28 @@ import edu.concordia.app.model.Players;
  */
 public class GameController {
 	
+	/**
+	 * The instance variable of GameConfiguration class.
+	 */
 	private GameConfiguration gameConfig;
 	
+	/**
+	 * The instance variable of GameInstance class.
+	 */
 	private GameInstance gameInstance;
 
 	/**
-	 * 
+	 * The default constructor of GameController class.
 	 */
 	public GameController() {
 		
 	}
 
 	/**
-	 * @param gameConfig
-	 * @param gameInstance
+	 * This GameController class constructor will set 
+	 * GameConfiguration and GameInstance objects.
+	 * @param gameConfig The GameConfiguration class object.
+	 * @param gameInstance The GameInstance class object.
 	 */
 	public GameController(GameConfiguration gameConfig,
 			GameInstance gameInstance) {
@@ -48,7 +56,7 @@ public class GameController {
 		this.gameInstance = gameInstance;
 	}
 	
-	public String getFileName(){
+	/*public String getFileName(){
 		System.out.println("Please enter file name : ");
 		String s = null;
 		try{
@@ -63,26 +71,16 @@ public class GameController {
 		}
 		
 		return s;
-	}
+	}*/
 	
 	/**
-	 * @param gameFile
+	 * This method will check if the file name is empty or not.
+	 * If file name is empty, Default file name will be assigned.
+	 * @param gameFile The name of the file to save.
 	 */
 	public void saveGameToFile(String fileName){
 		File file;
-		//fileName = getFileName();
-		/*System.out.println("Please enter file name : ");
-		 
-		try{
-		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		    String s = bufferRead.readLine();
-	 
-		    System.out.println(s);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}*/
+		
 		
 		if(fileName == null || fileName == ""){
 			file = new File("/Users/lovepreet/default_game_save.xml");
@@ -95,7 +93,8 @@ public class GameController {
 	}
 	
 	/**
-	 * @param gameFile
+	 * This method will save GameInstance class object to an xml file.
+	 * @param gameFile The file name of the save file.
 	 */
 	public void saveGameToXml(File gameFile){
 		try {
@@ -111,6 +110,11 @@ public class GameController {
 		}
 	}
 	
+	/**
+	 * This method will check if the file name is empty or not.
+	 * @param fileName The name of the file to save.
+	 * @return The GameInstance class object will be returned.
+	 */
 	public GameInstance loadGameFromFile(String fileName) {
 		File file;
 		
@@ -124,6 +128,11 @@ public class GameController {
 		return loadGameState(file);
 	}
 	
+	/**
+	 * This method will load xml file and get the GameInstance class object.
+	 * @param file The file name of the file to be loaded.
+	 * @return The GameInstance class object will be returned.
+	 */
 	public GameInstance loadGameState(File file) {
 		
 		GameInstance gameInstance = null;
@@ -141,7 +150,7 @@ public class GameController {
 	}
 
 	/**
-	 * 
+	 * This method will print the Game state and player state on console.
 	 */
 	public void showTextMode() {
 		System.out.println("Game Status in Text Mode:");
