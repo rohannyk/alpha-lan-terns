@@ -20,22 +20,25 @@ import edu.concordia.app.model.Players;
  */
 
 /**
- * This is the main GUI class.
+ * The LanternMain class is the driver class. It will show game
+ *  options for new game, save game and load game.
  */
 //public class LanternMain extends JFrame implements ActionListener {
 public class LanternMain{
-	private static Scanner scan = new Scanner(System.in);
+	
 	/**
-	 * 
+	 * Scanner object to get user input from console.
 	 */
+	private static Scanner scan = new Scanner(System.in);
+	
 	private static final long serialVersionUID = 2550694388930175952L;
 	
 	private static int playerNumber;
 	
-	private static boolean gameLoop = true;
+//	private static boolean gameLoop = true;
 
 	/**
-	 * Constructor for an LanternMain.
+	 * Default constructor for an LanternMain.
 	 */
 	public LanternMain() {
 		
@@ -48,10 +51,9 @@ public class LanternMain{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// 
-		LanternMain mainObj = new LanternMain();
 		
-		System.out.println("test main "+playerNumber);
+		//object of LanternMain class. 
+		LanternMain mainObj = new LanternMain();
 		
 		System.out.println("Welcome! to the");
 		System.out.println("Lantern: The Harvest Festival Game");
@@ -92,13 +94,7 @@ public class LanternMain{
 				
 //				GameInstance instance = gameController.loadGameFromFile("/Users/lovepreet/save.xml");
 				
-				/*Players[] play = instance.getPlayersList();
-				for (int j = 0; j < play.length; j++) {
-					Players p = play[j];
-					System.out.println(p.getPlayerNumber());
-					System.out.println(p.getFaceColor());
-				}*/
-				//System.out.println(i);
+				
 				
 				gameController.showTextMode();
 				
@@ -131,41 +127,17 @@ public class LanternMain{
 			//scanner.close();
 	}
 	
+	/**
+	 * @return The scanner object to be used in other class.
+	 * The static scanner object to get user input.
+	 */
 	static String getValue()
 	{
 
 		return scan.next();
 	}
 	
-	/**
-	 * @return
-	 */
-	private String getSaveFileName() {
-		int maxPlayers = 4;
-		String input ="";
-						
-	   
-	    
-		do {
-			System.out.print("Please enter the file name :");
-//			while (!scanner.hasNextInt()) {
-//				System.out.println("Invalid input! Please try again:");
-//				scanner.next();
-//				System.out.print("Please enter the no of players (between 2 and 4) :");
-//			}
 			
-			input = scan.nextLine();
-			
-			/*if(input < 0 || input > maxPlayers){
-				System.out.println("Input must be within the specified range! Please try again:");
-			}*/
-			
-		} while (!input.isEmpty());
-		
-
-		
-		return input;
-	}		
 	
 //	public int FetchNumOfPlayers(){
 //		FetchPlayerNumber playerNumberObj = new FetchPlayerNumber();
@@ -211,16 +183,14 @@ public class LanternMain{
 	}
 	
 	/**
-	 * Gets the user to input file name for loading.
+	 * The method to get the user input of file name for loading.
 	 * @return The file name to be loaded by user.
 	 */
 	public String getLoadFileName(){
-		int maxPlayers = 4;
+		//int maxPlayers = 4;
 		String input;
 		int inputSize;
-						
-	   
-	    
+							    
 		do {
 			System.out.print("Please enter the file to load :");
 			while (!scan.hasNextLine()) {
@@ -250,7 +220,7 @@ public class LanternMain{
 	public String getSaveInput(){
 		
 		String stringValue;
-		int intInputValue;
+		//int intInputValue;
 		//do{
 		do{
 		System.out.println("Please enter your choice:");
@@ -262,39 +232,6 @@ public class LanternMain{
 		
 		System.out.println(stringValue);
 		}while(stringValue.length() == 0);
-		
-//		Console c = System.console();
-//		
-//		stringValue = c.readLine();
-//		intInputValue = Integer.valueOf(stringValue);
-//		}while(stringValue.length() == 0);
-		
-		/*int maxPlayers = 4;
-		String input;
-		int inputSize;
-						
-	    Scanner scanner = new Scanner(System.in);
-	    
-		do {
-			System.out.print("Please enter the file to load :");
-			while (!scanner.hasNextLine()) {
-				System.out.println("Invalid input! Please try again:");
-				scanner.next();
-				System.out.print("Please enter the file to load :");
-			}
-			
-			input = scanner.nextLine();
-			inputSize = input.length();
-			
-			if(inputSize == 0){
-				System.out.println("Please enter the file to load :");
-			}
-			
-		} while (inputSize == 0);
-		
-		scanner.close();
-		
-		return input;*/
 		
 		return stringValue;
 	}

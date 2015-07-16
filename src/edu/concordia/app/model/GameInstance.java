@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import edu.concordia.app.components.DedicationTokens;
@@ -223,7 +221,7 @@ public class GameInstance {
 		//create draw pile of Lake tiles according to no of players
 		gameTilesDrawPile = initializeDrawPileTiles(shuffledTilesAfterDeal);
 		
-		System.out.println("deal size"+gameTilesDrawPile.size());
+		//System.out.println("deal size"+gameTilesDrawPile.size());
 		
 		//reveal all color of start tile
 		//set face color to each player
@@ -345,9 +343,9 @@ public class GameInstance {
 	 */
 	private Vector<LakeTiles> dealLakeTileCards(Vector<LakeTiles> shuffledTiles) {
 		int totalDealCards = noOfPlayers * 3;
-		System.out.println("deal count "+totalDealCards);
+		//System.out.println("deal count "+totalDealCards);
 		int dealCount = 3;
-		System.out.println("initial shuffled tiles size"+shuffledTiles.size());
+		//System.out.println("initial shuffled tiles size"+shuffledTiles.size());
 		
 		for (int i = 0; i < playersList.length; i++) {
 			Players player = playersList[i];
@@ -363,7 +361,7 @@ public class GameInstance {
 //		Vector<LakeTiles> shuffledTilesAfterDeal = shuffledTiles;
 //		int shuffledTilesSize = shuffledTiles.size();
 		
-		System.out.println("final shuffled tiles size"+shuffledTiles.size());
+		//System.out.println("final shuffled tiles size"+shuffledTiles.size());
 		
 		/*for (int i = 0; i < playersList.length; i++) {
 			Players player = playersList[i];
@@ -545,7 +543,7 @@ public class GameInstance {
 				
 		//int random = 1 + randomNumbers.nextInt(4); // number between 1 to 4
 		int random = randomNumbers.nextInt(playerNum);  //number between 0 to 3
-		System.out.println("RANDOM NUMBER "+random);
+		//System.out.println("RANDOM NUMBER "+random);
 		
 		return random;
 	}
