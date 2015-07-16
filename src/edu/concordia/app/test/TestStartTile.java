@@ -57,20 +57,24 @@ public class TestStartTile {
 	public void testPlayerGetsRedTileEdgeForThreePlayers() {
 		
 		
-		GameConfiguration c3= new GameConfiguration(3);
-	    GameInstance gi3= new GameInstance(c3);
-	    String r ="RED";
+	GameConfiguration c3= new GameConfiguration(3);
+	   GameInstance gi3= new GameInstance(c3);
+	   String r ="RED";
 	   //Players[] playersList ;
-	          String a= gi3.playersList[0].getFaceColor();
-	          String b= gi3.playersList[1].getFaceColor();
-			  String c= gi3.playersList[2].getFaceColor();
-			  
-		// assertThat(r,MatcherAssert.either(Matcher.is(a).either(Matchers.is(b).or(Matchers.is(c))));
-			 System.out.println(a);
-			 System.out.println(b);
-			  System.out.println(c);
-			  
-	    assertTrue(r.equals(a) || r.equals(b)||r.equals(c));
+	    
+	    Players[] checkPlayerList = gi3.getPlayersList();
+	    
+	    String checkColor = null;
+	    for (int i = 0; i < checkPlayerList.length; i++) {
+	    	Players playerObj = checkPlayerList[i];
+	    	String pFaceColor = playerObj.getFaceColor();
+	    	
+	    	if(pFaceColor.equals("RED")){
+	    		checkColor = pFaceColor;
+	    	}
+		}
+	    	  
+	    assertTrue(r.equals(checkColor));
 	    
 	
 			
@@ -91,16 +95,20 @@ public void testPlayerGetsRedTileEdgeForTwoPlayers() {
 	    GameInstance gi2= new GameInstance(c2);
 	    String r ="RED";
 	   //Players[] playersList ;
-	          String a= gi2.playersList[0].getFaceColor();
-	          String b= gi2.playersList[1].getFaceColor();
-			  
-			  
-		// assertThat(r,MatcherAssert.either(Matcher.is(a).either(Matchers.is(b).or(Matchers.is(c))));
-			  System.out.println(a);
-			  System.out.println(b);
-			
-			  
-	    assertTrue(r.equals(a) || r.equals(b));
+ Players[] checkPlayerList = gi2.getPlayersList();
+	    
+	    String checkColor = null;
+	    for (int i = 0; i < checkPlayerList.length; i++) {
+	    	Players playerObj = checkPlayerList[i];
+	    	String pFaceColor = playerObj.getFaceColor();
+	    	
+	    	if(pFaceColor.equals("RED")){
+	    		checkColor = pFaceColor;
+	    	}
+		}
+	    	  
+	    assertTrue(r.equals(checkColor));
+	    
 	    
 		
 	   
@@ -119,20 +127,20 @@ public void testPlayerGetsRedTileEdgeForFourPlayers() {
     String r ="RED";
    //Players[] playersList ;
    // Players[] getPlayersList();
-          String a= gi4.playersList[0].getFaceColor();
-          String b= gi4.playersList[1].getFaceColor();
-		  String c= gi4.playersList[2].getFaceColor();
-		  String d= gi4.playersList[3].getFaceColor();
-		  
-		  
-	// assertThat(r,MatcherAssert.either(Matcher.is(a).either(Matchers.is(b).or(Matchers.is(c))));
-		  System.out.println(a);
-		  System.out.println(b);
-		  System.out.println(c);
-		  System.out.println(d);
-		  
-		  
-    assertTrue(r.equals(a) || r.equals(b)||r.equals(c)||r.equals(d));
+    Players[] checkPlayerList = gi4.getPlayersList();
+    
+    String checkColor = null;
+    for (int i = 0; i < checkPlayerList.length; i++) {
+    	Players playerObj = checkPlayerList[i];
+    	String pFaceColor = playerObj.getFaceColor();
+    	
+    	if(pFaceColor.equals("RED")){
+    		checkColor = pFaceColor;
+    	}
+	}
+    	  
+    assertTrue(r.equals(checkColor));
+    
     	
 	
 	}	
