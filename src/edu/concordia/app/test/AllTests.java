@@ -13,7 +13,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ TestDedicationTokens.class, TestFavorTokens.class, TestLakeTiles.class, 
-				TestPlayers.class})
+				TestPlayers.class,TestComponents.class,TestStartTile.class})
 public class AllTests {
 
 }
