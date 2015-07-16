@@ -23,32 +23,12 @@ import edu.concordia.app.model.Players;
  * This is the main GUI class.
  */
 //public class LanternMain extends JFrame implements ActionListener {
-public class LanternMain implements ActionListener {
-	
+public class LanternMain{
+	private static Scanner scan = new Scanner(System.in);
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2550694388930175952L;
-
-	
-	/**
-	 * 
-	 */
-	private String imageDir = "images/";
-	
-	/**
-	 * Name of the Background image in main frame.
-	 */
-	private String gameImageFile = "Lanterns-cover.jpg";
-	
-	private String imageCaption = "Harvest Game";
-	
-	/**
-	 *  Image icon used in background.
-	 */
-	private ImageIcon icon;
-	
-	private JButton newGame, loadGame, exitGame;
 	
 	private static int playerNumber;
 	
@@ -68,7 +48,7 @@ public class LanternMain implements ActionListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// 
 		LanternMain mainObj = new LanternMain();
 		
 		System.out.println("test main "+playerNumber);
@@ -81,14 +61,10 @@ public class LanternMain implements ActionListener {
 		System.out.println("Press 2 to Exit Game.");
 		
 		GameController gameController = null;
-		
-		int input;
-		
-		Scanner scanner = new Scanner(System.in);
-	   int response = scanner.nextInt();
-		
+	    String response = scan.next();
+	    scan.nextLine();
 			
-			if(response == 0){
+			if(response.equals("0")){
 				
 				int playerNumber = mainObj.getInputNoOfPlayers();
 				
@@ -103,16 +79,17 @@ public class LanternMain implements ActionListener {
 				
 				 gameController.showTextMode();
 				
-
-				
 				//GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
 				
-			}else if(response == 1){
+			}else if(response.equals("1")){
 				
 				gameController =  new GameController();
 				String fileName = mainObj.getLoadFileName();
 				
 				GameInstance instance = gameController.loadGameFromFile(fileName);
+				
+				gameController.showTextMode();
+				
 //				GameInstance instance = gameController.loadGameFromFile("/Users/lovepreet/save.xml");
 				
 				/*Players[] play = instance.getPlayersList();
@@ -125,73 +102,40 @@ public class LanternMain implements ActionListener {
 				
 				gameController.showTextMode();
 				
-		} else if (response == 2) {
+		} else if (response.equals("2")) {
 
 			System.exit(0);
 		}
 			
-			scanner.close();
 			
-			/*String userResponse = mainObj.getSaveInput();
+			System.out.println("3:Do you want to save the game?(yes/no)");
+			//System.out.println("4:Show game state in text mode.");	
+			System.out.println("Please enter your choice: ");
 			
+			String userChoice = scan.next();
 			
+			if(userChoice.equals("yes")){
+				
+				System.out.println("Please enter the file name?");
+				
+				String fileName = scan.next();
+				
+				gameController.saveGameToFile(fileName);
+			}else if(userChoice.equals("no")){
+				System.exit(0);
+			}
 			
-			if(userResponse.equals("yes")){
-			
-				gameController.saveGameToFile("/Users/lovepreet/save.xml");
-			}*/
-		
-		
+//			if(getValue().equals("yes")){			
+//			System.out.println(stringsValue);}
+		   
+			//scanner.close();
 	}
 	
-	/**
-	 * Create starting GUI of Lantern Game with three option
-	 * New game, Load game and exit game.
-	 */
-	/*private  void createAndShowGui(){
-		//Exit frame on close
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
-				 JPanel mainPanel = new JPanel();
-			     mainPanel.setLayout(new FlowLayout());
+	static String getValue()
+	{
 
-		        JLabel defaultLabel = new JLabel();
-		        //defaultLabel.setPreferredSize(new Dimension(630, 500));
-		        //getContentPane().add(mainPanel, BorderLayout.CENTER);
-		        
-		        newGame  = new JButton("New Game");
-		        loadGame  = new JButton("Load Game"); 
-		        exitGame = new JButton("Exit Game");
-
-		        icon = createImageIcon(gameImageFile, imageCaption);
-		        
-		        defaultLabel.setIcon(icon);
-		        
-		        
-		        add(defaultLabel, BorderLayout.CENTER);
-		        add(mainPanel, BorderLayout.SOUTH);
-		        
-		        // Add buttons to panel
-		        mainPanel.add(newGame);
-		        mainPanel.add(loadGame);
-		        mainPanel.add(exitGame);
-		        
-		        //Add event listener to buttons
-		        newGame.addActionListener(this);
-		        loadGame.addActionListener(this);
-		        exitGame.addActionListener(this);
-		        
-		       
-		        
-		        //position the window
-		        setBounds(350,100,2000,1000);
-		     // this centers the frame on the screen
-		        //setLocationRelativeTo(null);
-
-		        //Display the window.
-		        pack();
-		        setVisible(true);
-	}*/
+		return scan.next();
+	}
 	
 	/**
 	 * @return
@@ -200,7 +144,7 @@ public class LanternMain implements ActionListener {
 		int maxPlayers = 4;
 		String input ="";
 						
-	    Scanner scanner = new Scanner(System.in);
+	   
 	    
 		do {
 			System.out.print("Please enter the file name :");
@@ -210,7 +154,7 @@ public class LanternMain implements ActionListener {
 //				System.out.print("Please enter the no of players (between 2 and 4) :");
 //			}
 			
-			input = scanner.nextLine();
+			input = scan.nextLine();
 			
 			/*if(input < 0 || input > maxPlayers){
 				System.out.println("Input must be within the specified range! Please try again:");
@@ -218,75 +162,10 @@ public class LanternMain implements ActionListener {
 			
 		} while (!input.isEmpty());
 		
-		scanner.close();
+
 		
 		return input;
-	}
-
-	/**
-     * Creates an ImageIcon if the path is valid.
-     * @param String - resource path
-     * @param String - description of the file
-     */
-    protected ImageIcon createImageIcon(String path,
-            String description) {
-        java.net.URL imgURL = getClass().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String selectedAction = e.getActionCommand();
-		
-		if(selectedAction.equals("New Game")){
-			System.out.println(selectedAction);
-			//setVisible(false);
-			
-			int playerNumber = getInputNoOfPlayers();
-			
-			//FetchPlayerNumber playerNumberObj = new FetchPlayerNumber();
-			//playerNumber = playerNumberObj.getNumberOfPlayers();
-			
-			// ask user for number of players
-			//set number of players value
-			//int playerNumber = FetchNumOfPlayers();
-			
-			//System.out.println("test main "+playerNumber);
-			
-			GameConfiguration config = new GameConfiguration(playerNumber);
-			
-			GameInstance gameObj = new GameInstance(config);
-			
-			new GameController(config, gameObj).saveGameToFile("/Users/lovepreet/save.xml");
-			
-			GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
-			
-			//Vector<LanternCards> lanternCardsVector = gameInstance.gameLanternSuite;
-			//System.out.println(lanternCardsVector);
-			//Vector<Tokens> tokensFour = dTokens.getDedicationTokenFour();
-			//System.out.println(tokensFour);
-						
-		}
-		
-		if(selectedAction.equals("Load Game")){
-			System.out.println(selectedAction);
-			//setVisible(false);
-		}
-		
-		if(selectedAction.equals("Exit Game")){
-			System.exit(0);
-		}
-		
-	}
+	}		
 	
 //	public int FetchNumOfPlayers(){
 //		FetchPlayerNumber playerNumberObj = new FetchPlayerNumber();
@@ -308,25 +187,25 @@ public class LanternMain implements ActionListener {
 		int maxPlayers = 4;
 		int input;
 						
-	    Scanner scanner = new Scanner(System.in);
+	  
 	    
 		do {
 			System.out.print("Please enter the no of players (between 2 and 4) :");
-			while (!scanner.hasNextInt()) {
+			while (!scan.hasNextInt()) {
 				System.out.println("Invalid input! Please try again:");
-				scanner.next();
+				scan.next();
 				System.out.print("Please enter the no of players (between 2 and 4) :");
 			}
 			
-			input = scanner.nextInt();
-			
+			input = scan.nextInt();
+			scan.nextLine();
 			if(input < 0 || input > maxPlayers){
 				System.out.println("Input must be within the specified range! Please try again:");
 			}
 			
 		} while (input < 2 || input > maxPlayers);
 		
-		scanner.close();
+		
 		
 		return input;
 	}
@@ -340,17 +219,17 @@ public class LanternMain implements ActionListener {
 		String input;
 		int inputSize;
 						
-	    Scanner scanner = new Scanner(System.in);
+	   
 	    
 		do {
 			System.out.print("Please enter the file to load :");
-			while (!scanner.hasNextLine()) {
+			while (!scan.hasNextLine()) {
 				System.out.println("Invalid input! Please try again:");
-				scanner.next();
+				scan.next();
 				System.out.print("Please enter the file to load :");
 			}
 			
-			input = scanner.nextLine();
+			input = scan.nextLine();
 			inputSize = input.length();
 			
 			if(inputSize == 0){
@@ -359,7 +238,7 @@ public class LanternMain implements ActionListener {
 			
 		} while (inputSize == 0);
 		
-		scanner.close();
+	
 		
 		return input;
 	}
@@ -378,11 +257,17 @@ public class LanternMain implements ActionListener {
 		
 		System.out.println("3:Do you want to save the game?(yes/no)");
 		
-		Console c = System.console();
 		
-		stringValue = c.readLine();
-		intInputValue = Integer.valueOf(stringValue);
+		stringValue = scan.next();
+		
+		System.out.println(stringValue);
 		}while(stringValue.length() == 0);
+		
+//		Console c = System.console();
+//		
+//		stringValue = c.readLine();
+//		intInputValue = Integer.valueOf(stringValue);
+//		}while(stringValue.length() == 0);
 		
 		/*int maxPlayers = 4;
 		String input;
