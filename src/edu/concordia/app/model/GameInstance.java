@@ -34,7 +34,7 @@ public class GameInstance {
 	 * 1 - 4 for players
 	 */
 	private Players playerCurrentTurn;
-//	private int playerCurrentTurn;
+
 	
 	private Players gameStartPlayer;
 	
@@ -50,7 +50,7 @@ public class GameInstance {
 	/**
 	 * The array to store the player objects.
 	 */
-	public Players[] playersList;
+	private Players[] playersList;
 	
 	/**
 	 * @return the playersList
