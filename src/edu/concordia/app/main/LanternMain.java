@@ -79,9 +79,27 @@ public class LanternMain{
 				
 				 gameController = new GameController(config, gameObj);
 				
-				 gameController.showTextMode();
+				 gameController.showTextMode(gameObj);
+				 
+				 //Ask user to save file
+				 System.out.println("3:Do you want to save the game?(yes/no)");	
+				 System.out.println("Please enter your choice: ");
+					
+					String userChoice = scan.next();
+					
+					if(userChoice.equals("yes")){
+						
+						System.out.println("Please enter the file name?");
+						
+						String fileName = scan.next();
+						
+						gameController.saveGameToFile(fileName);
+						
+					}else if(userChoice.equals("no")){
+						System.exit(0);
+					}
 				
-				//GameInstance gameInstance =  new GameController(config, gameObj).loadGameFromFile("/Users/lovepreet/save.xml");
+				
 				
 			}else if(response.equals("1")){
 				
@@ -90,13 +108,33 @@ public class LanternMain{
 				
 				GameInstance instance = gameController.loadGameFromFile(fileName);
 				
-				gameController.showTextMode();
+				if(instance == null)
+				{
+					System.out.println("File not found.");
+					
+				}else{
+					gameController.showTextMode(instance);
+					
+					//Ask user to save file
+					 System.out.println("3:Do you want to save the game?(yes/no)");	
+					 System.out.println("Please enter your choice: ");
+						
+						String userChoice = scan.next();
+						
+						if(userChoice.equals("yes")){
+							
+							System.out.println("Please enter the file name?");
+							
+							String fileName1 = scan.next();
+							
+							gameController.saveGameToFile(fileName1);
+							
+						}else if(userChoice.equals("no")){
+							System.exit(0);
+						}
+				}
 				
-//				GameInstance instance = gameController.loadGameFromFile("/Users/lovepreet/save.xml");
-				
-				
-				
-				gameController.showTextMode();
+
 				
 		} else if (response.equals("2")) {
 
@@ -104,22 +142,7 @@ public class LanternMain{
 		}
 			
 			
-			System.out.println("3:Do you want to save the game?(yes/no)");
-			//System.out.println("4:Show game state in text mode.");	
-			System.out.println("Please enter your choice: ");
 			
-			String userChoice = scan.next();
-			
-			if(userChoice.equals("yes")){
-				
-				System.out.println("Please enter the file name?");
-				
-				String fileName = scan.next();
-				
-				gameController.saveGameToFile(fileName);
-			}else if(userChoice.equals("no")){
-				System.exit(0);
-			}
 			
 //			if(getValue().equals("yes")){			
 //			System.out.println(stringsValue);}
