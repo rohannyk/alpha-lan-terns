@@ -30,7 +30,10 @@ public class Players {
 	 */
 	private int playerNumber;
 	
-
+	/**
+	 * The total honor points of the player.
+	 */
+	private int totalHonorPoints = 0;
 
 
 	@XmlAttribute
@@ -485,6 +488,24 @@ public class Players {
 	 */
 	public void setFaceColor(String faceColor) {
 		this.faceColor = faceColor;
+	}
+
+
+
+	/**
+	 * @return the totalHonorPoints
+	 */
+	public int getTotalHonorPoints() {
+		return totalHonorPoints;
+	}
+
+
+
+	/**
+	 * @param totalHonorPoints the totalHonorPoints to set
+	 */
+	public void setTotalHonorPoints(int totalHonorPoints) {
+		this.totalHonorPoints = totalHonorPoints;
 	}
 
 
