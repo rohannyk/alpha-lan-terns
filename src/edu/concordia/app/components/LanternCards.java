@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
  * Lantern Cards can be exchanged with favor tokens
  * Lantern Cards can be exchanged with dedication tokens to score
  * @author Team E
+ * @since 23-07-2015
  */
 public class LanternCards {
 	

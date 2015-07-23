@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
  * This class creates Favor Tokens for the players to use in the game
  * Favor Tokens are used by the player to exchange lantern cards 
  * @author Team E
+ * @since 23-07-2015
  */
 public class FavorTokens {
 	
@@ -24,16 +25,17 @@ public class FavorTokens {
 	}
 	
 	/**
-	 * Constructor
+	 * This Constructor is used to set favortokenCount.
+	 * @param favtokenCount favtokenCount is set
 	 */
 	public FavorTokens(int favtokenCount){
 		this.favtokenCount = favtokenCount;
 	}
 	
-	
+    	
 	@XmlAttribute(name="totalFavorTokens")
 	/**
-	 * @return the favtokenCount
+	 * @return favtokenCount favtokenCount is returned 
 	 */
 	public int getFavtokenCount() {
 		return favtokenCount;

@@ -50,6 +50,7 @@ public class DedicationTokens {
 	/**
 	 * The integer variable to store size of General dedication
 	 * tokens with four dedications.
+	 * 
 	 */
 	private int dedicationTokenFourSize;
 	
@@ -122,7 +123,7 @@ public class DedicationTokens {
 		}
 
 	/**
-	 * @return the dedicationTokenFour
+	 * @return dedicationTokenFour dedicationToken four is returned
 	 */
 	public Vector<Integer> getDedicationTokenFour() {
 		return dedicationTokenFour;
@@ -136,7 +137,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSix
+	 * @return dedicationTokenSix dedicationTokenSix is returned
 	 */
 	public Vector<Integer> getDedicationTokenSix() {
 		return dedicationTokenSix;
@@ -150,7 +151,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSeven
+	 * @return dedicationTokenSeven dedicationTokenSeven is returned
 	 */
 	public Vector<Integer> getDedicationTokenSeven() {
 		return dedicationTokenSeven;
@@ -164,7 +165,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the genericDedicationTokens
+	 * @return genericDedicationTokens genericDedicationTokens is returned
 	 */
 	public Vector<Integer> getGenericDedicationTokens() {
 		return genericDedicationTokens;
@@ -178,7 +179,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenFourSize
+	 * @return dedicationTokenFourSize dedicationTokenFourSize is returned
 	 */
 	public int getDedicationTokenFourSize() {
 		return dedicationTokenFourSize;
@@ -192,7 +193,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSixSize
+	 * @return dedicationTokenSixSize dedicationTokenSixSize is returned
 	 */
 	public int getDedicationTokenSixSize() {
 		return dedicationTokenSixSize;
@@ -206,7 +207,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the dedicationTokenSevenSize
+	 * @return dedicationTokenSevenSize dedicationTokenSevenSize is returned
 	 */
 	public int getDedicationTokenSevenSize() {
 		return dedicationTokenSevenSize;
@@ -220,7 +221,7 @@ public class DedicationTokens {
 	}
 
 	/**
-	 * @return the genericDedicationTokensSize
+	 * @return genericDedicationTokensSize genericDedicationTokensSize is returned
 	 */
 	public int getGenericDedicationTokensSize() {
 		return genericDedicationTokensSize;

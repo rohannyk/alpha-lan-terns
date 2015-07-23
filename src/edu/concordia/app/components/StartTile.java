@@ -3,18 +3,16 @@ package edu.concordia.app.components;
 import java.util.Vector;
 
 /**
- * @author Team E 
+ * 
  * This program is used to create the Start Tile This Tile is the
  * first tile of the game The Red color in the tile chooses the first
  * player to start the game
- *
+ *@author Team E 
+ *@since 23-07-2015
  */
 public class StartTile {
 
-//	public Vector<String> edgecolour = new Vector<String>(4);
-	//private Vector<String> startTileColour;
-	
-	//private int startTileId;
+
 	private String startTileTopColor = "BLACK";
 	private String startTileLeftColor = "WHITE";
 	private String startTileRightColor = "BLUE";
@@ -25,7 +23,7 @@ public class StartTile {
 	private int startRightTileId;
 
 	/**
-	 * 
+	 * deafault constructor for StartTile
 	 */
 	public StartTile() {
 //		startTileColour = new Vector<String>(4);

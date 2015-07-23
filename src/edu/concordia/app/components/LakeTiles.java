@@ -7,6 +7,7 @@ import java.util.Vector;
  * and some of the lake tiles have a platform marker,again lake tile can have adjacent
  * top/bottom/left/right lake tile 
  * @author Team E
+ * @since 23-07-2015
  */
 public class LakeTiles {
 
@@ -352,7 +353,7 @@ public class LakeTiles {
 
 	/**
 	 * The getter method for tiles id
-	 * @return the tilesId
+	 * @return  tilesId tilesId is returned
 	 */
 	public int getTilesId() {
 		return tilesId;
@@ -520,7 +521,7 @@ public class LakeTiles {
 
 	/**
 	 *The getter method for the platform of the tile
-	 * @return The platform
+	 * @return The platform is returned 
 	 */
 	public boolean isPlatform() {
 		return platform;
