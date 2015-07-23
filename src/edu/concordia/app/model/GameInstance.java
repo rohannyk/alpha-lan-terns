@@ -27,14 +27,21 @@ public class GameInstance {
 	
 	//@XmlElement
 	/**
-	 * the variable to hold current player
+	 * The current player of the game.
 	 * 0 for game not started
 	 * 1 - 4 for players
 	 */
 	private Players playerCurrentTurn;
-
 	
+	/**
+	 * The player who will start the game
+	 */
 	private Players gameStartPlayer;
+	
+	/**
+	 * The player who won the game.
+	 */
+	private Players winnerPlayer;
 	
 	private LakeTiles gameStartTile;
 	
@@ -307,7 +314,12 @@ public class GameInstance {
 			if(playerCheck.getFaceColor().equals("RED")){
 			startPlayer = playerCheck;
 			//playerCurrentTurn = playerCheck;
+			
+			// set current player of the game
 			setPlayerCurrentTurn(playerCheck);
+			
+			//set start player of the game.
+			setGameStartPlayer(playerCheck);
 			}
 		}
 		//System.out.println("check "+getPlayerCurrentTurn().getPlayerNumber());
@@ -888,6 +900,20 @@ public class GameInstance {
 	 */
 	public void setDefaultLanternCardSize(int defaultLanternCardSize) {
 		this.defaultLanternCardSize = defaultLanternCardSize;
+	}
+
+	/**
+	 * @return the winnerPlayer
+	 */
+	public Players getWinnerPlayer() {
+		return winnerPlayer;
+	}
+
+	/**
+	 * @param winnerPlayer the winnerPlayer to set
+	 */
+	public void setWinnerPlayer(Players winnerPlayer) {
+		this.winnerPlayer = winnerPlayer;
 	}
 	
 	

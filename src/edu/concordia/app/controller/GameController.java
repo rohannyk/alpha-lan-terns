@@ -56,22 +56,7 @@ public class GameController {
 		this.gameInstance = gameInstance;
 	}
 	
-	/*public String getFileName(){
-		System.out.println("Please enter file name : ");
-		String s = null;
-		try{
-		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		    s = bufferRead.readLine();
-	 
-		    System.out.println(s);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return s;
-	}*/
+	
 	
 	/**
 	 * This method will check if the file name is empty or not.
@@ -116,16 +101,40 @@ public class GameController {
 	 * @return The GameInstance class object will be returned.
 	 */
 	public GameInstance loadGameFromFile(String fileName) {
-		File file;
+		File file = null;
 		
 		if(fileName == null || fileName == ""){
-			file = new File("/Users/lovepreet/default_game_load.xml");
+			
+			System.out.println("File Name is empty. Please enter the file name.");
+			
+			return null;
+			//file = new File("/Users/lovepreet/default_game_load.xml");
 		}
 		else{
 			file = new File(fileName);
+			
+			boolean fileExists = checkFileExist(file);
+			
+			if(fileExists){
+				return loadGameState(file);
+			}else{
+				return null;
+			}
 		}
 		
-		return loadGameState(file);
+		//return loadGameState(file);
+	}
+	
+	/**
+	 * @param file 
+	 * @return The boolean value to check if file exists or not.
+	 */
+	public boolean checkFileExist(File file){
+		
+		//System.out.println(file.exists());
+		
+		return file.exists();
+		//return true;
 	}
 	
 	/**
@@ -134,6 +143,8 @@ public class GameController {
 	 * @return The GameInstance class object will be returned.
 	 */
 	public GameInstance loadGameState(File file) {
+		
+		System.out.println("Loading the game.......!");
 		
 		GameInstance gameInstance = null;
 		try {
@@ -146,52 +157,65 @@ public class GameController {
 		
 		this.gameInstance = gameInstance;
 		
+		System.out.println("Verifying game configuration....");
+		
+		//verifyLoadedGameState();
+		
+		System.out.println("Game Loaded successfully.");
+		
 		return gameInstance;
 	}
+	
+//	private void verifyLoadedGameState(){
+//		
+//	}
 
 	/**
 	 * This method will print the Game state and player state on console.
+	 * @param gameObj 
 	 */
-	public void showTextMode() {
+	public void showTextMode(GameInstance gameObj) {
 		System.out.println("Game Status in Text Mode:");
 		System.out.println();
-		System.out.println("Number of Players: " +gameInstance.getNoOfPlayers());
+		System.out.println("Number of Players: " +gameObj.getNoOfPlayers());
 		System.out.println();
-		System.out.println("Current Player: " +gameInstance.getPlayerCurrentTurn().getPlayerNumber());
+		System.out.println("Start Player: " +gameObj.getGameStartPlayer().getPlayerNumber());
+		System.out.println();
+		System.out.println("Current Player: " +gameObj.getPlayerCurrentTurn().getPlayerNumber());
 		System.out.println();
 		System.out.println("-----Lantern Cards-----");
 		System.out.println();
-		System.out.println("Red Lantern Cards Left: "+gameInstance.getGameRedLanternCardCount());
+		System.out.println("Red Lantern Cards Left: "+gameObj.getGameRedLanternCardCount());
 		
-		System.out.println("Blue Lantern Cards Left: "+gameInstance.getGameBlueLanternCardCount());
-		System.out.println("Black Lantern Cards Left: "+gameInstance.getGameBlackLanternCardCount());
-		System.out.println("Green Lantern Cards Left: "+gameInstance.getGameGreenLanternCardCount());
-		System.out.println("Orange Lantern Cards Left: "+gameInstance.getGameOrangeLanternCardCount());
-		System.out.println("Purple Lantern Cards Left: "+gameInstance.getGamePurpleLanternCardCount());
-		System.out.println("White Lantern Cards Left: "+gameInstance.getGameWhiteLanternCardCount());
+		System.out.println("Blue Lantern Cards Left: "+gameObj.getGameBlueLanternCardCount());
+		System.out.println("Black Lantern Cards Left: "+gameObj.getGameBlackLanternCardCount());
+		System.out.println("Green Lantern Cards Left: "+gameObj.getGameGreenLanternCardCount());
+		System.out.println("Orange Lantern Cards Left: "+gameObj.getGameOrangeLanternCardCount());
+		System.out.println("Purple Lantern Cards Left: "+gameObj.getGamePurpleLanternCardCount());
+		System.out.println("White Lantern Cards Left: "+gameObj.getGameWhiteLanternCardCount());
 		System.out.println();
 		System.out.println("-----Dedication Tokens-----");
 		System.out.println();
-		System.out.println("Next Dedication Token Four: " +gameInstance.getNextDedicationTokenFour());
-		System.out.println("Next Dedication Token Six: "+gameInstance.getNextDedicationTokenSix());
-		System.out.println("Next Dedication Token Seven: "+gameInstance.getNextDedicationTokenSeven());
-		System.out.println("Next Genric Dedication Token: "+gameInstance.getNextGenericDedicationToken());
+		System.out.println("Next Dedication Token Four: " +gameObj.getNextDedicationTokenFour());
+		System.out.println("Next Dedication Token Six: "+gameObj.getNextDedicationTokenSix());
+		System.out.println("Next Dedication Token Seven: "+gameObj.getNextDedicationTokenSeven());
+		System.out.println("Next Genric Dedication Token: "+gameObj.getNextGenericDedicationToken());
 		System.out.println();
 		System.out.println("-----Dedication Tokens Count-----");
 		System.out.println();
 		
-		DedicationTokens deTokens = gameInstance.getDedicationTokens();
+		DedicationTokens deTokens = gameObj.getDedicationTokens();
 		
 		System.out.println("Dedication Token Four: " +deTokens.getDedicationTokenFourSize());
 		System.out.println("Dedication Token Six: "+deTokens.getDedicationTokenSixSize());
 		System.out.println("Dedication Token Seven: "+deTokens.getDedicationTokenSevenSize());
 		System.out.println("Genric Dedication Token: "+deTokens.getGenericDedicationTokensSize());
 		System.out.println();
-		System.out.println("Available Lake Tiles in shuffled deck  : "+gameInstance.getGameTilesDrawPile().size());
+		System.out.println("Available Lake Tiles in shuffled deck  : "+gameObj.getGameTilesDrawPile().size());
 		System.out.println();
 		
 		System.out.println("-----Shuffled Lake Tiles-----");
-		Vector<LakeTiles> drawTile = gameInstance.getGameTilesDrawPile();
+		Vector<LakeTiles> drawTile = gameObj.getGameTilesDrawPile();
 		
 		for (int i = 0; i < drawTile.size(); i++) {
 			LakeTiles currTile= drawTile.get(i);
@@ -201,14 +225,14 @@ public class GameController {
 		System.out.println();
 		System.out.println("-----Current Lake Tile Arrangement-----");
 		System.out.println();
-		Vector<LakeTiles> tileArrangement = gameInstance.getCurrentLakeTilesArrangement();
+		Vector<LakeTiles> tileArrangement = gameObj.getCurrentLakeTilesArrangement();
 		System.out.println("No of Lake Tile: "+tileArrangement.size());
 		System.out.println("Lake Tile Number Id: "+tileArrangement.get(0).getTilesId());
 		System.out.println();
-		System.out.println("Available Favor Tokens: "+gameInstance.getGameFavorToken());
+		System.out.println("Available Favor Tokens: "+gameObj.getGameFavorToken());
 		System.out.println();
 		System.out.println("-----Players Status-----");
-		Players[] playersArray = gameInstance.getPlayersList();
+		Players[] playersArray = gameObj.getPlayersList();
 		
 		for (int i = 0; i < playersArray.length; i++) {
 			Players player = playersArray[i];
