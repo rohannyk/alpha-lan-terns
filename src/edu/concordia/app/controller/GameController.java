@@ -56,22 +56,7 @@ public class GameController {
 		this.gameInstance = gameInstance;
 	}
 	
-	/*public String getFileName(){
-		System.out.println("Please enter file name : ");
-		String s = null;
-		try{
-		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		    s = bufferRead.readLine();
-	 
-		    System.out.println(s);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return s;
-	}*/
+	
 	
 	/**
 	 * This method will check if the file name is empty or not.
