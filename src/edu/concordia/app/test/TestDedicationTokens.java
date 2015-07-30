@@ -43,6 +43,10 @@ public class TestDedicationTokens {
 		lm = null;
 	}
 	
+	
+	/**
+	 * This test is used to check if the dedication tokens are being initialized
+	 */
 	@Test
 	public void testInitialzeDedicationTokens() {
 		GameConfiguration gc1= new GameConfiguration();

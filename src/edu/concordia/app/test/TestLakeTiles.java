@@ -16,7 +16,7 @@ import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 
 /**
- * @author Saleh
+ * @author Team E
  *
  */
 public class TestLakeTiles {
@@ -38,6 +38,9 @@ public class TestLakeTiles {
 		gc = null;
 	}
 	
+	/**
+	 * To test lake tile configuration for three players
+	 */
 	@Test
 	public void testConfigWithParam4() {
 		
@@ -48,26 +51,29 @@ public class TestLakeTiles {
 		
 	}
 	
+	/**
+	 * To test lake tile configuration for three players
+	 */
 	@Test
 	public void testConfigWithParam3() {
-		
-		
-		
-	GameConfiguration c3 = new GameConfiguration(3);
-    GameInstance gi3 = new GameInstance(c3);
-    Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
-    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+
+		GameConfiguration c3 = new GameConfiguration(3);
+		GameInstance gi3 = new GameInstance(c3);
+		Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
+		assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
 	}
-	
-	
+
+	/**
+	 * To test lake tile configuration for two players
+	 */
 	@Test
 	public void testConfigWithParam2() {
-		
-	GameConfiguration c2 = new GameConfiguration(2);
-    GameInstance gi2 = new GameInstance(c2);
-    Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
-   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
-	       
+
+		GameConfiguration c2 = new GameConfiguration(2);
+		GameInstance gi2 = new GameInstance(c2);
+		Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
+		assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+
 	}
 	
 }

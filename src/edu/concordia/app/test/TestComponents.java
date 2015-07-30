@@ -17,7 +17,7 @@ import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 
 /**
- * @author abhijit
+ * @author Team E
  *
  */
 public class TestComponents {

@@ -37,43 +37,55 @@ public class TestLanternCard {
 	
 
 
+	/**
+	 * To test Lantern Card Configuration for three players
+	 */
 	@Test
 	public void testConfigWithLantern3()
-		
+
 	{
-		
-	GameConfiguration c3= new GameConfiguration(3);
-    GameInstance gi3= new GameInstance(c3);
-    
-  assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi3.getDefaultLanternCardSize());
-	
-    //System.out.println(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
+
+		GameConfiguration c3 = new GameConfiguration(3);
+		GameInstance gi3 = new GameInstance(c3);
+
+		assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
+				gi3.getDefaultLanternCardSize());
+
+		// System.out.println(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
-	
+
+	/**
+	 * To test Lantern Card Configuration for four players
+	 */
 	@Test
 	public void testConfigWithLantern4()
-		
+
 	{
-		
-	GameConfiguration c4= new GameConfiguration(4);
-    GameInstance gi4= new GameInstance(c4);
-    
-  assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi4.getDefaultLanternCardSize());
-	
-    //System.out.println(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
+
+		GameConfiguration c4 = new GameConfiguration(4);
+		GameInstance gi4 = new GameInstance(c4);
+
+		assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
+				gi4.getDefaultLanternCardSize());
+
+		// System.out.println(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
-	
+
+	/**
+	 * To test Lantern Card Configuration for two players
+	 */
 	@Test
 	public void testConfigWithLantern2()
-		
+
 	{
-		
-	GameConfiguration c2= new GameConfiguration(2);
-    GameInstance gi2= new GameInstance(c2);
-    
-  assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi2.getDefaultLanternCardSize());
-	
-   // System.out.println(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
+
+		GameConfiguration c2 = new GameConfiguration(2);
+		GameInstance gi2 = new GameInstance(c2);
+
+		assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
+				gi2.getDefaultLanternCardSize());
+
+		// System.out.println(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
 
 

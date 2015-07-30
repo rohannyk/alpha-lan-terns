@@ -42,12 +42,10 @@ public class TestController {
 	}
 
 	
-	
-	@Test
 	/**
 	 * The test checks the number of players entered by the user
-	 */
-	 
+	 */	
+	@Test
 	public void testNoOfPlayers() {
 
 		int noOfPlayers = lm.getInputNoOfPlayers();

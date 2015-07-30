@@ -47,54 +47,46 @@ public class TestStartTile {
 	}
 		
 
-	@Test
 	/**
 	 * The Test to check the red edge side of the tile is assigned to one player
 	 * when number of players are three
 	 */
-	
-	public void testPlayerGetsRedTileEdgeForThreePlayers() {
-		
-		
-	GameConfiguration c3= new GameConfiguration(3);
-	   GameInstance gi3= new GameInstance(c3);
-	   String r ="RED";
-	   //Players[] playersList ;
-	    
-	    Players[] checkPlayerList = gi3.getPlayersList();
-	    
-	    String checkColor = null;
-	    for (int i = 0; i < checkPlayerList.length; i++) {
-	    	Players playerObj = checkPlayerList[i];
-	    	String pFaceColor = playerObj.getFaceColor();
-	    	
-	    	if(pFaceColor.equals("RED")){
-	    		checkColor = pFaceColor;
-	    	}
-		}
-	    	  
-	    assertTrue(r.equals(checkColor));
-	    
-	
-			
-		
-			
-	   
-	}
 	@Test
+	public void testPlayerGetsRedTileEdgeForThreePlayers() {
+
+		GameConfiguration c3 = new GameConfiguration(3);
+		GameInstance gi3 = new GameInstance(c3);
+		String r = "RED";
+		// Players[] playersList ;
+
+		Players[] checkPlayerList = gi3.getPlayersList();
+
+		String checkColor = null;
+		for (int i = 0; i < checkPlayerList.length; i++) {
+			Players playerObj = checkPlayerList[i];
+			String pFaceColor = playerObj.getFaceColor();
+
+			if (pFaceColor.equals("RED")) {
+				checkColor = pFaceColor;
+			}
+		}
+
+		assertTrue(r.equals(checkColor));
+
+	}
+	
 	/**
 	 * The Test to check the red edge side of the tile is assigned to one player
 	 * when number of players are two
 	 */
-
-public void testPlayerGetsRedTileEdgeForTwoPlayers() {
-		
-		
+	@Test
+	public void testPlayerGetsRedTileEdgeForTwoPlayers() {
+				
 		GameConfiguration c2= new GameConfiguration(2);
 	    GameInstance gi2= new GameInstance(c2);
 	    String r ="RED";
 	   //Players[] playersList ;
- Players[] checkPlayerList = gi2.getPlayersList();
+	    Players[] checkPlayerList = gi2.getPlayersList();
 	    
 	    String checkColor = null;
 	    for (int i = 0; i < checkPlayerList.length; i++) {
@@ -107,42 +99,36 @@ public void testPlayerGetsRedTileEdgeForTwoPlayers() {
 		}
 	    	  
 	    assertTrue(r.equals(checkColor));
-	    
-	    
-		
-	   
+	       
 	}
-
-	@Test
+	
 	/**
 	 * The Test to check the red edge side of the tile is assigned to one player
 	 * when number of players are three
 	 */
-public void testPlayerGetsRedTileEdgeForFourPlayers() {
-	
-	
-	GameConfiguration c4= new GameConfiguration(4);
-    GameInstance gi4= new GameInstance(c4);
-    String r ="RED";
-   //Players[] playersList ;
-   // Players[] getPlayersList();
-    Players[] checkPlayerList = gi4.getPlayersList();
-    
-    String checkColor = null;
-    for (int i = 0; i < checkPlayerList.length; i++) {
-    	Players playerObj = checkPlayerList[i];
-    	String pFaceColor = playerObj.getFaceColor();
-    	
-    	if(pFaceColor.equals("RED")){
-    		checkColor = pFaceColor;
-    	}
+	@Test
+	public void testPlayerGetsRedTileEdgeForFourPlayers() {
+
+		GameConfiguration c4 = new GameConfiguration(4);
+		GameInstance gi4 = new GameInstance(c4);
+		String r = "RED";
+		// Players[] playersList ;
+		// Players[] getPlayersList();
+		Players[] checkPlayerList = gi4.getPlayersList();
+
+		String checkColor = null;
+		for (int i = 0; i < checkPlayerList.length; i++) {
+			Players playerObj = checkPlayerList[i];
+			String pFaceColor = playerObj.getFaceColor();
+
+			if (pFaceColor.equals("RED")) {
+				checkColor = pFaceColor;
+			}
+		}
+
+		assertTrue(r.equals(checkColor));
+
 	}
-    	  
-    assertTrue(r.equals(checkColor));
-    
-    	
-	
-	}	
    
 }
 

@@ -37,8 +37,12 @@ public class TestFavorTokens {
 		
 	}
 	
+	
+	/**
+	 * This test is used to check if the favor tokens hav been initialized
+	 */
 	@Test
-public void testFavourTokens() {
+	public void testFavourTokens() {
 	
 		
 		assertEquals(gc.TOTAL_FAVOR_TOKEN, gi.getGameFavorToken());
