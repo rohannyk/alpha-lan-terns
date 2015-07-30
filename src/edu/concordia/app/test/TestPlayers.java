@@ -213,7 +213,7 @@ public class TestPlayers {
 	 * The method test if lake tile card is rotated 0 degree.
 	 */
 	@Test
-	public void testLakeTileRotation0Degree() {
+	public void testLakeTileRotationZeroDegree() {
 
 		GameConfiguration gc1 = new GameConfiguration();
 
