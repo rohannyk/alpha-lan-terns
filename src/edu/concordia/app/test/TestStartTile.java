@@ -4,13 +4,12 @@
 package edu.concordia.app.test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.hamcrest.Matchers.*;
+
 
 import java.util.Arrays;
 
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
