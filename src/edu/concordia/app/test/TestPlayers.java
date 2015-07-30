@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertSame;
 
+import java.util.Vector;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -308,53 +310,386 @@ GameConfiguration gc1 = new GameConfiguration();
 		assertSame(checkTile.getBottomColor(), returnTile.getRightColor());
 	}*/
 	
-
-}
-/**
- * 
- */
-package edu.concordia.app.test;
-
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import edu.concordia.app.model.GameConfiguration;
-import edu.concordia.app.model.GameInstance;
-
-/**
- * @author abhijit
- *
- */
-public class TestPlayers {
-
-	GameInstance gi;
-	GameConfiguration  gc;
-		
-	
-
-	@Before
-	public void setUp() throws Exception {
-		gi = new GameInstance(new GameConfiguration());
-		gc = new GameConfiguration();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		gi = null;
-		gc = null;
-	}
-
-/*
- * This method checks no of players  playing the game	
- */
+	/**
+	 * The method test the winner player in two player configuration.
+	 */
 	@Test
-	public void testPlayers() {
-
-		GameConfiguration gc1= new GameConfiguration(2);
-		assertEquals(gc1.NUM_OF_PLAYERS,2);
+	public void testWinnerInTwoPlayerDifferentScore(){
+		GameConfiguration gc1 = new GameConfiguration(2);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//
+		player[0].setTotalPoints(20); //winner player
+		player[1].setTotalPoints(18);
+		
+		
+		
+		LakeTiles tileInHand = player[0].getCurrentLakeTilesHold().get(0);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		System.out.println(winnerPlayer.get(0));
+		
+		assertEquals(player[0], winnerPlayer.firstElement());
+		
 	}
+	
+	/**
+	 * The method test the winner player in three player configuration.
+	 */
+	@Test
+	public void testWinnerInThreePlayerDifferentScore(){
+		GameConfiguration gc1 = new GameConfiguration(3);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//
+		player[0].setTotalPoints(20); 
+		player[1].setTotalPoints(25);//winner player
+		player[2].setTotalPoints(10);
+		
+		
+		LakeTiles tileInHand = player[0].getCurrentLakeTilesHold().get(0);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[1], winnerPlayer.get(1));
+		
+	}
+	
+	/**
+	 * The method test the winner player in four player configuration.
+	 */
+	@Test
+	public void testWinnerInFourPlayerDifferentScore(){
+		GameConfiguration gc1 = new GameConfiguration(4);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//
+		player[0].setTotalPoints(18); //winner player
+		player[1].setTotalPoints(8);
+		player[2].setTotalPoints(10);
+		player[3].setTotalPoints(15);
+		
+		
+		LakeTiles tileInHand = player[0].getCurrentLakeTilesHold().get(0);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		System.out.println(winnerPlayer.get(0));
+		
+		assertEquals(player[0], winnerPlayer.firstElement());
+		
+	}
+	
+	/**
+	 * The method test the winner player in two player configuration
+	 * with same score and different number of lantern cards.
+	 */
+	@Test
+	public void testWinnerTwoPlayerSameScoreDiffCard(){
+		GameConfiguration gc1 = new GameConfiguration(2);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(15);
+		player[1].setLanternCardCount(20);//winner player
+		
+		LakeTiles tileInHand = player[0].getCurrentLakeTilesHold().get(0);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[1], winnerPlayer.get(1));
+	}
+	
+	/**
+	 * The method test the winner player in two player configuration
+	 * with same score , same number of lantern cards and different favor.
+	 */
+	@Test
+	public void testWinnerTwoPlayerSameScoreSameCardDiffFavor(){
+		GameConfiguration gc1 = new GameConfiguration(2);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(8);
+		player[1].setPlayerFavorToken(12);//winner player
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[1], winnerPlayer.get(0));
+	}
+	
+	/**
+	 * The method test the winner player in two player configuration
+	 * with same score , same number of lantern cards and same favor tokens.
+	 */
+	@Test
+	public void testWinnerTwoPlayerSameScoreSameCardSameFavor(){
+		GameConfiguration gc1 = new GameConfiguration(2);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(8);
+		player[1].setPlayerFavorToken(8);//winner player
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(2, winnerPlayer.size());
+	}
+	
+	/**
+	 * The method test the winner player in three player configuration
+	 * with same score and different number of lantern cards.
+	 */
+	@Test
+	public void testWinnerThreePlayerSameScoreDiffCard(){
+		GameConfiguration gc1 = new GameConfiguration(3);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[2].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(20);//winner player
+		player[2].setLanternCardCount(18);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[1], winnerPlayer.get(1));
+	}
+	
+	/**
+	 * The method test the winner player in three player configuration
+	 * with same score , same number of lantern cards and different favor tokens.
+	 */
+	@Test
+	public void testWinnerThreePlayerSameScoreSameCardDiffFavor(){
+		GameConfiguration gc1 = new GameConfiguration(3);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[1].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(8);
+		player[1].setPlayerFavorToken(10);
+		player[2].setPlayerFavorToken(12);//winner player
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[2], winnerPlayer.get(0));
+	}
+	
+	/**
+	 * The method test the winner player in three player configuration
+	 * with same score , same number of lantern cards and same favor tokens.
+	 */
+	@Test
+	public void testWinnerThreePlayerSameScoreSameCardSameFavor(){
+		GameConfiguration gc1 = new GameConfiguration(3);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[2].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		player[2].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(6);
+		player[1].setPlayerFavorToken(6);
+		player[2].setPlayerFavorToken(6);
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(3, winnerPlayer.size());
+	}
+	
+	/**
+	 * The method test the winner player in four player configuration
+	 * with same score and different number of lantern cards.
+	 */
+	@Test
+	public void testWinnerFourPlayerSameScoreDiffCard(){
+		GameConfiguration gc1 = new GameConfiguration(4);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[2].setTotalPoints(10);
+		player[3].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(20);//winner player
+		player[2].setLanternCardCount(8);
+		player[3].setLanternCardCount(18);
+		
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		System.out.println("*****"+winnerPlayer.size());
+		
+		assertEquals(player[1], winnerPlayer.get(1));
+	}
+	
+	/**
+	 * The method test the winner player in four player configuration
+	 * with same score , same number of lantern cards and different favor tokens.
+	 */
+	@Test
+	public void testWinnerFourPlayerSameScoreSameCardDiffFavor(){
+		GameConfiguration gc1 = new GameConfiguration(4);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[2].setTotalPoints(10);
+		player[3].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		player[2].setLanternCardCount(10);
+		player[3].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(8);
+		player[1].setPlayerFavorToken(10);
+		player[2].setPlayerFavorToken(12);
+		player[3].setPlayerFavorToken(16);//winner player
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(player[3], winnerPlayer.get(0));
+	}
+	
+	/**
+	 * The method test the winner player in four player configuration
+	 * with same score , same number of lantern cards and same favor tokens.
+	 */
+	@Test
+	public void testWinnerFourPlayerSameScoreSameCardSameFavor(){
+		GameConfiguration gc1 = new GameConfiguration(4);
+		gi = new GameInstance(new GameConfiguration());
+		
+		Players player[] = gi.getPlayersList();
+		
+		//set total score
+		player[0].setTotalPoints(10); 
+		player[1].setTotalPoints(10);
+		player[2].setTotalPoints(10);
+		player[3].setTotalPoints(10);
+		
+		//set lantern card count
+		player[0].setLanternCardCount(10);
+		player[1].setLanternCardCount(10);
+		player[2].setLanternCardCount(10);
+		player[3].setLanternCardCount(10);
+		
+		//set differnt favor tokens
+		player[0].setPlayerFavorToken(5);
+		player[1].setPlayerFavorToken(5);
+		player[2].setPlayerFavorToken(5);
+		player[3].setPlayerFavorToken(5);
+		
+		//create PlayGame class object
+		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		Vector<Players> winnerPlayer = play.validateWinner(player);
+		
+		
+		assertEquals(4, winnerPlayer.size());
+	}
+	
 
 }
