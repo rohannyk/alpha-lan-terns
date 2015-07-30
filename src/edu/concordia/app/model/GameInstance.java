@@ -519,7 +519,7 @@ public class GameInstance {
 	}
 	
 	/** 
-	 * This method gets the game start layer.
+	 * This method gets the game start player.
 	 * @param playersList: Players[] type
 	 * @return gameStartPlayer: Players type 
 	 */
