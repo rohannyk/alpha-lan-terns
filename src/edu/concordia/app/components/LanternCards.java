@@ -5,11 +5,11 @@ import javax.xml.bind.annotation.XmlElement;
 
 
 /**
- * This class is used to create the Lantern Cards
- * The Lantern Cards are made up of 7 different colors
- * There are 8 cards for each color
- * Lantern Cards can be exchanged with favor tokens
- * Lantern Cards can be exchanged with dedication tokens to score
+ * This class is used to create the Lantern Cards.
+ * The Lantern Cards are made up of 7 different colors.
+ * There are 8 cards for each color.
+ * Lantern Cards can be exchanged with favor tokens.
+ * Lantern Cards can be exchanged with dedication tokens to score.
  * @author Team E
  */
 public class LanternCards {
@@ -73,18 +73,19 @@ public class LanternCards {
 
 	@XmlAttribute
 	/**
-	 * @return the numberOfCards
+	 * This method gets the number of cards.
+	 * @return the numberOfCards. int type
 	 */
 	public int getNumberOfCards() {
 		return numberOfCards;
 	}
 
 	/**
-	 * @param numberOfCards the numberOfCards to set
+	 * This method sets the number of cards.
+	 * @param numberOfCards the numberOfCards to set: int type
 	 */
 	public void setNumberOfCards(int numberOfCards) {
 		this.numberOfCards = numberOfCards;
 	}
-	
 	
 }
