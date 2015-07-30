@@ -21,6 +21,9 @@ import edu.concordia.app.model.GameInstance;
 import edu.concordia.app.model.Players;
 
 /**
+ * GameConfiguration Class.
+ * Methods saveGameToFile, saveGameToXml, loadGameFromFile, checkFileExist
+ * Methods loadGameState, showTextMode
  * @author Team E
  *
  */
@@ -60,6 +63,7 @@ public class GameController {
 	
 	/**
 	 * This method will check if the file name is empty or not.
+	 * Creates File object.
 	 * If file name is empty, Default file name will be assigned.
 	 * @param gameFile The name of the file to save.
 	 */
@@ -78,27 +82,27 @@ public class GameController {
 	}
 	
 	/**
-	 * This method will save GameInstance class object to an xml file.
-	 * @param gameFile The file name of the save file.
+	 * This method will save GameInstance class object to an 'XML' file.
+	 * Creates objects of JAXBContext, Marshaller.
+	 * @param gameFile The file name of the save file (exception handled).
 	 */
-	public void saveGameToXml(File gameFile){
+	private void saveGameToXml(File gameFile){
 		try {
 			JAXBContext context = JAXBContext.newInstance(GameInstance.class);
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			
-			//marshaller.marshal(this.gameInstance, System.out);
 			marshaller.marshal(this.gameInstance, gameFile);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/**
 	 * This method will check if the file name is empty or not.
+	 * Creates object of File.
 	 * @param fileName The name of the file to save.
-	 * @return The GameInstance class object will be returned.
+	 * @return The GameInstance class object is returned.
 	 */
 	public GameInstance loadGameFromFile(String fileName) {
 		File file = null;
@@ -108,7 +112,6 @@ public class GameController {
 			System.out.println("File Name is empty. Please enter the file name.");
 			
 			return null;
-			//file = new File("/Users/lovepreet/default_game_load.xml");
 		}
 		else{
 			file = new File(fileName);
@@ -121,28 +124,28 @@ public class GameController {
 				return null;
 			}
 		}
-		
-		//return loadGameState(file);
+
 	}
 	
 	/**
-	 * @param file 
+	 * This method checks if the given file exists or not.
+	 * @param file of File type.
 	 * @return The boolean value to check if file exists or not.
 	 */
-	public boolean checkFileExist(File file){
+	private boolean checkFileExist(File file){
 		
 		//System.out.println(file.exists());
-		
 		return file.exists();
-		//return true;
+
 	}
 	
 	/**
-	 * This method will load xml file and get the GameInstance class object.
+	 * This method will load 'XML' file and get the GameInstance class object.
+	 * Creates objects of GameInstance, JAXBContext, Unmarshaller.
 	 * @param file The file name of the file to be loaded.
-	 * @return The GameInstance class object will be returned.
+	 * @return The GameInstance class object will be returned (exception handled).
 	 */
-	public GameInstance loadGameState(File file) {
+	private GameInstance loadGameState(File file) {
 		
 		System.out.println("Loading the game.......!");
 		
@@ -156,26 +159,26 @@ public class GameController {
 		}
 		
 		this.gameInstance = gameInstance;
-		
-		System.out.println("Verifying game configuration....");
-		
-		//verifyLoadedGameState();
-		
+				
 		System.out.println("Game Loaded successfully.");
 		
 		return gameInstance;
 	}
 	
-//	private void verifyLoadedGameState(){
-//		
-//	}
-
 	/**
-	 * This method will print the Game state and player state on console.
-	 * @param gameObj 
+	 * This method will print the game state and player state on console.
+	 * Prints Number of Players, Start Player, Current Player
+	 * Prints Game Lantern Cards Status, Game Dedication Tokens.
+	 * Prints Available Lake Tiles in shuffled deck, Shuffled Lake Tiles.
+	 * Prints Current Lake Tile Arrangement, Game available Favor Tokens.
+	 * Prints Player Number, Number of favor tokens player has.
+	 * Prints Lantern Cards Player Holds, Player Lake Tiles.
+	 * Prints No of Lake Tiles held, Lake Tiles held, Player Dedication Tokens.
+	 * Creates objects of DedicationTokens, Vector<LakeTiles>, LakeTiles, Players[]
+	 * @param gameObj of GameInstance type
 	 */
 	public void showTextMode(GameInstance gameObj) {
-		System.out.println("Game Status in Text Mode:");
+		System.out.println(" ********* Game Status in Text Mode ********* ");
 		System.out.println();
 		System.out.println("Number of Players: " +gameObj.getNoOfPlayers());
 		System.out.println();
@@ -183,8 +186,9 @@ public class GameController {
 		System.out.println();
 		System.out.println("Current Player: " +gameObj.getPlayerCurrentTurn().getPlayerNumber());
 		System.out.println();
-		System.out.println("-----Lantern Cards-----");
+		System.out.println("-----Game Lantern Cards Status-----");
 		System.out.println();
+		System.out.println("Total Lantern cards: "+gameObj.getLanternCardCount());
 		System.out.println("Red Lantern Cards Left: "+gameObj.getGameRedLanternCardCount());
 		
 		System.out.println("Blue Lantern Cards Left: "+gameObj.getGameBlueLanternCardCount());
@@ -194,14 +198,14 @@ public class GameController {
 		System.out.println("Purple Lantern Cards Left: "+gameObj.getGamePurpleLanternCardCount());
 		System.out.println("White Lantern Cards Left: "+gameObj.getGameWhiteLanternCardCount());
 		System.out.println();
-		System.out.println("-----Dedication Tokens-----");
+		System.out.println("-----Game Dedication Tokens-----");
 		System.out.println();
 		System.out.println("Next Dedication Token Four: " +gameObj.getNextDedicationTokenFour());
 		System.out.println("Next Dedication Token Six: "+gameObj.getNextDedicationTokenSix());
 		System.out.println("Next Dedication Token Seven: "+gameObj.getNextDedicationTokenSeven());
 		System.out.println("Next Genric Dedication Token: "+gameObj.getNextGenericDedicationToken());
 		System.out.println();
-		System.out.println("-----Dedication Tokens Count-----");
+		System.out.println("-----Game Dedication Tokens Count-----");
 		System.out.println();
 		
 		DedicationTokens deTokens = gameObj.getDedicationTokens();
@@ -227,9 +231,20 @@ public class GameController {
 		System.out.println();
 		Vector<LakeTiles> tileArrangement = gameObj.getCurrentLakeTilesArrangement();
 		System.out.println("No of Lake Tile: "+tileArrangement.size());
-		System.out.println("Lake Tile Number Id: "+tileArrangement.get(0).getTilesId());
+		
+		for (Iterator<LakeTiles> iterator = tileArrangement.iterator(); iterator.hasNext();) {
+			LakeTiles lakeTiles = (LakeTiles) iterator.next();
+			System.out.println("Lake Tile Id: " + lakeTiles.getTilesId()
+					+ " TC: " + lakeTiles.getTopColor() + " BC: "
+					+ lakeTiles.getBottomColor() + " LC: "
+					+ lakeTiles.getLeftColor() + " RC: "
+					+ lakeTiles.getRightColor());
+		}	
+		
 		System.out.println();
-		System.out.println("Available Favor Tokens: "+gameObj.getGameFavorToken());
+		System.out.println("Game available Favor Tokens: "+gameObj.getGameFavorToken());
+		
+		
 		System.out.println();
 		System.out.println("-----Players Status-----");
 		Players[] playersArray = gameObj.getPlayersList();
@@ -237,11 +252,13 @@ public class GameController {
 		for (int i = 0; i < playersArray.length; i++) {
 			Players player = playersArray[i];
 			System.out.println();
-			System.out.println("Player Number: "+player.getPlayerNumber());
+			System.out.println("********* Player Number: "+player.getPlayerNumber()+" **********");
+			System.out.println();
 			System.out.println("Number of favor tokens player has: "+player.getPlayerFavorToken());
 			System.out.println();
 			System.out.println("-------Lantern Cards Player Holds-----");
 			System.out.println();
+			System.out.println("Total Lantern cards: "+player.getLanternCardCount());
 			System.out.println("Red Lantern Cards Left: "+player.getPlayerRedLanternCardCount());
 			System.out.println("Blue Lantern Cards Left: "+player.getPlayerBlueLanternCardCount());
 			System.out.println("Black Lantern Cards Left: "+player.getPlayerBlackLanternCardCount());
@@ -254,11 +271,12 @@ public class GameController {
 			System.out.println("-----Player Lake Tiles -----");
 			System.out.println();
 			Vector<LakeTiles> lakeTiles = player.getCurrentLakeTilesHold();
-			System.out.println("No of Lake Tiles holded: "+lakeTiles.size());
+			System.out.println("No of Lake Tiles held: "+lakeTiles.size());
 			for (int j = 0; j < lakeTiles.size(); j++) {
 				LakeTiles tileHolded = lakeTiles.get(j);
-				System.out.println("Lake Tiles holded "+tileHolded.getTilesId());
+				System.out.println("Lake Tiles held "+tileHolded.getTilesId());
 			}
+			System.out.println();
 			
 			System.out.println("-----Player Dedication Tokens -----");
 			DedicationTokens playerDedicationTokens = player.getDedicationTokens();
@@ -310,9 +328,11 @@ public class GameController {
 					System.out.println("Generic Dedication Tokens: "+genericToken.get(j));
 				}
 			}
-			
 			System.out.println();
+			System.out.println("********* Player Number: "+player.getPlayerNumber()+" **********");
+			
 		}
+		
 		System.out.println();
 		
 	}
