@@ -9,7 +9,7 @@ import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 
 /**
- * This class contain the configuration parameters of Lantern Game.
+ * This class contains the configuration parameters of Lantern Game.
  * 
  * @author Team E
  *
@@ -91,14 +91,6 @@ public class GameConfiguration {
 
 	protected static int GAME_TOTAL_NO_DEDICATED_TOKEN = 27;
 
-	// protected int[] gameDedicatedTokenFour = {8,7,6,6,5,4,3,2,1};
-	//
-	// protected int[] gameDedicatedTokenSix = {9,8,7,6,5,4,3,2,1};
-	//
-	// protected int[] gameDedicatedTokenSeven = {10,9,8,8,7,6,6,5,4,3};
-	//
-	// protected int[] gameGenericDedicatedToken = {4,3,2};
-
 	/**
 	 * The total favor tokens of the game
 	 */
@@ -131,7 +123,7 @@ public class GameConfiguration {
 	}
 
 	/**
-	 * @param numberOfPlayers The number of players of the game.
+	 * @param numberOfPlayers: The number of players of the game.
 	 * This constructor will set the game configuration according to number of players.
 	 */
 	public GameConfiguration(int numberOfPlayers) {
@@ -149,7 +141,7 @@ public class GameConfiguration {
 	}
 
 	/**
-	 * The enum type having the seven colors
+	 * The enum type having the seven colors for Lantern Cards.
 	 */
 	public enum TileColor {
 		RED, ORANGE, PURPLE, WHITE, BLUE, BLACK, GREEN;
@@ -157,8 +149,10 @@ public class GameConfiguration {
 
 	/**
 	 * @return The vector containing 36 lake tiles and one start lake tile.
-	 * This method initializes the lake tile suit 
-	 * containing 36 lake tiles and one start lake tile.
+	 * This method initializes the lake tile suit containing 36 lake tiles and 
+	 * one start lake tile; with their respective colors, platform value
+	 * and adjacent lake tile id information.
+	 * Creates Vector<LakeTiles> for the Lake Tiles
 	 */
 	private Vector<LakeTiles> initializeDefaultTileSuite() {
 		Vector<LakeTiles> tileVector = new Vector<LakeTiles>();
@@ -268,11 +262,15 @@ public class GameConfiguration {
 	/**
 	 * @param numberOfPlayers The number of players in the game.
 	 * @return The dedication tokens according to game rules.
-	 * This method return the dedication tokens according to the game rules.
+	 * This method initializes and returns the DedicationTokens object 
+	 * according to the game rules, depending on the number of players.
+	 * Separates Dedication Tokens by type into 3 groups.
+	 * Arranges each group in descending order of value.
+	 * 4 Players: uses all tokens.
+	 * 3 Players: removes tokens with 4 dots.
+	 * 2 Players: removes tokens with 3 or 4 dots.
 	 */
 	public DedicationTokens initializeDedicationTokens(int numberOfPlayers) {
-
-//		DedicationTokens dedicationTokens = new DedicationTokens();
 
 		Vector<Integer> dedicationTokenFour = new Vector<Integer>();
 
@@ -294,13 +292,6 @@ public class GameConfiguration {
 			dedicationTokenFour.add(5);
 			dedicationTokenFour.add(4);
 			
-//			dedicationTokenFour.add(new Tokens(8, 0));
-//			dedicationTokenFour.add(new Tokens(7, 0));
-//			dedicationTokenFour.add(new Tokens(6, 0));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(4, 0));
-
 			// dedication token six
 			dedicationTokenSix.add(9);
 			dedicationTokenSix.add(8);
@@ -317,22 +308,11 @@ public class GameConfiguration {
 			dedicationTokenSeven.add(6);
 			dedicationTokenSeven.add(5);
 			
-//			dedicationTokenSeven.add(new Tokens(10, 0));
-//			dedicationTokenSeven.add(new Tokens(9, 0));
-//			dedicationTokenSeven.add(new Tokens(8, 0));
-//			dedicationTokenSeven.add(new Tokens(7, 0));
-//			dedicationTokenSeven.add(new Tokens(6, 0));
-//			dedicationTokenSeven.add(new Tokens(5, 0));
-
 			// generic dedication token
 			genericDedicationTokens.add(4);
 			genericDedicationTokens.add(4);
 			genericDedicationTokens.add(4);
 			
-//			genericDedicationTokens.add(new Tokens(4, 0));
-//			genericDedicationTokens.add(new Tokens(4, 0));
-//			genericDedicationTokens.add(new Tokens(4, 0));
-
 			break;
 
 		case 3:
@@ -347,15 +327,6 @@ public class GameConfiguration {
 			dedicationTokenFour.add(5);
 			dedicationTokenFour.add(4);
 			
-//			dedicationTokenFour.add(new Tokens(8, 0));
-//			dedicationTokenFour.add(new Tokens(7, 0));
-//			dedicationTokenFour.add(new Tokens(6, 3));
-//			dedicationTokenFour.add(new Tokens(6, 0));
-//			dedicationTokenFour.add(new Tokens(5, 3));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(4, 0));
-
 			// dedication token six
 			dedicationTokenSix.add(9);
 			dedicationTokenSix.add(8);
@@ -366,15 +337,6 @@ public class GameConfiguration {
 			dedicationTokenSix.add(5);
 			dedicationTokenSix.add(5);
 			
-//			dedicationTokenSix.add(new Tokens(9, 0));
-//			dedicationTokenSix.add(new Tokens(8, 0));
-//			dedicationTokenSix.add(new Tokens(7, 3));
-//			dedicationTokenSix.add(new Tokens(7, 0));
-//			dedicationTokenSix.add(new Tokens(6, 3));
-//			dedicationTokenSix.add(new Tokens(6, 0));
-//			dedicationTokenSix.add(new Tokens(5, 0));
-//			dedicationTokenSix.add(new Tokens(5, 0));
-
 			// dedication token seven
 			dedicationTokenSeven.add(10);
 			dedicationTokenSeven.add(9);
@@ -385,15 +347,6 @@ public class GameConfiguration {
 			dedicationTokenSeven.add(6);
 			dedicationTokenSeven.add(5);
 			
-//			dedicationTokenSeven.add(new Tokens(10, 0));
-//			dedicationTokenSeven.add(new Tokens(9, 0));
-//			dedicationTokenSeven.add(new Tokens(8, 3));
-//			dedicationTokenSeven.add(new Tokens(8, 0));
-//			dedicationTokenSeven.add(new Tokens(7, 3));
-//			dedicationTokenSeven.add(new Tokens(7, 0));
-//			dedicationTokenSeven.add(new Tokens(6, 0));
-//			dedicationTokenSeven.add(new Tokens(5, 0));
-
 			// generic dedication token
 			genericDedicationTokens.add(4);
 			genericDedicationTokens.add(4);
@@ -415,16 +368,6 @@ public class GameConfiguration {
 			dedicationTokenFour.add(5);
 			dedicationTokenFour.add(4);
 			
-//			dedicationTokenFour.add(new Tokens(8, 0));
-//			dedicationTokenFour.add(new Tokens(7, 4));
-//			dedicationTokenFour.add(new Tokens(7, 0));
-//			dedicationTokenFour.add(new Tokens(6, 3));
-//			dedicationTokenFour.add(new Tokens(6, 0));
-//			dedicationTokenFour.add(new Tokens(5, 3));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(5, 0));
-//			dedicationTokenFour.add(new Tokens(4, 0));
-
 			// dedication token six
 			dedicationTokenSix.add(9);
 			dedicationTokenSix.add(8);
@@ -436,16 +379,6 @@ public class GameConfiguration {
 			dedicationTokenSix.add(5);
 			dedicationTokenSix.add(5);
 			
-//			dedicationTokenSix.add(new Tokens(9, 0));
-//			dedicationTokenSix.add(new Tokens(8, 4));
-//			dedicationTokenSix.add(new Tokens(8, 0));
-//			dedicationTokenSix.add(new Tokens(7, 3));
-//			dedicationTokenSix.add(new Tokens(7, 0));
-//			dedicationTokenSix.add(new Tokens(6, 3));
-//			dedicationTokenSix.add(new Tokens(6, 0));
-//			dedicationTokenSix.add(new Tokens(5, 0));
-//			dedicationTokenSix.add(new Tokens(5, 0));
-
 			// dedication token seven
 			dedicationTokenSeven.add(10);
 			dedicationTokenSeven.add(9);
@@ -457,16 +390,6 @@ public class GameConfiguration {
 			dedicationTokenSeven.add(6);
 			dedicationTokenSeven.add(5);
 			
-//			dedicationTokenSeven.add(new Tokens(10, 0));
-//			dedicationTokenSeven.add(new Tokens(9, 4));
-//			dedicationTokenSeven.add(new Tokens(9, 0));
-//			dedicationTokenSeven.add(new Tokens(8, 3));
-//			dedicationTokenSeven.add(new Tokens(8, 0));
-//			dedicationTokenSeven.add(new Tokens(7, 3));
-//			dedicationTokenSeven.add(new Tokens(7, 0));
-//			dedicationTokenSeven.add(new Tokens(6, 0));
-//			dedicationTokenSeven.add(new Tokens(5, 0));
-
 			// generic dedication token
 			genericDedicationTokens.add(4);
 			genericDedicationTokens.add(4);
@@ -481,25 +404,21 @@ public class GameConfiguration {
 		DedicationTokens dedicationTokens = new DedicationTokens(dedicationTokenFour, dedicationTokenSix, 
 				dedicationTokenSeven, genericDedicationTokens);
 		
-		
-
-//		dedicationTokens.setDedicationTokenFour(dedicationTokenFour);
-//		dedicationTokens.setDedicationTokenSix(dedicationTokenSix);
-//		dedicationTokens.setDedicationTokenSeven(dedicationTokenSeven);
-//		dedicationTokens.setGenericDedicationTokens(genericDedicationTokens);
-
 		return dedicationTokens;
 	}
 
 	/**
-	 * This method calculates the no of tiles in the draw stack based on the no
-	 * of players. This calculation is done by the rules of of the game.
-	 * 
-	 * @param noOfPlayers
-	 *            The no of players in the game.
-	 * @return Returns the no of tiles in the draw stack.
+	 * This method calculates the no of tiles in the draw stack based on the number
+	 * of players. This calculation is done by the rules of the game.
+	 * Creates a draw pile of Lake Tiles. The number of tiles in the stack depends 
+	 * on player count:
+	 * 4 Players: 20 tiles
+	 * 3 Players: 18 tiles
+	 * 2 Players: 16 tiles
+	 * @param noOfPlayers: The no of players in the game.
+	 * @return Returns the no of tiles in the draw pile.
 	 */
-	//public int noOfDrawTileInStack = 0;
+
 	private int calculateNoOfDrawTile(int numberOfPlayers) {
 		int noOfDrawTileInStack = 0;
 		switch (numberOfPlayers) {
@@ -524,12 +443,16 @@ public class GameConfiguration {
 	}
 
 	/**
-	 * This method calculates the no of lantern cards for every color. based on
-	 * the no of players. This calculation is done by the rules of of the game.
-	 * 
-	 * @param noOfPlayers
-	 *            The no of players in the game.
-	 * @return Returns the no of lantern cards for every color.
+	 * This method calculates the no of lantern cards for every color, based on
+	 * the number of players. This calculation is done by the rules of of the game.
+	 * Separates the Lantern Cards by color into 7 groups.
+	 * These groups are collectively called the “supply.”
+	 * The number of cards in each stack depends on player count:
+	 * 4 Players: 8 cards
+	 * 3 Players: 7 cards
+	 * 2 Players: 5 cards
+	 * @param noOfPlayers: The number of players in the game.
+	 * @return Returns the number of lantern cards for every color.
 	 */
 	private int calculateNoOfLanternCardsEveryColor(int numberOfPlayers) {
 		int noOfLanternCards = 0;
