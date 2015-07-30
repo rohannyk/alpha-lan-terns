@@ -12,18 +12,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
-//import edu.concordia.app.components.LanternCards.Color;
 
 @XmlRootElement
 /**
+ * GameInstance class for the Board Game object
+ * Creates GameConfiguration for the configuration of the game.
+ * Creates GameBoard [][] for the layout of the lake tiles for the board.
+ * Creates Vector<LakeTiles> for all the lake tiles, draw pile, start tile,
+ * current tile suite, current arrangement of lake tiles that are already played.
+ * Creates DedicationTokens object to keep the dedication token for the board.
+ * Creates Players for player current turn, game start player, winner player.
+ * Variables to count the Lantern Cards for the board.
+ * Variable to count the favorite token for the board.
+ * Getters and setters for the components of the board game. 
  * @author TEAM E
  *
  */
 public class GameInstance {
 
-	private GameConfiguration config;
 	
+	private GameConfiguration config;
+	public int GameBoard [][] =  new int [73][73];
 	private int defaultLanternCardSize;
+	//tiles vector to get all tiles details by id
+	private Vector<LakeTiles> allLakeTiles = new Vector<LakeTiles>();
 	
 	//@XmlElement
 	/**
@@ -58,6 +70,7 @@ public class GameInstance {
 	private Players[] playersList;
 	
 	/**
+	 * This method is to get the list of players.
 	 * @return the playersList
 	 */
 	public Players[] getPlayersList() {
@@ -65,49 +78,33 @@ public class GameInstance {
 	}
 
 	/**
-	 * @param playersList the playersList to set
+	 * This method is to set the list of players.
+	 * @param playersList: the playersList to set
 	 */
 	public void setPlayersList(Players[] playersList) {
 		this.playersList = playersList;
 	}
 
-	//@XmlElementWrapper(name="drawPileTiles")
-	//@XmlElement(name="tile")
 	/**
 	 * The vector to store the lake tiles for doing the draw.
 	 */
 	private Vector<LakeTiles> gameTilesDrawPile;
 	
-	
-
-	//@XmlElementWrapper(name="tileSuite")
-	//@XmlElement(name="tile")
 	/**
 	 * The vector to store the complete 36 lake tile and start tile.
 	 */
 	private Vector<LakeTiles> gameTileSuite;
-	
-//	Lantern Card Class
-//	@XmlElementWrapper(name="lanternCardSuite")
-//	@XmlElement(name="lanternCard")
-//	/**
-//	 * The vector used to store lantern cards while saving file.
-//	 */
-//	public Vector<LanternCards> gameLanternSuite;
-	
+		
 	private String[] playerPositions = {"SOUTH", "EAST","NORTH", "WEST"};
-	//@XmlElement(name="favorToken")
+
 	/**
-	 * 
+	 * Variable for favorite token for the board.
 	 */
-	//private FavorTokens gameFavorTokens;
 	private int gameFavorToken = 20;
 	
 	
-	//@XmlElementWrapper(name="gameDedicationTokens")
-	//@XmlElement(name="gameDedicationToken")
 	/**
-	 * 
+	 * Object for the dedication tokens.
 	 */
 	private DedicationTokens dedicationTokens;
 	
@@ -116,82 +113,73 @@ public class GameInstance {
 	 */
 	private Vector<LakeTiles> currentLakeTilesArrangement = new Vector<LakeTiles>();
 	
-	//@XmlElement(name="GameRedLanterCard")
 	/**
-	 * 
+	 * Integer variable to track Red Lantern Card count for the board.
 	 */
 	private  int gameRedLanternCardCount = 0;
 	
-	//@XmlElement(name="GameBlueLanternCard")
 	/**
-	 * 
+	 * Integer variable to track Blue Lantern Card count for the board.
 	 */
 	private  int gameBlueLanternCardCount = 0;
 	
-	//@XmlElement(name="GameOrangeLanternCard")
 	/**
-	 * 
+	 * Integer variable to track Orange Lantern Card count for the board.
 	 */
 	private  int gameOrangeLanternCardCount = 0;
 	
-	//@XmlElement(name="GameBlackLanternCard")
 	/**
-	 * 
+	 * Integer variable to track Black Lantern Card count for the board.
 	 */
 	private  int gameBlackLanternCardCount = 0;
 	
-	//@XmlElement(name="GamePurpleLanternCard")
 	/**
-	 * 
+	 * Integer variable to track Purple Lantern Card count for the board.
 	 */
 	private  int gamePurpleLanternCardCount = 0;
 	
-	//@XmlElement(name="GameWhiteLanternCard")
 	/**
-	 * 
+	 * Integer variable to track White Lantern Card count for the board.
 	 */
 	private  int gameWhiteLanternCardCount = 0;
 	
-	//@XmlElement(name="GameGreenLanternCard")
 	/**
-	 * 
+	 * Integer variable to track Green Lantern Card count for the board.
 	 */
 	private  int gameGreenLanternCardCount = 0;
 	
-	//next dedication token track
-	
-		/**
-		 * The next value of dedication token with four coins logo
-		 */
-		private int nextDedicationTokenFour;
-		
-		
-		/**
-		 * The next value of dedication token with six coins logo
-		 */
-		private int nextDedicationTokenSix;
-		
-		
-		/**
-		 * The next value of dedication token with seven coins logo
-		 */
-		private int nextDedicationTokenSeven;
-		
-		
-		/**
-		 * The next value of generic dedication token
-		 */
-		private int nextGenericDedicationToken;
 	
 	/**
-	 * 
+	 * The next value of dedication token with four coins logo
+	 */
+	private int nextDedicationTokenFour;
+
+	/**
+	 * The next value of dedication token with six coins logo
+	 */
+	private int nextDedicationTokenSix;
+
+	/**
+	 * The next value of dedication token with seven coins logo
+	 */
+	private int nextDedicationTokenSeven;
+
+	/**
+	 * The next value of generic dedication token
+	 */
+	private int nextGenericDedicationToken;
+
+	/**
+	 * Default Constructor 
 	 */
 	public GameInstance() {
 		
 	}
 
 	/**
-	 * 
+	 * @param config of GameConfiguration
+	 * sets game configuration, number of players, default lantern card size
+	 * initializes game data.
 	 */
 	public GameInstance(GameConfiguration config) {
 		this.config = config;
@@ -203,6 +191,15 @@ public class GameInstance {
 		initializeGameData();
 	}
 	
+	/**
+	 * This method initializes game data.
+	 * Initializes players of the game, lantern cards, game tiles,
+	 * dedication tokens,shuffle lake tiles, deal lake tiles for each player,
+	 * draw pile of Lake tiles according to number of players.
+	 * Reveal all color of start tile and set face color to each player.
+	 * Determines the start player, assign lantern cards to players 
+	 * and remove from game stack.
+	 */
 	private void initializeGameData(){
 		
 		//initialize players of the game
@@ -210,9 +207,6 @@ public class GameInstance {
 		
 		//initialize Lantern Cards
 		initializeLanternCards();
-		
-		//initialize favor tokens
-		//initializeFavorTokens();
 		
 		initializeGameTiles();
 		
@@ -228,13 +222,10 @@ public class GameInstance {
 		//create draw pile of Lake tiles according to no of players
 		gameTilesDrawPile = initializeDrawPileTiles(shuffledTilesAfterDeal);
 		
-		//System.out.println("deal size"+gameTilesDrawPile.size());
-		
-		//reveal all color of start tile
-		//set face color to each player
+		//reveal all color of start tile and set face color to each player
 		playStartTile(gameStartTile);
 		
-		//determine the start player and also current player
+		//determine the start player
 		gameStartPlayer = determineStartPlayer(playersList);
 		
 		if(gameStartPlayer == null){
@@ -244,12 +235,23 @@ public class GameInstance {
 		//assign lantern cards to players and remove from game stack
 		assignLanternCards();
 		
-		//chooseStartTileOrientation();
-		
 	}
 	
 	/**
-	 * @param gameStartTile2
+	 * This method is to get all lake tiles.
+	 * @return allLakeTiles of Vector<LakeTiles> type 
+	 */
+	public Vector<LakeTiles> getAllLakeTiles(){
+		 return allLakeTiles;
+	}
+	
+	/**
+	 * This method is to assign lantern cards to players 
+	 * and remove from board game according to the face position. 
+	 * Increments player lantern card count for specific color.
+	 * Sets board game lantern card count for specific color.
+	 * Creates Players[] object for all the players.
+	 * Creates Players object for the current player.
 	 */
 	private void assignLanternCards() {
 		Players[] totalPlayers = playersList;
@@ -302,18 +304,20 @@ public class GameInstance {
 	}
 
 	/**
-	 * @param playersList2
-	 * @return
+	 * This method determines the start player and returns it.
+	 * Also sets the current player.
+	 * @param playersList2 of Players[] type
+	 * @return Players for the start player
+	 * Creates Players object for the start player.
 	 */
 	private Players determineStartPlayer(Players[] playersList2) {
 		Players startPlayer = null;
 		
 		for (int i = 0; i < playersList2.length; i++) {
 			Players playerCheck = playersList2[i];
-			//System.out.println(playerCheck.getFaceColor()+" "+playerCheck.getPlayerNumber());
+
 			if(playerCheck.getFaceColor().equals("RED")){
 			startPlayer = playerCheck;
-			//playerCurrentTurn = playerCheck;
 			
 			// set current player of the game
 			setPlayerCurrentTurn(playerCheck);
@@ -322,36 +326,14 @@ public class GameInstance {
 			setGameStartPlayer(playerCheck);
 			}
 		}
-		//System.out.println("check "+getPlayerCurrentTurn().getPlayerNumber());
+
 		return startPlayer;
 	}
 
 	/**
-	 * 
-	 */
-	/*private void chooseStartTileOrientation() {
-
-		// int Random = (int)(Math.random()*3);
-		// System.out.println(Random);
-		
-		int startPlr = noOfPlayers;
-
-		Random randomGenerator = new Random();
-
-		//choose random numbers between 0 - 3
-		int randomInt = randomGenerator.nextInt(startPlr - 1);
-		
-		//increase random numbers by 1 to choose range 1 - 4
-		int startPlayer = randomInt + 1;
-		
-		gameStartPlayer = new Players();
-		
-
-	}*/
-
-	/**
-	 * @param shuffledTiles The shuffled Lake Tiles
-	 * @return The remaining shuffled tiles after the deal
+	 * This method returns the remaining shuffled tiles after the deal.
+	 * @param shuffledTiles: The shuffled Lake Tiles, Vector<LakeTiles> type
+	 * @return shuffledTiles: Vector<LakeTiles> type
 	 */
 	private Vector<LakeTiles> dealLakeTileCards(Vector<LakeTiles> shuffledTiles) {
 		int totalDealCards = noOfPlayers * 3;
@@ -370,23 +352,11 @@ public class GameInstance {
 			player.setCurrentLakeTilesHold(playerTiles);
 		}
 		
-//		Vector<LakeTiles> shuffledTilesAfterDeal = shuffledTiles;
-//		int shuffledTilesSize = shuffledTiles.size();
-		
-		//System.out.println("final shuffled tiles size"+shuffledTiles.size());
-		
-		/*for (int i = 0; i < playersList.length; i++) {
-			Players player = playersList[i];
-			System.out.println(player.getCurrentLakeTilesHold().size());			
-		}*/
-		
-		
-		
 		return shuffledTiles;
 	}
 
 	/**
-	 * Initialize the players of the game.
+	 * This method initializes the players of the game.
 	 */
 	private void initializePlayers(){
 		
@@ -403,22 +373,23 @@ public class GameInstance {
 			}
 		}		
 		
-		/*for (int i = 0; i < playersList.length; i++) {
-			System.out.println(playersList[i]);
-		}*/
-		
-		//System.out.println("Player positions "+ playerPositions);
-		//System.out.println("test no. of players "+ playersList.length);
+}
+	/**
+	 * This method returns the lantern card count for each color of the board.
+	 * @return gameBlackLanternCardCount, gameBlueLanternCardCount, 
+	 * gameGreenLanternCardCount, gameOrangeLanternCardCount, gamePurpleLanternCardCount, 
+	 * gameRedLanternCardCount, gameWhiteLanternCardCount
+	 */
+	public int getLanternCardCount() {
+		return this.gameBlackLanternCardCount + this.gameBlueLanternCardCount + this.gameGreenLanternCardCount
+				+ this.gameOrangeLanternCardCount + this.gamePurpleLanternCardCount
+				+ this.gameRedLanternCardCount + this.gameWhiteLanternCardCount;
 	}
 	
+	/**
+	 * This method initializes the lantern cards of the game for each color.
+	 */
 	private void initializeLanternCards(){
-		
-		/*gameLanternSuite = new Vector<LanternCards>();
-		Color lanterCardColors[] = Color.values();
-		
-		for (int i = 0; i < lanterCardColors.length; i++) {
-			gameLanternSuite.add(new LanternCards(lanterCardColors[i], config.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR));
-		}*/
 		
 		gameRedLanternCardCount = defaultLanternCardSize;
 		
@@ -436,11 +407,11 @@ public class GameInstance {
 		
 	}
 	
-	/*private void initializeFavorTokens(){
-		//default tokens of new game
-		gameFavorTokens.setFavtokenCount(20);
-	}*/
-	
+	/**
+	 * This method initializes the dedication tokens of the game for each type.
+	 * Four, six, seven and generic.
+	 * Sets the next dedication token to be taken by the player
+	 */
 	private void initializeDedicationTokens() {
 		dedicationTokens = config.DEDICATION_TOKENS;
 		
@@ -449,28 +420,35 @@ public class GameInstance {
 		Vector<Integer> dedicationTokenSeven = dedicationTokens.getDedicationTokenSeven();
 		Vector<Integer> genericDedicationTokens = dedicationTokens.getGenericDedicationTokens();
 		
-		// set the next dedication token to be taken by the player
-			setNextDedicationTokenFour(dedicationTokenFour.firstElement());
-			setNextDedicationTokenSix(dedicationTokenSix.firstElement());
-			setNextDedicationTokenSeven(dedicationTokenSeven.firstElement());
-			setNextGenericDedicationToken(genericDedicationTokens.firstElement());
-		//setDedicationTokens(config.DEDICATION_TOKENS);
+		// sets the next dedication token to be taken by the player
+		setNextDedicationTokenFour(dedicationTokenFour.firstElement());
+		setNextDedicationTokenSix(dedicationTokenSix.firstElement());
+		setNextDedicationTokenSeven(dedicationTokenSeven.firstElement());
+		setNextGenericDedicationToken(genericDedicationTokens.firstElement());
+
 	}
 	
+	/**
+	 * This method initializes the tiles of the board game.
+	 * Sets the start tile and removes it from tile suite 
+	 */
 	private void initializeGameTiles(){
 		this.gameTileSuite = config.GAME_TOTAL_TILE_SUITE;
 		
+		allLakeTiles.addAll(gameTileSuite);
+		
 		//remove start tile from tile suite
 		LakeTiles startTile =  gameTileSuite.remove(0);
-		
-		//System.out.println("start tile "+startTile.getTopColor());
-		
+				
 		// set start tile of game
 		gameStartTile = startTile;
 	}
 	
-	/** This class get colors of start tile and assign face colors to each player
-	 * @param gameStartTile
+	/** 
+	 * This method gets and sets, face colors to each player according to number of players
+	 * for the start lake tile.
+	 * Adds start tile to vector contains played lake tiles: currentLakeTilesArrangement
+	 * @param gameStartTile: LakeTiles type
 	 */
 	private void playStartTile(LakeTiles gameStartTile){
 		
@@ -480,8 +458,6 @@ public class GameInstance {
 		String secondColor = gameStartTile.getLeftColor();
 		String thirdColor = gameStartTile.getRightColor();
 		String fourthColor = gameStartTile.getBottomColor();
-		
-		
 		
 		if (playerNum == 2) {
 			int number = getRandomNumber(playerNum);
@@ -535,34 +511,41 @@ public class GameInstance {
 				playersList[number].setFaceColor(firstColor);
 			}
 		}
-			
-
-		
+					
 		// add start tile to vector contains played lake tiles
 		currentLakeTilesArrangement.addElement(gameStartTile);
 		
 		 setPlayersList(playersList);
 	}
 	
+	/** 
+	 * This method gets the game start layer.
+	 * @param playersList: Players[] type
+	 * @return gameStartPlayer: Players type 
+	 */
 	private Players getStartPlayer(Players[] playersList){
 		return gameStartPlayer;
 		
 	}
 	
+	/** 
+	 * This method a random number according to number of players.
+	 * @param playerNum: int type
+	 * @return random: int type 
+	 */
 	private int getRandomNumber(int playerNum){
 		
 		Random randomNumbers=new Random(0);
 				
-		//int random = 1 + randomNumbers.nextInt(4); // number between 1 to 4
 		int random = randomNumbers.nextInt(playerNum);  //number between 0 to 3
-		//System.out.println("RANDOM NUMBER "+random);
 		
 		return random;
 	}
 	
 	/**
-	 * @param tiles The vector containing complete lake tiles.
-	 * @return Return the vector containing shuffled lake tiles.
+	 * This method shuffles the lake tiles and returns it.
+	 * @param tiles The vector containing complete lake tiles: Vector<LakeTiles> type.
+	 * @return Return the vector containing shuffled lake tiles: Vector<LakeTiles> type.
 	 */
 	private Vector<LakeTiles> shuffleTiles(Vector<LakeTiles> tiles){
 		
@@ -570,6 +553,13 @@ public class GameInstance {
 		return tiles;
 	}
 
+	/**
+	 * This method initializes the draw pile and returns it according to number of players.
+	 * @param shuffledTiles, the vector containing shuffled lake tiles: 
+	 * Vector<LakeTiles> type.
+	 * @return tilesDrawPile, the vector containing draw pile lake tiles: 
+	 * Vector<LakeTiles> type.
+	 */
 	private Vector<LakeTiles> initializeDrawPileTiles(Vector<LakeTiles> shuffledTiles) {
 		List<LakeTiles> tileDrawList= shuffledTiles.subList(0, config.NUM_OF_TILES_IN_DRAW_STACK);
 		
@@ -580,224 +570,257 @@ public class GameInstance {
 	}
 	
 	/**
-	 * @return the noOfPlayers
+	 * This method gets the number of players.
+	 * @return the noOfPlayers: int type
 	 */
 	public int getNoOfPlayers() {
 		return noOfPlayers;
 	}
 
 	/**
-	 * @param noOfPlayers the noOfPlayers to set
+	 * This method sets the number of players.
+	 * @param noOfPlayers, the number of players to set: int type
 	 */
 	public void setNoOfPlayers(int noOfPlayers) {
 		this.noOfPlayers = noOfPlayers;
 	}
 
 	/**
-	 * @return the playerCurrentTurn
+	 * This method gets the current player turn.
+	 * @return playerCurrentTurn: Players type
 	 */
 	public Players getPlayerCurrentTurn() {
 		return playerCurrentTurn;
 	}
 
 	/**
-	 * @param playerCurrentTurn the playerCurrentTurn to set
+	 * This method sets the current player turn.
+	 * @param playerCurrentTurn, the player current turn to set: Players type
 	 */
 	public void setPlayerCurrentTurn(Players playerCurrentTurn) {
 		this.playerCurrentTurn = playerCurrentTurn;
 	}
 
 	/**
-	 * @return the dedicationTokens
+	 * This method gets the dedication tokens.
+	 * @return the dedicationTokens: DedicationTokens type
 	 */
 	public DedicationTokens getDedicationTokens() {
 		return dedicationTokens;
 	}
 
 	/**
-	 * @param dedicationTokens the dedicationTokens to set
+	 * This method sets the dedication tokens.
+	 * @param dedicationTokens the dedicationTokens to set: DedicationTokens type
 	 */
 	public void setDedicationTokens(DedicationTokens dedicationTokens) {
 		this.dedicationTokens = dedicationTokens;
 	}
 
 	/**
-	 * @return the gameFavorToken
+	 * This method gets the favor tokens.
+	 * @return gameFavorToken: int type
 	 */
 	public int getGameFavorToken() {
 		return gameFavorToken;
 	}
 
 	/**
-	 * @param gameFavorToken the gameFavorToken to set
+	 * This method sets the favor tokens.
+	 * @param gameFavorToken the gameFavorToken to set: int type
 	 */
 	public void setGameFavorToken(int gameFavorToken) {
 		this.gameFavorToken = gameFavorToken;
 	}
 	
 	/**
-	 * @return the nextDedicationTokenFour
+	 * This method gets the dedication tokens type four.
+	 * @return the nextDedicationTokenFour: int type.
 	 */
 	public int getNextDedicationTokenFour() {
 		return nextDedicationTokenFour;
 	}
 
 	/**
-	 * @param nextDedicationTokenFour the nextDedicationTokenFour to set
+	 * This method sets the dedication tokens type four.
+	 * @param nextDedicationTokenFour the nextDedicationTokenFour to set: int type.
 	 */
 	public void setNextDedicationTokenFour(int nextDedicationTokenFour) {
 		this.nextDedicationTokenFour = nextDedicationTokenFour;
 	}
 
 	/**
-	 * @return the nextDedicationTokenSix
+	 * This method gets the dedication tokens type six.
+	 * @return the nextDedicationTokenSix: int type.
 	 */
 	public int getNextDedicationTokenSix() {
 		return nextDedicationTokenSix;
 	}
 
 	/**
-	 * @param nextDedicationTokenSix the nextDedicationTokenSix to set
+	 * This method sets the dedication tokens type six.
+	 * @param nextDedicationTokenSix the nextDedicationTokenSix to set: int type.
 	 */
 	public void setNextDedicationTokenSix(int nextDedicationTokenSix) {
 		this.nextDedicationTokenSix = nextDedicationTokenSix;
 	}
 
 	/**
-	 * @return the nextDedicationTokenSeven
+	 * This method gets the dedication tokens type seven.
+	 * @return the nextDedicationTokenSeven: int type.
 	 */
 	public int getNextDedicationTokenSeven() {
 		return nextDedicationTokenSeven;
 	}
 
 	/**
-	 * @param nextDedicationTokenSeven the nextDedicationTokenSeven to set
+	 * This method sets the dedication tokens type seven.
+	 * @param nextDedicationTokenSeven the nextDedicationTokenSeven to set: int type.
 	 */
 	public void setNextDedicationTokenSeven(int nextDedicationTokenSeven) {
 		this.nextDedicationTokenSeven = nextDedicationTokenSeven;
 	}
 
 	/**
-	 * @return the nextGenericDedicationToken
+	 * This method gets the dedication tokens type generic.
+	 * @return the nextGenericDedicationToken: int type.
 	 */
 	public int getNextGenericDedicationToken() {
 		return nextGenericDedicationToken;
 	}
 
 	/**
-	 * @param nextGenericDedicationToken the nextGenericDedicationToken to set
+	 * This method sets the dedication tokens type generic.
+	 * @param nextGenericDedicationToken the nextGenericDedicationToken to set: int type.
 	 */
 	public void setNextGenericDedicationToken(int nextGenericDedicationToken) {
 		this.nextGenericDedicationToken = nextGenericDedicationToken;
 	}
 
 	/**
-	 * @return the gameRedLanternCardCount
+	 * This method gets the game lantern card count for the red color.
+	 * @return the gameRedLanternCardCount: int type.
 	 */
 	public  int getGameRedLanternCardCount() {
 		return gameRedLanternCardCount;
 	}
 
 	/**
-	 * @param gameRedLanternCardCount the gameRedLanternCardCount to set
+	 * This method sets the game lantern card count for the red color.
+	 * @param gameRedLanternCardCount the gameRedLanternCardCount to set: int type.
 	 */
 	public  void setGameRedLanternCardCount(int gameRedLanternCardCount) {
 		this.gameRedLanternCardCount = gameRedLanternCardCount;
 	}
 
 	/**
-	 * @return the gameBlueLanternCardCount
+	 * This method gets the game lantern card count for the blue color.
+	 * @return the gameBlueLanternCardCount: int type.
 	 */
 	public  int getGameBlueLanternCardCount() {
 		return gameBlueLanternCardCount;
 	}
 
 	/**
-	 * @param gameBlueLanternCardCount the gameBlueLanternCardCount to set
+	 * This method sets the game lantern card count for the blue color.
+	 * @param gameBlueLanternCardCount the gameBlueLanternCardCount to set: int type.
 	 */
 	public  void setGameBlueLanternCardCount(int gameBlueLanternCardCount) {
 		this.gameBlueLanternCardCount = gameBlueLanternCardCount;
 	}
 
 	/**
-	 * @return the gameOrangeLanternCardCount
+	 * This method gets the game lantern card count for the orange color.
+	 * @return the gameOrangeLanternCardCount: int type.
 	 */
 	public  int getGameOrangeLanternCardCount() {
 		return gameOrangeLanternCardCount;
 	}
 
 	/**
-	 * @param gameOrangeLanternCardCount the gameOrangeLanternCardCount to set
+	 * This method sets the game lantern card count for the orange color.
+	 * @param gameOrangeLanternCardCount the gameOrangeLanternCardCount to set: int type.
 	 */
 	public  void setGameOrangeLanternCardCount(int gameOrangeLanternCardCount) {
 		this.gameOrangeLanternCardCount = gameOrangeLanternCardCount;
 	}
 
 	/**
-	 * @return the gameBlackLanternCardCount
+	 * This method gets the game lantern card count for the black color.
+	 * @return the gameBlackLanternCardCount: int type.
 	 */
 	public  int getGameBlackLanternCardCount() {
 		return gameBlackLanternCardCount;
 	}
 
 	/**
-	 * @param gameBlackLanternCardCount the gameBlackLanternCardCount to set
+	 * This method sets the game lantern card count for the black color.
+	 * @param gameBlackLanternCardCount the gameBlackLanternCardCount to set: int type.
 	 */
 	public  void setGameBlackLanternCardCount(int gameBlackLanternCardCount) {
 		this.gameBlackLanternCardCount = gameBlackLanternCardCount;
 	}
 
 	/**
-	 * @return the gamePurpleLanternCardCount
+	 * This method gets the game lantern card count for the purple color.
+	 * @return the gamePurpleLanternCardCount: int type.
 	 */
 	public  int getGamePurpleLanternCardCount() {
 		return gamePurpleLanternCardCount;
 	}
 
 	/**
-	 * @param gamePurpleLanternCardCount the gamePurpleLanternCardCount to set
+	 * This method sets the game lantern card count for the purple color.
+	 * @param gamePurpleLanternCardCount the gamePurpleLanternCardCount to set: int type.
 	 */
 	public  void setGamePurpleLanternCardCount(int gamePurpleLanternCardCount) {
 		this.gamePurpleLanternCardCount = gamePurpleLanternCardCount;
 	}
 
 	/**
-	 * @return the gameWhiteLanternCardCount
+	 * This method gets the game lantern card count for the white color.
+	 * @return the gameWhiteLanternCardCount: int type.
 	 */
 	public  int getGameWhiteLanternCardCount() {
 		return gameWhiteLanternCardCount;
 	}
 
 	/**
-	 * @param gameWhiteLanternCardCount the gameWhiteLanternCardCount to set
+	 * This method sets the game lantern card count for the white color.
+	 * @param gameWhiteLanternCardCount the gameWhiteLanternCardCount to set: int type.
 	 */
 	public  void setGameWhiteLanternCardCount(int gameWhiteLanternCardCount) {
 		this.gameWhiteLanternCardCount = gameWhiteLanternCardCount;
 	}
 
 	/**
-	 * @return the gameGreenLanternCardCount
+	 * This method gets the game lantern card count for the green color.
+	 * @return the gameGreenLanternCardCount: int type.
 	 */
 	public  int getGameGreenLanternCardCount() {
 		return gameGreenLanternCardCount;
 	}
 
 	/**
-	 * @param gameGreenLanternCardCount the gameGreenLanternCardCount to set
+	 * This method sets the game lantern card count for the green color.
+	 * @param gameGreenLanternCardCount the gameGreenLanternCardCount to set: int type.
 	 */
 	public  void setGameGreenLanternCardCount(int gameGreenLanternCardCount) {
 		this.gameGreenLanternCardCount = gameGreenLanternCardCount;
 	}
 
 	/**
-	 * @return the currentLakeTilesArrangement
+	 * This method gets the current lake tiles arrangement.
+	 * @return the currentLakeTilesArrangement: Vector<LakeTiles> type
 	 */
 	public Vector<LakeTiles> getCurrentLakeTilesArrangement() {
 		return currentLakeTilesArrangement;
 	}
 
 	/**
-	 * @param currentLakeTilesArrangement the currentLakeTilesArrangement to set
+	 * This method sets the current lake tiles arrangement.
+	 * @param currentLakeTilesArrangement the currentLakeTilesArrangement to set: 
+	 * Vector<LakeTiles> type
 	 */
 	public void setCurrentLakeTilesArrangement(
 			Vector<LakeTiles> currentLakeTilesArrangement) {
@@ -805,133 +828,155 @@ public class GameInstance {
 	}
 	
 	/**
-	 * @return the gameTilesDrawPile
+	 * This method gets the draw pile of the board game.
+	 * @return the gameTilesDrawPile: Vector<LakeTiles> type
 	 */
 	public Vector<LakeTiles> getGameTilesDrawPile() {
 		return gameTilesDrawPile;
 	}
 
 	/**
-	 * @param gameTilesDrawPile the gameTilesDrawPile to set
+	 * This method sets the draw pile of the board game.
+	 * @param gameTilesDrawPile the game tiles draw pile to set: Vector<LakeTiles> type
 	 */
 	public void setGameTilesDrawPile(Vector<LakeTiles> gameTilesDrawPile) {
 		this.gameTilesDrawPile = gameTilesDrawPile;
 	}
 
 	/**
-	 * @return the config
+	 * This method gets the configuration of the current game.
+	 * @return the config: GameConfiguration type
 	 */
 	public GameConfiguration getConfig() {
 		return config;
 	}
 
 	/**
-	 * @param config the config to set
+	 * This method sets the configuration of the current game.
+	 * @param config the config to set: GameConfiguration type
 	 */
 	public void setConfig(GameConfiguration config) {
 		this.config = config;
 	}
 
 	/**
-	 * @return the gameStartPlayer
+	 * This method gets the start player of the current game.
+	 * @return the gameStartPlayer: Players type.
 	 */
 	public Players getGameStartPlayer() {
 		return gameStartPlayer;
 	}
 
 	/**
-	 * @param gameStartPlayer the gameStartPlayer to set
+	 * This method sets the start player of the current game.
+	 * @param gameStartPlayer the gameStartPlayer to set: Players type.
 	 */
 	public void setGameStartPlayer(Players gameStartPlayer) {
 		this.gameStartPlayer = gameStartPlayer;
 	}
 
 	/**
-	 * @return the gameStartTile
+	 * This method gets the start tile.
+	 * @return the gameStartTile: LakeTiles type
 	 */
 	public LakeTiles getGameStartTile() {
 		return gameStartTile;
 	}
 
 	/**
-	 * @param gameStartTile the gameStartTile to set
+	 * This method sets the start tile.
+	 * @param gameStartTile the gameStartTile to set: LakeTiles type
 	 */
 	public void setGameStartTile(LakeTiles gameStartTile) {
 		this.gameStartTile = gameStartTile;
 	}
 
 	/**
-	 * @return the gameTileSuite
+	 * This method gets the game tile suite.
+	 * @return the gameTileSuite: Vector<LakeTiles> type.
 	 */
 	public Vector<LakeTiles> getGameTileSuite() {
 		return gameTileSuite;
 	}
 
 	/**
-	 * @param gameTileSuite the gameTileSuite to set
+	 * This method sets the game tile suite.
+	 * @param gameTileSuite the gameTileSuite to set: Vector<LakeTiles> type.
 	 */
 	public void setGameTileSuite(Vector<LakeTiles> gameTileSuite) {
 		this.gameTileSuite = gameTileSuite;
 	}
 
 	/**
-	 * @return the playerPositions
+	 * This method gets the array of players positions.
+	 * @return the playerPositions: String[] type.
 	 */
 	public String[] getPlayerPositions() {
 		return playerPositions;
 	}
 
 	/**
-	 * @param playerPositions the playerPositions to set
+	 * This method sets the array of players positions.
+	 * @param playerPositions the playerPositions to set: String[] type.
 	 */
 	public void setPlayerPositions(String[] playerPositions) {
 		this.playerPositions = playerPositions;
 	}
 
 	/**
-	 * @return the defaultLanternCardSize
+	 * This method gets the default lantern card size.
+	 * @return the defaultLanternCardSize: int type.
 	 */
 	public int getDefaultLanternCardSize() {
 		return defaultLanternCardSize;
 	}
 
 	/**
-	 * @param defaultLanternCardSize the defaultLanternCardSize to set
+	 * This method sets the default lantern card size.
+	 * @param defaultLanternCardSize the defaultLanternCardSize to set: int type.
 	 */
 	public void setDefaultLanternCardSize(int defaultLanternCardSize) {
 		this.defaultLanternCardSize = defaultLanternCardSize;
 	}
 
 	/**
-	 * @return the winnerPlayer
+	 * This method gets the winner player.
+	 * @return the winnerPlayer: Players type.
 	 */
 	public Players getWinnerPlayer() {
 		return winnerPlayer;
 	}
 
 	/**
-	 * @param winnerPlayer the winnerPlayer to set
+	 * This method sets the winner player.
+	 * @param winnerPlayer the winnerPlayer to set: Players type.
 	 */
 	public void setWinnerPlayer(Players winnerPlayer) {
 		this.winnerPlayer = winnerPlayer;
 	}
-	
-	
 
-//	/**
-//	 * @return the gameLanternSuite
-//	 */
-//	public Vector<LanternCards> getGameLanternSuite() {
-//		return gameLanternSuite;
-//	}
-//
-//	/**
-//	 * @param gameLanternSuite the gameLanternSuite to set
-//	 */
-//	public void setGameLanternSuite(Vector<LanternCards> gameLanternSuite) {
-//		this.gameLanternSuite = gameLanternSuite;
-//	}
-	
-	
+	/**
+	 * This method gets the game board layout of lake tiles.
+	 * @return the gameBoard: int[][] type.
+	 */
+	public int[][] getGameBoard() {
+		return GameBoard;
+	}
 
+	/**
+	 * This method sets the game board layout of lake tiles.
+	 * @param gameBoard the gameBoard to set: int[][] type.
+	 */
+	public void setGameBoard(int[][] gameBoard) {
+		GameBoard = gameBoard;
+	}
+
+	/**
+	 * This method sets the all lake tiles.
+	 * @param allLakeTiles the allLakeTiles to set: Vector<LakeTiles> type
+	 */
+	public void setAllLakeTiles(Vector<LakeTiles> allLakeTiles) {
+		this.allLakeTiles = allLakeTiles;
+	}
+	
 }
