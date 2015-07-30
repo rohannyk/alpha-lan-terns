@@ -529,7 +529,7 @@ public class GameInstance {
 	}
 	
 	/** 
-	 * This method a random number according to number of players.
+	 * This method gets a random number according to number of players.
 	 * @param playerNum: int type
 	 * @return random: int type 
 	 */
