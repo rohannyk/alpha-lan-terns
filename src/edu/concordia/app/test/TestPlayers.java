@@ -44,7 +44,7 @@ public class TestPlayers {
 		gc = null;
 	}
 
-/*
+/**
  * This method checks two players  playing the game	
  */
 	@Test
@@ -59,7 +59,7 @@ public class TestPlayers {
 
 	}
 	
-	/*
+	/**
 	 * This method checks three players  playing the game	
 	 */
 	@Test
@@ -73,7 +73,7 @@ public class TestPlayers {
 		
 	}
 
-	/*
+	/**
 	 * This method checks four players  playing the game	
 	 */
 	@Test
