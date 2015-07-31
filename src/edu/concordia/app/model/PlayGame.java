@@ -33,6 +33,13 @@ public class PlayGame {
 	private Scanner scan;
 	
 	/**
+	 * 
+	 */
+	public PlayGame() {
+		
+	}
+
+	/**
 	 * The PlayGame constructor with two parameters.
 	 * @param gameObj The GameInstance object of the game.
 	 * @param gameController The GameController object 
@@ -772,7 +779,7 @@ public class PlayGame {
 	 * @param gamePlayers
 	 *            The array of players of the game.
 	 */
-	private static Vector<Players> validateWinner(Players[] gamePlayers) {
+	public static Vector<Players> validateWinner(Players[] gamePlayers) {
 		int winnerScore = 0;
 		
 		//int winnerLanternCount = 0;
@@ -1552,7 +1559,7 @@ public class PlayGame {
 	 * @param playing
 	 *            The current player of the game.
 	 */
-	private static boolean replenishLakeTilesInHand(GameInstance gameObj,
+	public static boolean replenishLakeTilesInHand(GameInstance gameObj,
 			Players playing) {
 		LakeTiles replenishedTile = null;
 
@@ -1594,7 +1601,7 @@ public class PlayGame {
 	 *            will be removed.
 	 * @return The player of the game with update lake tiles in hand.
 	 */
-	private Players removePlacedLakeTile(LakeTiles tileInHand, Players playing) {
+	public Players removePlacedLakeTile(LakeTiles tileInHand, Players playing) {
 		Vector<LakeTiles> handLakeTiles = playing.getCurrentLakeTilesHold();
 		
 		boolean removed = handLakeTiles.remove(tileInHand);

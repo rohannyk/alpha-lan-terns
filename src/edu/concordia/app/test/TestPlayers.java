@@ -363,7 +363,7 @@ GameConfiguration gc1 = new GameConfiguration();
 		Vector<Players> winnerPlayer = play.validateWinner(player);
 		
 		
-		assertEquals(player[1], winnerPlayer.get(1));
+		assertEquals(player[1], winnerPlayer.get(0));
 		
 	}
 	
@@ -540,16 +540,16 @@ GameConfiguration gc1 = new GameConfiguration();
 		player[1].setLanternCardCount(10);
 		
 		//set differnt favor tokens
-		player[0].setPlayerFavorToken(8);
+		player[0].setPlayerFavorToken(12);//winner player
 		player[1].setPlayerFavorToken(10);
-		player[2].setPlayerFavorToken(12);//winner player
+		player[2].setPlayerFavorToken(8);
 		
 		//create PlayGame class object
 		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
 		Vector<Players> winnerPlayer = play.validateWinner(player);
 		
 		
-		assertEquals(player[2], winnerPlayer.get(0));
+		assertEquals(player[0], winnerPlayer.get(0));
 	}
 	
 	/**
