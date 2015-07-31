@@ -2107,5 +2107,322 @@ public class PlayGame {
 			}
 		}
 	}
+	
+	/**
+	 * @param playing
+	 * @param gameObj
+	 * @return
+	 */
+	private static boolean getDedicationType3ColorValidationAndRemoval(
+			Players playing, GameInstance gameObj) {
+
+		if (playing.getPlayerBlackLanternCardCount() > 0) {
+			playing.setPlayerBlackLanternCardCount(playing
+					.getPlayerBlackLanternCardCount() - 1);
+			gameObj.setGameBlackLanternCardCount(gameObj
+					.getGameBlackLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerWhiteLanternCardCount() > 0) {
+			playing.setPlayerWhiteLanternCardCount(playing
+					.getPlayerWhiteLanternCardCount() - 1);
+			gameObj.setGameWhiteLanternCardCount(gameObj
+					.getGameWhiteLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerBlueLanternCardCount() > 0) {
+			playing.setPlayerBlueLanternCardCount(playing
+					.getPlayerBlueLanternCardCount() - 1);
+			gameObj.setGameBlueLanternCardCount(gameObj
+					.getGameBlueLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerGreenLanternCardCount() > 0) {
+			playing.setPlayerGreenLanternCardCount(playing
+					.getPlayerGreenLanternCardCount() - 1);
+			gameObj.setGameGreenLanternCardCount(gameObj
+					.getGameGreenLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerOrangeLanternCardCount() > 0) {
+			playing.setPlayerOrangeLanternCardCount(playing
+					.getPlayerOrangeLanternCardCount() - 1);
+			gameObj.setGameOrangeLanternCardCount(gameObj
+					.getGameOrangeLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerRedLanternCardCount() > 0) {
+			playing.setPlayerRedLanternCardCount(playing
+					.getPlayerRedLanternCardCount() - 1);
+			gameObj.setGameRedLanternCardCount(gameObj
+					.getGameRedLanternCardCount() + 1);
+			return true;
+		}
+
+		if (playing.getPlayerPurpleLanternCardCount() > 0) {
+			playing.setPlayerPurpleLanternCardCount(playing
+					.getPlayerPurpleLanternCardCount() - 1);
+			gameObj.setGamePurpleLanternCardCount(gameObj
+					.getGamePurpleLanternCardCount() + 1);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @param playing
+	 * @param colorOne
+	 * @param gameObj
+	 * @return
+	 */
+	private static boolean getDedicationType2ColorValidationAndRemoval(Players playing, String yourColor,
+ GameInstance gameObj) {
+
+		if (yourColor.equals("Black"))
+			if (playing.getPlayerBlackLanternCardCount() > 1) {
+				playing.setPlayerBlackLanternCardCount(playing
+						.getPlayerBlackLanternCardCount() - 2);
+				gameObj.setGameBlackLanternCardCount(gameObj
+						.getGameBlackLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("White"))
+			if (playing.getPlayerWhiteLanternCardCount() > 1) {
+				playing.setPlayerWhiteLanternCardCount(playing
+						.getPlayerWhiteLanternCardCount() - 2);
+				gameObj.setGameWhiteLanternCardCount(gameObj
+						.getGameWhiteLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("Blue"))
+			if (playing.getPlayerBlueLanternCardCount() > 1) {
+				playing.setPlayerBlueLanternCardCount(playing
+						.getPlayerBlueLanternCardCount() - 2);
+				gameObj.setGameBlueLanternCardCount(gameObj
+						.getGameBlueLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("Green"))
+			if (playing.getPlayerGreenLanternCardCount() > 1) {
+				playing.setPlayerGreenLanternCardCount(playing
+						.getPlayerGreenLanternCardCount() - 2);
+				gameObj.setGameGreenLanternCardCount(gameObj
+						.getGameGreenLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("Orange"))
+			if (playing.getPlayerOrangeLanternCardCount() > 1) {
+				playing.setPlayerOrangeLanternCardCount(playing
+						.getPlayerOrangeLanternCardCount() - 2);
+				gameObj.setGameOrangeLanternCardCount(gameObj
+						.getGameOrangeLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("Red"))
+			if (playing.getPlayerRedLanternCardCount() > 1) {
+				playing.setPlayerRedLanternCardCount(playing
+						.getPlayerRedLanternCardCount() - 2);
+				gameObj.setGameRedLanternCardCount(gameObj
+						.getGameRedLanternCardCount() + 2);
+				return true;
+			}
+		if (yourColor.equals("Purple"))
+			if (playing.getPlayerPurpleLanternCardCount() > 1) {
+				playing.setPlayerPurpleLanternCardCount(playing
+						.getPlayerPurpleLanternCardCount() - 2);
+				gameObj.setGamePurpleLanternCardCount(gameObj
+						.getGamePurpleLanternCardCount() + 2);
+				return true;
+			}
+		return false;
+	}
+
+	/**
+	 * @param playing
+	 * @param gameObj
+	 * @param color1
+	 */
+	private static boolean getDedicationType1ColorValidationAndRemoval(Players playing, String yourColor,
+ GameInstance gameObj) {
+		if (yourColor.equals("Black"))
+			if (playing.getPlayerBlackLanternCardCount() > 3) {
+				playing.setPlayerBlackLanternCardCount(playing
+						.getPlayerBlackLanternCardCount() - 4);
+				gameObj.setGameBlackLanternCardCount(gameObj
+						.getGameBlackLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("White"))
+			if (playing.getPlayerWhiteLanternCardCount() > 3) {
+				playing.setPlayerWhiteLanternCardCount(playing
+						.getPlayerWhiteLanternCardCount() - 4);
+				gameObj.setGameWhiteLanternCardCount(gameObj
+						.getGameWhiteLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("Blue"))
+			if (playing.getPlayerBlueLanternCardCount() > 3) {
+				playing.setPlayerBlueLanternCardCount(playing
+						.getPlayerBlueLanternCardCount() - 4);
+				gameObj.setGameBlueLanternCardCount(gameObj
+						.getGameBlueLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("Green"))
+			if (playing.getPlayerGreenLanternCardCount() > 3) {
+				playing.setPlayerGreenLanternCardCount(playing
+						.getPlayerGreenLanternCardCount() - 4);
+				gameObj.setGameGreenLanternCardCount(gameObj
+						.getGameGreenLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("Orange"))
+			if (playing.getPlayerOrangeLanternCardCount() > 3) {
+				playing.setPlayerOrangeLanternCardCount(playing
+						.getPlayerOrangeLanternCardCount() - 4);
+				gameObj.setGameOrangeLanternCardCount(gameObj
+						.getGameOrangeLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("Red"))
+			if (playing.getPlayerRedLanternCardCount() > 3) {
+				playing.setPlayerRedLanternCardCount(playing
+						.getPlayerRedLanternCardCount() - 4);
+				gameObj.setGameRedLanternCardCount(gameObj
+						.getGameRedLanternCardCount() + 4);
+				return true;
+			}
+		if (yourColor.equals("Purple"))
+			if (playing.getPlayerPurpleLanternCardCount() > 3) {
+				playing.setPlayerPurpleLanternCardCount(playing
+						.getPlayerPurpleLanternCardCount() - 4);
+				gameObj.setGamePurpleLanternCardCount(gameObj
+						.getGamePurpleLanternCardCount() + 4);
+				return true;
+			}
+		return false;
+
+	}
+
+	/**
+	 * @param gameObj
+	 * @param playing
+	 */
+	private void exchageLaternCard(GameInstance gameObj, Players playing) {
+		boolean loop = true;
+		String yourColor = "";
+		String gameColor = "";
+
+		while (loop) {
+			
+			System.out.println();  //for space
+			
+			System.out.println("Number of your Favor "
+					+ "tokens present currently = "
+					+ playing.getPlayerFavorToken());
+			
+			System.out.println();  //for space
+			
+			System.out.println("Your Lantern Cards Details ");
+			
+			System.out.println("Number of Black Lantern Card :"
+					+ playing.getPlayerBlackLanternCardCount());
+			
+			System.out.println("Number of White Lantern Card :"
+					+ playing.getPlayerWhiteLanternCardCount());
+			
+			System.out.println("Number of Blue Lantern Card :"
+					+ playing.getPlayerBlueLanternCardCount());
+			
+			System.out.println("Number of Green Lantern Card :"
+					+ playing.getPlayerGreenLanternCardCount());
+			
+			System.out.println("Number of Orange Lantern Card :"
+					+ playing.getPlayerOrangeLanternCardCount());
+			
+			System.out.println("Number of Purple Lantern Card :"
+					+ playing.getPlayerPurpleLanternCardCount());
+			
+			System.out.println("Number of Red Lantern Card :"
+					+ playing.getPlayerRedLanternCardCount());
+
+			System.out.println("Number of favor tokens in game = "
+					+ gameObj.getGameFavorToken());
+			
+			System.out.println();  //for space
+			
+			System.out.println("Game Lantern Cards Details ");
+			
+			System.out.println();  //for space
+			
+			System.out.println("Number of Black Lantern Card :"
+					+ gameObj.getGameBlackLanternCardCount());
+			
+			System.out.println("Number of White Lantern Card :"
+					+ gameObj.getGameWhiteLanternCardCount());
+			
+			System.out.println("Number of Blue Lantern Card :"
+					+ gameObj.getGameBlueLanternCardCount());
+			
+			System.out.println("Number of Green Lantern Card :"
+					+ gameObj.getGameGreenLanternCardCount());
+			
+			System.out.println("Number of Orange Lantern Card :"
+					+ gameObj.getGameOrangeLanternCardCount());
+			
+			System.out.println("Number of Purple Lantern Card :"
+					+ gameObj.getGamePurpleLanternCardCount());
+			
+			System.out.println("Number of Red Lantern Card :"
+					+ gameObj.getGameRedLanternCardCount());
+
+			System.out.println("Which your color do you want to give: ");
+			
+			yourColor = scan.next();
+			
+			loop = lanternColorPlayerValidation(playing, yourColor);
+			
+			if (loop == true) {
+				loop = false;
+			} else {
+				System.out.println("Please enter your Lantern "
+						+ "card's valid color ");
+				loop = true;
+				continue;
+			}
+
+			System.out.println("Which Game color do you want to get: ");
+			
+			gameColor = scan.next();
+			loop = lanternColorGameValidation(gameObj, gameColor);
+			if (loop == true) {
+				loop = false;
+			} else {
+				System.out.println("Please enter game Lantern"
+						+ " card's valid color ");
+				loop = true;
+				continue;
+			}
+
+		}
+		if (!loop) {
+
+			playing.setPlayerFavorToken(playing.getPlayerFavorToken() - 2);
+			
+			gameObj.setGameFavorToken(gameObj.getGameFavorToken() + 2);
+			
+			playerColorAugment(yourColor, playing, gameColor);
+			
+			gameColorAugment(gameColor, gameObj, yourColor);
+
+		}
+
+	}
+
 
 }
