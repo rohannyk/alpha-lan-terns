@@ -16,15 +16,7 @@ import edu.concordia.app.components.LakeTiles;
 @XmlRootElement
 /**
  * GameInstance class for the Board Game object
- * Creates GameConfiguration for the configuration of the game.
- * Creates GameBoard [][] for the layout of the lake tiles for the board.
- * Creates Vector<LakeTiles> for all the lake tiles, draw pile, start tile,
- * current tile suite, current arrangement of lake tiles that are already played.
- * Creates DedicationTokens object to keep the dedication token for the board.
- * Creates Players for player current turn, game start player, winner player.
- * Variables to count the Lantern Cards for the board.
- * Variable to count the favorite token for the board.
- * Getters and setters for the components of the board game. 
+ * 
  * @author TEAM E
  *
  */
