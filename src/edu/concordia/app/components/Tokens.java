@@ -1,10 +1,11 @@
 package edu.concordia.app.components;
 
 /**
- * @author Team E
+ * 
  * This class is used to create objects of Tokens class which is used by DedicationTokens class.It 
  * would hold value and number of dots for each dedication token card.
- *
+ * 
+ * @author Team E
  */
 public class Tokens {
 	

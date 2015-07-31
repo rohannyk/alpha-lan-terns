@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 
-@XmlRootElement
+
 /**
  * GameInstance class for the Board Game object
  * 
