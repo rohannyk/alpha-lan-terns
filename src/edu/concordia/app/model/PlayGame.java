@@ -3,9 +3,6 @@
  */
 package edu.concordia.app.model;
 
-import GameInstance;
-import Players;
-
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
@@ -16,32 +13,30 @@ import edu.concordia.app.controller.GameController;
 
 /**
  * @author Team E
- * 
+ *
  */
 public class PlayGame {
-
+	
 	/**
 	 * The instance variable of type GameInstance.
 	 */
 	private GameInstance gameObj;
-
+	
 	/**
 	 * The instance variable of type GameController.
 	 */
 	private GameController gameController;
-
+	
 	/**
 	 * The instance variable of type Scanner.
 	 */
 	private Scanner scan;
-
+	
 	/**
 	 * The PlayGame constructor with two parameters.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object of the game.
-	 * @param gameController
-	 *            The GameController object for controlling game view.
+	 * @param gameObj The GameInstance object of the game.
+	 * @param gameController The GameController object 
+	 * for controlling game view.
 	 */
 	public PlayGame(GameInstance gameObj, GameController gameController) {
 		this.gameObj = gameObj;
@@ -49,10 +44,9 @@ public class PlayGame {
 	}
 
 	/**
-	 * The main method to play game.
-	 * 
-	 * @param scan
-	 *            The Scanner object for getting input through console.
+	 * The main method to play game.  
+	 * @param scan The Scanner object for getting 
+	 * input through console.  
 	 */
 	public void gameStart(Scanner scan) {
 
@@ -63,7 +57,7 @@ public class PlayGame {
 		int playOption = 99;
 
 		int turnCount = 0; // track if one turn is complete or not
-
+		
 		boolean exchangeRun = false; // exchange option didn't run yet
 		boolean dedicationRun = false; // dedication option didn't run yet
 
@@ -103,11 +97,11 @@ public class PlayGame {
 
 			String opt = genValidation(gameObj, playing);
 
-			if (exchangeRun) {
+			if(exchangeRun){
 				// remove exchange substring from opt string
 				opt = removeSubstring(new String("exchange"), opt);
 			}
-			if (dedicationRun) {
+			if(dedicationRun){
 				// remove dedication substring from opt string
 				opt = removeSubstring(new String("type1"), opt);
 				opt = removeSubstring(new String("type2"), opt);
@@ -136,7 +130,7 @@ public class PlayGame {
 			System.out.println(); // for spacing
 
 			switch (optPlay) {
-
+			
 			case 0:
 				if (!opt.contains("exchange")) {
 					break;
@@ -144,10 +138,10 @@ public class PlayGame {
 
 					exchageLaternCard(gameObj, playing);
 					exchangeRun = true; // to mark exchange has been done.
-
+					
 				}
 				break;
-
+			
 			case 1:
 				if (!(opt.contains("type1") || opt.contains("type2") || opt
 						.contains("type3"))) {
@@ -156,11 +150,11 @@ public class PlayGame {
 
 					makeADedication(gameObj, playing, opt);
 					dedicationRun = true; // to mark dedication has been done.
-
+					
 				}
 
 				break;
-
+			
 			case 2:
 				if (playing.getLanternCardCount() > 12) {
 
@@ -214,7 +208,7 @@ public class PlayGame {
 					}
 
 					System.out.println(); // for spacing
-
+					
 					String placementOpt = "";
 
 					System.out.print("Place tile at ");
@@ -240,28 +234,29 @@ public class PlayGame {
 						bottom = true;
 					}
 
-					// if no location is available
-					if (placementOpt.isEmpty()) {
-
+					
+					//if no location is available
+					if(placementOpt.isEmpty()){
+						
 					}
 
 					int x = 0, y = 0;
 					boolean locationLoop = true;
-
+					
 					String location = null;
-
+					
 					while (locationLoop) {
 						location = scan.next();
-
-						if (placementOpt.contains(location)) {
+						
+						if(placementOpt.contains(location)){
 							locationLoop = false;
-						} else {
-							System.out
-									.println("Please enter the correct available location.");
+						}
+						else{
+							System.out.println("Please enter the correct available location.");
 							locationLoop = true;
 						}
-					}
-
+					}					
+					
 					if (location.equals("right") && right == true) {
 						gameObj.GameBoard[adjLocY][adjLocX + 1] = tileInHand
 								.getTilesId();
@@ -342,9 +337,9 @@ public class PlayGame {
 					playing = updateCurrentPlayer(gameObj, playing);
 
 					gameObj.setPlayerCurrentTurn(playing);
-
+					
 					// exchange option will run after player change.
-					exchangeRun = false;
+					exchangeRun = false; 
 					dedicationRun = false;
 
 					turnCount += 1;
@@ -374,21 +369,20 @@ public class PlayGame {
 		displayWinner(winnerPlayers);
 
 	}
-
+	
 	/**
 	 * This method asks takes input from user and rotate the selected tile to
 	 * 0/90/180/270 degree.
 	 * 
-	 * @param tileInHand
-	 *            The tile to be rotated before placing on the board.
+	 * @param tileInHand The tile to be rotated before placing on the board.
 	 * @return The rotated lake tile.
 	 */
 	private LakeTiles rotateLakeTileOnUserChoice(LakeTiles tileInHand) {
 		boolean choiceRotate = true;
 
-		// loop until correct input is given
+		//loop until correct input is given
 		while (choiceRotate) {
-
+			
 			// Rotate lake tile
 			System.out.print("Do you want to rotate tile by"
 					+ " 90/180/270 clockwise or 0 degree: ");
@@ -462,25 +456,21 @@ public class PlayGame {
 	}
 
 	/**
-	 * This method will discard the excess Lantern cards, if the current player
-	 * has more than 12 lantern cards. The player has two options, either to
-	 * discard the lantern cards of his choice or to perform either of the three
-	 * possible dedications.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for updating game elements according
-	 *            to user choice.
-	 * @param playing
-	 *            The current player of the game.
-	 * @param opt
-	 *            The string contain options that player can choose
-	 *            (Dedication/discard).
+	 * This method will discard the excess Lantern cards,
+	 * if the current player has more than 12 lantern cards.
+	 * The player has two options, either to discard the lantern
+	 * cards of his choice or to perform either of the three possible dedications.
+	 * @param gameObj The GameInstance object for updating game 
+	 * elements according to user choice.
+	 * @param playing The current player of the game.
+	 * @param opt The string contain options that player can choose (Dedication/discard).
 	 * @return The string contain those choices that are not used by the user.
 	 */
 	private String filterExcessLanternCards(GameInstance gameObj,
 			Players playing, String opt) {
-
-		while (playing.getLanternCardCount() > 12) {
+		
+		while (playing.getLanternCardCount() > 12) 
+		{
 			System.out.println("---------- Lantern Cards"
 					+ " Count Check -----------");
 
@@ -507,7 +497,7 @@ public class PlayGame {
 			int checkChoice = scan.nextInt();
 
 			switch (checkChoice) {
-
+			
 			case 1:
 				// make dedication
 				makeADedication(gameObj, playing, opt);
@@ -520,8 +510,8 @@ public class PlayGame {
 				break;
 
 			case 2:
-
-				// discard the lantern cards.
+				
+				//discard the lantern cards.
 				discardLanternCards(gameObj, playing);
 				break;
 
@@ -535,24 +525,23 @@ public class PlayGame {
 	/**
 	 * The method to save and exit the game according to the user choice.
 	 * 
-	 * @param gameController
-	 *            The GameController object to store the game state to an XML
-	 *            file.
+	 * @param gameController The GameController object to store
+	 * the game state to an XML file.
 	 */
-	private void saveAndExitGame(GameController gameController) {
-
+	private  void saveAndExitGame(GameController gameController) {
+		
 		// Ask user to exit the game
 		System.out.println("Do you want to exit the game?(yes/no)");
-
+		
 		System.out.println("Please enter your choice: ");
 
 		String exitChoice = scan.next();
-
+		
 		if (exitChoice.equals("yes")) {
-
+			
 			// Ask user to save file
 			System.out.println("Do you want to save the game?(yes/no)");
-
+			
 			System.out.println("Please enter your choice: ");
 
 			String userChoice = scan.next();
@@ -586,24 +575,25 @@ public class PlayGame {
 	 * @return The array of players with updated values according to their last
 	 *         turn.
 	 */
-	private Players[] gameLastTurnWithoutLakeTiles(GameInstance gameObj) {
-
+	private  Players[] gameLastTurnWithoutLakeTiles(GameInstance gameObj) {
+		
 		// last turn after all lake tiles were exposed
-		// int playerCont = gameObj.getPlayersList().length;
+		//int playerCont = gameObj.getPlayersList().length;
 		Players[] gamePlayers = gameObj.getPlayersList();
-
+		
 		System.out.println("Last turn of each player "
 				+ "after all LakeTiles are used.");
-
+		
 		for (int i = 0; i < gamePlayers.length; i++) {
 			Players gamePlayer = gamePlayers[i];
-
+			
 			System.out.println("--------- Player "
 					+ gamePlayer.getPlayerNumber() + " turn ---------");
-
+			
+			
 			String opt1 = genValidation(gameObj, gamePlayer);
-
-			// when player don't have enough lantern cards or favor tokens
+			
+			//when player don't have enough lantern cards or favor tokens
 			// for exchange and make a dedication.
 			if (opt1.isEmpty()) {
 				if (!opt1.contains("exchange")) {
@@ -616,34 +606,36 @@ public class PlayGame {
 							+ "cards to make a dedication.");
 				}
 			} else {
-
-				// for loop until exchange and dedication is done until
-				// completed.
+				
+				//for loop until exchange and dedication is done until completed.
 				int optionTurnCheck = 0;
 				int lastExchange = 0;
 				int lastDedication = 0;
-
+				
 				boolean optionLoop = true;
-
-				while (optionLoop) {
-
+				
+				while(optionLoop){
+					
 					System.out.println("--------------------------");
-
+					
 					System.out.println("Please enter you choice:");
-
+					
 					System.out.println("--------------------------");
+									
 
 					if (opt1.contains("exchange")) {
 						System.out.println("0 - Exchange a Lantern Card");
-
+						
+						
 						optionTurnCheck += 1;
-
+						
 					}
 
 					if (opt1.contains("type1") || opt1.contains("type2")
 							|| opt1.contains("type3")) {
 						System.out.println("1 - Make a dedication");
-
+						
+						
 						optionTurnCheck += 1;
 					}
 
@@ -657,7 +649,7 @@ public class PlayGame {
 						opt1 = removeSubstring(new String("exchange"), opt1);
 						System.out.println(opt1);
 
-						lastExchange = 1; // exchange option used.
+						lastExchange = 1; //exchange option used.
 
 						break;
 
@@ -669,14 +661,14 @@ public class PlayGame {
 						opt1 = removeSubstring(new String("type3"), opt1);
 						System.out.println(opt1);
 
-						lastDedication = 1; // dedication option used.
+						lastDedication = 1; //dedication option used.
 
 						break;
 
 					default:
 						break;
 					}
-
+					
 					// if all options are used
 					// exit loop
 					if (optionTurnCheck == 2) {
@@ -690,88 +682,88 @@ public class PlayGame {
 						}
 					}
 					optionTurnCheck = 0;
-
+					
 				}
-
+				
+				
 			}
 		}
 		return gamePlayers;
 	}
+	
 
 	/**
-	 * The method to remove the substring, i.e. game option, from given string
-	 * 
-	 * @param string
-	 *            The main string that contain the value to be removed.
-	 * @param opt1
-	 *            The substring to be removed from the string.
+	 * The method to remove the substring, i.e. game option, from given string 
+	 * @param string The main string that contain the value to be removed.
+	 * @param opt1 The substring to be removed from the string.
 	 * @return The updated string with given substring removed from it.
 	 */
-	private String removeSubstring(String string, String opt1) {
-
+	private  String removeSubstring(String string, String opt1) {
+	
 		int removeSize = string.length();
-
+		
 		int strtPoint = opt1.indexOf(string);
-		// int endPoint = opt1.lastIndexOf(string);
-
+		//int endPoint = opt1.lastIndexOf(string);
+		
 		String firstSubString = "";
 		String lastSubString = "";
-
-		if (strtPoint == 0) {
-			firstSubString = "";
-			lastSubString = opt1.substring(((strtPoint) + removeSize),
-					opt1.length());
-		} else {
-			firstSubString = opt1.substring(0, strtPoint - 1);
-			lastSubString = opt1.substring(((strtPoint) + removeSize),
-					opt1.length());
+		
+		if(strtPoint == 0){
+			 firstSubString = "";
+			 lastSubString = opt1.substring(((strtPoint)+removeSize), opt1.length());
+		}else{
+			 firstSubString = opt1.substring(0, strtPoint-1);
+			 lastSubString = opt1.substring(((strtPoint)+removeSize), opt1.length());
 		}
-
-		// opt1 = new String(firstSubString+lastSubString);
-		return new String(firstSubString + lastSubString);
+		
+		//opt1 = new String(firstSubString+lastSubString);
+		return new String(firstSubString+lastSubString);
 	}
 
+	
 	/**
-	 * The method to determine the winners of the game and to store the winner
-	 * players in a vector. If the score of two players is same, then their
-	 * corresponding lantern cards count will be checked to determine the
-	 * winner.But if the lantern cards are also same, then favor tokens will be
-	 * counted. If favor tokens are also same then both players will be winner
-	 * 
-	 * @param gamePlayers
-	 *            The array of players of the game.
+	 * The method to determine the winners of the game and
+	 *  to store the winner players in a vector. If the score of two 
+	 *  players is same, then their corresponding lantern cards count
+	 *  will be checked to determine the winner.But if the lantern 
+	 *  cards are also same, then favor tokens will be counted. If 
+	 *  favor tokens are also same then both players will be winner
+	 * @param gamePlayers The array of players of the game.
 	 */
 	private static Vector<Players> validateWinner(Players[] gamePlayers) {
 		int winnerScore = 0;
-
-		// int winnerLanternCount = 0;
-		// int winnerFavorTokenCount = 0;
-
-		// Players[] winnerPlayer = new Players[gamePlayers.length];
-
+		
+		//int winnerLanternCount = 0;
+		//int winnerFavorTokenCount = 0;
+		
+		//Players[] winnerPlayer = new Players[gamePlayers.length];
+		
 		Vector<Players> winner = new Vector<Players>();
-
+		
 		for (int i = 0; i < gamePlayers.length; i++) {
 			Players checkPlayer = gamePlayers[i];
-
+			
 			if (checkPlayer.getTotalPoints() > winnerScore) {
 				winnerScore = checkPlayer.getTotalPoints();
 				winner.removeAllElements();
 				winner.add(checkPlayer);
-			} else if (checkPlayer.getTotalPoints() < winnerScore) {
+			}
+			else if (checkPlayer.getTotalPoints() < winnerScore) {
 				// do nothing
 			}
 			// if two players has same score.
-			else if (checkPlayer.getTotalPoints() == winnerScore) {
-
-				// if no players in winner array.
-				if (winner.isEmpty()) {
+			else if(checkPlayer.getTotalPoints() == winnerScore){
+				
+				//if no players in winner array.
+				if(winner.isEmpty())
+				{
 					winner.addElement(checkPlayer);
 				}
-
-				else if (winner.size() == 1) {
+				
+				else if(winner.size() == 1)
+				{
 					// lantern card count is same
-					// then check no. of favor tokens
+					//then check no. of favor tokens
 					if (winner.firstElement().getLanternCardCount() == checkPlayer
 							.getLanternCardCount()) {
 
@@ -779,38 +771,38 @@ public class PlayGame {
 						// then add check player to winner array
 						if (winner.firstElement().getPlayerFavorToken() == checkPlayer
 								.getPlayerFavorToken()) {
-
+							
 							winner.addElement(checkPlayer);
 						}
-
-						// if winner player has less favor tokens
-						// then remove winner player and add
-						// check player to winner array.
+						
+						//if winner player has less favor tokens
+						//then remove winner player and add 
+						//check player to winner array.
 						if (winner.firstElement().getPlayerFavorToken() < checkPlayer
 								.getPlayerFavorToken()) {
-
+							
 							winner.remove(0);
 							winner.addElement(checkPlayer);
 						}
-
-						// if winner player has more favor tokens
-						// then do nothing.
+						
+						//if winner player has more favor tokens
+						//then do nothing.
 						if (winner.firstElement().getPlayerFavorToken() > checkPlayer
 								.getPlayerFavorToken()) {
 						}
-
+												
 					} else if (winner.firstElement().getLanternCardCount() < checkPlayer
 							.getLanternCardCount()) {
-
+						
 						winner.remove(0);
 						winner.addElement(checkPlayer);
 					} else if (winner.firstElement().getLanternCardCount() > checkPlayer
 							.getLanternCardCount()) {
 					}
 				}
-
+				
 				else if (winner.size() > 1) {
-
+					
 					// lantern card count is same
 					// then check no. of favor tokens
 					if (winner.firstElement().getLanternCardCount() == checkPlayer
@@ -842,32 +834,32 @@ public class PlayGame {
 						}
 
 					} else if (winner.firstElement().getLanternCardCount() < checkPlayer
-							.getLanternCardCount()) {
+							.getLanternCardCount()) 
+					{
 
 						// remove all elements since all
 						// elements have same lantern cards count.
 						winner.removeAllElements();
-
+						
 						winner.addElement(checkPlayer);
-
+						
 					} else if (winner.firstElement().getLanternCardCount() > checkPlayer
-							.getLanternCardCount()) {
-					}
+							.getLanternCardCount()) 
+					{}
 				}
-
+				
+				
 			}
-
+			
 		}
-
+				
 		return winner;
-
+		
 	}
-
+	
 	/**
-	 * The method to display the winners of the game.
-	 * 
-	 * @param winnerPlayers
-	 *            The array containing the winner players of the game.
+	 * The method to display the winners of the game. 
+	 * @param winnerPlayers The array containing the winner players of the game.
 	 */
 	private static void displayWinner(Vector<Players> winnerPlayers) {
 
@@ -926,87 +918,75 @@ public class PlayGame {
 
 	/**
 	 * The method to check the size of the draw stack of Lake Tiles.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for getting the draw stack of lake
-	 *            tiles.
-	 * @return The boolean value to determine id lake tile draw stack is empty
-	 *         or not. <BR>
-	 *         True : If the size is zero. False: If the draw stack is not
-	 *         empty.
+	 * @param gameObj The GameInstance object for getting the draw stack of lake tiles.
+	 * @return The boolean value to determine id lake tile draw stack is empty or not.
+	 * <BR>
+	 * True : If the size is zero.
+	 * False: If the draw stack is not empty.
 	 */
 	private static boolean checkDrawStackSize(GameInstance gameObj) {
-		if (gameObj.getGameTilesDrawPile().isEmpty()) {
+		if(gameObj.getGameTilesDrawPile().isEmpty()){
 			return true;
-			// return 0;
-		} else {
+//			return 0;
+		}else{
 			return false;
-			// return gameObj.getGameTilesDrawPile().size();
+			//return gameObj.getGameTilesDrawPile().size();
 		}
-
+		
 	}
 
 	/**
-	 * The method to discard the specified Lantern cards of the given player of
-	 * the game. It will ask for the lantern cards to be discarded and discard
-	 * the selected cards
-	 * 
+	 * The method to discard the specified Lantern cards of the given player of the game.
+	 * It will ask for the lantern cards to be discarded and discard the selected cards
 	 * @see getLanterCardColorRemoval
-	 * @param gameObj
-	 *            The GameInstance object for updating the lantern cards of the
-	 *            game board.
-	 * @param playing
-	 *            The current player whose lantern cards will be discarded.
+	 * @param gameObj The GameInstance object for updating 
+	 * the lantern cards of the game board.
+	 * @param playing The current player whose lantern cards will be discarded.
 	 */
-	private void discardLanternCards(GameInstance gameObj, Players playing) {
-
+	private void discardLanternCards(GameInstance gameObj,
+			Players playing) {
+		
 		System.out.println("-------Lantern Cards Player Holds-----");
-
+		
 		System.out.println();
-
-		System.out.println("Red Lantern Cards Left: "
-				+ playing.getPlayerRedLanternCardCount());
-
-		System.out.println("Blue Lantern Cards Left: "
-				+ playing.getPlayerBlueLanternCardCount());
-
-		System.out.println("Black Lantern Cards Left: "
-				+ playing.getPlayerBlackLanternCardCount());
-
-		System.out.println("Green Lantern Cards Left: "
-				+ playing.getPlayerGreenLanternCardCount());
-
-		System.out.println("Orange Lantern Cards Left: "
-				+ playing.getPlayerOrangeLanternCardCount());
-
-		System.out.println("Purple Lantern Cards Left: "
-				+ playing.getPlayerPurpleLanternCardCount());
-
-		System.out.println("White Lantern Cards Left: "
-				+ playing.getPlayerWhiteLanternCardCount());
-
+		
+		System.out.println("Red Lantern Cards Left: "+playing.getPlayerRedLanternCardCount());
+		
+		System.out.println("Blue Lantern Cards Left: "+playing.getPlayerBlueLanternCardCount());
+		
+		System.out.println("Black Lantern Cards Left: "+playing.getPlayerBlackLanternCardCount());
+		
+		System.out.println("Green Lantern Cards Left: "+playing.getPlayerGreenLanternCardCount());
+		
+		System.out.println("Orange Lantern Cards Left: "+playing.getPlayerOrangeLanternCardCount());
+		
+		System.out.println("Purple Lantern Cards Left: "+playing.getPlayerPurpleLanternCardCount());
+		
+		System.out.println("White Lantern Cards Left: "+playing.getPlayerWhiteLanternCardCount());
+		
 		System.out.println();
-
+		
+		
 		boolean loopCheck = true;
-
+		
 		while (loopCheck) {
 
 			System.out.println("Lantern cards count: "
 					+ playing.getLanternCardCount());
 
 			System.out.println("Which color you want to discard?");
-
+			
 			System.out.println("Black/Blue/White/Green/Orange/Red/Purple");
-
+			
 			System.out.println();
-
+			
 			System.out.print("Please enter your choice:");
-
+			
 			String deleteColor = scan.next();
-
+			
 			System.out.print("Please enter the number of"
 					+ " cards you want to discard:");
-
+			
 			int deleteCardCount = scan.nextInt();
 
 			boolean removeResult = getLanterCardColorRemoval(playing,
@@ -1021,31 +1001,29 @@ public class PlayGame {
 			}
 
 		}
-
+		
 	}
-
+	
+	
 	/**
-	 * The method to remove the lantern cards of specified color from the given
-	 * player.The number of lantern cards will be discarded according to the
-	 * given cardCount.
-	 * 
-	 * @param playing
-	 *            The current player whose lantern cards will be discarded.
-	 * @param deleteColor
-	 *            The color of the lantern card to be discarded
-	 * @param gameObj
-	 *            The GameInstance object for updating the lantern cards of the
-	 *            game board.
-	 * @param cardCount
-	 *            The number of cards to be discarded
-	 * @return true if lantern cards of selected color are removed from players
-	 *         lantern count and add to the game lantern count.
+	 * The method to remove the lantern cards of specified color from 
+	 * the given player.The number of lantern cards will be discarded
+	 * according to the given cardCount.
+	 * @param playing The current player whose lantern cards will be discarded.
+	 * @param deleteColor The color of the lantern card to be discarded
+	 * @param gameObj The GameInstance object for updating 
+	 * the lantern cards of the game board.
+	 * @param cardCount The number of cards to be discarded
+	 * @return true if lantern cards of selected color are removed from
+	 * players lantern count and add to the game lantern count.
 	 */
 	private static boolean getLanterCardColorRemoval(Players playing,
 			String deleteColor, GameInstance gameObj, int cardCount) {
 
-		if (deleteColor.equals("Black")) {
-			if (playing.getPlayerBlackLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Black")) 
+		{
+			if (playing.getPlayerBlackLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerBlackLanternCardCount(playing
 						.getPlayerBlackLanternCardCount() - cardCount);
 				gameObj.setGameBlackLanternCardCount(gameObj
@@ -1054,8 +1032,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("White")) {
-			if (playing.getPlayerWhiteLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("White")) 
+		{
+			if (playing.getPlayerWhiteLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerWhiteLanternCardCount(playing
 						.getPlayerWhiteLanternCardCount() - cardCount);
 				gameObj.setGameWhiteLanternCardCount(gameObj
@@ -1064,8 +1044,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("Blue")) {
-			if (playing.getPlayerBlueLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Blue")) 
+		{
+			if (playing.getPlayerBlueLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerBlueLanternCardCount(playing
 						.getPlayerBlueLanternCardCount() - cardCount);
 				gameObj.setGameBlueLanternCardCount(gameObj
@@ -1074,8 +1056,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("Green")) {
-			if (playing.getPlayerGreenLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Green")) 
+		{
+			if (playing.getPlayerGreenLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerGreenLanternCardCount(playing
 						.getPlayerGreenLanternCardCount() - cardCount);
 				gameObj.setGameGreenLanternCardCount(gameObj
@@ -1084,8 +1068,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("Orange")) {
-			if (playing.getPlayerOrangeLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Orange")) 
+		{
+			if (playing.getPlayerOrangeLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerOrangeLanternCardCount(playing
 						.getPlayerOrangeLanternCardCount() - cardCount);
 				gameObj.setGameOrangeLanternCardCount(gameObj
@@ -1094,8 +1080,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("Red")) {
-			if (playing.getPlayerRedLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Red")) 
+		{
+			if (playing.getPlayerRedLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerRedLanternCardCount(playing
 						.getPlayerRedLanternCardCount() - cardCount);
 				gameObj.setGameRedLanternCardCount(gameObj
@@ -1104,8 +1092,10 @@ public class PlayGame {
 			}
 		}
 
-		if (deleteColor.equals("Purple")) {
-			if (playing.getPlayerPurpleLanternCardCount() >= cardCount) {
+		if (deleteColor.equals("Purple")) 
+		{
+			if (playing.getPlayerPurpleLanternCardCount() >= cardCount) 
+			{
 				playing.setPlayerPurpleLanternCardCount(playing
 						.getPlayerPurpleLanternCardCount() - cardCount);
 				gameObj.setGamePurpleLanternCardCount(gameObj
@@ -1118,9 +1108,7 @@ public class PlayGame {
 
 	/**
 	 * The method to display the status of the specified player.
-	 * 
-	 * @param playing
-	 *            The player of the game.
+	 * @param playing The player of the game.
 	 */
 	private static void displayPlayerStatus(Players playing) {
 
@@ -1128,16 +1116,16 @@ public class PlayGame {
 
 		System.out.println("******** Player number "
 				+ playing.getPlayerNumber() + " status ********");
-		System.out.println(); // space
+		System.out.println();  //space
 
 		System.out.println("Player position: " + playing.getPlayerPosition());
-
-		System.out.println(); // space
+		
+		System.out.println();  //space
 
 		System.out.println("Total Lantern cards: "
 				+ playing.getLanternCardCount());
-
-		System.out.println(); // space
+		
+		System.out.println();  //space
 
 		System.out.println("Red Lantern cards: "
 				+ playing.getPlayerRedLanternCardCount());
@@ -1169,90 +1157,99 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to distribute the lantern cards to all the players of the game
-	 * except the current player of the game, whose turn is going on. The
-	 * players will get the lantern card according to the color of the lake tile
-	 * card they are facing.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for updating the lantern cards of the
-	 *            game board.
-	 * @param playing
-	 *            The current player of the game.
-	 * @param y
-	 *            The row of the game board.
-	 * @param x
-	 *            The column of the game board.
+	 * The method to distribute the lantern cards to all the players
+	 * of the game except the current player of the game, whose turn is 
+	 * going on. The players will get the lantern card according to the
+	 * color of the lake tile card they are facing.
+	 * @param gameObj The GameInstance object for updating 
+	 * the lantern cards of the game board.
+	 * @param playing The current player of the game.
+	 * @param y The row of the game board.
+	 * @param x The column of the game board.
 	 */
-	private static void distributingLakeTilesToRestPlayers(
-			GameInstance gameObj, Players playing, int y, int x) {
-
+	private static void distributingLakeTilesToRestPlayers(GameInstance gameObj, Players playing, int y, int x) {
+		
 		Players[] players = gameObj.getPlayersList();
-
+		
 		Vector<LakeTiles> VLT = gameObj.getAllLakeTiles();
-
+		
 		for (int plyrCount = 0; plyrCount < players.length; plyrCount++) {
-
+			
 			Players tempPlyr = players[plyrCount];
-
+			
 			if (tempPlyr.getPlayerNumber() != playing.getPlayerNumber()) {
-
-				if (gameObj.GameBoard[y][x] != 99) {
+				
+				if (gameObj.GameBoard[y][x] != 99) 
+				{
 					if (tempPlyr.getPlayerPosition().equals("NORTH")) {
 						addingLanternCardsToPlayer(tempPlyr,
-								VLT.get(gameObj.GameBoard[y][x]).getTopColor(),
-								gameObj);
+								VLT.get(gameObj.GameBoard[y][x]).getTopColor(),gameObj);
 					}
-
+				
 					if (tempPlyr.getPlayerPosition().equals("SOUTH")) {
 						addingLanternCardsToPlayer(tempPlyr,
 								VLT.get(gameObj.GameBoard[y][x])
 										.getBottomColor(), gameObj);
 					}
-
+				
 					if (tempPlyr.getPlayerPosition().equals("EAST")) {
 						addingLanternCardsToPlayer(
 								tempPlyr,
 								VLT.get(gameObj.GameBoard[y][x]).getLeftColor(),
 								gameObj);
 					}
-
+				
 					if (tempPlyr.getPlayerPosition().equals("WEST")) {
 						addingLanternCardsToPlayer(tempPlyr,
 								VLT.get(gameObj.GameBoard[y][x])
 										.getRightColor(), gameObj);
 					}
 				}
-
-				/*
-				 * if (gameObj.GameBoard[y - 1][x] != 99) { if
-				 * (tempPlyr.getPlayerPosition().equals("NORTH") &&
-				 * VLT.get(gameObj.GameBoard[y - 1][x]) .getBottomColor()
-				 * .equals(VLT.get(gameObj.GameBoard[y][x]).getTopColor())) {
-				 * addingLanternCardsToPlayer(tempPlyr,
-				 * VLT.get(gameObj.GameBoard[y][x]).getTopColor(),gameObj); } }
-				 * if (gameObj.GameBoard[y + 1][x] != 99) { if
-				 * (tempPlyr.getPlayerPosition().equals("SOUTH") &&
-				 * VLT.get(gameObj.GameBoard[y + 1][x]) .getTopColor()
-				 * .equals(VLT.get(gameObj.GameBoard[y][x]) .getBottomColor()))
-				 * { addingLanternCardsToPlayer(tempPlyr,
-				 * VLT.get(gameObj.GameBoard[y][x]) .getBottomColor(), gameObj);
-				 * } } if (gameObj.GameBoard[y][x - 1] != 99) { if
-				 * (tempPlyr.getPlayerPosition().equals("EAST") &&
-				 * VLT.get(gameObj.GameBoard[y][x - 1]) .getRightColor()
-				 * .equals(VLT.get(gameObj.GameBoard[y][x]) .getLeftColor())) {
-				 * addingLanternCardsToPlayer( tempPlyr,
-				 * VLT.get(gameObj.GameBoard[y][x]).getLeftColor(), gameObj); }
-				 * }
-				 * 
-				 * if (gameObj.GameBoard[y][x + 1] != 99) { if
-				 * (tempPlyr.getPlayerPosition().equals("WEST") &&
-				 * VLT.get(gameObj.GameBoard[y][x + 1]) .getLeftColor()
-				 * .equals(VLT.get(gameObj.GameBoard[y][x]) .getRightColor())) {
-				 * addingLanternCardsToPlayer(tempPlyr,
-				 * VLT.get(gameObj.GameBoard[y][x]) .getRightColor(), gameObj);
-				 * } }
-				 */
+				
+				/*if (gameObj.GameBoard[y - 1][x] != 99) {
+					if (tempPlyr.getPlayerPosition().equals("NORTH")
+							&& VLT.get(gameObj.GameBoard[y - 1][x])
+									.getBottomColor()
+									.equals(VLT.get(gameObj.GameBoard[y][x]).getTopColor())) {
+						addingLanternCardsToPlayer(tempPlyr,
+								VLT.get(gameObj.GameBoard[y][x]).getTopColor(),gameObj);
+					}
+				}
+				if (gameObj.GameBoard[y + 1][x] != 99) {
+					if (tempPlyr.getPlayerPosition().equals("SOUTH")
+							&& VLT.get(gameObj.GameBoard[y + 1][x])
+									.getTopColor()
+									.equals(VLT.get(gameObj.GameBoard[y][x])
+											.getBottomColor())) {
+						addingLanternCardsToPlayer(tempPlyr,
+								VLT.get(gameObj.GameBoard[y][x])
+										.getBottomColor(), gameObj);
+					}
+				}
+				if (gameObj.GameBoard[y][x - 1] != 99) {
+					if (tempPlyr.getPlayerPosition().equals("EAST")
+							&& VLT.get(gameObj.GameBoard[y][x - 1])
+									.getRightColor()
+									.equals(VLT.get(gameObj.GameBoard[y][x])
+											.getLeftColor())) {
+						addingLanternCardsToPlayer(
+								tempPlyr,
+								VLT.get(gameObj.GameBoard[y][x]).getLeftColor(),
+								gameObj);
+					}
+				}
+				
+				if (gameObj.GameBoard[y][x + 1] != 99) {
+					if (tempPlyr.getPlayerPosition().equals("WEST")
+							&& VLT.get(gameObj.GameBoard[y][x + 1])
+									.getLeftColor()
+									.equals(VLT.get(gameObj.GameBoard[y][x])
+											.getRightColor())) {
+						addingLanternCardsToPlayer(tempPlyr,
+								VLT.get(gameObj.GameBoard[y][x])
+										.getRightColor(), gameObj);
+					}
+				}*/
 			}
 		}
 	}
@@ -1267,16 +1264,15 @@ public class PlayGame {
 	 * @param playing
 	 *            The current player of the game.
 	 */
-	private static void distributeLakeTilesPlaying(GameInstance gameObj,
-			Players playing, int y, int x) {
-
-		// current player gets everything
+	private static void distributeLakeTilesPlaying(GameInstance gameObj, Players playing, int y, int x) {
+	
+		//current player gets everything
 		Vector<LakeTiles> VLT = gameObj.getAllLakeTiles();
-
-		boolean right = false, top = false, left = false, bottom = false;
-
+		
+		boolean right = false, top = false, left =false, bottom = false;
+		
 		String position = playing.getPlayerPosition();
-
+		
 		if (gameObj.GameBoard[y - 1][x] != 99) {
 
 			left = true;
@@ -1318,11 +1314,11 @@ public class PlayGame {
 		if (gameObj.GameBoard[y][x - 1] != 99) {
 
 			System.out.println(gameObj.GameBoard[y][x - 1]);
-
+			
 			System.out.println(gameObj.GameBoard[y][x]);
-
+			
 			top = true;
-
+			
 			if (VLT.get(gameObj.GameBoard[y][x - 1]).getRightColor()
 					.equals(VLT.get(gameObj.GameBoard[y][x]).getLeftColor())) {
 				addingLanternCardsToPlayer(playing,
@@ -1342,7 +1338,7 @@ public class PlayGame {
 		if (gameObj.GameBoard[y][x + 1] != 99) {
 
 			bottom = true;
-
+			
 			if (VLT.get(gameObj.GameBoard[y][x + 1]).getLeftColor()
 					.equals(VLT.get(gameObj.GameBoard[y][x]).getRightColor())) {
 				addingLanternCardsToPlayer(playing,
@@ -1359,8 +1355,8 @@ public class PlayGame {
 			addingLanternCardsToPlayer(playing, VLT
 					.get(gameObj.GameBoard[y][x]).getRightColor(), gameObj);
 		}
-
-		// Platform Card To do
+		
+		//Platform Card To do
 		if (VLT.get(gameObj.GameBoard[y][x]).isPlatform()) {
 			if (gameObj.getGameFavorToken() > 0) {
 				playing.setPlayerFavorToken(playing.getPlayerFavorToken() + 1);
@@ -1405,9 +1401,10 @@ public class PlayGame {
 			}
 
 		}
-
+		
 	}
-
+		
+	
 	private static boolean addingLanternCardsToPlayer(Players playing,
 			String yourColor, GameInstance gameObj) {
 
@@ -1524,20 +1521,18 @@ public class PlayGame {
 	 */
 	private Players removePlacedLakeTile(LakeTiles tileInHand, Players playing) {
 		Vector<LakeTiles> handLakeTiles = playing.getCurrentLakeTilesHold();
-
+		
 		boolean removed = handLakeTiles.remove(tileInHand);
-		// System.out.println("check removed "+ removed);
-		//
-		// System.out.println(" tiles in hand "+handLakeTiles.size());
-		// System.out.println(" tiles in hand "+playing.getCurrentLakeTilesHold().size());
+//		System.out.println("check removed "+ removed);
+//		
+//		System.out.println(" tiles in hand "+handLakeTiles.size());
+//		System.out.println(" tiles in hand "+playing.getCurrentLakeTilesHold().size());
 		return playing;
 	}
 
 	/**
 	 * The method to rotate the lake tile 90 Degree clockwise
-	 * 
-	 * @param tileInHand
-	 *            The lake tile which will be rotated
+	 * @param tileInHand The lake tile which will be rotated
 	 */
 	private LakeTiles rotateLakeTile(LakeTiles tileInHand) {
 
@@ -1546,11 +1541,11 @@ public class PlayGame {
 		String RC = tileInHand.getRightColor();
 		String LC = tileInHand.getLeftColor();
 
-		// tileInHand.setBottomColor(LC);
-		// tileInHand.setLeftColor(TC);
-		// tileInHand.setTopColor(RC);
-		// tileInHand.setRightColor(BC);
-
+//		tileInHand.setBottomColor(LC);
+//		tileInHand.setLeftColor(TC);
+//		tileInHand.setTopColor(RC);
+//		tileInHand.setRightColor(BC);
+		
 		tileInHand.setBottomColor(RC);
 		tileInHand.setLeftColor(BC);
 		tileInHand.setTopColor(LC);
@@ -1573,12 +1568,12 @@ public class PlayGame {
 		LakeTiles tileHolded;
 		while (inputLoop) {
 			System.out.println(); // for spacing
-
+			
 			System.out.println("******** Player " + playing.getPlayerNumber()
 					+ " Lake Tiles details ********");
 
 			Vector<LakeTiles> lakeTiles = playing.getCurrentLakeTilesHold();
-
+			
 			System.out.println(); // for spacing
 
 			System.out.println("No of Lake Tiles in hand: " + lakeTiles.size());
@@ -1615,6 +1610,7 @@ public class PlayGame {
 		return null;
 	}
 
+	
 	/**
 	 * The method to return the top vertical element of the game board array
 	 * which is not empty.
@@ -1673,11 +1669,9 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to return the right horizontal element of the game board array
+	 *The method to return the right horizontal element of the game board array
 	 * which is not empty.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for updating game board array.
+	 * @param gameObj The GameInstance object for updating game board array.
 	 * @return right horizontal array element which is not empty.
 	 */
 	public static int getEndHorizontal(GameInstance gameObj) {
@@ -1694,11 +1688,8 @@ public class PlayGame {
 
 	/**
 	 * The method for left padding.
-	 * 
-	 * @param s
-	 *            The string to be padded.
-	 * @param n
-	 *            The number of time string is padded.
+	 * @param s The string to be padded.
+	 * @param n The number of time string is padded.
 	 * @return The padded string.
 	 */
 	public static String padRight(String s, int n) {
@@ -1707,25 +1698,18 @@ public class PlayGame {
 
 	/**
 	 * The method for right padding.
-	 * 
-	 * @param s
-	 *            The string to be padded.
-	 * @param n
-	 *            The number of time string is padded.
+	 * @param s The string to be padded.
+	 * @param n The number of time string is padded.
 	 * @return The padded string.
 	 */
 	public static String padLeft(String s, int n) {
 		return String.format("%1$" + n + "s", s);
 	}
-
+	
 	/**
-	 * The method to display the game board and the lake tiles placed on the
-	 * game board.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for updating game board array.
-	 * @param playing
-	 *            The current player of the game.
+	 * The method to display the game board and the lake tiles placed on the game board.
+	 * @param gameObj The GameInstance object for updating game board array.
+	 * @param playing The current player of the game.
 	 */
 	private void displayLakeTileBoard(GameInstance gameObj, Players playing) {
 
@@ -1783,17 +1767,12 @@ public class PlayGame {
 
 	/**
 	 * The method to make a dedication
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object to update its elements according to
-	 *            the dedications..
-	 * @param playing
-	 *            The current player who is doing the dedication.
-	 * @param opt
-	 *            The string to choose the type of dedication.
+	 * @param gameObj The GameInstance object to update its elements
+	 *  according to the dedications..
+	 * @param playing The current player who is doing the dedication.
+	 * @param opt The string to choose the type of dedication.
 	 */
-	private void makeADedication(GameInstance gameObj, Players playing,
-			String opt) {
+	private void makeADedication(GameInstance gameObj, Players playing, String opt) {
 		boolean loop = true;
 		while (loop) {
 			if (opt.contains("type1")) {
@@ -1808,16 +1787,16 @@ public class PlayGame {
 				System.out
 						.println("3 - Type 3 Dedication (Seven cards of different color.)");
 			}
-
+			
 			int selectionType = scan.nextInt();
-
+			
 			switch (selectionType) {
 			case 1:
 				if (opt.contains("type1")) {
 					loop = false;
-
+					
 					System.out.println("Your Lantern Cards Details ");
-
+					
 					if (playing.getPlayerBlackLanternCardCount() > 3)
 						System.out.println("Number of Black Lantern Card :"
 								+ playing.getPlayerBlackLanternCardCount());
@@ -1841,12 +1820,12 @@ public class PlayGame {
 								+ playing.getPlayerRedLanternCardCount());
 
 					System.out.println("Input color of lantern card ");
-
+					
 					String color1 = scan.next();
-
+					
 					boolean type1Val = getDedicationType1ColorValidationAndRemoval(
 							playing, color1, gameObj);
-
+					
 					if (type1Val) {
 						DedicationTokens dedicationObj = gameObj
 								.getDedicationTokens();
@@ -1892,43 +1871,51 @@ public class PlayGame {
 
 					System.out.println("Your Lantern Cards Details ");
 
-					if (playing.getPlayerBlackLanternCardCount() > 1) {
+					if (playing.getPlayerBlackLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Black Lantern Card :"
 								+ playing.getPlayerBlackLanternCardCount());
 					}
-					if (playing.getPlayerWhiteLanternCardCount() > 1) {
+					if (playing.getPlayerWhiteLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of White Lantern Card :"
 								+ playing.getPlayerWhiteLanternCardCount());
 					}
-					if (playing.getPlayerBlueLanternCardCount() > 1) {
+					if (playing.getPlayerBlueLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Blue Lantern Card :"
 								+ playing.getPlayerBlueLanternCardCount());
 					}
-					if (playing.getPlayerGreenLanternCardCount() > 1) {
+					if (playing.getPlayerGreenLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Green Lantern Card :"
 								+ playing.getPlayerGreenLanternCardCount());
 					}
-					if (playing.getPlayerOrangeLanternCardCount() > 1) {
+					if (playing.getPlayerOrangeLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Orange Lantern Card :"
 								+ playing.getPlayerOrangeLanternCardCount());
 					}
-					if (playing.getPlayerPurpleLanternCardCount() > 1) {
+					if (playing.getPlayerPurpleLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Purple Lantern Card :"
 								+ playing.getPlayerPurpleLanternCardCount());
 					}
-					if (playing.getPlayerRedLanternCardCount() > 1) {
+					if (playing.getPlayerRedLanternCardCount() > 1) 
+					{
 						stepTwoColorCount += 1;
 						System.out.println("Number of Red Lantern Card :"
 								+ playing.getPlayerRedLanternCardCount());
 					}
 
-					if (stepTwoColorCount > 2) {
+					if (stepTwoColorCount > 2) 
+					{
 
 						boolean colorLoop1 = true;
 						while (colorLoop1) {
@@ -2107,7 +2094,7 @@ public class PlayGame {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param playing
 	 * @param gameObj
@@ -2424,5 +2411,358 @@ public class PlayGame {
 
 	}
 
+	/**
+	 * @param gameColor
+	 * @param gameObj
+	 */
+	private void gameColorAugment(String gameColor, GameInstance gameObj, String yourColor) {
+		// Game lantern color Addition
+		if (yourColor.equals("Black"))
+			gameObj.setGameBlackLanternCardCount(gameObj.getGameBlackLanternCardCount() + 1);
+		if (yourColor.equals("White"))
+			gameObj.setGameWhiteLanternCardCount(gameObj.getGameWhiteLanternCardCount() + 1);
+		if (yourColor.equals("Blue"))
+			gameObj.setGameBlueLanternCardCount(gameObj.getGameBlueLanternCardCount() + 1);
+		if (yourColor.equals("Green"))
+			gameObj.setGameGreenLanternCardCount(gameObj.getGameGreenLanternCardCount() + 1);
+		if (yourColor.equals("Orange"))
+			gameObj.setGameOrangeLanternCardCount(gameObj.getGameOrangeLanternCardCount() + 1);
+		if (yourColor.equals("Red"))
+			gameObj.setGameRedLanternCardCount(gameObj.getGameRedLanternCardCount() + 1);
+		if (yourColor.equals("Purple"))
+			gameObj.setGamePurpleLanternCardCount(gameObj.getGamePurpleLanternCardCount() + 1);
+		// Game lantern color removal
+		if (gameColor.equals("Black"))
+			gameObj.setGameBlackLanternCardCount(gameObj.getGameBlackLanternCardCount() - 1);
+		if (gameColor.equals("White"))
+			gameObj.setGameWhiteLanternCardCount(gameObj.getGameWhiteLanternCardCount() - 1);
+		if (gameColor.equals("Blue"))
+			gameObj.setGameBlueLanternCardCount(gameObj.getGameBlueLanternCardCount() - 1);
+		if (gameColor.equals("Green"))
+			gameObj.setGameGreenLanternCardCount(gameObj.getGameGreenLanternCardCount() - 1);
+		if (gameColor.equals("Orange"))
+			gameObj.setGameOrangeLanternCardCount(gameObj.getGameOrangeLanternCardCount() - 1);
+		if (gameColor.equals("Red"))
+			gameObj.setGameRedLanternCardCount(gameObj.getGameRedLanternCardCount() - 1);
+		if (gameColor.equals("Purple"))
+			gameObj.setGamePurpleLanternCardCount(gameObj.getGamePurpleLanternCardCount() - 1);
+
+	}
+
+	/**
+	 * @param yourColor
+	 * @param playing
+	 */
+	private void playerColorAugment(String yourColor, Players playing,
+			String gameColor) {
+		// Player lantern color removal
+		if (yourColor.equals("Black")) {
+			playing.setPlayerBlackLanternCardCount(playing
+					.getPlayerBlackLanternCardCount() - 1);
+		}
+		if (yourColor.equals("White")) {
+			playing.setPlayerWhiteLanternCardCount(playing
+					.getPlayerWhiteLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Blue")) {
+			playing.setPlayerBlueLanternCardCount(playing
+					.getPlayerBlueLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Green")) {
+			playing.setPlayerGreenLanternCardCount(playing
+					.getPlayerGreenLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Orange")) {
+			playing.setPlayerOrangeLanternCardCount(playing
+					.getPlayerOrangeLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Red")) {
+			playing.setPlayerRedLanternCardCount(playing
+					.getPlayerRedLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Purple")) {
+			playing.setPlayerPurpleLanternCardCount(playing
+					.getPlayerPurpleLanternCardCount() - 1);
+		}
+		
+		// Player lantern color addition
+		if (gameColor.equals("Black")) {
+			playing.setPlayerBlackLanternCardCount(playing
+					.getPlayerBlackLanternCardCount() + 1);
+		}
+		if (gameColor.equals("White")) {
+			playing.setPlayerWhiteLanternCardCount(playing
+					.getPlayerWhiteLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Blue")) {
+			playing.setPlayerBlueLanternCardCount(playing
+					.getPlayerBlueLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Green")) {
+			playing.setPlayerGreenLanternCardCount(playing
+					.getPlayerGreenLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Orange")) {
+			playing.setPlayerOrangeLanternCardCount(playing
+					.getPlayerOrangeLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Red")) {
+			playing.setPlayerRedLanternCardCount(playing
+					.getPlayerRedLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Purple")) {
+			playing.setPlayerPurpleLanternCardCount(playing
+					.getPlayerPurpleLanternCardCount() + 1);
+		}
+
+	}
+
+	/**
+	 * @param gameObj
+	 * @param gameColor
+	 * @return
+	 */
+	private boolean lanternColorGameValidation(GameInstance gameObj, String gameColor) {
+
+		if (gameColor.equals("Black"))
+			if (gameObj.getGameBlackLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (gameColor.equals("White"))
+			if (gameObj.getGameWhiteLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (gameColor.equals("Blue"))
+			if (gameObj.getGameBlueLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (gameColor.equals("Green"))
+			if (gameObj.getGameGreenLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (gameColor.equals("Orange"))
+			if (gameObj.getGameOrangeLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (gameColor.equals("Red"))
+			if (gameObj.getGameRedLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Purple"))
+			if (gameObj.getGamePurpleLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		return false;
+	}
+
+	/**
+	 * @param playing
+	 * @param yourColor
+	 * @return
+	 */
+	private boolean lanternColorPlayerValidation(Players playing, String yourColor) {
+		if (yourColor.equals("Black"))
+			if (playing.getPlayerBlackLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("White"))
+			if (playing.getPlayerWhiteLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("Blue"))
+			if (playing.getPlayerBlueLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("Green"))
+			if (playing.getPlayerGreenLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("Orange"))
+			if (playing.getPlayerOrangeLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("Red"))
+			if (playing.getPlayerRedLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		if (yourColor.equals("Purple"))
+			if (playing.getPlayerPurpleLanternCardCount() > 0) 
+			{
+				return true;
+			}
+		return false;
+	}
+
+	/**
+	 * @param playing
+	 * @param gameObj
+	 * 
+	 */
+	private Players updateCurrentPlayer(GameInstance gameObj, Players playing) {
+		int playerCont = gameObj.getPlayersList().length;
+		// System.out.println("count "+ playerCont);
+		// System.out.println("current number player "+
+		// playing.getPlayerNumber());
+		if (playing.getPlayerNumber() == playerCont) 
+		{
+			playing = gameObj.getPlayersList()[0];
+		} else 
+		{
+			playing = gameObj.getPlayersList()[playing.getPlayerNumber()];
+		}
+		return playing;
+
+	}
+
+	/**
+	 * @param gameObj
+	 * @param playing
+	 * @return
+	 */
+	private String genValidation(GameInstance gameObj, Players playing) {
+		// Validation for Exchange a lantern
+		boolean exahange = false;
+		String retStr = "";
+		if (playing.getPlayerFavorToken() >= 2) {
+			if (playing.getPlayerBlackLanternCardCount() > 0
+					|| playing.getPlayerWhiteLanternCardCount() > 0
+					|| playing.getPlayerBlueLanternCardCount() > 0
+					|| playing.getPlayerGreenLanternCardCount() > 0
+					|| playing.getPlayerOrangeLanternCardCount() > 0
+					|| playing.getPlayerPurpleLanternCardCount() > 0
+					|| playing.getPlayerRedLanternCardCount() > 0) 
+			{
+				if (gameObj.getGameBlackLanternCardCount() > 0
+						|| gameObj.getGameWhiteLanternCardCount() > 0
+						|| gameObj.getGameBlueLanternCardCount() > 0
+						|| gameObj.getGameGreenLanternCardCount() > 0
+						|| gameObj.getGameOrangeLanternCardCount() > 0
+						|| gameObj.getGamePurpleLanternCardCount() > 0
+						|| gameObj.getGameRedLanternCardCount() > 0) 
+				{
+					retStr += "exchange";
+				}
+			}
+		}
+		// Make a dedication
+		// Validation for Dedication Type 1
+		boolean type1 = false;
+		if (playing.getPlayerBlackLanternCardCount() > 3
+				|| playing.getPlayerWhiteLanternCardCount() > 3
+				|| playing.getPlayerBlueLanternCardCount() > 3
+				|| playing.getPlayerGreenLanternCardCount() > 3
+				|| playing.getPlayerOrangeLanternCardCount() > 3
+				|| playing.getPlayerPurpleLanternCardCount() > 3
+				|| playing.getPlayerRedLanternCardCount() > 3) 
+		{
+			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
+			if (dedicationToken.getDedicationTokenFourSize() > 0) 
+			{
+				retStr += "type1";
+			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) 
+			{
+				retStr += "type1";
+			}
+		}
+		
+		// Validation for Dedication Type 2
+		boolean type2 = false;
+		int countPairs2 = 0;
+		if (playing.getPlayerBlackLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (playing.getPlayerWhiteLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+
+		if (playing.getPlayerBlueLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (playing.getPlayerGreenLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (playing.getPlayerOrangeLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (playing.getPlayerPurpleLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (playing.getPlayerRedLanternCardCount() > 1) 
+		{
+			countPairs2++;
+		}
+		if (countPairs2 > 2) 
+		{
+			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
+			if (dedicationToken.getDedicationTokenSixSize() > 0) {
+				retStr += "type2";
+			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) {
+				retStr += "type2";
+			}
+		}
+		// type 3 validation
+		boolean type3 = false;
+		int countPairs7 = 0;
+		if (playing.getPlayerBlackLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (playing.getPlayerWhiteLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+
+		if (playing.getPlayerBlueLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (playing.getPlayerGreenLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (playing.getPlayerOrangeLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (playing.getPlayerPurpleLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (playing.getPlayerRedLanternCardCount() > 0) 
+		{
+			countPairs7++;
+		}
+		if (countPairs7 > 6) 
+		{
+			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
+			if (dedicationToken.getDedicationTokenSevenSize() > 0) 
+			{
+				retStr += "type3";
+			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) 
+			{
+				retStr += "type3";
+			}
+		}
+
+		return retStr;
+	}
 
 }
