@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
+ * Test Suite Class
  * @author Team E
  *
  */

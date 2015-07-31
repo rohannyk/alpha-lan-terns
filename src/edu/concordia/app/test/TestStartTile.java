@@ -20,6 +20,7 @@ import edu.concordia.app.model.GameInstance;
 import edu.concordia.app.model.Players;
 
 /**
+ * Class to execute Test Cases for Start Tile
  * @author Team E
  *
  */

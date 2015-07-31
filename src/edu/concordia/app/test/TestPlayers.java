@@ -21,6 +21,7 @@ import edu.concordia.app.model.PlayGame;
 import edu.concordia.app.model.Players;
 
 /**
+ * Class to execute Test Cases for Players
  * @author Team E
  *
  */

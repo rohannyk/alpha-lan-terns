@@ -16,6 +16,7 @@ import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 
 /**
+ * Class to execute Test Cases for Lake Tiles
  * @author Team E
  *
  */

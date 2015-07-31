@@ -20,6 +20,7 @@ import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
 
 /**
+ * Class to execute Test Cases for Dedication Tokens
  * @author Team E
  *
  */
