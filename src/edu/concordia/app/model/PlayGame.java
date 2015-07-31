@@ -12,6 +12,7 @@ import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.controller.GameController;
 
 /**
+ * This class governs the game play of the lantern game according to the rules.
  * @author Team E
  *
  */
