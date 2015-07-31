@@ -12,8 +12,6 @@ import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.controller.GameController;
 
 /**
- * This class governs the game play of the lantern game according to the rules.
- * 
  * @author Team E
  *
  */
@@ -376,7 +374,8 @@ public class PlayGame {
 	 * This method asks takes input from user and rotate the selected tile to
 	 * 0/90/180/270 degree.
 	 * 
-	 * @param tileInHand The tile to be rotated before placing on the board.
+	 * @param tileInHand
+	 *            The tile to be rotated before placing on the board.
 	 * @return The rotated lake tile.
 	 */
 	private LakeTiles rotateLakeTileOnUserChoice(LakeTiles tileInHand) {
@@ -396,8 +395,8 @@ public class PlayGame {
 			scan.nextLine();
 
 			if (degreeRotation.equals("90")) {
-
-				tileInHand = rotateLakeTile(tileInHand);
+				
+				rotateLakeTileByDegree(tileInHand, degreeRotation);
 
 				System.out.println();
 
@@ -411,10 +410,8 @@ public class PlayGame {
 				choiceRotate = false;
 
 			} else if (degreeRotation.equals("180")) {
-
-				tileInHand = rotateLakeTile(tileInHand);
-
-				tileInHand = rotateLakeTile(tileInHand);
+				
+				rotateLakeTileByDegree(tileInHand, degreeRotation);
 
 				System.out.println();
 
@@ -428,11 +425,7 @@ public class PlayGame {
 
 			} else if (degreeRotation.equals("270")) {
 
-				tileInHand = rotateLakeTile(tileInHand);
-
-				tileInHand = rotateLakeTile(tileInHand);
-
-				tileInHand = rotateLakeTile(tileInHand);
+				rotateLakeTileByDegree(tileInHand, degreeRotation);
 
 				System.out.println();
 
@@ -456,16 +449,58 @@ public class PlayGame {
 		}
 		return tileInHand;
 	}
+	
+	/**
+	 * The method to rotate lake tile according to the given
+	 * degree(0/90/180/270).
+	 * 
+	 * @param tileInHand
+	 *            The lake tile rotated by the degree.
+	 * @param degree
+	 *            The angle to which lake tile will be rotated.
+	 * @return The rotated lake tile according to the degree.
+	 */
+	public LakeTiles rotateLakeTileByDegree(LakeTiles tileInHand, String degree) {
+
+		if (degree.equals("90")) {
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+		} else if (degree.equals("180")) {
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+		} else if (degree.equals("270")) {
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+			tileInHand = rotateLakeTile(tileInHand);
+
+		} else if (degree.equals("0")) {
+			// do nothing
+		}
+
+		return tileInHand;
+	}
 
 	/**
-	 * This method will discard the excess Lantern cards,
-	 * if the current player has more than 12 lantern cards.
-	 * The player has two options, either to discard the lantern
-	 * cards of his choice or to perform either of the three possible dedications.
-	 * @param gameObj The GameInstance object for updating game 
-	 * elements according to user choice.
-	 * @param playing The current player of the game.
-	 * @param opt The string contain options that player can choose (Dedication/discard).
+	 * This method will discard the excess Lantern cards, if the current player
+	 * has more than 12 lantern cards. The player has two options, either to
+	 * discard the lantern cards of his choice or to perform either of the three
+	 * possible dedications.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object for updating game elements according
+	 *            to user choice.
+	 * @param playing
+	 *            The current player of the game.
+	 * @param opt
+	 *            The string contain options that player can choose
+	 *            (Dedication/discard).
 	 * @return The string contain those choices that are not used by the user.
 	 */
 	private String filterExcessLanternCards(GameInstance gameObj,
@@ -527,8 +562,9 @@ public class PlayGame {
 	/**
 	 * The method to save and exit the game according to the user choice.
 	 * 
-	 * @param gameController The GameController object to store
-	 * the game state to an XML file.
+	 * @param gameController
+	 *            The GameController object to store the game state to an XML
+	 *            file.
 	 */
 	private  void saveAndExitGame(GameController gameController) {
 		
@@ -695,9 +731,12 @@ public class PlayGame {
 	
 
 	/**
-	 * The method to remove the substring, i.e. game option, from given string 
-	 * @param string The main string that contain the value to be removed.
-	 * @param opt1 The substring to be removed from the string.
+	 * The method to remove the substring, i.e. game option, from given string
+	 * 
+	 * @param string
+	 *            The main string that contain the value to be removed.
+	 * @param opt1
+	 *            The substring to be removed from the string.
 	 * @return The updated string with given substring removed from it.
 	 */
 	private  String removeSubstring(String string, String opt1) {
@@ -724,13 +763,14 @@ public class PlayGame {
 
 	
 	/**
-	 * The method to determine the winners of the game and
-	 *  to store the winner players in a vector. If the score of two 
-	 *  players is same, then their corresponding lantern cards count
-	 *  will be checked to determine the winner.But if the lantern 
-	 *  cards are also same, then favor tokens will be counted. If 
-	 *  favor tokens are also same then both players will be winner
-	 * @param gamePlayers The array of players of the game.
+	 * The method to determine the winners of the game and to store the winner
+	 * players in a vector. If the score of two players is same, then their
+	 * corresponding lantern cards count will be checked to determine the
+	 * winner.But if the lantern cards are also same, then favor tokens will be
+	 * counted. If favor tokens are also same then both players will be winner
+	 * 
+	 * @param gamePlayers
+	 *            The array of players of the game.
 	 */
 	private static Vector<Players> validateWinner(Players[] gamePlayers) {
 		int winnerScore = 0;
@@ -860,8 +900,10 @@ public class PlayGame {
 	}
 	
 	/**
-	 * The method to display the winners of the game. 
-	 * @param winnerPlayers The array containing the winner players of the game.
+	 * The method to display the winners of the game.
+	 * 
+	 * @param winnerPlayers
+	 *            The array containing the winner players of the game.
 	 */
 	private static void displayWinner(Vector<Players> winnerPlayers) {
 
@@ -920,11 +962,14 @@ public class PlayGame {
 
 	/**
 	 * The method to check the size of the draw stack of Lake Tiles.
-	 * @param gameObj The GameInstance object for getting the draw stack of lake tiles.
-	 * @return The boolean value to determine id lake tile draw stack is empty or not.
-	 * <BR>
-	 * True : If the size is zero.
-	 * False: If the draw stack is not empty.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object for getting the draw stack of lake
+	 *            tiles.
+	 * @return The boolean value to determine id lake tile draw stack is empty
+	 *         or not. <BR>
+	 *         True : If the size is zero. False: If the draw stack is not
+	 *         empty.
 	 */
 	private static boolean checkDrawStackSize(GameInstance gameObj) {
 		if(gameObj.getGameTilesDrawPile().isEmpty()){
@@ -938,12 +983,16 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to discard the specified Lantern cards of the given player of the game.
-	 * It will ask for the lantern cards to be discarded and discard the selected cards
+	 * The method to discard the specified Lantern cards of the given player of
+	 * the game. It will ask for the lantern cards to be discarded and discard
+	 * the selected cards
+	 * 
 	 * @see getLanterCardColorRemoval
-	 * @param gameObj The GameInstance object for updating 
-	 * the lantern cards of the game board.
-	 * @param playing The current player whose lantern cards will be discarded.
+	 * @param gameObj
+	 *            The GameInstance object for updating the lantern cards of the
+	 *            game board.
+	 * @param playing
+	 *            The current player whose lantern cards will be discarded.
 	 */
 	private void discardLanternCards(GameInstance gameObj,
 			Players playing) {
@@ -1008,16 +1057,21 @@ public class PlayGame {
 	
 	
 	/**
-	 * The method to remove the lantern cards of specified color from 
-	 * the given player.The number of lantern cards will be discarded
-	 * according to the given cardCount.
-	 * @param playing The current player whose lantern cards will be discarded.
-	 * @param deleteColor The color of the lantern card to be discarded
-	 * @param gameObj The GameInstance object for updating 
-	 * the lantern cards of the game board.
-	 * @param cardCount The number of cards to be discarded
-	 * @return true if lantern cards of selected color are removed from
-	 * players lantern count and add to the game lantern count.
+	 * The method to remove the lantern cards of specified color from the given
+	 * player.The number of lantern cards will be discarded according to the
+	 * given cardCount.
+	 * 
+	 * @param playing
+	 *            The current player whose lantern cards will be discarded.
+	 * @param deleteColor
+	 *            The color of the lantern card to be discarded
+	 * @param gameObj
+	 *            The GameInstance object for updating the lantern cards of the
+	 *            game board.
+	 * @param cardCount
+	 *            The number of cards to be discarded
+	 * @return true if lantern cards of selected color are removed from players
+	 *         lantern count and add to the game lantern count.
 	 */
 	private static boolean getLanterCardColorRemoval(Players playing,
 			String deleteColor, GameInstance gameObj, int cardCount) {
@@ -1110,7 +1164,9 @@ public class PlayGame {
 
 	/**
 	 * The method to display the status of the specified player.
-	 * @param playing The player of the game.
+	 * 
+	 * @param playing
+	 *            The player of the game.
 	 */
 	private static void displayPlayerStatus(Players playing) {
 
@@ -1159,15 +1215,20 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to distribute the lantern cards to all the players
-	 * of the game except the current player of the game, whose turn is 
-	 * going on. The players will get the lantern card according to the
-	 * color of the lake tile card they are facing.
-	 * @param gameObj The GameInstance object for updating 
-	 * the lantern cards of the game board.
-	 * @param playing The current player of the game.
-	 * @param y The row of the game board.
-	 * @param x The column of the game board.
+	 * The method to distribute the lantern cards to all the players of the game
+	 * except the current player of the game, whose turn is going on. The
+	 * players will get the lantern card according to the color of the lake tile
+	 * card they are facing.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object for updating the lantern cards of the
+	 *            game board.
+	 * @param playing
+	 *            The current player of the game.
+	 * @param y
+	 *            The row of the game board.
+	 * @param x
+	 *            The column of the game board.
 	 */
 	private static void distributingLakeTilesToRestPlayers(GameInstance gameObj, Players playing, int y, int x) {
 		
@@ -1407,6 +1468,18 @@ public class PlayGame {
 	}
 		
 	
+	/**
+	 * The method to add the lantern card to current player, whose color is same
+	 * as the color matched by the current player while joining the lake tiles.
+	 * 
+	 * @param playing
+	 *            The current player of the game.
+	 * @param yourColor
+	 *            The color matched by the current player.
+	 * @param gameObj
+	 *            The GameInstance to update lantern card.
+	 * @return true if lantern card were updated in GameInstance and player.
+	 */
 	private static boolean addingLanternCardsToPlayer(Players playing,
 			String yourColor, GameInstance gameObj) {
 
@@ -1534,7 +1607,9 @@ public class PlayGame {
 
 	/**
 	 * The method to rotate the lake tile 90 Degree clockwise
-	 * @param tileInHand The lake tile which will be rotated
+	 * 
+	 * @param tileInHand
+	 *            The lake tile which will be rotated
 	 */
 	private LakeTiles rotateLakeTile(LakeTiles tileInHand) {
 
@@ -1671,9 +1746,11 @@ public class PlayGame {
 	}
 
 	/**
-	 *The method to return the right horizontal element of the game board array
+	 * The method to return the right horizontal element of the game board array
 	 * which is not empty.
-	 * @param gameObj The GameInstance object for updating game board array.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object for updating game board array.
 	 * @return right horizontal array element which is not empty.
 	 */
 	public static int getEndHorizontal(GameInstance gameObj) {
@@ -1690,8 +1767,11 @@ public class PlayGame {
 
 	/**
 	 * The method for left padding.
-	 * @param s The string to be padded.
-	 * @param n The number of time string is padded.
+	 * 
+	 * @param s
+	 *            The string to be padded.
+	 * @param n
+	 *            The number of time string is padded.
 	 * @return The padded string.
 	 */
 	public static String padRight(String s, int n) {
@@ -1700,8 +1780,11 @@ public class PlayGame {
 
 	/**
 	 * The method for right padding.
-	 * @param s The string to be padded.
-	 * @param n The number of time string is padded.
+	 * 
+	 * @param s
+	 *            The string to be padded.
+	 * @param n
+	 *            The number of time string is padded.
 	 * @return The padded string.
 	 */
 	public static String padLeft(String s, int n) {
@@ -1709,9 +1792,13 @@ public class PlayGame {
 	}
 	
 	/**
-	 * The method to display the game board and the lake tiles placed on the game board.
-	 * @param gameObj The GameInstance object for updating game board array.
-	 * @param playing The current player of the game.
+	 * The method to display the game board and the lake tiles placed on the
+	 * game board.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object for updating game board array.
+	 * @param playing
+	 *            The current player of the game.
 	 */
 	private void displayLakeTileBoard(GameInstance gameObj, Players playing) {
 
@@ -1768,11 +1855,16 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to make a dedication
-	 * @param gameObj The GameInstance object to update its elements
-	 *  according to the dedications..
-	 * @param playing The current player who is doing the dedication.
-	 * @param opt The string to choose the type of dedication.
+	 * The method to make a dedication by the player passed as a parameter. Any
+	 * one of the three options will be executed depending upon the user input.
+	 * 
+	 * @param gameObj
+	 *            The GameInstance object to update its elements according to
+	 *            the dedications.
+	 * @param playing
+	 *            The current player who is doing the dedication.
+	 * @param opt
+	 *            The string to choose the type of dedication.
 	 */
 	private void makeADedication(GameInstance gameObj, Players playing, String opt) {
 		boolean loop = true;
@@ -2098,9 +2190,15 @@ public class PlayGame {
 	}
 
 	/**
+	 * The method to update the lantern cards of GameInstance and player
+	 * according to type 3 dedication (Seven cards of different color).
+	 * 
 	 * @param playing
+	 *            The player who is doing the type 3 dedication.
 	 * @param gameObj
-	 * @return
+	 *            The GameInstance object to update its elements according to
+	 *            type 3 dedications.
+	 * @return true if type 3 dedication is successful.
 	 */
 	private static boolean getDedicationType3ColorValidationAndRemoval(
 			Players playing, GameInstance gameObj) {
@@ -2164,13 +2262,20 @@ public class PlayGame {
 	}
 
 	/**
+	 * The method to update the lantern cards of GameInstance and player
+	 * according to type 2 dedication (Three pairs of unique color).
+	 * 
 	 * @param playing
+	 *            The player who is doing the type 2 dedication.
 	 * @param colorOne
+	 *            The color of the lantern card pair to be dedicated.
 	 * @param gameObj
-	 * @return
+	 *            The GameInstance object to update its elements according to
+	 *            type 2 dedications.
+	 * @return true if type 2 dedication is successful.
 	 */
-	private static boolean getDedicationType2ColorValidationAndRemoval(Players playing, String yourColor,
- GameInstance gameObj) {
+	private static boolean getDedicationType2ColorValidationAndRemoval(
+			Players playing, String yourColor, GameInstance gameObj) {
 
 		if (yourColor.equals("Black"))
 			if (playing.getPlayerBlackLanternCardCount() > 1) {
@@ -2230,14 +2335,22 @@ public class PlayGame {
 			}
 		return false;
 	}
-
+	
 	/**
+	 * The method to update the lantern cards of GameInstance and player
+	 * according to type 1 dedication (Four cards of unique color).
+	 * 
 	 * @param playing
+	 *            The player who is doing the type 1 dedication.
+	 * @param yourColor
+	 *            The color of the lantern card pair to be dedicated.
 	 * @param gameObj
-	 * @param color1
+	 *            The GameInstance object to update its elements according to
+	 *            type 1 dedications.
+	 * @return true if type 1 dedication is successful.
 	 */
-	private static boolean getDedicationType1ColorValidationAndRemoval(Players playing, String yourColor,
- GameInstance gameObj) {
+	private static boolean getDedicationType1ColorValidationAndRemoval(
+			Players playing, String yourColor, GameInstance gameObj) {
 		if (yourColor.equals("Black"))
 			if (playing.getPlayerBlackLanternCardCount() > 3) {
 				playing.setPlayerBlackLanternCardCount(playing
@@ -2298,9 +2411,16 @@ public class PlayGame {
 
 	}
 
+	
 	/**
+	 * The method prompt player to enter lantern card color player wants to
+	 * exchange and then perform the exchange operation.
+	 * 
 	 * @param gameObj
+	 *            The GameInstance object to update its elements according to
+	 *            lantern card exchange.
 	 * @param playing
+	 *            The player who is doing the exchange.
 	 */
 	private void exchageLaternCard(GameInstance gameObj, Players playing) {
 		boolean loop = true;
@@ -2412,10 +2532,18 @@ public class PlayGame {
 		}
 
 	}
-
+	
+	
 	/**
+	 * The method to update the lantern cards of given color of GameInstance for
+	 * exchange.
+	 * 
 	 * @param gameColor
+	 *            The color of lantern card removed from GameInstance.
 	 * @param gameObj
+	 *            The GameInstance to update lantern cards.
+	 * @param yourColor
+	 *            The color of lantern card added to GameInstance.
 	 */
 	private void gameColorAugment(String gameColor, GameInstance gameObj, String yourColor) {
 		// Game lantern color Addition
@@ -2451,9 +2579,17 @@ public class PlayGame {
 
 	}
 
+	
 	/**
+	 * The method to update the lantern cards of given color of player for
+	 * exchange.
+	 * 
 	 * @param yourColor
+	 *            The color of lantern card removed from player.
 	 * @param playing
+	 *            The player to update the lantern cards.
+	 * @param gameColor
+	 *            The color of lantern card added to player.
 	 */
 	private void playerColorAugment(String yourColor, Players playing,
 			String gameColor) {
@@ -2520,9 +2656,14 @@ public class PlayGame {
 	}
 
 	/**
+	 * The method to validate if the game has at least one lantern card of
+	 * specified color to perform the exchange operation.
+	 * 
 	 * @param gameObj
+	 *            The GameInstance to update lantern cards
 	 * @param gameColor
-	 * @return
+	 *            The color exchanged by the GameInstance.
+	 * @return true if the GameInstance can exchange the lantern card.
 	 */
 	private boolean lanternColorGameValidation(GameInstance gameObj, String gameColor) {
 
@@ -2564,9 +2705,14 @@ public class PlayGame {
 	}
 
 	/**
+	 * The method to validate if the player has at least one lantern card of
+	 * specified color to perform the exchange operation.
+	 * 
 	 * @param playing
+	 *            The player who is performing the exchange operation.
 	 * @param yourColor
-	 * @return
+	 *            The color exchanged by the player.
+	 * @return true if the player can perform the exchange operation.
 	 */
 	private boolean lanternColorPlayerValidation(Players playing, String yourColor) {
 		if (yourColor.equals("Black"))
@@ -2607,10 +2753,17 @@ public class PlayGame {
 		return false;
 	}
 
+	
+	
 	/**
-	 * @param playing
-	 * @param gameObj
 	 * 
+	 * The method to switch turn to the next player of the game in clockwise
+	 * direction.
+	 * 
+	 * @param playing
+	 *            The current player of the game.
+	 * @param gameObj
+	 *            The GameInstance to retrieve players of the game.
 	 */
 	private Players updateCurrentPlayer(GameInstance gameObj, Players playing) {
 		int playerCont = gameObj.getPlayersList().length;
@@ -2629,9 +2782,14 @@ public class PlayGame {
 	}
 
 	/**
+	 * The method to validate the options(exchange/make a dedication) user can
+	 * choose during the game.
+	 * 
 	 * @param gameObj
+	 *            The GameInstance to verify if exchange or is possible or not.
 	 * @param playing
-	 * @return
+	 *            The player to verify if exchange or is possible or not.
+	 * @return The string containing the possible options.
 	 */
 	private String genValidation(GameInstance gameObj, Players playing) {
 		// Validation for Exchange a lantern
