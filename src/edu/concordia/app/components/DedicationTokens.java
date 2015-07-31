@@ -11,6 +11,7 @@ import java.util.Vector;
  * group of tokens are for four same color cards Second group of tokens
  * are for three pair of same color cards Third group of tokens are for
  * seven different color of cards Fourth group of tokens are extra
+ * 
  * @author Team E
  */
 public class DedicationTokens {
