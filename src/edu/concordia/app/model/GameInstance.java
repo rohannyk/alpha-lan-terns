@@ -4,16 +4,15 @@
 package edu.concordia.app.model;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
-
 import javax.xml.bind.annotation.XmlRootElement;
-
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 
-
+@XmlRootElement
 /**
  * GameInstance class for the Board Game object
  * 
@@ -969,6 +968,263 @@ public class GameInstance {
 	 */
 	public void setAllLakeTiles(Vector<LakeTiles> allLakeTiles) {
 		this.allLakeTiles = allLakeTiles;
+	}
+
+	/**
+	 * This method will print the game state and player state on console. Prints Number of Players, Start Player, Current Player Prints Game Lantern Cards Status, Game Dedication Tokens. Prints Available Lake Tiles in shuffled deck, Shuffled Lake Tiles. Prints Current Lake Tile Arrangement, Game available Favor Tokens. Prints Player Number, Number of favor tokens player has. Prints Lantern Cards Player Holds, Player Lake Tiles. Prints No of Lake Tiles held, Lake Tiles held, Player Dedication Tokens. Creates objects of DedicationTokens, Vector<LakeTiles>, LakeTiles, Players[]
+	 */
+	public void showTextMode() {
+		System.out.println(" ********* Game Status in Text Mode ********* ");
+		System.out.println();
+		System.out.println("Number of Players: " + getNoOfPlayers());
+		System.out.println();
+		System.out.println("Start Player: "
+				+ getGameStartPlayer().getPlayerNumber());
+		System.out.println();
+		System.out.println("Current Player: "
+				+ getPlayerCurrentTurn().getPlayerNumber());
+		System.out.println();
+		System.out.println("-----Game Lantern Cards Status-----");
+		System.out.println();
+		System.out.println("Total Lantern cards: " + getLanternCardCount());
+		System.out.println("Red Lantern Cards Left: "
+				+ getGameRedLanternCardCount());
+		System.out.println("Blue Lantern Cards Left: "
+				+ getGameBlueLanternCardCount());
+		System.out.println("Black Lantern Cards Left: "
+				+ getGameBlackLanternCardCount());
+		System.out.println("Green Lantern Cards Left: "
+				+ getGameGreenLanternCardCount());
+		System.out.println("Orange Lantern Cards Left: "
+				+ getGameOrangeLanternCardCount());
+		System.out.println("Purple Lantern Cards Left: "
+				+ getGamePurpleLanternCardCount());
+		System.out.println("White Lantern Cards Left: "
+				+ getGameWhiteLanternCardCount());
+		System.out.println();
+		System.out.println("-----Game Dedication Tokens-----");
+		System.out.println();
+		System.out.println("Next Dedication Token Four: "
+				+ getNextDedicationTokenFour());
+		System.out.println("Next Dedication Token Six: "
+				+ getNextDedicationTokenSix());
+		System.out.println("Next Dedication Token Seven: "
+				+ getNextDedicationTokenSeven());
+		System.out.println("Next Genric Dedication Token: "
+				+ getNextGenericDedicationToken());
+		System.out.println();
+		System.out.println("-----Game Dedication Tokens Count-----");
+		System.out.println();
+		DedicationTokens deTokens = getDedicationTokens();
+		System.out.println("Dedication Token Four: "
+				+ deTokens.getDedicationTokenFourSize());
+		System.out.println("Dedication Token Six: "
+				+ deTokens.getDedicationTokenSixSize());
+		System.out.println("Dedication Token Seven: "
+				+ deTokens.getDedicationTokenSevenSize());
+		System.out.println("Genric Dedication Token: "
+				+ deTokens.getGenericDedicationTokensSize());
+		System.out.println();
+		System.out.println("Available Lake Tiles in shuffled deck  : "
+				+ getGameTilesDrawPile().size());
+		System.out.println();
+		System.out.println("-----Shuffled Lake Tiles-----");
+		Vector<LakeTiles> drawTile = getGameTilesDrawPile();
+		for (int i = 0; i < drawTile.size(); i++) {
+			LakeTiles currTile = drawTile.get(i);
+			System.out.println("Lake Tile Number: " + currTile.getTilesId());
+		}
+		System.out.println();
+		System.out.println("-----Current Lake Tile Arrangement-----");
+		System.out.println();
+		Vector<LakeTiles> tileArrangement = getCurrentLakeTilesArrangement();
+		System.out.println("No of Lake Tile: " + tileArrangement.size());
+		for (Iterator<LakeTiles> iterator = tileArrangement.iterator(); iterator
+				.hasNext();) {
+			LakeTiles lakeTiles = (LakeTiles) iterator.next();
+			System.out.println("Lake Tile Id: " + lakeTiles.getTilesId()
+					+ " TC: " + lakeTiles.getTopColor() + " BC: "
+					+ lakeTiles.getBottomColor() + " LC: "
+					+ lakeTiles.getLeftColor() + " RC: "
+					+ lakeTiles.getRightColor());
+		}
+		System.out.println();
+		System.out.println("Game available Favor Tokens: "
+				+ getGameFavorToken());
+		System.out.println();
+		System.out.println("-----Players Status-----");
+		Players[] playersArray = getPlayersList();
+		for (int i = 0; i < playersArray.length; i++) {
+			Players player = playersArray[i];
+			System.out.println();
+			System.out.println("********* Player Number: "
+					+ player.getPlayerNumber() + " **********");
+			System.out.println();
+			System.out.println("Number of favor tokens player has: "
+					+ player.getPlayerFavorToken());
+			System.out.println();
+			System.out.println("-------Lantern Cards Player Holds-----");
+			System.out.println();
+			System.out.println("Total Lantern cards: "
+					+ player.getLanternCardCount());
+			System.out.println("Red Lantern Cards Left: "
+					+ player.getPlayerRedLanternCardCount());
+			System.out.println("Blue Lantern Cards Left: "
+					+ player.getPlayerBlueLanternCardCount());
+			System.out.println("Black Lantern Cards Left: "
+					+ player.getPlayerBlackLanternCardCount());
+			System.out.println("Green Lantern Cards Left: "
+					+ player.getPlayerGreenLanternCardCount());
+			System.out.println("Orange Lantern Cards Left: "
+					+ player.getPlayerOrangeLanternCardCount());
+			System.out.println("Purple Lantern Cards Left: "
+					+ player.getPlayerPurpleLanternCardCount());
+			System.out.println("White Lantern Cards Left: "
+					+ player.getPlayerWhiteLanternCardCount());
+			System.out.println();
+			System.out.println("-----Player Lake Tiles -----");
+			System.out.println();
+			Vector<LakeTiles> lakeTiles = player.getCurrentLakeTilesHold();
+			System.out.println("No of Lake Tiles held: " + lakeTiles.size());
+			for (int j = 0; j < lakeTiles.size(); j++) {
+				LakeTiles tileHolded = lakeTiles.get(j);
+				System.out
+						.println("Lake Tiles held " + tileHolded.getTilesId());
+			}
+			System.out.println();
+			System.out.println("-----Player Dedication Tokens -----");
+			DedicationTokens playerDedicationTokens = player
+					.getDedicationTokens();
+			Vector<Integer> tokenFour = playerDedicationTokens
+					.getDedicationTokenFour();
+			if (tokenFour.size() == 0) {
+				System.out.println("Primary Dedication Tokens Four: "
+						+ tokenFour.size());
+			} else {
+				for (int j = 0; j < tokenFour.size(); j++) {
+					System.out.println("Primary Dedication Tokens Four Size: "
+							+ tokenFour.size());
+					System.out.println("Primary Dedication Tokens Four: "
+							+ tokenFour.get(j));
+				}
+			}
+			Vector<Integer> tokenSix = playerDedicationTokens
+					.getDedicationTokenSix();
+			if (tokenSix.size() == 0) {
+				System.out.println("Primary Dedication Tokens Six: "
+						+ tokenSix.size());
+			} else {
+				for (int j = 0; j < tokenSix.size(); j++) {
+					System.out.println("Primary Dedication Tokens Six Size: "
+							+ tokenSix.size());
+					System.out.println("Primary Dedication Tokens Six: "
+							+ tokenSix.get(j));
+				}
+			}
+			Vector<Integer> tokenSeven = playerDedicationTokens
+					.getDedicationTokenSeven();
+			if (tokenSeven.size() == 0) {
+				System.out.println("Primary Dedication Tokens Seven: "
+						+ tokenSeven.size());
+			} else {
+				for (int j = 0; j < tokenSeven.size(); j++) {
+					System.out.println("Primary Dedication Tokens Seven Size: "
+							+ tokenSeven.size());
+					System.out.println("Primary Dedication Tokens Seven: "
+							+ tokenSeven.get(j));
+				}
+			}
+			Vector<Integer> genericToken = playerDedicationTokens
+					.getGenericDedicationTokens();
+			if (genericToken.size() == 0) {
+				System.out.println("Generic Dedication Tokens: "
+						+ genericToken.size());
+			} else {
+				for (int j = 0; j < genericToken.size(); j++) {
+					System.out.println("Generic Dedication Tokens size: "
+							+ genericToken.size());
+					System.out.println("Generic Dedication Tokens: "
+							+ genericToken.get(j));
+				}
+			}
+			System.out.println();
+			System.out.println("********* Player Number: "
+					+ player.getPlayerNumber() + " **********");
+		}
+		System.out.println();
+	}
+
+	/**
+	 * The method to update the lantern cards of given color of GameInstance for exchange.
+	 * @param gameColor The color of lantern card removed from GameInstance.
+	 * @param yourColor The color of lantern card added to GameInstance.
+	 */
+	public void gameColorAugment(String gameColor, String yourColor) {
+		if (yourColor.equals("Black"))
+			setGameBlackLanternCardCount(getGameBlackLanternCardCount() + 1);
+		if (yourColor.equals("White"))
+			setGameWhiteLanternCardCount(getGameWhiteLanternCardCount() + 1);
+		if (yourColor.equals("Blue"))
+			setGameBlueLanternCardCount(getGameBlueLanternCardCount() + 1);
+		if (yourColor.equals("Green"))
+			setGameGreenLanternCardCount(getGameGreenLanternCardCount() + 1);
+		if (yourColor.equals("Orange"))
+			setGameOrangeLanternCardCount(getGameOrangeLanternCardCount() + 1);
+		if (yourColor.equals("Red"))
+			setGameRedLanternCardCount(getGameRedLanternCardCount() + 1);
+		if (yourColor.equals("Purple"))
+			setGamePurpleLanternCardCount(getGamePurpleLanternCardCount() + 1);
+		if (gameColor.equals("Black"))
+			setGameBlackLanternCardCount(getGameBlackLanternCardCount() - 1);
+		if (gameColor.equals("White"))
+			setGameWhiteLanternCardCount(getGameWhiteLanternCardCount() - 1);
+		if (gameColor.equals("Blue"))
+			setGameBlueLanternCardCount(getGameBlueLanternCardCount() - 1);
+		if (gameColor.equals("Green"))
+			setGameGreenLanternCardCount(getGameGreenLanternCardCount() - 1);
+		if (gameColor.equals("Orange"))
+			setGameOrangeLanternCardCount(getGameOrangeLanternCardCount() - 1);
+		if (gameColor.equals("Red"))
+			setGameRedLanternCardCount(getGameRedLanternCardCount() - 1);
+		if (gameColor.equals("Purple"))
+			setGamePurpleLanternCardCount(getGamePurpleLanternCardCount() - 1);
+	}
+
+	/**
+	 * The method to validate if the game has at least one lantern card of specified color to perform the exchange operation.
+	 * @param gameColor The color exchanged by the GameInstance.
+	 * @return  true if the GameInstance can exchange the lantern card.
+	 */
+	public boolean lanternColorGameValidation(String gameColor) {
+		if (gameColor.equals("Black"))
+			if (getGameBlackLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("White"))
+			if (getGameWhiteLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Blue"))
+			if (getGameBlueLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Green"))
+			if (getGameGreenLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Orange"))
+			if (getGameOrangeLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Red"))
+			if (getGameRedLanternCardCount() > 0) {
+				return true;
+			}
+		if (gameColor.equals("Purple"))
+			if (getGamePurpleLanternCardCount() > 0) {
+				return true;
+			}
+		return false;
 	}
 	
 }

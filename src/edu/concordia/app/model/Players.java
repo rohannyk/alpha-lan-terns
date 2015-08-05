@@ -4,17 +4,18 @@
 package edu.concordia.app.model;
 
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Vector;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-
+import javax.xml.bind.annotation.XmlRootElement;
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.components.LanternCards;
 import edu.concordia.app.components.LanternCards.Color;
 import edu.concordia.app.components.Tokens;
 
+@XmlRootElement
 /**
  * This class contains information about the lantern game players.
  * 
@@ -586,6 +587,535 @@ public class Players {
 	 */
 	public void setPlayerPosition(String playerPosition) {
 		this.playerPosition = playerPosition;
+	}
+
+	/**
+	 * The method to make a dedication by the player passed as a parameter. Any one of the three options will be executed depending upon the user input.
+	 * @param gameObj The GameInstance object to update its elements according to the dedications.
+	 * @param opt The string to choose the type of dedication.
+	 * @param scan
+	 */
+	public void makeADedication(GameInstance gameObj, String opt, Scanner scan) {
+		boolean loop = true;
+		while (loop) {
+			if (opt.contains("type1")) {
+				System.out
+						.println("1 - Type 1 Dedication (Four cards of unique color.)");
+			}
+			if (opt.contains("type2")) {
+				System.out
+						.println("2 - Type 2 Dedication (Three pairs of unique color)");
+			}
+			if (opt.contains("type3")) {
+				System.out
+						.println("3 - Type 3 Dedication (Seven cards of different color.)");
+			}
+			int selectionType = scan.nextInt();
+			switch (selectionType) {
+			case 1:
+				if (opt.contains("type1")) {
+					loop = false;
+					System.out.println("Your Lantern Cards Details ");
+					if (getPlayerBlackLanternCardCount() > 3)
+						System.out.println("Number of Black Lantern Card :"
+								+ getPlayerBlackLanternCardCount());
+					if (getPlayerWhiteLanternCardCount() > 3)
+						System.out.println("Number of White Lantern Card :"
+								+ getPlayerWhiteLanternCardCount());
+					if (getPlayerBlueLanternCardCount() > 3)
+						System.out.println("Number of Blue Lantern Card :"
+								+ getPlayerBlueLanternCardCount());
+					if (getPlayerGreenLanternCardCount() > 3)
+						System.out.println("Number of Green Lantern Card :"
+								+ getPlayerGreenLanternCardCount());
+					if (getPlayerOrangeLanternCardCount() > 3)
+						System.out.println("Number of Orange Lantern Card :"
+								+ getPlayerOrangeLanternCardCount());
+					if (getPlayerPurpleLanternCardCount() > 3)
+						System.out.println("Number of Purple Lantern Card :"
+								+ getPlayerPurpleLanternCardCount());
+					if (getPlayerRedLanternCardCount() > 3)
+						System.out.println("Number of Red Lantern Card :"
+								+ getPlayerRedLanternCardCount());
+					System.out.println("Input color of lantern card ");
+					String color1 = scan.next();
+					boolean type1Val = PlayGame
+							.getDedicationType1ColorValidationAndRemoval(this,
+									color1, gameObj);
+					if (type1Val) {
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationVal = dedicationObj
+								.getDedicationTokenFour();
+						if (dedicationVal.size() > 0) {
+							int dedicationValue = dedicationVal.remove(0);
+							DedicationTokens playerDedicationObj = getDedicationTokens();
+							playerDedicationObj.getDedicationTokenFour().add(
+									dedicationValue);
+							if (dedicationVal.isEmpty()) {
+								gameObj.setNextDedicationTokenFour(-1);
+							} else {
+								gameObj.setNextDedicationTokenFour(dedicationVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genDedicationVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genDedicationVal.size() > 0) {
+								int genericValue = genDedicationVal.remove(0);
+								DedicationTokens playerDedicationObj = getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue);
+							}
+						}
+					} else {
+						System.out.println("Wrong color choice");
+					}
+				}
+				break;
+			case 2:
+				if (opt.contains("type2")) {
+					loop = false;
+					int stepTwoColorCount = 0;
+					System.out.println("Your Lantern Cards Details ");
+					if (getPlayerBlackLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Black Lantern Card :"
+								+ getPlayerBlackLanternCardCount());
+					}
+					if (getPlayerWhiteLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of White Lantern Card :"
+								+ getPlayerWhiteLanternCardCount());
+					}
+					if (getPlayerBlueLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Blue Lantern Card :"
+								+ getPlayerBlueLanternCardCount());
+					}
+					if (getPlayerGreenLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Green Lantern Card :"
+								+ getPlayerGreenLanternCardCount());
+					}
+					if (getPlayerOrangeLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Orange Lantern Card :"
+								+ getPlayerOrangeLanternCardCount());
+					}
+					if (getPlayerPurpleLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Purple Lantern Card :"
+								+ getPlayerPurpleLanternCardCount());
+					}
+					if (getPlayerRedLanternCardCount() > 1) {
+						stepTwoColorCount += 1;
+						System.out.println("Number of Red Lantern Card :"
+								+ getPlayerRedLanternCardCount());
+					}
+					if (stepTwoColorCount > 2) {
+						boolean colorLoop1 = true;
+						while (colorLoop1) {
+							System.out
+									.println("Input first color of lantern card: ");
+							String colorOne = scan.next();
+							boolean type2ValOne = PlayGame
+									.getDedicationType2ColorValidationAndRemoval(
+											this, colorOne, gameObj);
+							if (type2ValOne) {
+								colorLoop1 = false;
+							} else {
+								colorLoop1 = true;
+							}
+						}
+						boolean colorLoop2 = true;
+						while (colorLoop2) {
+							System.out
+									.println("Input second color of lantern card: ");
+							String colorTwo = scan.next();
+							boolean type2ValTwo = PlayGame
+									.getDedicationType2ColorValidationAndRemoval(
+											this, colorTwo, gameObj);
+							if (type2ValTwo) {
+								colorLoop2 = false;
+							} else {
+								colorLoop2 = true;
+							}
+						}
+						boolean colorLoop3 = true;
+						while (colorLoop3) {
+							System.out
+									.println("Input third color of lantern card ");
+							String colorThree = scan.next();
+							boolean type2ValThree = PlayGame
+									.getDedicationType2ColorValidationAndRemoval(
+											this, colorThree, gameObj);
+							if (type2ValThree) {
+								colorLoop3 = false;
+							} else {
+								colorLoop3 = true;
+							}
+						}
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationSixVal = dedicationObj
+								.getDedicationTokenSix();
+						if (dedicationSixVal.size() > 0) {
+							int dedicationSixValue = dedicationSixVal.remove(0);
+							DedicationTokens playerDedicationObj = getDedicationTokens();
+							playerDedicationObj.getDedicationTokenSix().add(
+									dedicationSixValue);
+							if (dedicationSixVal.isEmpty()) {
+								gameObj.setNextDedicationTokenSix(-1);
+							} else {
+								gameObj.setNextDedicationTokenSix(dedicationSixVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genDedicationVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genDedicationVal.size() > 0) {
+								int genericValue = genDedicationVal.remove(0);
+								DedicationTokens playerDedicationObj = getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue);
+							}
+						}
+					} else {
+						break;
+					}
+				}
+				break;
+			case 3:
+				if (opt.contains("type3")) {
+					loop = false;
+					int stepThreeColorCount = 0;
+					System.out.println("Your Lantern Cards Details ");
+					if (getPlayerBlackLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Black Lantern Card :"
+								+ getPlayerBlackLanternCardCount());
+					}
+					if (getPlayerWhiteLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of White Lantern Card :"
+								+ getPlayerWhiteLanternCardCount());
+					}
+					if (getPlayerBlueLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Blue Lantern Card :"
+								+ getPlayerBlueLanternCardCount());
+					}
+					if (getPlayerGreenLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Green Lantern Card :"
+								+ getPlayerGreenLanternCardCount());
+					}
+					if (getPlayerOrangeLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Orange Lantern Card :"
+								+ getPlayerOrangeLanternCardCount());
+					}
+					if (getPlayerPurpleLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Purple Lantern Card :"
+								+ getPlayerPurpleLanternCardCount());
+					}
+					if (getPlayerRedLanternCardCount() > 0) {
+						stepThreeColorCount += 1;
+						System.out.println("Number of Red Lantern Card :"
+								+ getPlayerRedLanternCardCount());
+					}
+					if (stepThreeColorCount == 7) {
+						boolean type3Val = PlayGame
+								.getDedicationType3ColorValidationAndRemoval(
+										this, gameObj);
+						if (type3Val) {
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSevenVal = dedicationObj
+									.getDedicationTokenSeven();
+							if (dedicationSevenVal.size() > 0) {
+								int dedicationSevenValue = dedicationSevenVal
+										.remove(0);
+								DedicationTokens playerDedicationObj = getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSeven()
+										.add(dedicationSevenValue);
+								if (dedicationSevenVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSeven(-1);
+								} else {
+									gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genGenericVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genGenericVal.size() > 0) {
+									int genericValue = genGenericVal.remove(0);
+									DedicationTokens playerDedicationObj = getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue);
+								}
+							}
+						}
+					} else {
+						break;
+					}
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	/**
+	 * The method prompt player to enter lantern card color player wants to exchange and then perform the exchange operation.
+	 * @param gameObj The GameInstance object to update its elements according to lantern card exchange.
+	 * @param scan
+	 * @param playGame
+	 */
+	public void exchageLaternCard(GameInstance gameObj, Scanner scan,
+			PlayGame playGame) {
+		boolean loop = true;
+		String yourColor = "";
+		String gameColor = "";
+		while (loop) {
+			System.out.println();
+			System.out.println("Number of your Favor "
+					+ "tokens present currently = " + getPlayerFavorToken());
+			System.out.println();
+			System.out.println("Your Lantern Cards Details ");
+			System.out.println("Number of Black Lantern Card :"
+					+ getPlayerBlackLanternCardCount());
+			System.out.println("Number of White Lantern Card :"
+					+ getPlayerWhiteLanternCardCount());
+			System.out.println("Number of Blue Lantern Card :"
+					+ getPlayerBlueLanternCardCount());
+			System.out.println("Number of Green Lantern Card :"
+					+ getPlayerGreenLanternCardCount());
+			System.out.println("Number of Orange Lantern Card :"
+					+ getPlayerOrangeLanternCardCount());
+			System.out.println("Number of Purple Lantern Card :"
+					+ getPlayerPurpleLanternCardCount());
+			System.out.println("Number of Red Lantern Card :"
+					+ getPlayerRedLanternCardCount());
+			System.out.println("Number of favor tokens in game = "
+					+ gameObj.getGameFavorToken());
+			System.out.println();
+			System.out.println("Game Lantern Cards Details ");
+			System.out.println();
+			System.out.println("Number of Black Lantern Card :"
+					+ gameObj.getGameBlackLanternCardCount());
+			System.out.println("Number of White Lantern Card :"
+					+ gameObj.getGameWhiteLanternCardCount());
+			System.out.println("Number of Blue Lantern Card :"
+					+ gameObj.getGameBlueLanternCardCount());
+			System.out.println("Number of Green Lantern Card :"
+					+ gameObj.getGameGreenLanternCardCount());
+			System.out.println("Number of Orange Lantern Card :"
+					+ gameObj.getGameOrangeLanternCardCount());
+			System.out.println("Number of Purple Lantern Card :"
+					+ gameObj.getGamePurpleLanternCardCount());
+			System.out.println("Number of Red Lantern Card :"
+					+ gameObj.getGameRedLanternCardCount());
+			System.out.println("Which your color do you want to give: ");
+			yourColor = scan.next();
+			loop = playGame.lanternColorPlayerValidation(this, yourColor);
+			if (loop == true) {
+				loop = false;
+			} else {
+				System.out.println("Please enter your Lantern "
+						+ "card's valid color ");
+				loop = true;
+				continue;
+			}
+			System.out.println("Which Game color do you want to get: ");
+			gameColor = scan.next();
+			loop = playGame.lanternColorGameValidation(gameObj, gameColor);
+			if (loop == true) {
+				loop = false;
+			} else {
+				System.out.println("Please enter game Lantern"
+						+ " card's valid color ");
+				loop = true;
+				continue;
+			}
+		}
+		if (!loop) {
+			setPlayerFavorToken(getPlayerFavorToken() - 2);
+			gameObj.setGameFavorToken(gameObj.getGameFavorToken() + 2);
+			playGame.playerColorAugment(yourColor, this, gameColor);
+			playGame.gameColorAugment(gameColor, gameObj, yourColor);
+		}
+	}
+
+	/**
+	 * The method to display the status of the specified player.
+	 */
+	public void displayPlayerStatus() {
+		System.out.println();
+		System.out.println("******** Player number " + getPlayerNumber()
+				+ " status ********");
+		System.out.println();
+		System.out.println("Player position: " + getPlayerPosition());
+		System.out.println();
+		System.out.println("Total Lantern cards: " + getLanternCardCount());
+		System.out.println();
+		System.out.println("Red Lantern cards: "
+				+ getPlayerRedLanternCardCount());
+		System.out.println("Black Lantern cards: "
+				+ getPlayerBlackLanternCardCount());
+		System.out.println("Blue Lantern cards: "
+				+ getPlayerBlueLanternCardCount());
+		System.out.println("Green Lantern cards: "
+				+ getPlayerGreenLanternCardCount());
+		System.out.println("Purple Lantern cards: "
+				+ getPlayerPurpleLanternCardCount());
+		System.out.println("White Lantern cards: "
+				+ getPlayerWhiteLanternCardCount());
+		System.out.println("Orange Lantern cards: "
+				+ getPlayerOrangeLanternCardCount());
+		System.out.println("Total Favor tokens: " + getPlayerFavorToken());
+		System.out.println("************************************");
+		System.out.println();
+	}
+
+	/**
+	 * The method to update the lantern cards of given color of player for exchange.
+	 * @param yourColor The color of lantern card removed from player.
+	 * @param gameColor The color of lantern card added to player.
+	 */
+	public void playerColorAugment(String yourColor, String gameColor) {
+		if (yourColor.equals("Black")) {
+			setPlayerBlackLanternCardCount(getPlayerBlackLanternCardCount() - 1);
+		}
+		if (yourColor.equals("White")) {
+			setPlayerWhiteLanternCardCount(getPlayerWhiteLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Blue")) {
+			setPlayerBlueLanternCardCount(getPlayerBlueLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Green")) {
+			setPlayerGreenLanternCardCount(getPlayerGreenLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Orange")) {
+			setPlayerOrangeLanternCardCount(getPlayerOrangeLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Red")) {
+			setPlayerRedLanternCardCount(getPlayerRedLanternCardCount() - 1);
+		}
+		if (yourColor.equals("Purple")) {
+			setPlayerPurpleLanternCardCount(getPlayerPurpleLanternCardCount() - 1);
+		}
+		if (gameColor.equals("Black")) {
+			setPlayerBlackLanternCardCount(getPlayerBlackLanternCardCount() + 1);
+		}
+		if (gameColor.equals("White")) {
+			setPlayerWhiteLanternCardCount(getPlayerWhiteLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Blue")) {
+			setPlayerBlueLanternCardCount(getPlayerBlueLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Green")) {
+			setPlayerGreenLanternCardCount(getPlayerGreenLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Orange")) {
+			setPlayerOrangeLanternCardCount(getPlayerOrangeLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Red")) {
+			setPlayerRedLanternCardCount(getPlayerRedLanternCardCount() + 1);
+		}
+		if (gameColor.equals("Purple")) {
+			setPlayerPurpleLanternCardCount(getPlayerPurpleLanternCardCount() + 1);
+		}
+	}
+
+	/**
+	 * The method to validate if the player has at least one lantern card of specified color to perform the exchange operation.
+	 * @param yourColor The color exchanged by the player.
+	 * @return  true if the player can perform the exchange operation.
+	 */
+	public boolean lanternColorPlayerValidation(String yourColor) {
+		if (yourColor.equals("Black"))
+			if (getPlayerBlackLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("White"))
+			if (getPlayerWhiteLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("Blue"))
+			if (getPlayerBlueLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("Green"))
+			if (getPlayerGreenLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("Orange"))
+			if (getPlayerOrangeLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("Red"))
+			if (getPlayerRedLanternCardCount() > 0) {
+				return true;
+			}
+		if (yourColor.equals("Purple"))
+			if (getPlayerPurpleLanternCardCount() > 0) {
+				return true;
+			}
+		return false;
+	}
+
+	/**
+	 * The method to discard the specified Lantern cards of the given player of the game. It will ask for the lantern cards to be discarded and discard the selected cards
+	 * @see getLanterCardColorRemoval
+	 * @param gameObj The GameInstance object for updating the lantern cards of the game board.
+	 * @param scan
+	 */
+	public void discardLanternCards(GameInstance gameObj, Scanner scan) {
+		System.out.println("-------Lantern Cards Player Holds-----");
+		System.out.println();
+		System.out.println("Red Lantern Cards Left: "
+				+ getPlayerRedLanternCardCount());
+		System.out.println("Blue Lantern Cards Left: "
+				+ getPlayerBlueLanternCardCount());
+		System.out.println("Black Lantern Cards Left: "
+				+ getPlayerBlackLanternCardCount());
+		System.out.println("Green Lantern Cards Left: "
+				+ getPlayerGreenLanternCardCount());
+		System.out.println("Orange Lantern Cards Left: "
+				+ getPlayerOrangeLanternCardCount());
+		System.out.println("Purple Lantern Cards Left: "
+				+ getPlayerPurpleLanternCardCount());
+		System.out.println("White Lantern Cards Left: "
+				+ getPlayerWhiteLanternCardCount());
+		System.out.println();
+		boolean loopCheck = true;
+		while (loopCheck) {
+			System.out.println("Lantern cards count: " + getLanternCardCount());
+			System.out.println("Which color you want to discard?");
+			System.out.println("Black/Blue/White/Green/Orange/Red/Purple");
+			System.out.println();
+			System.out.print("Please enter your choice:");
+			String deleteColor = scan.next();
+			System.out.print("Please enter the number of"
+					+ " cards you want to discard:");
+			int deleteCardCount = scan.nextInt();
+			boolean removeResult = PlayGame.getLanterCardColorRemoval(this,
+					deleteColor, gameObj, deleteCardCount);
+			if (removeResult) {
+				if (getLanternCardCount() > 12) {
+					loopCheck = true;
+				} else {
+					loopCheck = false;
+				}
+			}
+		}
 	}
 
 }

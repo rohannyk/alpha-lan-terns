@@ -214,5 +214,20 @@ public class LakeTiles {
 	public void setPlatform(boolean platform) {
 		this.platform = platform;
 	}
+
+	/**
+	 * The method to rotate the lake tile 90 Degree clockwise
+	 */
+	public LakeTiles rotateLakeTile() {
+		String TC = getTopColor();
+		String BC = getBottomColor();
+		String RC = getRightColor();
+		String LC = getLeftColor();
+		setBottomColor(RC);
+		setLeftColor(BC);
+		setTopColor(LC);
+		setRightColor(TC);
+		return this;
+	}
 	
 }
