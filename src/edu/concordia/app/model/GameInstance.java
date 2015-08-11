@@ -8,9 +8,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
+import edu.concordia.app.strategy.FriendlyPlayerStrategy;
+import edu.concordia.app.strategy.GreedyPlayerStrategy;
+import edu.concordia.app.strategy.NormalPlayerStrategy;
+import edu.concordia.app.strategy.RandomPlayerStrategy;
+import edu.concordia.app.strategy.UnfriendlyPlayerStrategy;
 
 @XmlRootElement
 /**
@@ -27,6 +34,8 @@ public class GameInstance {
 	private int defaultLanternCardSize;
 	//tiles vector to get all tiles details by id
 	private Vector<LakeTiles> allLakeTiles = new Vector<LakeTiles>();
+	
+	private Vector<String> playerTypes;
 	
 	//@XmlElement
 	/**
@@ -172,10 +181,14 @@ public class GameInstance {
 	 * sets game configuration, number of players, default lantern card size
 	 * initializes game data.
 	 */
-	public GameInstance(GameConfiguration config) {
+	public GameInstance(GameConfiguration config, Vector<String> playerTypes) {
+		
 		this.config = config;
 		this.noOfPlayers = config.NUM_OF_PLAYERS;
 		this.defaultLanternCardSize = config.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR;
+		
+		this.playerTypes = playerTypes;
+		
 		//gameTileSuite = config.GAME_TOTAL_TILE_SUITE;
 		//gameFavorTokens = new FavorTokens();
 		
@@ -205,13 +218,19 @@ public class GameInstance {
 		initializeDedicationTokens();
 		
 		//shuffle lake tiles
-		Vector<LakeTiles> shuffledTiles= shuffleTiles(gameTileSuite);
+		Vector<LakeTiles> shuffledTiles = shuffleTiles(gameTileSuite);
 		
-		//deal lake tiles to each player
-		Vector<LakeTiles> shuffledTilesAfterDeal = dealLakeTileCards(shuffledTiles);
+		//System.out.println("shuffled tiles "+shuffledTiles.size());
 		
 		//create draw pile of Lake tiles according to no of players
-		gameTilesDrawPile = initializeDrawPileTiles(shuffledTilesAfterDeal);
+		Vector<LakeTiles> filteredExcessShuffledTiles = initializeDrawPileTiles(shuffledTiles);
+		
+		//System.out.println("filtered shuffled tiles "+filteredExcessShuffledTiles.size());
+		
+		//deal lake tiles to each player
+		gameTilesDrawPile = dealLakeTileCards(filteredExcessShuffledTiles);
+		
+		//System.out.println("draw pile shuffled tiles "+gameTilesDrawPile.size());
 		
 		//reveal all color of start tile and set face color to each player
 		playStartTile(gameStartTile);
@@ -349,22 +368,40 @@ public class GameInstance {
 	/**
 	 * This method initializes the players of the game.
 	 */
-	private void initializePlayers(){
-		
+	private void initializePlayers() {
+
 		playersList = new Players[config.NUM_OF_PLAYERS];
-		
-		if(playersList.length == 2){
-			playersList[0] = new Players(config,1, playerPositions[0]);
-			playersList[1] = new Players(config,2, playerPositions[2]);
+
+		if (playersList.length == 2) {
+			playersList[0] = new Players(config, 1, playerPositions[0]);
+			playersList[1] = new Players(config, 2, playerPositions[2]);
 		}
-		
-		else{
+
+		else {
 			for (int i = 0; i < playersList.length; i++) {
-				playersList[i] = new Players(config,i+1, playerPositions[i]);
+				playersList[i] = new Players(config, i + 1, playerPositions[i]);
 			}
-		}		
-		
-}
+		}
+
+		// set player strategy.
+		for (int i = 0; i < playersList.length; i++) {
+			String pStrategy = playerTypes.get(i);
+
+			if (pStrategy.equals("Greedy")) {
+				playersList[i].setStrategy(new GreedyPlayerStrategy(this));
+			} else if (pStrategy.equals("Unfriendly")) {
+				playersList[i].setStrategy(new UnfriendlyPlayerStrategy(this));
+			} else if (pStrategy.equals("Random")) {
+				playersList[i].setStrategy(new RandomPlayerStrategy(this));
+			} else if (pStrategy.equals("Friendly")) {
+				playersList[i].setStrategy(new FriendlyPlayerStrategy(this));
+			} else if (pStrategy.equals("Human")) {
+				playersList[i].setStrategy(new NormalPlayerStrategy(this));
+			}
+
+		}
+
+	}
 	/**
 	 * This method returns the lantern card count for each color of the board.
 	 * @return gameBlackLanternCardCount, gameBlueLanternCardCount, 
@@ -526,7 +563,7 @@ public class GameInstance {
 	 */
 	private int getRandomNumber(int playerNum){
 		
-		Random randomNumbers=new Random(0);
+		Random randomNumbers = new Random(0);
 				
 		int random = randomNumbers.nextInt(playerNum);  //number between 0 to 3
 		
