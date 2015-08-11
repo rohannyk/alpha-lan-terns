@@ -1162,7 +1162,7 @@ public class Players {
 		
 	}
 
-	public void playMove(Players playing, GameInstance gameObjs, String option)
+	/*public void playMove(Players playing, GameInstance gameObjs, String option)
 	{
 		if(playing instanceof GreedyPlayer)
 		{
@@ -1181,7 +1181,7 @@ public class Players {
 			playing = HumanPlayer.makeAMove(playing, gameObjs, option);
 		}
 		
-	}
+	}*/
 
 	/**
 	 * The method to validate the options(exchange/make a dedication) user can choose during the game.
