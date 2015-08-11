@@ -17,7 +17,7 @@ import edu.concordia.app.model.Players;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author lovepreet
+ * @author Team E
  *
  */
 public class UnfriendlyPlayerStrategy extends PlayerStrategy {
