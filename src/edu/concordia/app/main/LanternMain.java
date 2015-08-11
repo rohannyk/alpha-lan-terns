@@ -3,11 +3,17 @@
  */
 package edu.concordia.app.main;
 
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Vector;
 
+import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.controller.GameController;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
+import edu.concordia.app.model.NCardGamePlay;
+import edu.concordia.app.model.NHonorPointsGamePlay;
+import edu.concordia.app.model.NormalGamePlay;
 import edu.concordia.app.model.PlayGame;
 
 /**
@@ -28,6 +34,8 @@ public class LanternMain {
 	private static final long serialVersionUID = 2550694388930175952L;
 
 	private static int playerNumber;
+	
+	
 
 	/**
 	 * Default constructor for an LanternMain.
@@ -46,6 +54,8 @@ public class LanternMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		PlayGame pGame;
 
 		// object of LanternMain class.
 		LanternMain mainObj = new LanternMain();
@@ -69,14 +79,138 @@ public class LanternMain {
 			if (response.equals("0")) {
 
 				int playerNumber = mainObj.getInputNoOfPlayers();
+				
+				System.out.println();  //for space
+				
+				//set player type in vector
+				Vector<String> playerTypes = mainObj.getPlayerTypeArray(playerNumber);
 
 				System.out.println();
 
 				GameConfiguration config = new GameConfiguration(playerNumber);
 
-				GameInstance gameObj = new GameInstance(config);
-
+				GameInstance gameObj = new GameInstance(config, playerTypes);
+				
 				gameController = new GameController(config, gameObj);
+				
+				System.out.println("How you want to end the game?");
+				
+				System.out.println("1: Normal game end.");
+				
+				System.out.println("2: N Lake tile game end.");
+				
+				System.out.println("3: N Honor points game end.");
+				
+				System.out.print("Please enter your choice: ");
+				
+				int endChoice = scan.nextInt();
+				
+				switch (endChoice) {
+				case 1:
+
+					pGame = new NormalGamePlay(gameObj, gameController);
+					break;
+				
+				case 2:
+					
+					int totalTiles = gameObj.getGameTilesDrawPile().size();
+					
+					int playerTiles = 3*playerNumber; //tiles deal to all player
+					
+					int maxInput = (totalTiles+playerTiles)/playerNumber;
+					
+					//System.out.println(maxInput);
+					
+					boolean cardLoop = true;
+					
+					int tileChoice = 0;
+
+					while (cardLoop) {
+						System.out.println("Please enter No. of Laketiles "
+								+ "each player will place(between 2 and "
+								+ maxInput + ").");
+						
+						tileChoice = scan.nextInt();
+						
+						if(tileChoice <= 4 || tileChoice >= 2){
+							cardLoop = false;
+						}
+					}
+										
+
+					pGame = new NCardGamePlay(gameObj, gameController, tileChoice);
+					break;
+				
+				case 3:
+					
+					DedicationTokens dedicationTokens = gameObj.getDedicationTokens();
+					
+					Vector<Integer> fourValues = dedicationTokens.getDedicationTokenFour();
+					Vector<Integer> sixValues = dedicationTokens.getDedicationTokenSix();
+					Vector<Integer> sevenValues = dedicationTokens.getDedicationTokenSeven();
+					Vector<Integer> genericValues = dedicationTokens.getGenericDedicationTokens();
+					
+					int totalPoints = 0;
+					
+					for (Iterator<Integer> iterator = fourValues.iterator(); iterator
+							.hasNext();) {
+						Integer integer = (Integer) iterator.next();
+						totalPoints = totalPoints + integer;
+						
+					}
+					
+					for (Iterator<Integer> iterator = sixValues.iterator(); iterator
+							.hasNext();) {
+						Integer integer = (Integer) iterator.next();
+						totalPoints = totalPoints + integer;
+						
+					}
+					
+					for (Iterator<Integer> iterator = sevenValues.iterator(); iterator
+							.hasNext();) {
+						Integer integer = (Integer) iterator.next();
+						totalPoints = totalPoints + integer;
+						
+					}
+					
+					for (Iterator<Integer> iterator = genericValues.iterator(); iterator
+							.hasNext();) {
+						Integer integer = (Integer) iterator.next();
+						totalPoints = totalPoints + integer;
+						
+					}
+					
+					System.out.println("total points: "+totalPoints);
+					
+					int maxPointInput = totalPoints/playerNumber;
+					//System.out.println(maxPointInput);					
+					
+					boolean pointLoop = true;
+					
+					int pointChoice = 0;
+
+					while (pointLoop) {
+						System.out.println("Please enter No. of Honor points "
+								+ "winner should have(between 4 and "
+								+ maxPointInput + ").");
+						
+						pointChoice = scan.nextInt();
+						
+						if(pointChoice <= maxPointInput || pointChoice >= 4){
+							pointLoop = false;
+						}
+					}
+					
+					pGame = new NHonorPointsGamePlay(gameObj, gameController, pointChoice);
+					break;
+
+				default:
+					
+					pGame = new NormalGamePlay(gameObj, gameController);
+					break;
+				}
+
+				
 
 				gameController.showTextMode(gameObj);
 
@@ -90,8 +224,8 @@ public class LanternMain {
 				gameObj.GameBoard[36][36] = 0;
 
 				// method to play game
-
-				new PlayGame(gameObj, gameController).gameStart(scan);
+				pGame.gameStart(scan);
+				//new PlayGame(gameObj, gameController).gameStart(scan);
 
 				choiceInitial = false;
 
@@ -109,7 +243,8 @@ public class LanternMain {
 				} else {
 					gameController.showTextMode(instance);
 
-					new PlayGame(instance, gameController).gameStart(scan);
+					//pGame.gameStart(scan);
+					//new PlayGame(instance, gameController).gameStart(scan);
 
 				}
 				choiceInitial = false;
@@ -127,12 +262,68 @@ public class LanternMain {
 	}
 
 	/**
+	 * @param playerNumber2 
+	 * @return
+	 */
+	private Vector<String> getPlayerTypeArray(int playerNumber) {
+		
+		Vector<String> playerTypes = new Vector<String>();
+		
+		for (int i = 0; i < playerNumber; i++) {
+			
+			System.out.println("Please enter the player type (0-Greedy/"
+					+ "1-Unfriendly/2-Random/3-Friendly/4-Human).");
+			
+			System.out.println("Enter type for player "+(i+1));
+			System.out.print(" your choice: ");
+			
+			int typeChoice = scan.nextInt();
+			
+			switch (typeChoice) {
+			
+			case 0:
+				
+				playerTypes.add("Greedy");
+				break;
+
+			case 1:
+				
+				playerTypes.add("Unfriendly");
+				break;
+				
+			case 2:
+	
+				playerTypes.add("Random");
+				break;
+			
+			case 3:
+				
+				playerTypes.add("Friendly");
+				break;
+				
+			case 4:
+	
+				playerTypes.add("Human");
+				break;
+				
+			default:
+				playerTypes.add("Human");
+				break;
+			}
+			System.out.println();  //for space
+		}		
+		
+		return playerTypes;
+	}
+
+	/**
 	 * @return The scanner object to be used in other class. The static scanner
 	 *         object to get user input.
 	 */
-	static String getValue() {
+	public static Scanner getValue() {
 
-		return scan.next();
+		return scan;
+		//return scan.next();
 	}
 
 	/**
