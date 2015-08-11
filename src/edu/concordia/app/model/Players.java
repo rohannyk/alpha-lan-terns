@@ -1,5 +1,5 @@
 /**
- * 
+ * Players Class
  */
 package edu.concordia.app.model;
 
