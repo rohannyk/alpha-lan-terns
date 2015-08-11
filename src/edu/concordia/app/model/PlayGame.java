@@ -10,6 +10,7 @@ import java.util.Vector;
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.controller.GameController;
+import edu.concordia.app.main.LanternMain;
 import edu.concordia.app.view.LanternGameView;
 
 /**
@@ -17,12 +18,12 @@ import edu.concordia.app.view.LanternGameView;
  * @author Team E
  *
  */
-public class PlayGame {
+public abstract class PlayGame {
 	
 	/**
 	 * The instance variable of type GameInstance.
 	 */
-	private GameInstance gameObj;
+	private static GameInstance gameObj;
 	
 	/**
 	 * The instance variable of type GameController.
@@ -32,7 +33,7 @@ public class PlayGame {
 	/**
 	 * The instance variable of type Scanner.
 	 */
-	private Scanner scan;
+	private static Scanner scan = LanternMain.getValue();
 	
 	/**
 	 * 
@@ -51,13 +52,15 @@ public class PlayGame {
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 	}
+	
+	public abstract void gameStart(Scanner scan);
 
 	/**
 	 * The main method to play game.  
 	 * @param scan The Scanner object for getting 
 	 * input through console.  
 	 */
-	public void gameStart(Scanner scan) {
+	/*public void gameStart(Scanner scan) {
 
 		this.scan = scan;
 
@@ -85,9 +88,9 @@ public class PlayGame {
 			// int stackSize = checkDrawStackSize(gameObj);
 
 			// break loop if no lake tile in draw stack
-			/*
+			
 			 * if(stackSize == 0){ break; }
-			 */
+			 
 
 			//gameObj.getGameTilesDrawPile().removeAllElements();
 			
@@ -110,7 +113,7 @@ public class PlayGame {
 			System.out.println("Please enter you choice:");
 			System.out.println("--------------------------");
 
-			String opt = genValidation(gameObj, playing);
+			String opt = playing.genValidation(gameObj);
 
 			if(exchangeRun){
 				// remove exchange substring from opt string
@@ -140,232 +143,28 @@ public class PlayGame {
 			System.out.print("Player " + playing.getPlayerNumber()
 					+ " choice: ");
 
-			int optPlay = scan.nextInt();
-
-			System.out.println(); // for spacing
-
-			switch (optPlay) {
+			//playing.playMove(playing, gameObj, opt);
 			
-			case 0:
-				if (!opt.contains("exchange")) {
-					break;
-				} else {
-
-					playing.exchageLaternCard(gameObj, scan, this);
-					exchangeRun = true; // to mark exchange has been done.
-					
-				}
-				break;
+			opt = makeAMove(scan, playing, opt);
 			
-			case 1:
-				if (!(opt.contains("type1") || opt.contains("type2") || opt
-						.contains("type3"))) {
-					break;
-				} else {
-
-					playing.makeADedication(gameObj, opt, scan);
-					dedicationRun = true; // to mark dedication has been done.
-					
-				}
-
-				break;
 			
-			case 2:
-				if (playing.getLanternCardCount() > 12) {
+			
+			//after player played his turn
+			// update current player of game to next player
+			playing = updateCurrentPlayer(gameObj, playing);
 
-					// If lantern cards are more than 12
-					// filter them i.e. discard or make a dedication.
-					opt = filterExcessLanternCards(gameObj, playing, opt);
+			gameObj.setPlayerCurrentTurn(playing);
+			
+			// exchange option will run after player change.
+			exchangeRun = false; 
+			dedicationRun = false;
 
-				} else {
+			turnCount += 1;
+			
+			//update player options to blank
+			opt = "";
 
-					//remove playing object
-					
-					// lake tiles that are already placed on the board.
-					new LanternGameView().displayLakeTileBoard(gameObj);
-					//displayLakeTileBoard(gameObj);
-					
-
-					// select lake tile from tiles in hand
-					LakeTiles tileInHand = revealLakeTile(playing);
-
-					// ask user to rotate card to what degree (0/90/180/270)
-					// and return the rotated lake tile
-					tileInHand = rotateLakeTileOnUserChoice(tileInHand);
-
-					System.out.println(); // for spacing
-
-					// place lake tile on board.
-					boolean placeLoop = true;
-
-					int adjacentTileId = 99;
-
-					int adjLocX = 99;
-
-					int adjLocY = 99;
-
-					while (placeLoop) {
-						System.out.println("What tile adjacent to put it to: ");
-
-						adjacentTileId = scan.nextInt();
-
-						for (int i = 0; i < 72; i++) {
-							for (int j = 0; j < 72; j++) {
-								if (gameObj.GameBoard[i][j] == adjacentTileId) {
-									placeLoop = false;
-									adjLocX = j;
-									adjLocY = i;
-								}
-							}
-						}
-						if (placeLoop) {
-							System.out
-									.println("Please enter the correct tile id!");
-						}
-					}
-
-					System.out.println(); // for spacing
-					
-					String placementOpt = "";
-
-					System.out.print("Place tile at ");
-					boolean right = false, top = false, left = false, bottom = false;
-					if (gameObj.GameBoard[adjLocY][adjLocX - 1] == 99) {
-						left = true;
-						System.out.print("left/ ");
-						placementOpt += "left/";
-					}
-					if (gameObj.GameBoard[adjLocY][adjLocX + 1] == 99) {
-						right = true;
-						System.out.print("right/ ");
-						placementOpt += "right/";
-					}
-					if (gameObj.GameBoard[adjLocY - 1][adjLocX] == 99) {
-						System.out.print("top/ ");
-						placementOpt += "top/";
-						top = true;
-					}
-					if (gameObj.GameBoard[adjLocY + 1][adjLocX] == 99) {
-						System.out.print("bottom ");
-						placementOpt += "bottom";
-						bottom = true;
-					}
-
-					
-					//if no location is available
-					if(placementOpt.isEmpty()){
-						
-					}
-
-					int x = 0, y = 0;
-					
-					boolean locationLoop = true;
-					
-					String location = null;
-					
-					while (locationLoop) {
-						location = scan.next();
-						
-						if(placementOpt.contains(location)){
-							locationLoop = false;
-						}
-						else{
-							System.out.println("Please enter the correct available location.");
-							locationLoop = true;
-						}
-					}					
-					
-					if (location.equals("right") && right == true) {
-						gameObj.GameBoard[adjLocY][adjLocX + 1] = tileInHand
-								.getTilesId();
-
-						y = adjLocY;
-						x = adjLocX + 1;
-					}
-					if (location.equals("left") && left == true) {
-						gameObj.GameBoard[adjLocY][adjLocX - 1] = tileInHand
-								.getTilesId();
-
-						y = adjLocY;
-						x = adjLocX - 1;
-					}
-					if (location.equals("top") && top == true) {
-						gameObj.GameBoard[adjLocY - 1][adjLocX] = tileInHand
-								.getTilesId();
-
-						y = adjLocY - 1;
-						x = adjLocX;
-					}
-					if (location.equals("bottom") && bottom == true) {
-						y = adjLocY + 1;
-						x = adjLocX;
-
-						gameObj.GameBoard[adjLocY + 1][adjLocX] = tileInHand
-								.getTilesId();
-					}
-
-					// distribute lantern cards and favor tokens to
-					// currently playing player
-					distributeLakeTilesPlaying(gameObj, playing, y, x);
-
-					// distribute lantern cards to
-					// all players except currently playing player
-					distributingLakeTilesToRestPlayers(gameObj, playing, y, x);
-
-					// add lake tile to current lake tile arrangement vector
-					gameObj.getCurrentLakeTilesArrangement().addElement(
-							tileInHand);
-
-					// remove laketile in hand and already placed
-					playing = removePlacedLakeTile(tileInHand, playing);
-
-					System.out.println(""); // for space
-
-					// take one card from draw stack to have three cards in hand
-					// and remove top element from draw stack.
-					boolean containTiles = replenishLakeTilesInHand(gameObj,
-							playing);
-
-					if (containTiles) {
-						playFlag = true;
-
-					} else {
-						playFlag = false;
-						break;
-					}
-
-					//display player status
-					new LanternGameView().displayPlayerStatus(playing);
-					//displayPlayerStatus(playing);
-
-					System.out.println("Lake Tile placed on the game board.");
-
-					//remove playing object
-					
-					// lake tiles that are already placed on the board.
-					new LanternGameView().displayLakeTileBoard(gameObj);
-					//displayLakeTileBoard(gameObj);
-
-					// update current player of game to next player
-					playing = updateCurrentPlayer(gameObj, playing);
-
-					gameObj.setPlayerCurrentTurn(playing);
-					
-					// exchange option will run after player change.
-					exchangeRun = false; 
-					dedicationRun = false;
-
-					turnCount += 1;
-
-					System.out.println(); // for space
-
-				}
-
-				break;
-
-			default:
-				break;
-			}
+			System.out.println(); // for space
 
 		}
 
@@ -382,7 +181,232 @@ public class PlayGame {
 		// Display winner
 		new LanternGameView().displayWinner(winnerPlayers);
 
-	}
+	}*/
+
+	/**
+	 * @param scan
+	 * @param playing
+	 * @param opt
+	 * @return
+	 */
+	/*private String makeAMove(Scanner scan, Players playing, String opt) {
+		//int optPlay = scan.nextInt();
+
+		System.out.println(); // for spacing
+
+		switch (scan.nextInt()) {
+		
+		case 0:
+			if (!opt.contains("exchange")) {
+				break;
+			} else {
+
+				playing.exchageLaternCard(gameObj, scan);
+				//exchangeRun = true; // to mark exchange has been done.
+				
+			}
+			break;
+		
+		case 1:
+			if (!(opt.contains("type1") || opt.contains("type2") || opt
+					.contains("type3"))) {
+				break;
+			} else {
+
+				playing.makeADedication(gameObj, opt, scan);
+				//dedicationRun = true; // to mark dedication has been done.
+				
+			}
+
+			break;
+		
+		case 2:
+			if (playing.getLanternCardCount() > 12) {
+
+				// If lantern cards are more than 12
+				// filter them i.e. discard or make a dedication.
+				opt = playing.filterExcessLanternCards(gameObj, playing, opt);
+
+			} else {
+
+				//remove playing object
+				
+				// lake tiles that are already placed on the board.
+				new LanternGameView().displayLakeTileBoard(gameObj);
+				//displayLakeTileBoard(gameObj);
+				
+
+				// select lake tile from tiles in hand
+				LakeTiles tileInHand = revealLakeTile(playing);
+
+				// ask user to rotate card to what degree (0/90/180/270)
+				// and return the rotated lake tile
+				tileInHand = rotateLakeTileOnUserChoice(tileInHand);
+
+				System.out.println(); // for spacing
+
+				// place lake tile on board.
+				boolean placeLoop = true;
+
+				int adjacentTileId = 99;
+
+				int adjLocX = 99;
+
+				int adjLocY = 99;
+
+				while (placeLoop) {
+					System.out.println("What tile adjacent to put it to: ");
+
+					adjacentTileId = scan.nextInt();
+
+					for (int i = 0; i < 72; i++) {
+						for (int j = 0; j < 72; j++) {
+							if (gameObj.GameBoard[i][j] == adjacentTileId) {
+								placeLoop = false;
+								adjLocX = j;
+								adjLocY = i;
+							}
+						}
+					}
+					if (placeLoop) {
+						System.out
+								.println("Please enter the correct tile id!");
+					}
+				}
+
+				System.out.println(); // for spacing
+				
+				String placementOpt = "";
+
+				System.out.print("Place tile at ");
+				boolean right = false, top = false, left = false, bottom = false;
+				if (gameObj.GameBoard[adjLocY][adjLocX - 1] == 99) {
+					left = true;
+					System.out.print("left/ ");
+					placementOpt += "left/";
+				}
+				if (gameObj.GameBoard[adjLocY][adjLocX + 1] == 99) {
+					right = true;
+					System.out.print("right/ ");
+					placementOpt += "right/";
+				}
+				if (gameObj.GameBoard[adjLocY - 1][adjLocX] == 99) {
+					System.out.print("top/ ");
+					placementOpt += "top/";
+					top = true;
+				}
+				if (gameObj.GameBoard[adjLocY + 1][adjLocX] == 99) {
+					System.out.print("bottom ");
+					placementOpt += "bottom";
+					bottom = true;
+				}
+
+				
+				//if no location is available
+				if(placementOpt.isEmpty()){
+					
+				}
+
+				int x = 0, y = 0;
+				
+				boolean locationLoop = true;
+				
+				String location = null;
+				
+				while (locationLoop) {
+					location = scan.next();
+					
+					if(placementOpt.contains(location)){
+						locationLoop = false;
+					}
+					else{
+						System.out.println("Please enter the correct available location.");
+						locationLoop = true;
+					}
+				}					
+				
+				if (location.equals("right") && right == true) {
+					gameObj.GameBoard[adjLocY][adjLocX + 1] = tileInHand
+							.getTilesId();
+
+					y = adjLocY;
+					x = adjLocX + 1;
+				}
+				if (location.equals("left") && left == true) {
+					gameObj.GameBoard[adjLocY][adjLocX - 1] = tileInHand
+							.getTilesId();
+
+					y = adjLocY;
+					x = adjLocX - 1;
+				}
+				if (location.equals("top") && top == true) {
+					gameObj.GameBoard[adjLocY - 1][adjLocX] = tileInHand
+							.getTilesId();
+
+					y = adjLocY - 1;
+					x = adjLocX;
+				}
+				if (location.equals("bottom") && bottom == true) {
+					y = adjLocY + 1;
+					x = adjLocX;
+
+					gameObj.GameBoard[adjLocY + 1][adjLocX] = tileInHand
+							.getTilesId();
+				}
+
+				// distribute lantern cards and favor tokens to
+				// currently playing player
+				distributeLakeTilesPlaying(gameObj, playing, y, x);
+
+				// distribute lantern cards to
+				// all players except currently playing player
+				distributingLakeTilesToRestPlayers(gameObj, playing, y, x);
+
+				// add lake tile to current lake tile arrangement vector
+				gameObj.getCurrentLakeTilesArrangement().addElement(
+						tileInHand);
+
+				// remove laketile in hand and already placed
+				playing.removePlacedLakeTile(tileInHand);
+//					playing = removePlacedLakeTile(tileInHand, playing);
+
+				System.out.println(""); // for space
+
+				// take one card from draw stack to have three cards in hand
+				// and remove top element from draw stack.
+				Players.replenishLakeTilesInHand(gameObj, playing);
+				boolean containTiles = replenishLakeTilesInHand(gameObj,
+						playing);
+
+				if (containTiles) {
+					playFlag = true;
+
+				} else {
+					playFlag = false;
+					break;
+				}
+
+				//display player status
+				new LanternGameView().displayPlayerStatus(playing);
+				//displayPlayerStatus(playing);
+
+				System.out.println("Lake Tile placed on the game board.");
+
+				//remove playing object
+				
+				// lake tiles that are already placed on the board.
+				new LanternGameView().displayLakeTileBoard(gameObj);
+				//displayLakeTileBoard(gameObj);
+
+			}
+
+			break;
+
+		default:
+			break;
+		}
+		return opt;
+	}*/
 	
 	/**
 	 * This method asks takes input from user and rotate the selected tile to
@@ -392,7 +416,7 @@ public class PlayGame {
 	 *            The tile to be rotated before placing on the board.
 	 * @return The rotated lake tile.
 	 */
-	private LakeTiles rotateLakeTileOnUserChoice(LakeTiles tileInHand) {
+	/*public LakeTiles rotateLakeTileOnUserChoice(LakeTiles tileInHand) {
 		boolean choiceRotate = true;
 
 		//loop until correct input is given
@@ -416,12 +440,6 @@ public class PlayGame {
 				
 				new LanternGameView().displayLakeTiles(gameObj, tileInHand.getTilesId());
 
-				/*System.out.println("Lake Tile : " + tileInHand.getTilesId()
-						+ " TC: " + tileInHand.getTopColor() + " RC: "
-						+ tileInHand.getRightColor() + " BC: "
-						+ tileInHand.getBottomColor() + " LC: "
-						+ tileInHand.getLeftColor() + " Platform: "
-						+ tileInHand.isPlatform());*/
 
 				choiceRotate = false;
 
@@ -433,12 +451,6 @@ public class PlayGame {
 				
 				new LanternGameView().displayLakeTiles(gameObj, tileInHand.getTilesId());
 
-				/*System.out.println("Lake Tile : " + tileInHand.getTilesId()
-						+ " TC: " + tileInHand.getTopColor() + " RC: "
-						+ tileInHand.getRightColor() + " BC: "
-						+ tileInHand.getBottomColor() + " LC: "
-						+ tileInHand.getLeftColor() + " Platform: "
-						+ tileInHand.isPlatform());*/
 				
 				choiceRotate = false;
 
@@ -450,12 +462,6 @@ public class PlayGame {
 				
 				new LanternGameView().displayLakeTiles(gameObj, tileInHand.getTilesId());
 
-				/*System.out.println("Lake Tile : " + tileInHand.getTilesId()
-						+ " TC: " + tileInHand.getTopColor() + " RC: "
-						+ tileInHand.getRightColor() + " BC: "
-						+ tileInHand.getBottomColor() + " LC: "
-						+ tileInHand.getLeftColor() + " Platform: "
-						+ tileInHand.isPlatform());*/
 
 				choiceRotate = false;
 
@@ -469,44 +475,45 @@ public class PlayGame {
 			}
 		}
 		return tileInHand;
-	}
+	}*/
 	
 	/**
 	 * The method to rotate lake tile according to the given
 	 * degree(0/90/180/270).
+	 * @param tileInHand 
 	 * 
-	 * @param tileInHand
-	 *            The lake tile rotated by the degree.
 	 * @param degree
 	 *            The angle to which lake tile will be rotated.
 	 * @return The rotated lake tile according to the degree.
 	 */
-	public LakeTiles rotateLakeTileByDegree(LakeTiles tileInHand, String degree) {
-
+	public static LakeTiles rotateLakeTileByDegree(LakeTiles tileInHand, String degree) {
+	
 		if (degree.equals("90")) {
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 		} else if (degree.equals("180")) {
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 		} else if (degree.equals("270")) {
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 			tileInHand = tileInHand.rotateLakeTile();
-
+	
 		} else if (degree.equals("0")) {
 			// do nothing
 		}
-
+	
 		return tileInHand;
 	}
+	
+	
 
 	/**
 	 * This method will discard the excess Lantern cards, if the current player
@@ -524,7 +531,7 @@ public class PlayGame {
 	 *            (Dedication/discard).
 	 * @return The string contain those choices that are not used by the user.
 	 */
-	private String filterExcessLanternCards(GameInstance gameObj,
+	/*protected String filterExcessLanternCards(GameInstance gameObj,
 			Players playing, String opt) {
 		
 		while (playing.getLanternCardCount() > 12) 
@@ -578,7 +585,7 @@ public class PlayGame {
 			}
 		}
 		return opt;
-	}
+	}*/
 
 	/**
 	 * The method to save and exit the game according to the user choice.
@@ -587,7 +594,7 @@ public class PlayGame {
 	 *            The GameController object to store the game state to an XML
 	 *            file.
 	 */
-	private  void saveAndExitGame(GameController gameController) {
+	protected  void saveAndExitGame(GameController gameController) {
 		
 		// Ask user to exit the game
 		System.out.println("Do you want to exit the game?(yes/no)");
@@ -634,7 +641,7 @@ public class PlayGame {
 	 * @return The array of players with updated values according to their last
 	 *         turn.
 	 */
-	private  Players[] gameLastTurnWithoutLakeTiles(GameInstance gameObj) {
+	/*protected  Players[] gameLastTurnWithoutLakeTiles(GameInstance gameObj) {
 		
 		// last turn after all lake tiles were exposed
 		//int playerCont = gameObj.getPlayersList().length;
@@ -650,7 +657,7 @@ public class PlayGame {
 					+ gamePlayer.getPlayerNumber() + " turn ---------");
 			
 			
-			String opt1 = genValidation(gameObj, gamePlayer);
+			String opt1 = gamePlayer.genValidation(gameObj);
 			
 			//when player don't have enough lantern cards or favor tokens
 			// for exchange and make a dedication.
@@ -703,7 +710,7 @@ public class PlayGame {
 
 					switch (optTurnChoice) {
 					case 0:
-						gamePlayer.exchageLaternCard(gameObj, scan, this);
+						gamePlayer.exchageLaternCard(gameObj, scan);
 						//System.out.println(opt1);
 						opt1 = removeSubstring(new String("exchange"), opt1);
 						//System.out.println(opt1);
@@ -745,7 +752,7 @@ public class PlayGame {
 			}
 		}
 		return gamePlayers;
-	}
+	}*/
 	
 
 	/**
@@ -757,7 +764,7 @@ public class PlayGame {
 	 *            The substring to be removed from the string.
 	 * @return The updated string with given substring removed from it.
 	 */
-	private  String removeSubstring(String string, String opt1) {
+	public static String removeSubstring(String string, String opt1) {
 	
 		int removeSize = string.length();
 		
@@ -1196,7 +1203,7 @@ public class PlayGame {
 	 * @param x
 	 *            The column of the game board.
 	 */
-	private static void distributingLakeTilesToRestPlayers(GameInstance gameObj, Players playing, int y, int x) {
+	public static void distributingLakeTilesToRestPlayers(GameInstance gameObj, Players playing, int y, int x) {
 		
 		Players[] players = gameObj.getPlayersList();
 		
@@ -1293,7 +1300,7 @@ public class PlayGame {
 	 * @param playing
 	 *            The current player of the game.
 	 */
-	private static void distributeLakeTilesPlaying(GameInstance gameObj, Players playing, int y, int x) {
+	public static void distributeLakeTilesPlaying(GameInstance gameObj, Players playing, int y, int x) {
 	
 		//current player gets everything
 		Vector<LakeTiles> VLT = gameObj.getAllLakeTiles();
@@ -1342,9 +1349,9 @@ public class PlayGame {
 		}
 		if (gameObj.GameBoard[y][x - 1] != 99) {
 
-			System.out.println(gameObj.GameBoard[y][x - 1]);
-			
-			System.out.println(gameObj.GameBoard[y][x]);
+//			System.out.println(gameObj.GameBoard[y][x - 1]);
+//			
+//			System.out.println(gameObj.GameBoard[y][x]);
 			
 			top = true;
 			
@@ -1509,73 +1516,6 @@ public class PlayGame {
 	}
 
 	/**
-	 * The method to replenish lake tile from draw stack to the players hand,
-	 * after the player has placed the lake tile on the board.
-	 * 
-	 * @param gameObj
-	 *            The GameInstance object for updating the lantern cards of the
-	 *            game board.
-	 * @param playing
-	 *            The current player of the game.
-	 */
-	public static boolean replenishLakeTilesInHand(GameInstance gameObj,
-			Players playing) {
-		LakeTiles replenishedTile = null;
-
-		// get top tile from draw pile and remove it.
-		if (gameObj.getGameTilesDrawPile().size() > 0) {
-			replenishedTile = gameObj.getGameTilesDrawPile().remove(0);
-
-			// LakeTiles replenishedTile =
-			// gameObj.getGameTilesDrawPile().firstElement();
-
-			// add tile to player hand
-			playing.getCurrentLakeTilesHold().add(replenishedTile);
-
-			System.out.println("--------Replenished Lake Tile for Player "
-					+ playing.getPlayerNumber() + "--------");
-			
-			//display tile details
-			new LanternGameView().displayLakeTiles(gameObj, replenishedTile.getTilesId());
-			
-			/*System.out.println("Tile iD: " + replenishedTile.getTilesId()
-					+ " TC: " + replenishedTile.getTopColor() + " RC: "
-					+ replenishedTile.getRightColor() + " BC: "
-					+ replenishedTile.getBottomColor() + " LC: "
-					+ replenishedTile.getLeftColor() + " Platform: "
-					+ replenishedTile.isPlatform());*/
-
-			System.out.println("---------------------------------------------");
-
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	/**
-	 * The method to remove the lake tile from player's hand.
-	 * 
-	 * @param tileInHand
-	 *            The lake tile to be removed.
-	 * @param playing
-	 *            The player of the game from whose hand the given lake tiles
-	 *            will be removed.
-	 * @return The player of the game with update lake tiles in hand.
-	 */
-	public Players removePlacedLakeTile(LakeTiles tileInHand, Players playing) {
-		Vector<LakeTiles> handLakeTiles = playing.getCurrentLakeTilesHold();
-		
-		boolean removed = handLakeTiles.remove(tileInHand);
-//		System.out.println("check removed "+ removed);
-//		
-//		System.out.println(" tiles in hand "+handLakeTiles.size());
-//		System.out.println(" tiles in hand "+playing.getCurrentLakeTilesHold().size());
-		return playing;
-	}
-
-	/**
 	 * The method to rotate the lake tile 90 Degree clockwise
 	 * 
 	 * @param tileInHand
@@ -1601,7 +1541,7 @@ public class PlayGame {
 	 *            The player of the game.
 	 * @return The lake tile selected by the player.
 	 */
-	private LakeTiles revealLakeTile(Players playing) {
+	public LakeTiles revealLakeTile(Players playing) {
 
 		boolean inputLoop = true;
 		LakeTiles tileHolded;
@@ -1621,14 +1561,6 @@ public class PlayGame {
 				LakeTiles tileHolded1 = lakeTiles.get(j);
 				
 				new LanternGameView().displayLakeTiles(gameObj, tileHolded1.getTilesId());
-				
-				/*System.out.println("Lake Tile Id : "
-						+ tileHolded1.getTilesId() + " TC: "
-						+ tileHolded1.getTopColor() + " RC: "
-						+ tileHolded1.getRightColor() + " BC: "
-						+ tileHolded1.getBottomColor() + " LC: "
-						+ tileHolded1.getLeftColor() + " Platform: "
-						+ tileHolded1.isPlatform());*/
 			}
 
 			System.out.println(); // for spacing
@@ -2069,10 +2001,10 @@ public class PlayGame {
 	 * @param playing
 	 *            The player who is doing the exchange.
 	 */
-	private void exchageLaternCard(GameInstance gameObj, Players playing) {
-		playing.exchageLaternCard(gameObj, scan, this);
+	/*private void exchageLaternCard(GameInstance gameObj, Players playing) {
+		playing.exchageLaternCard(gameObj, scan);
 
-	}
+	}*/
 	
 	
 	/**
@@ -2086,10 +2018,10 @@ public class PlayGame {
 	 * @param yourColor
 	 *            The color of lantern card added to GameInstance.
 	 */
-	public void gameColorAugment(String gameColor, GameInstance gameObj, String yourColor) {
+	/*public void gameColorAugment(String gameColor, GameInstance gameObj, String yourColor) {
 		gameObj.gameColorAugment(gameColor, yourColor);
 
-	}
+	}*/
 
 	
 	/**
@@ -2103,11 +2035,11 @@ public class PlayGame {
 	 * @param gameColor
 	 *            The color of lantern card added to player.
 	 */
-	public void playerColorAugment(String yourColor, Players playing,
+	/*public void playerColorAugment(String yourColor, Players playing,
 			String gameColor) {
 		playing.playerColorAugment(yourColor, gameColor);
 
-	}
+	}*/
 
 	/**
 	 * The method to validate if the game has at least one lantern card of
@@ -2119,10 +2051,10 @@ public class PlayGame {
 	 *            The color exchanged by the GameInstance.
 	 * @return true if the GameInstance can exchange the lantern card.
 	 */
-	public boolean lanternColorGameValidation(GameInstance gameObj, String gameColor) {
+	/*public boolean lanternColorGameValidation(GameInstance gameObj, String gameColor) {
 
 		return gameObj.lanternColorGameValidation(gameColor);
-	}
+	}*/
 
 	/**
 	 * The method to validate if the player has at least one lantern card of
@@ -2134,9 +2066,9 @@ public class PlayGame {
 	 *            The color exchanged by the player.
 	 * @return true if the player can perform the exchange operation.
 	 */
-	public boolean lanternColorPlayerValidation(Players playing, String yourColor) {
+	/*public boolean lanternColorPlayerValidation(Players playing, String yourColor) {
 		return playing.lanternColorPlayerValidation(yourColor);
-	}
+	}*/
 
 	
 	
@@ -2150,7 +2082,7 @@ public class PlayGame {
 	 * @param gameObj
 	 *            The GameInstance to retrieve players of the game.
 	 */
-	private Players updateCurrentPlayer(GameInstance gameObj, Players playing) {
+	protected Players updateCurrentPlayer(GameInstance gameObj, Players playing) {
 		int playerCont = gameObj.getPlayersList().length;
 		// System.out.println("count "+ playerCont);
 		// System.out.println("current number player "+
@@ -2176,138 +2108,8 @@ public class PlayGame {
 	 *            The player to verify if exchange or is possible or not.
 	 * @return The string containing the possible options.
 	 */
-	private String genValidation(GameInstance gameObj, Players playing) {
-		// Validation for Exchange a lantern
-		boolean exahange = false;
-		String retStr = "";
-		if (playing.getPlayerFavorToken() >= 2) {
-			if (playing.getPlayerBlackLanternCardCount() > 0
-					|| playing.getPlayerWhiteLanternCardCount() > 0
-					|| playing.getPlayerBlueLanternCardCount() > 0
-					|| playing.getPlayerGreenLanternCardCount() > 0
-					|| playing.getPlayerOrangeLanternCardCount() > 0
-					|| playing.getPlayerPurpleLanternCardCount() > 0
-					|| playing.getPlayerRedLanternCardCount() > 0) 
-			{
-				if (gameObj.getGameBlackLanternCardCount() > 0
-						|| gameObj.getGameWhiteLanternCardCount() > 0
-						|| gameObj.getGameBlueLanternCardCount() > 0
-						|| gameObj.getGameGreenLanternCardCount() > 0
-						|| gameObj.getGameOrangeLanternCardCount() > 0
-						|| gameObj.getGamePurpleLanternCardCount() > 0
-						|| gameObj.getGameRedLanternCardCount() > 0) 
-				{
-					retStr += "exchange";
-				}
-			}
-		}
-		// Make a dedication
-		// Validation for Dedication Type 1
-		boolean type1 = false;
-		if (playing.getPlayerBlackLanternCardCount() > 3
-				|| playing.getPlayerWhiteLanternCardCount() > 3
-				|| playing.getPlayerBlueLanternCardCount() > 3
-				|| playing.getPlayerGreenLanternCardCount() > 3
-				|| playing.getPlayerOrangeLanternCardCount() > 3
-				|| playing.getPlayerPurpleLanternCardCount() > 3
-				|| playing.getPlayerRedLanternCardCount() > 3) 
-		{
-			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
-			if (dedicationToken.getDedicationTokenFourSize() > 0) 
-			{
-				retStr += "type1";
-			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) 
-			{
-				retStr += "type1";
-			}
-		}
-		
-		// Validation for Dedication Type 2
-		boolean type2 = false;
-		int countPairs2 = 0;
-		if (playing.getPlayerBlackLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (playing.getPlayerWhiteLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-
-		if (playing.getPlayerBlueLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (playing.getPlayerGreenLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (playing.getPlayerOrangeLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (playing.getPlayerPurpleLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (playing.getPlayerRedLanternCardCount() > 1) 
-		{
-			countPairs2++;
-		}
-		if (countPairs2 > 2) 
-		{
-			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
-			if (dedicationToken.getDedicationTokenSixSize() > 0) {
-				retStr += "type2";
-			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) {
-				retStr += "type2";
-			}
-		}
-		// type 3 validation
-		boolean type3 = false;
-		int countPairs7 = 0;
-		if (playing.getPlayerBlackLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (playing.getPlayerWhiteLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-
-		if (playing.getPlayerBlueLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (playing.getPlayerGreenLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (playing.getPlayerOrangeLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (playing.getPlayerPurpleLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (playing.getPlayerRedLanternCardCount() > 0) 
-		{
-			countPairs7++;
-		}
-		if (countPairs7 > 6) 
-		{
-			DedicationTokens dedicationToken = gameObj.getDedicationTokens();
-			if (dedicationToken.getDedicationTokenSevenSize() > 0) 
-			{
-				retStr += "type3";
-			} else if (dedicationToken.getGenericDedicationTokensSize() > 0) 
-			{
-				retStr += "type3";
-			}
-		}
-
-		return retStr;
+	protected String genValidation(GameInstance gameObj, Players playing) {
+		return playing.genValidation(gameObj);
 	}
 
 }
