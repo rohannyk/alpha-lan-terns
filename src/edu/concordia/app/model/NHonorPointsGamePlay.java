@@ -165,13 +165,10 @@ public class NHonorPointsGamePlay extends PlayGame {
 				
 				//if score is not reached and all lake tiles has been placed
 				// exit the loop
-				if(playing.getTotalPoints() != gamePoint){
+				/*if(playing.getTotalPoints() != gamePoint){
 					
 					break;
-				}
-				
-				
-				
+				}	*/		
 				
 			}
 			

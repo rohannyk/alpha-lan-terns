@@ -141,15 +141,81 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 						|| (sevenValue > sixValue && sevenValue > fourValue)
 						|| (genericValue > sixValue && genericValue > fourValue && genericValue > sevenValue)) {
 					doDedicationSeven(gameObj, playing);
+					
+					System.out.println();
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+					
+					DedicationTokens dedicationObj = gameObj
+							.getDedicationTokens();
+					Vector<Integer> dedicationSevenVal = dedicationObj
+							.getDedicationTokenSeven();
+					if (dedicationSevenVal.size() > 0) {
+						int dedicationSevenValue = dedicationSevenVal
+								.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj.getDedicationTokenSeven()
+								.add(dedicationSevenValue);
+						if (dedicationSevenVal.isEmpty()) {
+							gameObj.setNextDedicationTokenSeven(-1);
+						} else {
+							gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+									.firstElement());
+						}
+					} else {
+						Vector<Integer> genGenericVal = dedicationObj
+								.getGenericDedicationTokens();
+						if (genGenericVal.size() > 0) {
+							int genericValue1 = genGenericVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj
+									.getGenericDedicationTokens().add(
+											genericValue1);
+						}
+					}
 
 				} else if ((colorPairs.size() > 2)
 						|| (sixValue > sevenValue && sixValue > fourValue)) {
 
+					int pairCount = 0;
+					
 					for (int i = 0; i < 3; i++) {
 
 						String color = colorPairs.get(i);
 
 						doDedicationSix(gameObj, color, playing);
+						
+						pairCount +=1;
+					}
+					
+					if(pairCount == 3){
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationSixVal = dedicationObj
+								.getDedicationTokenSix();
+						if (dedicationSixVal.size() > 0) {
+							int dedicationSixValue = dedicationSixVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj.getDedicationTokenSix().add(
+									dedicationSixValue);
+							if (dedicationSixVal.isEmpty()) {
+								gameObj.setNextDedicationTokenSix(-1);
+							} else {
+								gameObj.setNextDedicationTokenSix(dedicationSixVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genDedicationVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genDedicationVal.size() > 0) {
+								int genericValue1 = genDedicationVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue1);
+							}
+						}
 					}
 
 				} else if ((fourValue > sixValue && fourValue > sevenValue)
@@ -172,16 +238,82 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 						if (checkPossibleUniqueColor(playing)) {
 
 							doDedicationSeven(gameObj, playing);
+							
+							System.out.println();
+							
+							System.out.println("Player " + playing.getPlayerNumber()
+									+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+							
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSevenVal = dedicationObj
+									.getDedicationTokenSeven();
+							if (dedicationSevenVal.size() > 0) {
+								int dedicationSevenValue = dedicationSevenVal
+										.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSeven()
+										.add(dedicationSevenValue);
+								if (dedicationSevenVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSeven(-1);
+								} else {
+									gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genGenericVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genGenericVal.size() > 0) {
+									int genericValue1 = genGenericVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue1);
+								}
+							}
 						}
 					} else if (playing.getPossibleDedicationThreePairColor().size() > 3) {
 
 						if ((colorPairs.size() > 2)) {
 
+							int pairCount = 0;
+							
 							for (int i = 0; i < 3; i++) {
 
 								String color = colorPairs.get(i);
 
 								doDedicationSix(gameObj, color, playing);
+								
+								pairCount += 1;
+							}
+							
+							if(pairCount == 3){
+								DedicationTokens dedicationObj = gameObj
+										.getDedicationTokens();
+								Vector<Integer> dedicationSixVal = dedicationObj
+										.getDedicationTokenSix();
+								if (dedicationSixVal.size() > 0) {
+									int dedicationSixValue = dedicationSixVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj.getDedicationTokenSix().add(
+											dedicationSixValue);
+									if (dedicationSixVal.isEmpty()) {
+										gameObj.setNextDedicationTokenSix(-1);
+									} else {
+										gameObj.setNextDedicationTokenSix(dedicationSixVal
+												.firstElement());
+									}
+								} else {
+									Vector<Integer> genDedicationVal = dedicationObj
+											.getGenericDedicationTokens();
+									if (genDedicationVal.size() > 0) {
+										int genericValue1 = genDedicationVal.remove(0);
+										DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+										playerDedicationObj
+												.getGenericDedicationTokens().add(
+														genericValue1);
+									}
+								}
 							}
 						}
 
@@ -1040,6 +1172,39 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 			} else {
 				doDedicationSeven(gameObj, playing);
 			}
+			
+			System.out.println();
+			
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+			
+			DedicationTokens dedicationObj = gameObj
+					.getDedicationTokens();
+			Vector<Integer> dedicationSevenVal = dedicationObj
+					.getDedicationTokenSeven();
+			if (dedicationSevenVal.size() > 0) {
+				int dedicationSevenValue = dedicationSevenVal
+						.remove(0);
+				DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+				playerDedicationObj.getDedicationTokenSeven()
+						.add(dedicationSevenValue);
+				if (dedicationSevenVal.isEmpty()) {
+					gameObj.setNextDedicationTokenSeven(-1);
+				} else {
+					gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+							.firstElement());
+				}
+			} else {
+				Vector<Integer> genGenericVal = dedicationObj
+						.getGenericDedicationTokens();
+				if (genGenericVal.size() > 0) {
+					int genericValue1 = genGenericVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj
+							.getGenericDedicationTokens().add(
+									genericValue1);
+				}
+			}
 
 		} else if (type.equals("SIX")) {
 			
@@ -1150,6 +1315,35 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 					}
 				}
 			}
+			
+			if(pairCount == 3){
+				DedicationTokens dedicationObj = gameObj
+						.getDedicationTokens();
+				Vector<Integer> dedicationSixVal = dedicationObj
+						.getDedicationTokenSix();
+				if (dedicationSixVal.size() > 0) {
+					int dedicationSixValue = dedicationSixVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj.getDedicationTokenSix().add(
+							dedicationSixValue);
+					if (dedicationSixVal.isEmpty()) {
+						gameObj.setNextDedicationTokenSix(-1);
+					} else {
+						gameObj.setNextDedicationTokenSix(dedicationSixVal
+								.firstElement());
+					}
+				} else {
+					Vector<Integer> genDedicationVal = dedicationObj
+							.getGenericDedicationTokens();
+					if (genDedicationVal.size() > 0) {
+						int genericValue1 = genDedicationVal.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj
+								.getGenericDedicationTokens().add(
+										genericValue1);
+					}
+				}
+			}
 
 		} else if (type.equals("FOUR")) {
 			ArrayList<String> possibleFourUniqueColor = playing
@@ -1246,6 +1440,39 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 					doDedicationSeven(gameObj, playing);
 				} else {
 					doDedicationSeven(gameObj, playing);
+				}
+				
+				System.out.println();
+				
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+				
+				DedicationTokens dedicationObj = gameObj
+						.getDedicationTokens();
+				Vector<Integer> dedicationSevenVal = dedicationObj
+						.getDedicationTokenSeven();
+				if (dedicationSevenVal.size() > 0) {
+					int dedicationSevenValue = dedicationSevenVal
+							.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj.getDedicationTokenSeven()
+							.add(dedicationSevenValue);
+					if (dedicationSevenVal.isEmpty()) {
+						gameObj.setNextDedicationTokenSeven(-1);
+					} else {
+						gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+								.firstElement());
+					}
+				} else {
+					Vector<Integer> genGenericVal = dedicationObj
+							.getGenericDedicationTokens();
+					if (genGenericVal.size() > 0) {
+						int genericValue1 = genGenericVal.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj
+								.getGenericDedicationTokens().add(
+										genericValue1);
+					}
 				}
 			}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 			{
@@ -1350,6 +1577,35 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 					}
 				}
 				
+				if(pairCount == 3){
+					DedicationTokens dedicationObj = gameObj
+							.getDedicationTokens();
+					Vector<Integer> dedicationSixVal = dedicationObj
+							.getDedicationTokenSix();
+					if (dedicationSixVal.size() > 0) {
+						int dedicationSixValue = dedicationSixVal.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj.getDedicationTokenSix().add(
+								dedicationSixValue);
+						if (dedicationSixVal.isEmpty()) {
+							gameObj.setNextDedicationTokenSix(-1);
+						} else {
+							gameObj.setNextDedicationTokenSix(dedicationSixVal
+									.firstElement());
+						}
+					} else {
+						Vector<Integer> genDedicationVal = dedicationObj
+								.getGenericDedicationTokens();
+						if (genDedicationVal.size() > 0) {
+							int genericValue1 = genDedicationVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj
+									.getGenericDedicationTokens().add(
+											genericValue1);
+						}
+					}
+				}
+				
 			}else if(playing.getPossibleDedicationFourUniqueColor().size() > 0){
 				
 				ArrayList<String> possibleFourUniqueColor = playing
@@ -1444,8 +1700,37 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 	 * @param playing
 	 */
 	private static void doDedicationFour(GameInstance gameObj, String giveColor, Players playing){
-		PlayGame.getDedicationType1ColorValidationAndRemoval(
+		boolean type1Val = PlayGame.getDedicationType1ColorValidationAndRemoval(
 				playing, giveColor, gameObj);
+		
+		if (type1Val) {
+			DedicationTokens dedicationObj = gameObj
+					.getDedicationTokens();
+			Vector<Integer> dedicationVal = dedicationObj
+					.getDedicationTokenFour();
+			if (dedicationVal.size() > 0) {
+				int dedicationValue = dedicationVal.remove(0);
+				DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+				playerDedicationObj.getDedicationTokenFour().add(
+						dedicationValue);
+				if (dedicationVal.isEmpty()) {
+					gameObj.setNextDedicationTokenFour(-1);
+				} else {
+					gameObj.setNextDedicationTokenFour(dedicationVal
+							.firstElement());
+				}
+			} else {
+				Vector<Integer> genDedicationVal = dedicationObj
+						.getGenericDedicationTokens();
+				if (genDedicationVal.size() > 0) {
+					int genericValue = genDedicationVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj
+							.getGenericDedicationTokens().add(
+									genericValue);
+				}
+			}
+		}
 	}
 
 	public static void doExchange(Players playing, GameInstance gameObj, String getColors)
@@ -1708,15 +1993,81 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 					&& genericValue > sevenValue))
 			{
 					doDedicationSeven(gameObj, playing);
+					
+					System.out.println();
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+					
+					DedicationTokens dedicationObj = gameObj
+							.getDedicationTokens();
+					Vector<Integer> dedicationSevenVal = dedicationObj
+							.getDedicationTokenSeven();
+					if (dedicationSevenVal.size() > 0) {
+						int dedicationSevenValue = dedicationSevenVal
+								.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj.getDedicationTokenSeven()
+								.add(dedicationSevenValue);
+						if (dedicationSevenVal.isEmpty()) {
+							gameObj.setNextDedicationTokenSeven(-1);
+						} else {
+							gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+									.firstElement());
+						}
+					} else {
+						Vector<Integer> genGenericVal = dedicationObj
+								.getGenericDedicationTokens();
+						if (genGenericVal.size() > 0) {
+							int genericValue1 = genGenericVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj
+									.getGenericDedicationTokens().add(
+											genericValue1);
+						}
+					}
 				
 			} else if ((colorPairs.size() > 2) || (sixValue > sevenValue && sixValue > fourValue)) {
 								
+					int pairCount = 0;
+				
 					for (int i = 0; i < 3; i++) {
 						
 						String color = colorPairs.get(i);
 						
 						doDedicationSix(gameObj, color, playing);
-					}					
+						
+						pairCount += 1;
+					}	
+					
+					if(pairCount == 3){
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationSixVal = dedicationObj
+								.getDedicationTokenSix();
+						if (dedicationSixVal.size() > 0) {
+							int dedicationSixValue = dedicationSixVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj.getDedicationTokenSix().add(
+									dedicationSixValue);
+							if (dedicationSixVal.isEmpty()) {
+								gameObj.setNextDedicationTokenSix(-1);
+							} else {
+								gameObj.setNextDedicationTokenSix(dedicationSixVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genDedicationVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genDedicationVal.size() > 0) {
+								int genericValue1 = genDedicationVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue1);
+							}
+						}
+					}
 				
 			} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
 												
@@ -1737,9 +2088,45 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 					if (checkPossibleUniqueColor(playing)) {
 
 						doDedicationSeven(gameObj, playing);
+						
+						System.out.println();
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+						
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationSevenVal = dedicationObj
+								.getDedicationTokenSeven();
+						if (dedicationSevenVal.size() > 0) {
+							int dedicationSevenValue = dedicationSevenVal
+									.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj.getDedicationTokenSeven()
+									.add(dedicationSevenValue);
+							if (dedicationSevenVal.isEmpty()) {
+								gameObj.setNextDedicationTokenSeven(-1);
+							} else {
+								gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genGenericVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genGenericVal.size() > 0) {
+								int genericValue1 = genGenericVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue1);
+							}
+						}
+						
 					}
 				}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 				{
+					
+					int pairCount = 0;
 					
 					if ((colorPairs.size() > 2)) {
 						
@@ -1748,7 +2135,38 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 							String color = colorPairs.get(i);
 							
 							doDedicationSix(gameObj, color, playing);
-						}	
+							
+							pairCount += 1;
+						}
+						
+						if(pairCount == 3){
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSixVal = dedicationObj
+									.getDedicationTokenSix();
+							if (dedicationSixVal.size() > 0) {
+								int dedicationSixValue = dedicationSixVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSix().add(
+										dedicationSixValue);
+								if (dedicationSixVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSix(-1);
+								} else {
+									gameObj.setNextDedicationTokenSix(dedicationSixVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genDedicationVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genDedicationVal.size() > 0) {
+									int genericValue1 = genDedicationVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue1);
+								}
+							}
+						}
 					}
 										
 					

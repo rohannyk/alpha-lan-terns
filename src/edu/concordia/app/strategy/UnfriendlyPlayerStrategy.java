@@ -1374,8 +1374,37 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 	 * @param playing
 	 */
 	private static void doDedicationFour(GameInstance gameObj, String giveColor, Players playing){
-		PlayGame.getDedicationType1ColorValidationAndRemoval(
+		boolean type1Val = PlayGame.getDedicationType1ColorValidationAndRemoval(
 				playing, giveColor, gameObj);
+		
+		if (type1Val) {
+			DedicationTokens dedicationObj = gameObj
+					.getDedicationTokens();
+			Vector<Integer> dedicationVal = dedicationObj
+					.getDedicationTokenFour();
+			if (dedicationVal.size() > 0) {
+				int dedicationValue = dedicationVal.remove(0);
+				DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+				playerDedicationObj.getDedicationTokenFour().add(
+						dedicationValue);
+				if (dedicationVal.isEmpty()) {
+					gameObj.setNextDedicationTokenFour(-1);
+				} else {
+					gameObj.setNextDedicationTokenFour(dedicationVal
+							.firstElement());
+				}
+			} else {
+				Vector<Integer> genDedicationVal = dedicationObj
+						.getGenericDedicationTokens();
+				if (genDedicationVal.size() > 0) {
+					int genericValue = genDedicationVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj
+							.getGenericDedicationTokens().add(
+									genericValue);
+				}
+			}
+		}
 	}
 
 	public static void doExchange(Players playing, GameInstance gameObj, String getColors)

@@ -404,23 +404,23 @@ public class NormalGamePlay extends PlayGame {
 			new LanternGameView().displayLakeTileBoard(gameObj);
 			//displayLakeTileBoard(gameObj);
 			
-/*			// update current player of game to next player
+			// update current player of game to next player
 			playing = updateCurrentPlayer(gameObj, playing);
 
 			gameObj.setPlayerCurrentTurn(playing);
 			
 			// exchange option will run after player change.
 			exchangeRun = false; 
-			dedicationRun = false;*/
+			dedicationRun = false;
 			
 			// update current player of game to next player
-			if(opt.contains("lakeTile"))//Saleh if not working delete.
+			/*if(opt.contains("lakeTile"))//Saleh if not working delete.
 			{
 				playing = updateCurrentPlayer(gameObj, playing);
 				gameObj.setPlayerCurrentTurn(playing);
 				exchangeRun = false; 
 				dedicationRun = false;
-			}
+			}*/
 			
 			////////////////////////////////////////////////////
 						
