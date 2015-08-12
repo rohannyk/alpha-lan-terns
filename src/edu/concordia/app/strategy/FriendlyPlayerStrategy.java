@@ -17,20 +17,34 @@ import edu.concordia.app.model.Players;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author lovepreet
- *
+ * This class is used for creating objects of FriendlyPlayer strategy. Friedly player
+ *  is one of the four strategies implemented for build 3
+ * @author Team E
+ * @Since 8/8/15
+ * 
  */
 public class FriendlyPlayerStrategy extends PlayerStrategy {
 
+	/**
+	 * @param gameObj
+	 */
 	private GameInstance gameObj;
 	
 	/**
-	 * @param gameObj
+	 * This constructor is used to initialize GameInstance object.
+	 * @param gameObj is the instance of GameInstance class
 	 */
 	public FriendlyPlayerStrategy(GameInstance gameObj) {
 		this.gameObj = gameObj;
 	}
 
+	/**
+	 * This method is used to store the logic of last turn of the player when the game is 
+	 * about to end
+	 * @param gameobj object of GameInstance Class
+	 * @param gamePlayer object of Players class 
+	 * @param opt1 is used to check whether exchange has been done beforee
+	 */
 	public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, String opt1){
 
 		
@@ -361,7 +375,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	
 
 	/**
-	 * @param gamePlayer
+	 * @param gamePlayer object of Players class
 	 * @return
 	 */
 	private Vector<String> emptyLanternCardColors(Players gamePlayer) {
@@ -718,6 +732,13 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 			
 		return option;
 	}
+	
+	/**
+	 * 
+	 * @param color Lantern card color
+	 * @param gameobj instance of GameInstance class
+	 * @return count of color
+	 */
 	public static int colorCount(String color, GameInstance gameobj)
 	{
 		int count =0;
@@ -753,7 +774,14 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 				
 		return count;
 	}
-	
+	/**
+	 * 
+	 * @param gameObjs instance of GameInstance class 
+	 * @param playing instance of Players class
+	 * @param  combination of results for adjacent tile position 
+	 * @param adjTilePosition String to check adjacent tile position
+	 * @return LakeTiles object
+	 */
 	public static LakeTiles placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String comRes, String adjTilePosition)
 	{
 		String [] placingInformation = comRes.split(":");
@@ -903,9 +931,9 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-	 * @param playerPosition
-	 * @param lakeTileChoice
-	 * @return 
+	 * @param playerPosition Gives the player position
+	 * @param lakeTileChoice the laketile which is placed on the board
+	 * @return the player clard face color 
 	 */
 	private static String getPlayerFaceColor(String playerPosition,
 			LakeTiles lakeTileChoice) {
@@ -928,15 +956,21 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param playing
-	 * @param gameObjs 
-	 * @return
+	 * @param playing object of Players class
+	 * @param gameObjs object of GameInstance class
+	 * @return returns the new laketile
 	 */
 	private static LakeTiles revealLakeTile(Players playing, GameInstance gameObjs) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/**
+	 * 
+	 * @param playing object of players class
+	 * @param gameObj object of GameInstance class
+	 * @param type is used to check the eligibility for performing a certain type of dedication
+	 */
 	public static void doWhatIsAsked(Players playing, GameInstance gameObj,
 			String type) {
 		if (type.equals("SEVEN")) {
@@ -1557,8 +1591,8 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param gameObj
-	 * @param playing
+	 * @param gameObj object of GamInstance class
+	 * @param playing object of Players Class
 	 */
 	private static void doDedicationSeven(GameInstance gameObj, Players playing) {
 		
@@ -1568,8 +1602,9 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param gameObj
-	 * @param playing
+	 * @param gameObj object of GameInstance class
+	 * @param playing object of Players class
+	 * @param giveColor gives the lantern card colors for performing certain type of dedication
 	 */
 	private static void doDedicationSix(GameInstance gameObj, String giveColor, Players playing){
 		PlayGame.getDedicationType2ColorValidationAndRemoval(
@@ -1577,8 +1612,10 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param gameObj
-	 * @param playing
+	 * @param gameObj object of GameInstance class
+	 * @param playing object of Players class
+	 * @param giveColor gives the lantern card colors for performing certain type of dedication
+	 * 
 	 */
 	private static void doDedicationFour(GameInstance gameObj, String giveColor, Players playing){
 		boolean type1Val = PlayGame.getDedicationType1ColorValidationAndRemoval(
@@ -1614,7 +1651,12 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 		}
 		
 	}
-
+	/**
+	 * 
+	 * @param playing object of Players class
+	 * @param gameObj object of GameInstance class
+	 * @param getColors Lantern card to exchange
+	 */
 	public static void doExchange(Players playing, GameInstance gameObj, String getColors)
 	{
 		//sendColor.. any color whose count is > 1
@@ -1685,7 +1727,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-	 * @param playing
+	 * @param playing object of Players class
 	 */
 	private static void playerPossibleExchangeMoves(Players playing) {
 		
@@ -1709,7 +1751,11 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @param playing object of Players class
+	 * @param gameObjs object of GameInstance class
+	 */
 	private static void dedicationType1(Players playing, GameInstance gameObjs)
 	{
 		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
@@ -1729,7 +1775,11 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @param playing object of Players class
+	 * @param gameObjs object of GameInstance class
+	 */
 	 static void dedicationType2(Players playing, GameInstance gameObjs)
 	{
 		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
@@ -1775,7 +1825,12 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 		}
 		
 	}
-	
+	 
+	/**
+	 * 
+	 * @param playing object of Players class
+	 * @param gameObjs object of GameInstance class 
+	 */
 	private static void dedicationType3(Players playing, GameInstance gameObjs)
 	{
 		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
@@ -2313,8 +2368,8 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 
 
 	/**
-	 * @param playing
-	 * @return
+	 * @param playing object of Players class
+	 * @return the discarded Color
 	 */
 	private Vector<String> availableDiscardCardColors(Players playing) {
 		Vector<String> discardColorChoices = new Vector<String>();
@@ -2338,8 +2393,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param playing
-	 * @param fourUniqueColorPairs
+	 * @param playing object of Players class
 	 */
 	private static ArrayList<String> checkPossibleFourUnique(Players playing) {
 		
@@ -2371,8 +2425,8 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-	 * @param playing
-	 * @return
+	 * @param playing object of Players class
+	 * @return true if Unique color is present
 	 */
 	private static boolean checkPossibleUniqueColor(Players playing) {
 		return playing.getPlayerBlackLanternCardCount() > 0
@@ -2385,9 +2439,9 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	}
 	
 	/**
-	 * @param playing
+	 * @param playing object of Players class
 	 * @param colorPairs
-	 * @return 
+	 * @return colorPairs
 	 */
 	private static ArrayList<String> getLanternCardColorPairs(Players playing) {
 		
