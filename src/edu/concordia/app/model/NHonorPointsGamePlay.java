@@ -11,7 +11,11 @@ import edu.concordia.app.controller.GameController;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author lovepreet
+ * This class creates an instance for the strategy where the game will end as soon as any one 
+ * player has made enough dedications to earn N Honor points (where the value of N is chosen 
+ * by the user, and must be at least 4 and at most M, where M is the sum of the values of all 
+ * Dedication Tokens in the game divided by the number of players)
+ * @author Team E
  *
  */
 public class NHonorPointsGamePlay extends PlayGame {
@@ -93,65 +97,16 @@ public class NHonorPointsGamePlay extends PlayGame {
 
 			}			
 			
-			/*for (int i = 0; i < gameObj.getPlayersList().length; i++) {
-				Players playingCheck = gameObj.getPlayersList()[i];
-				
-				if(playingCheck.getTotalPoints() >= gamePoint){
-					playFlag = false;
-					break;
-				}
-				
-			}*/
-			
 			// get current player of the game.
 			playing = gameObj.getPlayerCurrentTurn();
 			
-			/*if(playing.getTotalPoints() >= gamePoint){
-				playFlag = false;
-				break;
-			}*/
-
 			System.out.println("--------- Player " + playing.getPlayerNumber()
 					+ " turn ---------");
 			
 			//display player status before placing lake tile.
 			new LanternGameView().displayPlayerStatus(playing);
 			
-			
-
 			String opt = this.genValidation(gameObj, playing);
-			
-			/*System.out.println("--------------------------");
-			System.out.println("Please enter you choice:");
-			System.out.println("--------------------------");
-
-			if(exchangeRun){
-				// remove exchange substring from opt string
-				opt = super.removeSubstring(new String("exchange"), opt);
-			}
-			if(dedicationRun){
-				// remove dedication substring from opt string
-				opt = removeSubstring(new String("type1"), opt);
-				opt = removeSubstring(new String("type2"), opt);
-				opt = removeSubstring(new String("type3"), opt);
-			}
-
-			if (opt.contains("exchange")) {
-				System.out.println("0 - Exchange a Lantern Card");
-
-			}
-			if (opt.contains("type1") || opt.contains("type2")
-					|| opt.contains("type3")) {
-				System.out.println("1 - Make a dedication");
-			}
-
-			System.out.println("2 - Place a lake tile");
-			System.out.println("--------------------------");
-
-			System.out.println(); // for spacing
-
-			System.out.print("Player " + playing.getPlayerNumber()
-					+ " choice: ");*/
 			
 			while (!opt.contains("lakeTile")) {
 				opt = playing.getStrategy().makeAMove(scan, gameObj, playing, opt);
@@ -163,246 +118,12 @@ public class NHonorPointsGamePlay extends PlayGame {
 				
 				System.out.println("playing score : "+playing.getTotalPoints());
 				
-				//if score is not reached and all lake tiles has been placed
-				// exit the loop
-				/*if(playing.getTotalPoints() != gamePoint){
-					
-					break;
-				}	*/		
-				
 			}
 			
 			if(playFlag == false){
 				break;
 			}
 
-			/*int optPlay = scan.nextInt();
-
-			System.out.println(); // for spacing
-
-			switch (optPlay) {
-			
-			case 0:
-				if (!opt.contains("exchange")) {
-					break;
-				} else {
-
-					playing.exchageLaternCard(gameObj, scan);
-					exchangeRun = true; // to mark exchange has been done.
-					
-				}
-				break;
-			
-			case 1:
-				if (!(opt.contains("type1") || opt.contains("type2") || opt
-						.contains("type3"))) {
-					break;
-				} else {
-
-					playing.makeADedication(gameObj, opt, scan);
-					dedicationRun = true; // to mark dedication has been done.
-					
-				}
-
-				break;
-			
-			case 2:
-				if (playing.getLanternCardCount() > 12) {
-
-					// If lantern cards are more than 12
-					// filter them i.e. discard or make a dedication.
-					opt = filterExcessLanternCards(gameObj, playing, opt);
-
-				} else {
-
-					//remove playing object
-					
-					// lake tiles that are already placed on the board.
-					new LanternGameView().displayLakeTileBoard(gameObj);
-					//displayLakeTileBoard(gameObj);
-					
-
-					// select lake tile from tiles in hand
-					LakeTiles tileInHand = revealLakeTile(playing);
-
-					// ask user to rotate card to what degree (0/90/180/270)
-					// and return the rotated lake tile
-					tileInHand = rotateLakeTileOnUserChoice(tileInHand);
-
-					System.out.println(); // for spacing
-
-					// place lake tile on board.
-					boolean placeLoop = true;
-
-					int adjacentTileId = 99;
-
-					int adjLocX = 99;
-
-					int adjLocY = 99;
-
-					while (placeLoop) {
-						System.out.println("What tile adjacent to put it to: ");
-
-						adjacentTileId = scan.nextInt();
-
-						for (int i = 0; i < 72; i++) {
-							for (int j = 0; j < 72; j++) {
-								if (gameObj.GameBoard[i][j] == adjacentTileId) {
-									placeLoop = false;
-									adjLocX = j;
-									adjLocY = i;
-								}
-							}
-						}
-						if (placeLoop) {
-							System.out
-									.println("Please enter the correct tile id!");
-						}
-					}
-
-					System.out.println(); // for spacing
-					
-					String placementOpt = "";
-
-					System.out.print("Place tile at ");
-					boolean right = false, top = false, left = false, bottom = false;
-					if (gameObj.GameBoard[adjLocY][adjLocX - 1] == 99) {
-						left = true;
-						System.out.print("left/ ");
-						placementOpt += "left/";
-					}
-					if (gameObj.GameBoard[adjLocY][adjLocX + 1] == 99) {
-						right = true;
-						System.out.print("right/ ");
-						placementOpt += "right/";
-					}
-					if (gameObj.GameBoard[adjLocY - 1][adjLocX] == 99) {
-						System.out.print("top/ ");
-						placementOpt += "top/";
-						top = true;
-					}
-					if (gameObj.GameBoard[adjLocY + 1][adjLocX] == 99) {
-						System.out.print("bottom ");
-						placementOpt += "bottom";
-						bottom = true;
-					}
-
-					
-					//if no location is available
-					if(placementOpt.isEmpty()){
-						
-					}
-
-					int x = 0, y = 0;
-					
-					boolean locationLoop = true;
-					
-					String location = null;
-					
-					while (locationLoop) {
-						location = scan.next();
-						
-						if(placementOpt.contains(location)){
-							locationLoop = false;
-						}
-						else{
-							System.out.println("Please enter the correct available location.");
-							locationLoop = true;
-						}
-					}					
-					
-					if (location.equals("right") && right == true) {
-						gameObj.GameBoard[adjLocY][adjLocX + 1] = tileInHand
-								.getTilesId();
-
-						y = adjLocY;
-						x = adjLocX + 1;
-					}
-					if (location.equals("left") && left == true) {
-						gameObj.GameBoard[adjLocY][adjLocX - 1] = tileInHand
-								.getTilesId();
-
-						y = adjLocY;
-						x = adjLocX - 1;
-					}
-					if (location.equals("top") && top == true) {
-						gameObj.GameBoard[adjLocY - 1][adjLocX] = tileInHand
-								.getTilesId();
-
-						y = adjLocY - 1;
-						x = adjLocX;
-					}
-					if (location.equals("bottom") && bottom == true) {
-						y = adjLocY + 1;
-						x = adjLocX;
-
-						gameObj.GameBoard[adjLocY + 1][adjLocX] = tileInHand
-								.getTilesId();
-					}
-
-					// distribute lantern cards and favor tokens to
-					// currently playing player
-					distributeLakeTilesPlaying(gameObj, playing, y, x);
-
-					// distribute lantern cards to
-					// all players except currently playing player
-					distributingLakeTilesToRestPlayers(gameObj, playing, y, x);
-
-					// add lake tile to current lake tile arrangement vector
-					gameObj.getCurrentLakeTilesArrangement().addElement(
-							tileInHand);
-
-					// remove laketile in hand and already placed
-					playing = playing.removePlacedLakeTile(tileInHand);
-
-					System.out.println(""); // for space
-
-					// take one card from draw stack to have three cards in hand
-					// and remove top element from draw stack.
-					boolean containTiles = Players.replenishLakeTilesInHand(gameObj,
-							playing);
-
-					if (containTiles) {
-						playFlag = true;
-
-					} else {
-						playFlag = false;
-						break;
-					}
-
-					//display player status
-					new LanternGameView().displayPlayerStatus(playing);
-					//displayPlayerStatus(playing);
-
-					System.out.println("Lake Tile placed on the game board.");
-
-					//remove playing object
-					
-					// lake tiles that are already placed on the board.
-					new LanternGameView().displayLakeTileBoard(gameObj);
-					//displayLakeTileBoard(gameObj);
-
-					// update current player of game to next player
-					playing = updateCurrentPlayer(gameObj, playing);
-
-					gameObj.setPlayerCurrentTurn(playing);
-					
-					// exchange option will run after player change.
-					exchangeRun = false; 
-					dedicationRun = false;
-
-					turnCount += 1;
-
-					System.out.println(); // for space
-
-				}
-
-				break;
-
-			default:
-				break;
-			}*/
-			
 			//display player status
 			new LanternGameView().displayPlayerStatus(playing);
 			//displayPlayerStatus(playing);				
@@ -529,12 +250,8 @@ public class NHonorPointsGamePlay extends PlayGame {
 	private static boolean checkDrawStackSize(GameInstance gameObj) {
 		if(gameObj.getGameTilesDrawPile().isEmpty()){
 			return true;
-//			return 0;
 		}else{
 			return false;
-			//return gameObj.getGameTilesDrawPile().size();
-		}
-		
+		}	
 	}
-
 }
