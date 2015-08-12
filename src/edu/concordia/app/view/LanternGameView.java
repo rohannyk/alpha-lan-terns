@@ -42,8 +42,8 @@ public class LanternGameView {
 
 		System.out.println("----------- Game Board ------------");
 
-		for (int i = startHorizontal-5; i < endHorizontal + 1; i++) {
-			for (int j = startVertial-5; j < endVertial + 1; j++) {
+		for (int i = startHorizontal-5; i < endHorizontal + 5; i++) {
+			for (int j = startVertial-5; j < endVertial + 5; j++) {
 				if ((gameObj.GameBoard[i][j]) == 99)
 					System.out.print(padLeft(" ", 3));
 				else
