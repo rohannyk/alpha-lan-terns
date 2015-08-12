@@ -566,7 +566,7 @@ public class Players {
 		}
 
 		if (!dediSixToken.isEmpty()) {
-			for (Iterator<Integer> iterator = dediFourToken.iterator(); 
+			for (Iterator<Integer> iterator = dediSixToken.iterator(); 
 					iterator.hasNext();) {
 				Integer integer = (Integer) iterator.next();
 
@@ -575,7 +575,7 @@ public class Players {
 		}
 
 		if (!dediSevenToken.isEmpty()) {
-			for (Iterator<Integer> iterator = dediFourToken.iterator(); 
+			for (Iterator<Integer> iterator = dediSevenToken.iterator(); 
 					iterator.hasNext();) {
 				Integer integer = (Integer) iterator.next();
 
