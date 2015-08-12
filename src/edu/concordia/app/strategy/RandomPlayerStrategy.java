@@ -16,7 +16,7 @@ import edu.concordia.app.model.Players;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author Team E
+ * @author lovepreet
  *
  */
 public class RandomPlayerStrategy extends PlayerStrategy {

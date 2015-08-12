@@ -5,17 +5,24 @@ package edu.concordia.app.strategy;
 
 import java.util.Scanner;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import edu.concordia.app.model.GameInstance;
 import edu.concordia.app.model.Players;
 
+@XmlRootElement
 /**
  * @author lovepreet
  *
  */
-public abstract class PlayerStrategy {
+public class PlayerStrategy {
 
-	public abstract String makeAMove(Scanner scan, GameInstance gameObjs, Players playing, String opt);
+	public String makeAMove(Scanner scan, GameInstance gameObjs, Players playing, String opt){
+		return opt;
+	}
 
-	public abstract Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer,
-			String opt1) ;
+	public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer,
+			String opt1){
+		return gamePlayer;
+	}
 }

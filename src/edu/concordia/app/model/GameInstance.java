@@ -57,6 +57,8 @@ public class GameInstance {
 	
 	private LakeTiles gameStartTile;
 	
+	private PlayGame gameEndMode = new PlayGame();
+	
 	/**
 	 * The variable holds the number of players
 	 */
@@ -1262,6 +1264,20 @@ public class GameInstance {
 				return true;
 			}
 		return false;
+	}
+
+	/**
+	 * @return the gameEndMode
+	 */
+	public PlayGame getGameEndMode() {
+		return gameEndMode;
+	}
+
+	/**
+	 * @param gameEndMode the gameEndMode to set
+	 */
+	public void setGameEndMode(PlayGame gameEndMode) {
+		this.gameEndMode = gameEndMode;
 	}
 	
 }

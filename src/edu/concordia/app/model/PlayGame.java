@@ -7,18 +7,21 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import edu.concordia.app.components.DedicationTokens;
 import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.controller.GameController;
 import edu.concordia.app.main.LanternMain;
 import edu.concordia.app.view.LanternGameView;
 
+@XmlRootElement
 /**
  * This class governs the gameplay of the lantern game according to the rules
  * @author Team E
  *
  */
-public abstract class PlayGame {
+public class PlayGame {
 	
 	/**
 	 * The instance variable of type GameInstance.
@@ -53,7 +56,41 @@ public abstract class PlayGame {
 		this.gameController = gameController;
 	}
 	
-	public abstract void gameStart(Scanner scan);
+	public void gameStart(Scanner scan){
+		
+	}
+	
+	public void playMove(Players playing, GameInstance gameObjs, String option)
+	{
+		System.out.println("hello");
+		
+		if(gameObjs.getGameEndMode() instanceof NormalGamePlay){
+			gameObjs.getGameEndMode().gameStart(scan);
+		}else if(gameObjs.getGameEndMode() instanceof NCardGamePlay){
+			
+		}else if(gameObjs.getGameEndMode() instanceof NHonorPointsGamePlay){
+			
+		}
+		
+		
+		/*if(playing instanceof GreedyPlayer)
+		{
+			playing = GreedyPlayer.makeAMove(playing, gameObjs, option);
+		}else if (playing instanceof UnfriendlyPlayer)
+		{
+			playing = UnfriendlyPlayer.makeAMove(playing, gameObjs, option); 
+		}else if (playing instanceof RandomPlayer)
+		{
+			playing = RandomPlayer.makeAMove(playing, gameObjs, option);
+		}else if(playing instanceof FriendlyPlayer)
+		{
+			playing = FriendlyPlayer.makeAMove(playing, gameObjs, option);
+		}else if(playing instanceof HumanPlayer)
+		{
+			playing = HumanPlayer.makeAMove(playing, gameObjs, option);
+		}*/
+		
+	}
 
 	/**
 	 * The main method to play game.  
@@ -998,7 +1035,7 @@ public abstract class PlayGame {
 	 *         True : If the size is zero. False: If the draw stack is not
 	 *         empty.
 	 */
-	private static boolean checkDrawStackSize(GameInstance gameObj) {
+	/*private static boolean checkDrawStackSize(GameInstance gameObj) {
 		if(gameObj.getGameTilesDrawPile().isEmpty()){
 			return true;
 //			return 0;
@@ -1007,7 +1044,7 @@ public abstract class PlayGame {
 			//return gameObj.getGameTilesDrawPile().size();
 		}
 		
-	}
+	}*/
 
 	/**
 	 * The method to discard the specified Lantern cards of the given player of
@@ -1021,12 +1058,12 @@ public abstract class PlayGame {
 	 * @param playing
 	 *            The current player whose lantern cards will be discarded.
 	 */
-	private void discardLanternCards(GameInstance gameObj,
+	/*private void discardLanternCards(GameInstance gameObj,
 			Players playing) {
 		
 		playing.discardLanternCards(gameObj, scan);
 		
-	}
+	}*/
 	
 	
 	/**

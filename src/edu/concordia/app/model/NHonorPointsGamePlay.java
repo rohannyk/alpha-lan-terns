@@ -33,6 +33,8 @@ public class NHonorPointsGamePlay extends PlayGame {
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 		this.gamePoint = gamePoint;
+		
+		gameObj.setGameEndMode(this);
 	}
 	
 	/**

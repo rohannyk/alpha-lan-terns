@@ -17,7 +17,7 @@ import edu.concordia.app.model.Players;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author Team E
+ * @author lovepreet
  *
  */
 public class UnfriendlyPlayerStrategy extends PlayerStrategy {
@@ -97,12 +97,12 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 					// doWhatIsAsked(playing, gameObjs, "GEN");
 
 					// If anyone of the dedication is possible, do it.
-					if (playing.possibleDedicationSevenUniqueColor.size() > 6) {
+					if (playing.getPossibleDedicationSevenUniqueColor().size() > 6) {
 						if (checkPossibleUniqueColor(playing)) {
 
 							doDedicationSeven(gameObj, playing);
 						}
-					} else if (playing.possibleDedicationThreePairColor.size() > 3) {
+					} else if (playing.getPossibleDedicationThreePairColor().size() > 3) {
 
 						if ((colorPairs.size() > 2)) {
 
@@ -114,7 +114,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 							}
 						}
 
-					} else if (playing.possibleDedicationFourUniqueColor.size() > 0) {
+					} else if (playing.getPossibleDedicationFourUniqueColor().size() > 0) {
 
 						if (fourUniqueColorPairs.size() > 0) {
 
@@ -157,13 +157,13 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 			dedicationType3(playing, gameObjs);
 			
 			//do exchange and dedication if possible
-			if(sevenValue > sixValue && sevenValue > fourValue && playing.possibleDedicationSevenUniqueColor.size() > 6)
+			if(sevenValue > sixValue && sevenValue > fourValue && playing.getPossibleDedicationSevenUniqueColor().size() > 6)
 			{				
 				doWhatIsAsked( playing,  gameObjs,  "SEVEN");
-			}else if(sixValue > sevenValue && sixValue > fourValue && playing.possibleDedicationThreePairColor.size() > 3)
+			}else if(sixValue > sevenValue && sixValue > fourValue && playing.getPossibleDedicationThreePairColor().size() > 3)
 			{
 				doWhatIsAsked( playing,  gameObjs,  "SIX");
-			}else if(fourValue > sixValue && fourValue > sevenValue && playing.possibleDedicationFourUniqueColor.size() > 0)
+			}else if(fourValue > sixValue && fourValue > sevenValue && playing.getPossibleDedicationFourUniqueColor().size() > 0)
 			{
 				doWhatIsAsked( playing,  gameObjs,  "FOUR");
 			}else if(genericValue > sixValue && genericValue > fourValue && genericValue> sevenValue)
@@ -893,7 +893,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 		else if (type.equals("GEN")) {
 			
 			// If anyone of the dedication is possible, do it.
-			if(playing.possibleDedicationSevenUniqueColor.size() > 6)
+			if(playing.getPossibleDedicationSevenUniqueColor().size() > 6)
 			{				
 				if (playing.getPlayerBlackLanternCardCount() == 0) {
 					doExchange(playing, gameObj, "Black");
@@ -921,7 +921,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 				} else {
 					doDedicationSeven(gameObj, playing);
 				}
-			}else if(playing.possibleDedicationThreePairColor.size() > 3)
+			}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 			{
 				ArrayList<String> possibleThreePair = playing
 						.getPossibleDedicationThreePairColor();
@@ -1024,7 +1024,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 					}
 				}
 				
-			}else if(playing.possibleDedicationFourUniqueColor.size() > 0){
+			}else if(playing.getPossibleDedicationFourUniqueColor().size() > 0){
 				
 				ArrayList<String> possibleFourUniqueColor = playing
 						.getPossibleDedicationFourUniqueColor();
@@ -1204,7 +1204,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 							.equalsIgnoreCase(
 									playing.possibleGameColorExchangeMoves
 											.get(j))) {
-						playing.possibleExchangeMoves
+						playing.getPossibleExchangeMoves()
 								.add(playing.possiblePlayerColorExchangeMoves
 										.get(i)
 										+ ":"
@@ -1219,10 +1219,10 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 	
 	private static void dedicationType1(Players playing, GameInstance gameObjs)
 	{
-		for(int i = 0; i<playing.possibleExchangeMoves.size();i++)
+		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
 		{
-			String playerExCol = playing.possibleExchangeMoves.get(i).split(":")[0];
-			String gameExCol = playing.possibleExchangeMoves.get(i).split(":")[1];
+			String playerExCol = playing.getPossibleExchangeMoves().get(i).split(":")[0];
+			String gameExCol = playing.getPossibleExchangeMoves().get(i).split(":")[1];
 			if((((playing.getPlayerBlackLanternCardCount() > 2 && gameExCol.equals("Black"))||(playing.getPlayerBlackLanternCardCount()>3))
 				|| ((playing.getPlayerWhiteLanternCardCount() > 2 && gameExCol.equals("White"))||(playing.getPlayerWhiteLanternCardCount() > 3))
 				|| ((playing.getPlayerBlueLanternCardCount() > 2 && gameExCol.equals("Blue"))||(playing.getPlayerBlueLanternCardCount() > 3))
@@ -1231,7 +1231,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 				|| ((playing.getPlayerPurpleLanternCardCount() > 2 && gameExCol.equals("Purple"))||(playing.getPlayerPurpleLanternCardCount() > 3))
 				|| ((playing.getPlayerRedLanternCardCount() > 2) && gameExCol.equals("Red") )||(playing.getPlayerRedLanternCardCount() > 3)))
 			{
-				playing.possibleDedicationFourUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationFourUniqueColor().add(gameExCol);
 			}
 		}
 		
@@ -1239,45 +1239,45 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 	
 	 static void dedicationType2(Players playing, GameInstance gameObjs)
 	{
-		for(int i = 0; i<playing.possibleExchangeMoves.size();i++)
+		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
 		{
-			String playerExCol = playing.possibleExchangeMoves.get(i).split(":")[0];
-			String gameExCol = playing.possibleExchangeMoves.get(i).split(":")[1];
+			String playerExCol = playing.getPossibleExchangeMoves().get(i).split(":")[0];
+			String gameExCol = playing.getPossibleExchangeMoves().get(i).split(":")[1];
 			
 			if ((playing.getPlayerBlackLanternCardCount() > 0 && gameExCol
 					.equals("Black"))
 					|| (playing.getPlayerBlackLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerWhiteLanternCardCount() > 0 && gameExCol
 					.equals("White"))
 					|| (playing.getPlayerWhiteLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerBlueLanternCardCount() > 0 && gameExCol
 					.equals("Blue"))
 					|| (playing.getPlayerBlueLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerGreenLanternCardCount() > 0 && gameExCol
 					.equals("Green"))
 					|| (playing.getPlayerGreenLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerOrangeLanternCardCount() > 0 && gameExCol
 					.equals("Orange"))
 					|| (playing.getPlayerOrangeLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerPurpleLanternCardCount() > 0 && gameExCol
 					.equals("Purple"))
 					|| (playing.getPlayerPurpleLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 			if ((playing.getPlayerRedLanternCardCount() > 0 && gameExCol
 					.equals("Red"))
 					|| (playing.getPlayerRedLanternCardCount() > 1)) {
-				playing.possibleDedicationThreePairColor.add(gameExCol);
+				playing.getPossibleDedicationThreePairColor().add(gameExCol);
 			}
 		}
 		
@@ -1285,45 +1285,45 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 	
 	private static void dedicationType3(Players playing, GameInstance gameObjs)
 	{
-		for(int i = 0; i<playing.possibleExchangeMoves.size();i++)
+		for(int i = 0; i<playing.getPossibleExchangeMoves().size();i++)
 		{
-			String playerExCol = playing.possibleExchangeMoves.get(i).split(":")[0];
-			String gameExCol = playing.possibleExchangeMoves.get(i).split(":")[1];
+			String playerExCol = playing.getPossibleExchangeMoves().get(i).split(":")[0];
+			String gameExCol = playing.getPossibleExchangeMoves().get(i).split(":")[1];
 			
 			if ((playing.getPlayerBlackLanternCardCount() == 0 && gameExCol
 					.equals("Black"))
 					|| (playing.getPlayerBlackLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerWhiteLanternCardCount() == 0 && gameExCol
 					.equals("White"))
 					|| (playing.getPlayerWhiteLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerBlueLanternCardCount() == 0 && gameExCol
 					.equals("Blue"))
 					|| (playing.getPlayerBlueLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerGreenLanternCardCount()== 0 && gameExCol
 					.equals("Green"))
 					|| (playing.getPlayerGreenLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerOrangeLanternCardCount() == 0 && gameExCol
 					.equals("Orange"))
 					|| (playing.getPlayerOrangeLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerPurpleLanternCardCount() == 0 && gameExCol
 					.equals("Purple"))
 					|| (playing.getPlayerPurpleLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 			if ((playing.getPlayerRedLanternCardCount() == 0 && gameExCol
 					.equals("Red"))
 					|| (playing.getPlayerRedLanternCardCount() > 0)) {
-				playing.possibleDedicationSevenUniqueColor.add(gameExCol);
+				playing.getPossibleDedicationSevenUniqueColor().add(gameExCol);
 			}
 		}
 		
@@ -1406,13 +1406,13 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 				//doWhatIsAsked(playing, gameObjs, "GEN");
 				
 				// If anyone of the dedication is possible, do it.
-				if(playing.possibleDedicationSevenUniqueColor.size() > 6)
+				if(playing.getPossibleDedicationSevenUniqueColor().size() > 6)
 				{				
 					if (checkPossibleUniqueColor(playing)) {
 
 						doDedicationSeven(gameObj, playing);
 					}
-				}else if(playing.possibleDedicationThreePairColor.size() > 3)
+				}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 				{
 					
 					if ((colorPairs.size() > 2)) {
@@ -1426,7 +1426,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 					}
 										
 					
-				}else if(playing.possibleDedicationFourUniqueColor.size() > 0){
+				}else if(playing.getPossibleDedicationFourUniqueColor().size() > 0){
 					
 					if(fourUniqueColorPairs.size() > 0) {
 												

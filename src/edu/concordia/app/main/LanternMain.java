@@ -108,7 +108,14 @@ public class LanternMain {
 				switch (endChoice) {
 				case 1:
 
+//					gameObj.setGameEndMode(new NormalGamePlay(gameObj, gameController));
+//					
+
+					
 					pGame = new NormalGamePlay(gameObj, gameController);
+					
+					pGame = gameObj.getGameEndMode();
+					
 					break;
 				
 				case 2:
@@ -136,9 +143,15 @@ public class LanternMain {
 							cardLoop = false;
 						}
 					}
-										
+					
+					//gameObj.setGameEndMode(new NCardGamePlay(gameObj, gameController, tileChoice));
+					
+					//pGame = gameObj.getGameEndMode();
 
 					pGame = new NCardGamePlay(gameObj, gameController, tileChoice);
+					
+					//gameObj.setGameEndMode(pGame);
+					
 					break;
 				
 				case 3:
@@ -201,12 +214,24 @@ public class LanternMain {
 						}
 					}
 					
+					//gameObj.setGameEndMode(new NHonorPointsGamePlay(gameObj, gameController, pointChoice));
+					
+					//pGame = gameObj.getGameEndMode();
+					
 					pGame = new NHonorPointsGamePlay(gameObj, gameController, pointChoice);
+					
+					//gameObj.setGameEndMode(pGame);
+					
 					break;
 
 				default:
 					
-					pGame = new NormalGamePlay(gameObj, gameController);
+					gameObj.setGameEndMode(new NormalGamePlay(gameObj, gameController));
+					
+					pGame = gameObj.getGameEndMode();
+					
+//					pGame = new NormalGamePlay(gameObj, gameController);
+//					gameObj.setGameEndMode(pGame);
 					break;
 				}
 
@@ -241,7 +266,20 @@ public class LanternMain {
 					System.out.println("File not found.");
 
 				} else {
-					gameController.showTextMode(instance);
+					//gameController.showTextMode(instance);
+					
+					if(instance.getGameEndMode() instanceof NormalGamePlay){
+						System.out.println("normal");
+						instance.getGameEndMode().gameStart(scan);
+					}else if(instance.getGameEndMode() instanceof NCardGamePlay){
+						System.out.println("card");
+					}else if(instance.getGameEndMode() instanceof NHonorPointsGamePlay){
+						System.out.println("point");
+					}else if(instance.getGameEndMode() instanceof PlayGame){
+						System.out.println("default");
+					}
+					
+					instance.getGameEndMode().gameStart(scan);
 
 					//pGame.gameStart(scan);
 					//new PlayGame(instance, gameController).gameStart(scan);

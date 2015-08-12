@@ -28,8 +28,12 @@ public class NormalGamePlay extends PlayGame {
 	 * @param gameController
 	 */
 	public NormalGamePlay(GameInstance gameObj, GameController gameController) {
+		super(gameObj, gameController);
+		
 		this.gameObj = gameObj;
 		this.gameController = gameController;
+		
+		gameObj.setGameEndMode(this);
 	}
 	
 	/**

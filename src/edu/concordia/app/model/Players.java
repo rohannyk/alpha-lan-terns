@@ -1,5 +1,5 @@
 /**
- * Players Class
+ * 
  */
 package edu.concordia.app.model;
 
@@ -33,13 +33,13 @@ public class Players {
 	
 	public ArrayList<String> possibleGameColorExchangeMoves = new ArrayList<String>();
 	
-	public ArrayList<String> possibleExchangeMoves = new ArrayList<String>();
+	protected ArrayList<String> possibleExchangeMoves = new ArrayList<String>();
 	
-	public ArrayList<String> possibleDedicationFourUniqueColor = new ArrayList<String>();
+	protected ArrayList<String> possibleDedicationFourUniqueColor = new ArrayList<String>();
 	
-	public ArrayList<String> possibleDedicationThreePairColor = new ArrayList<String>();
+	protected ArrayList<String> possibleDedicationThreePairColor = new ArrayList<String>();
 	
-	public ArrayList<String> possibleDedicationSevenUniqueColor = new ArrayList<String>();
+	protected ArrayList<String> possibleDedicationSevenUniqueColor = new ArrayList<String>();
 	
 	public ArrayList<String> firstLakeTilePossibleScore = new ArrayList<String>();
 	
@@ -1164,6 +1164,7 @@ public class Players {
 
 	/*public void playMove(Players playing, GameInstance gameObjs, String option)
 	{
+		System.out.println("hello");
 		if(playing instanceof GreedyPlayer)
 		{
 			playing = GreedyPlayer.makeAMove(playing, gameObjs, option);
@@ -1477,6 +1478,20 @@ public class Players {
 	public void setPossibleDedicationSevenUniqueColor(
 			ArrayList<String> possibleDedicationSevenUniqueColor) {
 		this.possibleDedicationSevenUniqueColor = possibleDedicationSevenUniqueColor;
+	}
+
+	/**
+	 * @return the possibleExchangeMoves
+	 */
+	public ArrayList<String> getPossibleExchangeMoves() {
+		return possibleExchangeMoves;
+	}
+
+	/**
+	 * @param possibleExchangeMoves the possibleExchangeMoves to set
+	 */
+	public void setPossibleExchangeMoves(ArrayList<String> possibleExchangeMoves) {
+		this.possibleExchangeMoves = possibleExchangeMoves;
 	}
 	
 	

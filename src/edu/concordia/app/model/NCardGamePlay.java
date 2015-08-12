@@ -33,7 +33,9 @@ public class NCardGamePlay extends PlayGame {
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 		this.maxCardInput = maxCardInput;
-		System.out.println(gameObj);
+		
+		gameObj.setGameEndMode(this);
+		//System.out.println(gameObj);
 	}
 	
 	/**

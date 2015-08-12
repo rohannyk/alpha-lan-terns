@@ -225,8 +225,22 @@ public class LanternGameView {
 		for (int i = 0; i < gamePlayers.length; i++) {
 			Players gamePlayer = gamePlayers[i];
 
-			System.out.println("Player " + gamePlayer.getPlayerNumber()
-					+ " Score: " + gamePlayer.getTotalPoints());
+			System.out.println("----- Player " + gamePlayer.getPlayerNumber()+"-------");
+			
+			System.out.println(); //space
+			
+			System.out.println(" Score: " + gamePlayer.getTotalPoints());
+			
+			System.out.println(); //space
+			
+			System.out.println(" Total Lantern Cards: "+gamePlayer.getLanternCardCount());
+			
+			System.out.println(); //space
+			
+			System.out.println(" Total Favor Tokens: "+gamePlayer.getPlayerFavorToken());
+			
+			System.out.println("------- ------------- -------");
+			
 		}
 
 		System.out.println("-------------- ---------- -------------");
