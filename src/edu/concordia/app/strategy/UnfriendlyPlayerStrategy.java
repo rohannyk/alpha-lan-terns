@@ -332,9 +332,14 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 				//arraylist contain lake tiles where adjacent lake tiles can be placed.
 				ArrayList<String> possibleAdjacentBoardLakeTiles = new ArrayList<String>();
 				
+				System.out.print("adjacent tiles: ");
+				
 				for (int i = startHorizontal; i < endHorizontal + 1; i++) {
 					for (int j = startVertial; j < endVertial + 1; j++) {
-						if ((gameObjs.GameBoard[i][j]) != 99){
+					if ((gameObjs.GameBoard[i][j]) != 99
+							&& (gameObjs.GameBoard[i][j - 1] == 99
+									|| gameObjs.GameBoard[i][j + 1] == 99
+									|| gameObjs.GameBoard[i - 1][j] == 99 || gameObjs.GameBoard[i + 1][j] == 99)) {
 							
 //							System.out.print(
 //									Integer.toString(gameObjs.GameBoard[i][j]));
@@ -456,8 +461,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 				System.out.println(degreeCombination[0]+" "+degreeCombination[1]);
 				
 				for (int plyrCount=0; plyrCount < gameObjs.getPlayersList().length;plyrCount++)
-				{
-					
+				{			
 					
 					if(gameObjs.getPlayersList()[plyrCount].getPlayerPosition().equalsIgnoreCase("North") && colorCount(lakeTileChoice.getTopColor(), gameObjs)>0 )
 					{
@@ -494,6 +498,8 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy {
 					
 //					tilePlacementCominationResults.add(otherPlayerTilesPlacement);
 //					otherPlayerTilesPlacement  += lakeTileChoice.getTilesId() +":"+ degree;
+					
+					
 				}
 				
 				tilePlacementCominationResults.add(otherPlayerTilesPlacement);

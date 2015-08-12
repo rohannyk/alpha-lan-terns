@@ -405,7 +405,10 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 				
 				for (int i = startHorizontal; i < endHorizontal + 1; i++) {
 					for (int j = startVertial; j < endVertial + 1; j++) {
-						if ((gameObjs.GameBoard[i][j]) != 99){
+					if ((gameObjs.GameBoard[i][j]) != 99
+							&& (gameObjs.GameBoard[i][j - 1] == 99
+									|| gameObjs.GameBoard[i][j + 1] == 99
+									|| gameObjs.GameBoard[i - 1][j] == 99 || gameObjs.GameBoard[i + 1][j] == 99)) {
 							
 //							System.out.print(
 //									Integer.toString(gameObjs.GameBoard[i][j]));
