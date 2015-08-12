@@ -125,6 +125,9 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 					
 					if(gamePlayer.getPlayerFavorToken() > 1){
 						
+					System.out.println("Player " + gamePlayer.getPlayerNumber()
+								+ " will do an exchange.");
+						
 					//possible lantern card colors player can give
 					Vector<String> possibleExchangColorsToGive = availableDiscardCardColors(gamePlayer);
 					
@@ -155,8 +158,8 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 					
 					System.out.println();
 					
-					System.out.println("Player" + gamePlayer.getPlayerNumber()
-							+ " will Make a dedication.");
+					System.out.println("Player " + gamePlayer.getPlayerNumber()
+							+ " will do a dedication.");
 
 					System.out.println();
 					
@@ -173,30 +176,108 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 					ArrayList<String> fourUniqueColorPairs = checkPossibleFourUnique(gamePlayer);
 					
 					//do exchange and dedication if possible
-					if (checkPossibleUniqueColor(gamePlayer) || (sevenValue > sixValue && sevenValue > fourValue)
-							|| (genericValue > sixValue && genericValue > fourValue
-							&& genericValue > sevenValue))
-					{
+					if (checkPossibleUniqueColor(gamePlayer) ){ //|| (sevenValue > sixValue && sevenValue > fourValue)
+							// || (genericValue > sixValue && genericValue > fourValue
+							// && genericValue > sevenValue)) {
 							doDedicationSeven(gameObj, gamePlayer);
+							
+							System.out.println();
+							
+							System.out.println("Player " + gamePlayer.getPlayerNumber()
+									+ " has choosen Type 3 Dedication"+"(Seven unique Lantern Cards).");
+							
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSevenVal = dedicationObj
+									.getDedicationTokenSeven();
+							if (dedicationSevenVal.size() > 0) {
+								int dedicationSevenValue = dedicationSevenVal
+										.remove(0);
+								DedicationTokens playerDedicationObj = gamePlayer.getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSeven()
+										.add(dedicationSevenValue);
+								if (dedicationSevenVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSeven(-1);
+								} else {
+									gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genGenericVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genGenericVal.size() > 0) {
+									int genericValue1 = genGenericVal.remove(0);
+									DedicationTokens playerDedicationObj = gamePlayer.getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue1);
+								}
+							}
 						
-					} else if ((colorPairs.size() > 2) || (sixValue > sevenValue && sixValue > fourValue)) {
+					} else if ((colorPairs.size() > 2)){// || (sixValue > sevenValue && sixValue > fourValue)) {
 										
+						System.out.println("Player " + gamePlayer.getPlayerNumber()
+								+ " has choosen Type 2 Dedication"+"(Three color pairs of Lantern Cards).");
+						
+							int pairCount = 0;
+						
 							for (int i = 0; i < 3; i++) {
 								
 								String color = colorPairs.get(i);
 								
 								doDedicationSix(gameObj, color, gamePlayer);
-							}					
+								
+								System.out.println("Player " + gamePlayer.getPlayerNumber()+"  dedicated "+color+" color.");
+								
+								pairCount += 1;
+								
+							}
+							
+							
+							
+							if(pairCount == 3){
+								DedicationTokens dedicationObj = gameObj
+										.getDedicationTokens();
+								Vector<Integer> dedicationSixVal = dedicationObj
+										.getDedicationTokenSix();
+								if (dedicationSixVal.size() > 0) {
+									int dedicationSixValue = dedicationSixVal.remove(0);
+									DedicationTokens playerDedicationObj = gamePlayer.getDedicationTokens();
+									playerDedicationObj.getDedicationTokenSix().add(
+											dedicationSixValue);
+									if (dedicationSixVal.isEmpty()) {
+										gameObj.setNextDedicationTokenSix(-1);
+									} else {
+										gameObj.setNextDedicationTokenSix(dedicationSixVal
+												.firstElement());
+									}
+								} else {
+									Vector<Integer> genDedicationVal = dedicationObj
+											.getGenericDedicationTokens();
+									if (genDedicationVal.size() > 0) {
+										int genericValue1 = genDedicationVal.remove(0);
+										DedicationTokens playerDedicationObj = gamePlayer.getDedicationTokens();
+										playerDedicationObj
+												.getGenericDedicationTokens().add(
+														genericValue1);
+									}
+								}
+							}
 						
-					} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
-														
+					} else if (fourUniqueColorPairs.size() > 0 ){ //|| (fourValue > sixValue && fourValue > sevenValue)) {
+						
+						System.out.println("Player " + gamePlayer.getPlayerNumber()
+								+ " has choosen Type 1 Dedication"+"(Four same color pair of Lantern Cards).");
+						
 						int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 						
 						String colorFour = fourUniqueColorPairs.get(randomNumber);
 							
 						doDedicationFour(gameObj, colorFour, gamePlayer);
 						
-					} else if (genericValue > sixValue && genericValue > fourValue
+						System.out.println("Player " + gamePlayer.getPlayerNumber()+"  dedicated "+colorFour+" color.");
+						
+					} /*else if (genericValue > sixValue && genericValue > fourValue
 							&& genericValue > sevenValue) {
 						
 						//doWhatIsAsked(playing, gameObjs, "GEN");
@@ -234,7 +315,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 							}
 							
 						}
-					}
+					}*/
 					
 					opt1 = PlayGame.removeSubstring(new String("type1"), opt1);
 					opt1 = PlayGame.removeSubstring(new String("type2"), opt1);
@@ -885,11 +966,46 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 			} else {
 				doDedicationSeven(gameObj, playing);
 			}
+			
+			System.out.println("Player "+playing.getPlayerNumber()+" perform type 3 dedication(Seven unique color).");
+			
+			DedicationTokens dedicationObj = gameObj
+					.getDedicationTokens();
+			Vector<Integer> dedicationSevenVal = dedicationObj
+					.getDedicationTokenSeven();
+			if (dedicationSevenVal.size() > 0) {
+				int dedicationSevenValue = dedicationSevenVal
+						.remove(0);
+				DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+				playerDedicationObj.getDedicationTokenSeven()
+						.add(dedicationSevenValue);
+				if (dedicationSevenVal.isEmpty()) {
+					gameObj.setNextDedicationTokenSeven(-1);
+				} else {
+					gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+							.firstElement());
+				}
+			} else {
+				Vector<Integer> genGenericVal = dedicationObj
+						.getGenericDedicationTokens();
+				if (genGenericVal.size() > 0) {
+					int genericValue = genGenericVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj
+							.getGenericDedicationTokens().add(
+									genericValue);
+				}
+			}
+			
+			new LanternGameView().displayPlayerStatus(playing);
 
 		} else if (type.equals("SIX")) {
 			
 			ArrayList<String> possibleThreePair = playing
 					.getPossibleDedicationThreePairColor();
+			
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " perform type 2 dedication(Three color pairs).");
 
 			int pairCount = 0;
 
@@ -905,10 +1021,16 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerBlackLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -919,10 +1041,16 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerWhiteLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -933,10 +1061,16 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerBlueLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -947,10 +1081,16 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerGreenLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -961,10 +1101,16 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerPurpleLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -975,9 +1121,15 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 					} else if (playing.getPlayerRedLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 					}
@@ -987,11 +1139,46 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 					} else if (playing.getPlayerOrangeLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
+					}
+				}
+			}
+			
+			if(pairCount == 3){
+				DedicationTokens dedicationObj = gameObj
+						.getDedicationTokens();
+				Vector<Integer> dedicationSixVal = dedicationObj
+						.getDedicationTokenSix();
+				if (dedicationSixVal.size() > 0) {
+					int dedicationSixValue = dedicationSixVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj.getDedicationTokenSix().add(
+							dedicationSixValue);
+					if (dedicationSixVal.isEmpty()) {
+						gameObj.setNextDedicationTokenSix(-1);
+					} else {
+						gameObj.setNextDedicationTokenSix(dedicationSixVal
+								.firstElement());
+					}
+				} else {
+					Vector<Integer> genDedicationVal = dedicationObj
+							.getGenericDedicationTokens();
+					if (genDedicationVal.size() > 0) {
+						int genericValue = genDedicationVal.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj
+								.getGenericDedicationTokens().add(
+										genericValue);
 					}
 				}
 			}
@@ -1001,62 +1188,107 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 					.getPossibleDedicationFourUniqueColor();
 
 			String color = possibleFourUniqueColor.get(0);
+			
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " perform type 1 dedication(Four same color Lantern cards).");
 
 			if (color.equalsIgnoreCase("Black")) {
 				if (playing.getPlayerBlackLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Black");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerBlackLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("White")) {
 				if (playing.getPlayerWhiteLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "White");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerWhiteLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Blue")) {
 				if (playing.getPlayerBlueLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Blue");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerBlueLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Green")) {
 				if (playing.getPlayerGreenLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Green");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerGreenLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Purple")) {
 				if (playing.getPlayerPurpleLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Purple");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerPurpleLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Red")) {
 				if (playing.getPlayerRedLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Red");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerRedLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Orange")) {
 				if (playing.getPlayerOrangeLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Orange");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerOrangeLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			}
 
@@ -1092,6 +1324,37 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 				} else {
 					doDedicationSeven(gameObj, playing);
 				}
+				
+				
+					DedicationTokens dedicationObj = gameObj
+							.getDedicationTokens();
+					Vector<Integer> dedicationSevenVal = dedicationObj
+							.getDedicationTokenSeven();
+					if (dedicationSevenVal.size() > 0) {
+						int dedicationSevenValue = dedicationSevenVal
+								.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj.getDedicationTokenSeven()
+								.add(dedicationSevenValue);
+						if (dedicationSevenVal.isEmpty()) {
+							gameObj.setNextDedicationTokenSeven(-1);
+						} else {
+							gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+									.firstElement());
+						}
+					} else {
+						Vector<Integer> genGenericVal = dedicationObj
+								.getGenericDedicationTokens();
+						if (genGenericVal.size() > 0) {
+							int genericValue = genGenericVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj
+									.getGenericDedicationTokens().add(
+											genericValue);
+						}
+					}
+				
+				
 			}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 			{
 				ArrayList<String> possibleThreePair = playing
@@ -1195,6 +1458,35 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 					}
 				}
 				
+				if(pairCount == 3){
+					DedicationTokens dedicationObj = gameObj
+							.getDedicationTokens();
+					Vector<Integer> dedicationSixVal = dedicationObj
+							.getDedicationTokenSix();
+					if (dedicationSixVal.size() > 0) {
+						int dedicationSixValue = dedicationSixVal.remove(0);
+						DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+						playerDedicationObj.getDedicationTokenSix().add(
+								dedicationSixValue);
+						if (dedicationSixVal.isEmpty()) {
+							gameObj.setNextDedicationTokenSix(-1);
+						} else {
+							gameObj.setNextDedicationTokenSix(dedicationSixVal
+									.firstElement());
+						}
+					} else {
+						Vector<Integer> genDedicationVal = dedicationObj
+								.getGenericDedicationTokens();
+						if (genDedicationVal.size() > 0) {
+							int genericValue = genDedicationVal.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj
+									.getGenericDedicationTokens().add(
+											genericValue);
+						}
+					}
+				}
+				
 			}else if(playing.getPossibleDedicationFourUniqueColor().size() > 0){
 				
 				ArrayList<String> possibleFourUniqueColor = playing
@@ -1289,8 +1581,38 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 	 * @param playing
 	 */
 	private static void doDedicationFour(GameInstance gameObj, String giveColor, Players playing){
-		PlayGame.getDedicationType1ColorValidationAndRemoval(
+		boolean type1Val = PlayGame.getDedicationType1ColorValidationAndRemoval(
 				playing, giveColor, gameObj);
+		
+		if (type1Val) {
+			DedicationTokens dedicationObj = gameObj
+					.getDedicationTokens();
+			Vector<Integer> dedicationVal = dedicationObj
+					.getDedicationTokenFour();
+			if (dedicationVal.size() > 0) {
+				int dedicationValue = dedicationVal.remove(0);
+				DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+				playerDedicationObj.getDedicationTokenFour().add(
+						dedicationValue);
+				if (dedicationVal.isEmpty()) {
+					gameObj.setNextDedicationTokenFour(-1);
+				} else {
+					gameObj.setNextDedicationTokenFour(dedicationVal
+							.firstElement());
+				}
+			} else {
+				Vector<Integer> genDedicationVal = dedicationObj
+						.getGenericDedicationTokens();
+				if (genDedicationVal.size() > 0) {
+					int genericValue = genDedicationVal.remove(0);
+					DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+					playerDedicationObj
+							.getGenericDedicationTokens().add(
+									genericValue);
+				}
+			}
+		}
+		
 	}
 
 	public static void doExchange(Players playing, GameInstance gameObj, String getColors)
@@ -1578,15 +1900,77 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						&& genericValue > sevenValue))
 				{
 						doDedicationSeven(gameObj, playing);
+						
+						//update dedication value
+						DedicationTokens dedicationObj = gameObj
+								.getDedicationTokens();
+						Vector<Integer> dedicationSevenVal = dedicationObj
+								.getDedicationTokenSeven();
+						if (dedicationSevenVal.size() > 0) {
+							int dedicationSevenValue = dedicationSevenVal
+									.remove(0);
+							DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+							playerDedicationObj.getDedicationTokenSeven()
+									.add(dedicationSevenValue);
+							if (dedicationSevenVal.isEmpty()) {
+								gameObj.setNextDedicationTokenSeven(-1);
+							} else {
+								gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+										.firstElement());
+							}
+						} else {
+							Vector<Integer> genGenericVal = dedicationObj
+									.getGenericDedicationTokens();
+							if (genGenericVal.size() > 0) {
+								int genericValue1 = genGenericVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj
+										.getGenericDedicationTokens().add(
+												genericValue1);
+							}
+						}
 					
 				} else if ((colorPairs.size() > 2) || (sixValue > sevenValue && sixValue > fourValue)) {
 									
-						for (int i = 0; i < 3; i++) {
+					int pairCount = 0;	
+					
+					for (int i = 0; i < 3; i++) {
 							
 							String color = colorPairs.get(i);
 							
 							doDedicationSix(gameObj, color, playing);
-						}					
+							
+							pairCount +=1;
+						}	
+						
+						if(pairCount == 3){
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSixVal = dedicationObj
+									.getDedicationTokenSix();
+							if (dedicationSixVal.size() > 0) {
+								int dedicationSixValue = dedicationSixVal.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSix().add(
+										dedicationSixValue);
+								if (dedicationSixVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSix(-1);
+								} else {
+									gameObj.setNextDedicationTokenSix(dedicationSixVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genDedicationVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genDedicationVal.size() > 0) {
+									int genericValue1 = genDedicationVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue1);
+								}
+							}
+						}
 					
 				} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
 													
@@ -1607,18 +1991,80 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 						if (checkPossibleUniqueColor(playing)) {
 
 							doDedicationSeven(gameObj, playing);
+							
+							DedicationTokens dedicationObj = gameObj
+									.getDedicationTokens();
+							Vector<Integer> dedicationSevenVal = dedicationObj
+									.getDedicationTokenSeven();
+							if (dedicationSevenVal.size() > 0) {
+								int dedicationSevenValue = dedicationSevenVal
+										.remove(0);
+								DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+								playerDedicationObj.getDedicationTokenSeven()
+										.add(dedicationSevenValue);
+								if (dedicationSevenVal.isEmpty()) {
+									gameObj.setNextDedicationTokenSeven(-1);
+								} else {
+									gameObj.setNextDedicationTokenSeven(dedicationSevenVal
+											.firstElement());
+								}
+							} else {
+								Vector<Integer> genGenericVal = dedicationObj
+										.getGenericDedicationTokens();
+								if (genGenericVal.size() > 0) {
+									int genericValue1 = genGenericVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj
+											.getGenericDedicationTokens().add(
+													genericValue1);
+								}
+							}
 						}
+						
 					}else if(playing.getPossibleDedicationThreePairColor().size() > 3)
 					{
 						
 						if ((colorPairs.size() > 2)) {
+							
+							int pairCount = 0;
 							
 							for (int i = 0; i < 3; i++) {
 								
 								String color = colorPairs.get(i);
 								
 								doDedicationSix(gameObj, color, playing);
+								
+								pairCount +=1;
 							}	
+							
+							if(pairCount == 3){
+								DedicationTokens dedicationObj = gameObj
+										.getDedicationTokens();
+								Vector<Integer> dedicationSixVal = dedicationObj
+										.getDedicationTokenSix();
+								if (dedicationSixVal.size() > 0) {
+									int dedicationSixValue = dedicationSixVal.remove(0);
+									DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+									playerDedicationObj.getDedicationTokenSix().add(
+											dedicationSixValue);
+									if (dedicationSixVal.isEmpty()) {
+										gameObj.setNextDedicationTokenSix(-1);
+									} else {
+										gameObj.setNextDedicationTokenSix(dedicationSixVal
+												.firstElement());
+									}
+								} else {
+									Vector<Integer> genDedicationVal = dedicationObj
+											.getGenericDedicationTokens();
+									if (genDedicationVal.size() > 0) {
+										int genericValue1 = genDedicationVal.remove(0);
+										DedicationTokens playerDedicationObj = playing.getDedicationTokens();
+										playerDedicationObj
+												.getGenericDedicationTokens().add(
+														genericValue1);
+									}
+								}
+							}
 						}
 											
 						
@@ -1696,35 +2142,146 @@ public class FriendlyPlayerStrategy extends PlayerStrategy {
 			
 			System.out.println();
 			
-			System.out.println("Please enter your choice:");
 			
-			System.out.println(discardColorChoices.size());
 			
 			int colorId = getRandomNumber(discardColorChoices.size());
 			
 			String deleteColor = discardColorChoices.get(colorId);
 			
+			System.out.println("Please enter your choice:");
+			
+			System.out.println(deleteColor);
+			
 			// get card count of lantern card color to be deleted
 			int colorCount = getLanternCardColorCount(playing, deleteColor);			
 			
-			System.out.println("Please enter the number of"
-					+ " cards you want to discard:");
+			System.out.print("Please enter the number of"
+					+ " cards you want to discard: ");
 			
 			//method returns random number between 0 and colorCount-1
 			//int deleteCardCount = getRandomNumber(colorCount+1);
 			
-			boolean removeResult = PlayGame.getLanterCardColorRemoval(playing,
+			System.out.println(colorCount);
+			// method should return player whose lantern cards have been updated.
+			playing = this.getLanterCardColorRemoval(playing,
 					deleteColor, gameObj, colorCount);
 			
-			if (removeResult) {
+			//if (removeResult) {
+				//System.out.println(playing.getLanternCardCount());
 				if (playing.getLanternCardCount() > 12) {
 					loopCheck = true;
 				} else {
 					loopCheck = false;
 				}
-			}
+			//}
 		}
 		
+	}
+	
+	/**
+	 * The method to remove the lantern cards of specified color from the given
+	 * player.The number of lantern cards will be discarded according to the
+	 * given cardCount.
+	 * 
+	 * @param playing
+	 *            The current player whose lantern cards will be discarded.
+	 * @param deleteColor
+	 *            The color of the lantern card to be discarded
+	 * @param gameObj
+	 *            The GameInstance object for updating the lantern cards of the
+	 *            game board.
+	 * @param cardCount
+	 *            The number of cards to be discarded
+	 * @return true if lantern cards of selected color are removed from players
+	 *         lantern count and add to the game lantern count.
+	 */
+	public Players getLanterCardColorRemoval(Players playing,
+			String deleteColor, GameInstance gameObj, int cardCount) {
+
+		if (deleteColor.equals("Black")) 
+		{
+			if (playing.getPlayerBlackLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerBlackLanternCardCount(playing
+						.getPlayerBlackLanternCardCount() - cardCount);
+				gameObj.setGameBlackLanternCardCount(gameObj
+						.getGameBlackLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("White")) 
+		{
+			if (playing.getPlayerWhiteLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerWhiteLanternCardCount(playing
+						.getPlayerWhiteLanternCardCount() - cardCount);
+				gameObj.setGameWhiteLanternCardCount(gameObj
+						.getGameWhiteLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("Blue")) 
+		{
+			if (playing.getPlayerBlueLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerBlueLanternCardCount(playing
+						.getPlayerBlueLanternCardCount() - cardCount);
+				gameObj.setGameBlueLanternCardCount(gameObj
+						.getGameBlueLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("Green")) 
+		{
+			if (playing.getPlayerGreenLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerGreenLanternCardCount(playing
+						.getPlayerGreenLanternCardCount() - cardCount);
+				gameObj.setGameGreenLanternCardCount(gameObj
+						.getGameGreenLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("Orange")) 
+		{
+			if (playing.getPlayerOrangeLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerOrangeLanternCardCount(playing
+						.getPlayerOrangeLanternCardCount() - cardCount);
+				gameObj.setGameOrangeLanternCardCount(gameObj
+						.getGameOrangeLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("Red")) 
+		{
+			if (playing.getPlayerRedLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerRedLanternCardCount(playing
+						.getPlayerRedLanternCardCount() - cardCount);
+				gameObj.setGameRedLanternCardCount(gameObj
+						.getGameRedLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+
+		if (deleteColor.equals("Purple")) 
+		{
+			if (playing.getPlayerPurpleLanternCardCount() >= cardCount) 
+			{
+				playing.setPlayerPurpleLanternCardCount(playing
+						.getPlayerPurpleLanternCardCount() - cardCount);
+				gameObj.setGamePurpleLanternCardCount(gameObj
+						.getGamePurpleLanternCardCount() + cardCount);
+				//return true;
+			}
+		}
+		return playing;
 	}
 	
 	/**
