@@ -27,6 +27,7 @@ public class NHonorPointsGamePlay extends PlayGame {
 	private Scanner scan;
 	
 	/**
+	 * Constructor
 	 * @param gameObj
 	 * @param gameController
 	 * @param maxPointInput
