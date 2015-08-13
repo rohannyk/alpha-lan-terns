@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.strategy;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -17,11 +18,17 @@ import edu.concordia.app.view.LanternGameView;
  * @author lovepreet
  *
  */
-public class NormalPlayerStrategy extends PlayerStrategy {
+public class NormalPlayerStrategy extends PlayerStrategy implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4659220962800092534L;
+
 	private GameInstance gameObj;
 	
-	private static Scanner scan = LanternMain.getValue();
+	private transient Scanner scan = new Scanner(System.in);
+	//private static Scanner scan = LanternMain.getValue();
 
 	/**
 	 * 
@@ -30,6 +37,17 @@ public class NormalPlayerStrategy extends PlayerStrategy {
 		this.gameObj = gameObj;
 	}
 	
+	
+	
+/**
+	 * 
+	 */
+	public NormalPlayerStrategy() {
+		
+	}
+
+
+
 public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, String opt1){
 		
 		//when player don't have enough lantern cards or favor tokens
@@ -109,7 +127,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 				switch (optTurnChoice) {
 				case 0:
 					
-					gamePlayer.exchageLaternCard(gameObj, scan);
+					gamePlayer.exchageLaternCard(gameObj);
 				
 					opt1 = PlayGame.removeSubstring(new String("exchange"), opt1);
 					
@@ -118,7 +136,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 					break;
 
 				case 1:
-					gamePlayer.makeADedication(gameObj, opt1, scan);
+					gamePlayer.makeADedication(gameObj, opt1);
 					
 					opt1 = PlayGame.removeSubstring(new String("type1"), opt1);
 					opt1 = PlayGame.removeSubstring(new String("type2"), opt1);
@@ -165,9 +183,9 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 	 * @see edu.concordia.app.strategy.PlayerStrategy#makeAMove()
 	 */
 	@Override
-	public String makeAMove(Scanner scan, GameInstance gameObj, Players playing, String opt) {
+	public String makeAMove(GameInstance gameObj, Players playing, String opt) {
 		
-		this.scan = scan;
+		
 		
 		System.out.println("--------------------------");
 		System.out.println("Please enter you choice:");
@@ -190,11 +208,11 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 		System.out.print("Player " + playing.getPlayerNumber()
 				+ " choice: ");
 
-		//int optPlay = scan.nextInt();
+		int optPlay = new NormalPlayerStrategy().scan.nextInt();
 
 		System.out.println(); // for spacing
 
-		switch (scan.nextInt()) {
+		switch (optPlay) {
 		
 		case 0:
 			if (!opt.contains("exchange")) {
@@ -202,7 +220,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 				break;
 			} else {
 
-				playing.exchageLaternCard(gameObj, scan);
+				playing.exchageLaternCard(gameObj);
 				
 				opt = PlayGame.removeSubstring(new String("exchange"), opt);// to mark exchange has been done.
 				
@@ -216,7 +234,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 				break;
 			} else {
 
-				playing.makeADedication(gameObj, opt, scan);
+				playing.makeADedication(gameObj, opt);
 				
 				// to mark dedication has been done.
 				opt = PlayGame.removeSubstring(new String("type1"), opt);
@@ -264,7 +282,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 				while (placeLoop) {
 					System.out.println("What tile adjacent to put it to: ");
 
-					adjacentTileId = scan.nextInt();
+					adjacentTileId = new NormalPlayerStrategy().scan.nextInt();
 
 					for (int i = 0; i < 72; i++) {
 						for (int j = 0; j < 72; j++) {
@@ -321,7 +339,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 				String location = null;
 				
 				while (locationLoop) {
-					location = scan.next();
+					location = new NormalPlayerStrategy().scan.next();
 					
 					if(placementOpt.contains(location)){
 						locationLoop = false;
@@ -446,7 +464,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 
 			System.out.println("Please enter your Lake Tile number: ");
 
-			int tileChoice = scan.nextInt();
+			int tileChoice = new NormalPlayerStrategy().scan.nextInt();
 
 			for (int j = 0; j < lakeTiles.size(); j++) {
 				tileHolded = lakeTiles.get(j);
@@ -483,9 +501,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 
 			// int degreeRotation = scan.nextInt();
 
-			String degreeRotation = scan.next();
-
-			scan.nextLine();
+			String degreeRotation = new NormalPlayerStrategy().scan.next();
 
 			if (degreeRotation.equals("90")) {
 				
@@ -577,13 +593,13 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 
 			System.out.print("Please choose one option:");
 
-			int checkChoice = scan.nextInt();
+			int checkChoice = new NormalPlayerStrategy().scan.nextInt();
 
 			switch (checkChoice) {
 			
 			case 1:
 				// make dedication
-				playing.makeADedication(gameObj, opt, scan);
+				playing.makeADedication(gameObj, opt);
 
 				// remove dedication substring from opt string
 				opt = PlayGame.removeSubstring(new String("type1"), opt);
@@ -595,7 +611,7 @@ public Players playerLastTurnChoice(GameInstance gameObj, Players gamePlayer, St
 			case 2:
 				
 				//discard the lantern cards.
-				playing.discardLanternCards(gameObj, scan);
+				playing.discardLanternCards(gameObj);
 				break;
 
 			default:

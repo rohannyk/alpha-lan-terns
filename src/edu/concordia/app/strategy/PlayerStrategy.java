@@ -17,7 +17,7 @@ import edu.concordia.app.model.Players;
  */
 public class PlayerStrategy {
 
-	public String makeAMove(Scanner scan, GameInstance gameObjs, Players playing, String opt){
+	public String makeAMove(GameInstance gameObjs, Players playing, String opt){
 		return opt;
 	}
 

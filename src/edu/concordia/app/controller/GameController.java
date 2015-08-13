@@ -3,22 +3,16 @@
  */
 package edu.concordia.app.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.Vector;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import edu.concordia.app.components.DedicationTokens;
-import edu.concordia.app.components.LakeTiles;
 import edu.concordia.app.model.GameConfiguration;
 import edu.concordia.app.model.GameInstance;
-import edu.concordia.app.model.Players;
 
 /**
  * GameConfiguration Class.
@@ -27,8 +21,13 @@ import edu.concordia.app.model.Players;
  * @author Team E
  *
  */
-public class GameController {
+public class GameController implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 214984028207175347L;
+
 	/**
 	 * The instance variable of GameConfiguration class.
 	 */
@@ -87,7 +86,7 @@ public class GameController {
 	 * @param gameFile The file name of the save file (exception handled).
 	 */
 	private void saveGameToXml(File gameFile){
-		try {
+		/*try {
 			JAXBContext context = JAXBContext.newInstance(GameInstance.class);
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -95,7 +94,21 @@ public class GameController {
 			marshaller.marshal(this.gameInstance, gameFile);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		try
+	      {
+	         FileOutputStream fileOut =
+	         new FileOutputStream(gameFile);
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(this.gameInstance);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/employee.ser");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
 	}
 	
 	/**
@@ -150,13 +163,32 @@ public class GameController {
 		System.out.println("Loading the game.......!");
 		
 		GameInstance gameInstance = null;
-		try {
+		/*try {
 			JAXBContext context = JAXBContext.newInstance(GameInstance.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			gameInstance = (GameInstance) unmarshaller.unmarshal(file);
 		} catch (Exception e) { 
 			e.printStackTrace();
-		}
+		}*/
+		
+		
+	      try
+	      {
+	         FileInputStream fileIn = new FileInputStream(file);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         gameInstance = (GameInstance) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         return null;
+	      }catch(ClassNotFoundException c)
+	      {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	         return null;
+	      }
 		
 		this.gameInstance = gameInstance;
 				

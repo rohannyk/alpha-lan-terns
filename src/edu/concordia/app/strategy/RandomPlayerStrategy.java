@@ -3,9 +3,9 @@
  */
 package edu.concordia.app.strategy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.Vector;
 
 import edu.concordia.app.components.DedicationTokens;
@@ -19,8 +19,12 @@ import edu.concordia.app.view.LanternGameView;
  * @author lovepreet
  *
  */
-public class RandomPlayerStrategy extends PlayerStrategy {
+public class RandomPlayerStrategy extends PlayerStrategy implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3917573629181668193L;
 	private GameInstance gameObj;
 	
 	/**
@@ -180,7 +184,7 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 	 * @see edu.concordia.app.strategy.PlayerStrategy#makeAMove()
 	 */
 	@Override
-	public String makeAMove(Scanner scan, GameInstance gameObjs, Players playing, String opt) {
+	public String makeAMove(GameInstance gameObjs, Players playing, String opt) {
 
 		
 		//this.scan = scan;

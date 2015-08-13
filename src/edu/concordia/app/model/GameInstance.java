@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +27,13 @@ import edu.concordia.app.strategy.UnfriendlyPlayerStrategy;
  * @author TEAM E
  *
  */
-public class GameInstance {
+public class GameInstance implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2962849411013972966L;
 	
 	private GameConfiguration config;
 	public int GameBoard [][] =  new int [73][73];

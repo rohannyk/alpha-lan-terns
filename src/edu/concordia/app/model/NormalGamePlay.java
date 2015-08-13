@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -18,13 +19,18 @@ import edu.concordia.app.view.LanternGameView;
  * @author Team E
  *
  */
-public class NormalGamePlay extends PlayGame {
+public class NormalGamePlay extends PlayGame implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8289485124522917097L;
 
 	private GameInstance gameObj;
 
 	private GameController gameController;
 
-	private Scanner scan;
+	private Scanner scan = new Scanner(System.in);
 
 	/**
 	 * Constructor
@@ -38,7 +44,7 @@ public class NormalGamePlay extends PlayGame {
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 
-		gameObj.setGameEndMode(this);
+		//gameObj.setGameEndMode(this);
 	}
 
 	/**
@@ -47,9 +53,9 @@ public class NormalGamePlay extends PlayGame {
 	 * @param scan
 	 *            The Scanner object for getting input through console.
 	 */
-	public void gameStart(Scanner scan) {
+	public void gameStart() {
 
-		this.scan = scan;
+		
 
 		Players playing;
 		boolean playFlag = true;
@@ -108,7 +114,7 @@ public class NormalGamePlay extends PlayGame {
 			String opt = genValidation(gameObj, playing);
 
 			while (!opt.contains("lakeTile")) {
-				opt = playing.getStrategy().makeAMove(scan, gameObj, playing, opt);
+				opt = playing.getStrategy().makeAMove(gameObj, playing, opt);
 			}
 
 			// display player status
@@ -196,7 +202,7 @@ public class NormalGamePlay extends PlayGame {
 
 			case 1:
 				// make dedication
-				playing.makeADedication(gameObj, opt, scan);
+				playing.makeADedication(gameObj, opt);
 
 				// remove dedication substring from opt string
 				opt = removeSubstring(new String("type1"), opt);
@@ -208,7 +214,7 @@ public class NormalGamePlay extends PlayGame {
 			case 2:
 
 				// discard the lantern cards.
-				playing.discardLanternCards(gameObj, scan);
+				playing.discardLanternCards(gameObj);
 				break;
 
 			default:

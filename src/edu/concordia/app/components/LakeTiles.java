@@ -1,5 +1,6 @@
 package edu.concordia.app.components;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
@@ -8,7 +9,12 @@ import java.util.Vector;
  * top/bottom/left/right lake tile 
  * @author Team E
  */
-public class LakeTiles {
+public class LakeTiles implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2009565864150267740L;
 
 	/**
 	 * Default Constructor

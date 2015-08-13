@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.components;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
@@ -14,7 +15,12 @@ import java.util.Vector;
  * 
  * @author Team E
  */
-public class DedicationTokens {
+public class DedicationTokens implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3791410227127688795L;
 
 	/**
 	 * The vector to store General dedication tokens with four dedications.

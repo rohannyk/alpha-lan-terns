@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.model;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import edu.concordia.app.components.DedicationTokens;
@@ -14,7 +15,12 @@ import edu.concordia.app.components.LakeTiles;
  * @author Team E
  *
  */
-public class GameConfiguration {
+public class GameConfiguration implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -433418405543959852L;
 
 	/**
 	 * The number of players of the game.
@@ -446,7 +452,7 @@ public class GameConfiguration {
 	 * This method calculates the no of lantern cards for every color, based on
 	 * the number of players. This calculation is done by the rules of of the game.
 	 * Separates the Lantern Cards by color into 7 groups.
-	 * These groups are collectively called the “supply.”
+	 * These groups are collectively called the ï¿½supply.ï¿½
 	 * The number of cards in each stack depends on player count:
 	 * 4 Players: 8 cards
 	 * 3 Players: 7 cards

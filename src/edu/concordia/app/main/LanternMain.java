@@ -29,7 +29,7 @@ public class LanternMain {
 	/**
 	 * Scanner object to get user input from console.
 	 */
-	private static Scanner scan = new Scanner(System.in);
+	private transient Scanner scan = new Scanner(System.in);
 
 	private static final long serialVersionUID = 2550694388930175952L;
 
@@ -55,7 +55,7 @@ public class LanternMain {
 	 */
 	public static void main(String[] args) {
 		
-		PlayGame pGame;
+		PlayGame pGame = null;
 
 		// object of LanternMain class.
 		LanternMain mainObj = new LanternMain();
@@ -73,8 +73,9 @@ public class LanternMain {
 			System.out.println("Press 2 to Exit Game.");
 
 			GameController gameController = null;
-			String response = scan.next();
-			scan.nextLine();
+			
+			String response = new LanternMain().scan.next();
+			//new LanternMain().scan.nextLine();
 
 			if (response.equals("0")) {
 
@@ -103,18 +104,18 @@ public class LanternMain {
 				
 				System.out.print("Please enter your choice: ");
 				
-				int endChoice = scan.nextInt();
+				int endChoice = new LanternMain().scan.nextInt();
 				
 				switch (endChoice) {
 				case 1:
 
-//					gameObj.setGameEndMode(new NormalGamePlay(gameObj, gameController));
+					gameObj.setGameEndMode(new NormalGamePlay(gameObj, gameController));
 //					
 
 					
 					pGame = new NormalGamePlay(gameObj, gameController);
 					
-					pGame = gameObj.getGameEndMode();
+					//pGame = gameObj.getGameEndMode();
 					
 					break;
 				
@@ -137,14 +138,14 @@ public class LanternMain {
 								+ "each player will place(between 2 and "
 								+ maxInput + ").");
 						
-						tileChoice = scan.nextInt();
+						tileChoice = new LanternMain().scan.nextInt();
 						
 						if(tileChoice <= 4 || tileChoice >= 2){
 							cardLoop = false;
 						}
 					}
 					
-					//gameObj.setGameEndMode(new NCardGamePlay(gameObj, gameController, tileChoice));
+					gameObj.setGameEndMode(new NCardGamePlay(gameObj, gameController, tileChoice));
 					
 					//pGame = gameObj.getGameEndMode();
 
@@ -207,14 +208,14 @@ public class LanternMain {
 								+ "winner should have(between 4 and "
 								+ maxPointInput + ").");
 						
-						pointChoice = scan.nextInt();
+						pointChoice = new LanternMain().scan.nextInt();
 						
 						if(pointChoice <= maxPointInput || pointChoice >= 4){
 							pointLoop = false;
 						}
 					}
 					
-					//gameObj.setGameEndMode(new NHonorPointsGamePlay(gameObj, gameController, pointChoice));
+					gameObj.setGameEndMode(new NHonorPointsGamePlay(gameObj, gameController, pointChoice));
 					
 					//pGame = gameObj.getGameEndMode();
 					
@@ -228,9 +229,9 @@ public class LanternMain {
 					
 					gameObj.setGameEndMode(new NormalGamePlay(gameObj, gameController));
 					
-					pGame = gameObj.getGameEndMode();
+					//pGame = gameObj.getGameEndMode();
 					
-//					pGame = new NormalGamePlay(gameObj, gameController);
+					pGame = new NormalGamePlay(gameObj, gameController);
 //					gameObj.setGameEndMode(pGame);
 					break;
 				}
@@ -249,7 +250,7 @@ public class LanternMain {
 				gameObj.GameBoard[36][36] = 0;
 
 				// method to play game
-				pGame.gameStart(scan);
+				pGame.gameStart();
 				//new PlayGame(gameObj, gameController).gameStart(scan);
 
 				choiceInitial = false;
@@ -268,7 +269,7 @@ public class LanternMain {
 				} else {
 					//gameController.showTextMode(instance);
 					
-					if(instance.getGameEndMode() instanceof NormalGamePlay){
+					/*if(instance.getGameEndMode() instanceof NormalGamePlay){
 						System.out.println("normal");
 						instance.getGameEndMode().gameStart(scan);
 					}else if(instance.getGameEndMode() instanceof NCardGamePlay){
@@ -277,9 +278,9 @@ public class LanternMain {
 						System.out.println("point");
 					}else if(instance.getGameEndMode() instanceof PlayGame){
 						System.out.println("default");
-					}
+					}*/
 					
-					instance.getGameEndMode().gameStart(scan);
+					instance.getGameEndMode().gameStart();
 
 					//pGame.gameStart(scan);
 					//new PlayGame(instance, gameController).gameStart(scan);
@@ -360,7 +361,7 @@ public class LanternMain {
 	 */
 	public static Scanner getValue() {
 
-		return scan;
+		return new LanternMain().scan;
 		//return scan.next();
 	}
 

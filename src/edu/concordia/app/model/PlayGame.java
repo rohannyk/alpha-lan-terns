@@ -23,6 +23,8 @@ import edu.concordia.app.view.LanternGameView;
  */
 public class PlayGame {
 	
+	
+	
 	/**
 	 * The instance variable of type GameInstance.
 	 */
@@ -36,7 +38,7 @@ public class PlayGame {
 	/**
 	 * The instance variable of type Scanner.
 	 */
-	private static Scanner scan = LanternMain.getValue();
+	private transient Scanner scan = new Scanner(System.in);
 	
 	/**
 	 * 
@@ -56,7 +58,7 @@ public class PlayGame {
 		this.gameController = gameController;
 	}
 	
-	public void gameStart(Scanner scan){
+	public void gameStart(){
 		
 	}
 	
@@ -65,7 +67,7 @@ public class PlayGame {
 		System.out.println("hello");
 		
 		if(gameObjs.getGameEndMode() instanceof NormalGamePlay){
-			gameObjs.getGameEndMode().gameStart(scan);
+			gameObjs.getGameEndMode().gameStart();
 		}else if(gameObjs.getGameEndMode() instanceof NCardGamePlay){
 			
 		}else if(gameObjs.getGameEndMode() instanceof NHonorPointsGamePlay){
@@ -1802,7 +1804,7 @@ public class PlayGame {
 	 *            The string to choose the type of dedication.
 	 */
 	private void makeADedication(GameInstance gameObj, Players playing, String opt) {
-		playing.makeADedication(gameObj, opt, scan);
+		playing.makeADedication(gameObj, opt);
 	}
 
 	/**

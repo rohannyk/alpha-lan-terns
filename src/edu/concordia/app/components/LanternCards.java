@@ -1,5 +1,7 @@
 package edu.concordia.app.components;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -12,8 +14,14 @@ import javax.xml.bind.annotation.XmlElement;
  * Lantern Cards can be exchanged with dedication tokens to score.
  * @author Team E
  */
-public class LanternCards {
+public class LanternCards implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4871186973694012184L;
+
+
 	/**
 	 * The color of the Lantern Card
 	 */

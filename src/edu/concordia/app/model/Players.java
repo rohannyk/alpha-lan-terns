@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -27,8 +28,15 @@ import edu.concordia.app.view.LanternGameView;
  * @author Team E
  *
  */
-public class Players {
+public class Players implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7717436099526919073L;
+	
+	private transient Scanner scan = new Scanner(System.in);
+
 	public ArrayList<String> possiblePlayerColorExchangeMoves = new ArrayList<String>();
 	
 	public ArrayList<String> possibleGameColorExchangeMoves = new ArrayList<String>();
@@ -621,7 +629,7 @@ public class Players {
 	 * @param opt The string to choose the type of dedication.
 	 * @param scan
 	 */
-	public void makeADedication(GameInstance gameObj, String opt, Scanner scan) {
+	public void makeADedication(GameInstance gameObj, String opt){//, Scanner scan) {
 		boolean loop = true;
 		while (loop) {
 			if (opt.contains("type1")) {
@@ -905,7 +913,7 @@ public class Players {
 	 * @param scan
 	 * @param playGame
 	 */
-	public void exchageLaternCard(GameInstance gameObj, Scanner scan) {
+	public void exchageLaternCard(GameInstance gameObj) {
 		boolean loop = true;
 		String yourColor = "";
 		String gameColor = "";
@@ -1120,7 +1128,7 @@ public class Players {
 	 * @param gameObj The GameInstance object for updating the lantern cards of the game board.
 	 * @param scan
 	 */
-	public void discardLanternCards(GameInstance gameObj, Scanner scan) {
+	public void discardLanternCards(GameInstance gameObj) {
 		System.out.println("-------Lantern Cards Player Holds-----");
 		System.out.println();
 		System.out.println("Red Lantern Cards Left: "

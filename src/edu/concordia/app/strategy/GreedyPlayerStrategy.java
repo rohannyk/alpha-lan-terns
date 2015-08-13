@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.strategy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -21,7 +22,12 @@ import edu.concordia.app.view.LanternGameView;
  * @author lovepreet
  *
  */
-public class GreedyPlayerStrategy extends PlayerStrategy {
+public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3774659584934624251L;
 
 	private GameInstance gameObj;
 	
@@ -31,7 +37,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 	 * @param gameObj
 	 */
 	public GreedyPlayerStrategy(GameInstance gameObj) {
-		super();
+		
 		this.gameObj = gameObj;
 	}
 	
@@ -338,7 +344,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy {
 
 	}
 	
-	public String makeAMove(Scanner scan, GameInstance gameObjs, Players playing, String option)
+	public String makeAMove(GameInstance gameObjs, Players playing, String option)
 	{
 		
 			this.playing = playing;

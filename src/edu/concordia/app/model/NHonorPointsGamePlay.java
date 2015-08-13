@@ -3,6 +3,7 @@
  */
 package edu.concordia.app.model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -18,13 +19,17 @@ import edu.concordia.app.view.LanternGameView;
  * @author Team E
  *
  */
-public class NHonorPointsGamePlay extends PlayGame {
+public class NHonorPointsGamePlay extends PlayGame implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6688851818720488284L;
 	private GameInstance gameObj;
 	private GameController gameController;
 	private int gamePoint;
 	
-	private Scanner scan;
+	private Scanner scan = new Scanner(System.in);
 	
 	/**
 	 * Constructor
@@ -39,7 +44,7 @@ public class NHonorPointsGamePlay extends PlayGame {
 		this.gameController = gameController;
 		this.gamePoint = gamePoint;
 		
-		gameObj.setGameEndMode(this);
+		//gameObj.setGameEndMode(this);
 	}
 	
 	/**
@@ -47,9 +52,9 @@ public class NHonorPointsGamePlay extends PlayGame {
 	 * @param scan The Scanner object for getting 
 	 * input through console.  
 	 */
-	public void gameStart(Scanner scan) {
+	public void gameStart() {
 
-		this.scan = scan;
+		
 
 		Players playing;
 		boolean playFlag = true;
@@ -110,7 +115,7 @@ public class NHonorPointsGamePlay extends PlayGame {
 			String opt = this.genValidation(gameObj, playing);
 			
 			while (!opt.contains("lakeTile")) {
-				opt = playing.getStrategy().makeAMove(scan, gameObj, playing, opt);
+				opt = playing.getStrategy().makeAMove(gameObj, playing, opt);
 				
 				if(playing.getTotalPoints() >= gamePoint){
 					playFlag = false;
@@ -215,7 +220,7 @@ public class NHonorPointsGamePlay extends PlayGame {
 			
 			case 1:
 				// make dedication
-				playing.makeADedication(gameObj, opt, scan);
+				playing.makeADedication(gameObj, opt);
 
 				// remove dedication substring from opt string
 				opt = removeSubstring(new String("type1"), opt);
@@ -227,7 +232,7 @@ public class NHonorPointsGamePlay extends PlayGame {
 			case 2:
 				
 				//discard the lantern cards.
-				playing.discardLanternCards(gameObj, scan);
+				playing.discardLanternCards(gameObj);
 				break;
 
 			default:
