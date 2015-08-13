@@ -29,7 +29,7 @@ public class NHonorPointsGamePlay extends PlayGame implements Serializable{
 	private GameController gameController;
 	private int gamePoint;
 	
-	private Scanner scan = new Scanner(System.in);
+	private transient Scanner scan = new Scanner(System.in);
 	
 	/**
 	 * Constructor

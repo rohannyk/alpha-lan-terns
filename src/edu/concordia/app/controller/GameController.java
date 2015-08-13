@@ -101,7 +101,7 @@ public class GameController implements Serializable{
 	         FileOutputStream fileOut =
 	         new FileOutputStream(gameFile);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(this.gameInstance);
+	         out.writeObject(gameInstance);
 	         out.close();
 	         fileOut.close();
 	         System.out.printf("Serialized data is saved in /tmp/employee.ser");

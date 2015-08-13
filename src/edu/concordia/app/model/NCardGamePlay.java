@@ -58,7 +58,7 @@ public class NCardGamePlay extends PlayGame implements Serializable {
 	 */
 	public void gameStart() {
 
-		this.scan = scan;
+		
 
 		Players playing;
 		boolean playFlag = true;

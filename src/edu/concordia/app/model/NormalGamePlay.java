@@ -30,7 +30,7 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 	private GameController gameController;
 
-	private Scanner scan = new Scanner(System.in);
+	private transient Scanner scan = new Scanner(System.in);
 
 	/**
 	 * Constructor
@@ -46,6 +46,16 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 		//gameObj.setGameEndMode(this);
 	}
+	
+	
+
+	/**
+	 * 
+	 */
+	public NormalGamePlay() {
+	}
+
+
 
 	/**
 	 * The main method to play game.
@@ -196,7 +206,7 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 			System.out.print("Please choose one option:");
 
-			int checkChoice = scan.nextInt();
+			int checkChoice = new NormalGamePlay().scan.nextInt();
 
 			switch (checkChoice) {
 
@@ -401,7 +411,7 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 		System.out.println("Please enter your choice: ");
 
-		String exitChoice = scan.next();
+		String exitChoice = new NormalGamePlay().scan.next();
 
 		if (exitChoice.equals("yes")) {
 
@@ -410,13 +420,13 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 			System.out.println("Please enter your choice: ");
 
-			String userChoice = scan.next();
+			String userChoice = new NormalGamePlay().scan.next();
 
 			if (userChoice.equals("yes")) {
 
 				System.out.println("Please enter the file name?");
 
-				String fileName = scan.next();
+				String fileName = new NormalGamePlay().scan.next();
 
 				gameController.saveGameToFile(fileName);
 
@@ -449,9 +459,9 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 			// int degreeRotation = scan.nextInt();
 
-			String degreeRotation = scan.next();
+			String degreeRotation = new NormalGamePlay().scan.next();
 
-			scan.nextLine();
+			//scan.nextLine();
 
 			if (degreeRotation.equals("90")) {
 
@@ -549,7 +559,7 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 			System.out.println("Please enter your Lake Tile number: ");
 
-			int tileChoice = scan.nextInt();
+			int tileChoice = new NormalGamePlay().scan.nextInt();
 
 			for (int j = 0; j < lakeTiles.size(); j++) {
 				tileHolded = lakeTiles.get(j);
