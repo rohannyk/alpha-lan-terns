@@ -27,6 +27,8 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 */
 	private static final long serialVersionUID = 3917573629181668193L;
 	private GameInstance gameObj;
+	
+	public String name;
 
 	/**
 	 * Constructor
@@ -37,6 +39,7 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	public RandomPlayerStrategy(GameInstance gameObj) {
 
 		this.gameObj = gameObj;
+		super.name = "Random";
 	}
 
 	/**
