@@ -644,7 +644,7 @@ public class Players implements Serializable{
 				System.out
 						.println("3 - Type 3 Dedication (Seven cards of different color.)");
 			}
-			int selectionType = scan.nextInt();
+			int selectionType = new Players().scan.nextInt();
 			switch (selectionType) {
 			case 1:
 				if (opt.contains("type1")) {
@@ -672,7 +672,7 @@ public class Players implements Serializable{
 						System.out.println("Number of Red Lantern Card :"
 								+ getPlayerRedLanternCardCount());
 					System.out.println("Input color of lantern card ");
-					String color1 = scan.next();
+					String color1 = new Players().scan.next();
 					boolean type1Val = PlayGame
 							.getDedicationType1ColorValidationAndRemoval(this,
 									color1, gameObj);
@@ -753,7 +753,7 @@ public class Players implements Serializable{
 						while (colorLoop1) {
 							System.out
 									.println("Input first color of lantern card: ");
-							String colorOne = scan.next();
+							String colorOne = new Players().scan.next();
 							boolean type2ValOne = PlayGame
 									.getDedicationType2ColorValidationAndRemoval(
 											this, colorOne, gameObj);
@@ -767,7 +767,7 @@ public class Players implements Serializable{
 						while (colorLoop2) {
 							System.out
 									.println("Input second color of lantern card: ");
-							String colorTwo = scan.next();
+							String colorTwo = new Players().scan.next();
 							boolean type2ValTwo = PlayGame
 									.getDedicationType2ColorValidationAndRemoval(
 											this, colorTwo, gameObj);
@@ -781,7 +781,7 @@ public class Players implements Serializable{
 						while (colorLoop3) {
 							System.out
 									.println("Input third color of lantern card ");
-							String colorThree = scan.next();
+							String colorThree = new Players().scan.next();
 							boolean type2ValThree = PlayGame
 									.getDedicationType2ColorValidationAndRemoval(
 											this, colorThree, gameObj);
@@ -957,7 +957,7 @@ public class Players implements Serializable{
 			System.out.println("Number of Red Lantern Card :"
 					+ gameObj.getGameRedLanternCardCount());
 			System.out.println("Which your color do you want to give: ");
-			yourColor = scan.next();
+			yourColor = new Players().scan.next();
 			
 			//check if game has one lantern card with player for exchange
 //			loop = playGame.lanternColorPlayerValidation(this, yourColor);
@@ -973,7 +973,7 @@ public class Players implements Serializable{
 			}
 			System.out.println("Which Game color do you want to get: ");
 			
-			gameColor = scan.next();
+			gameColor = new Players().scan.next();
 			
 			//check if game has one lantern card in game for exchange
 //			loop = playGame.lanternColorGameValidation(gameObj, gameColor);
@@ -1153,10 +1153,10 @@ public class Players implements Serializable{
 			System.out.println("Black/Blue/White/Green/Orange/Red/Purple");
 			System.out.println();
 			System.out.print("Please enter your choice:");
-			String deleteColor = scan.next();
+			String deleteColor = new Players().scan.next();
 			System.out.print("Please enter the number of"
 					+ " cards you want to discard:");
-			int deleteCardCount = scan.nextInt();
+			int deleteCardCount = new Players().scan.nextInt();
 			boolean removeResult = PlayGame.getLanterCardColorRemoval(this,
 					deleteColor, gameObj, deleteCardCount);
 			if (removeResult) {
