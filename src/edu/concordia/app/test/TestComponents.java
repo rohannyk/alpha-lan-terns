@@ -28,12 +28,20 @@ public class TestComponents {
 	GameInstance gi;
 	GameConfiguration gc;
 	LanternMain lm;
+	Vector<String> playerTypes;
 	
 	@Before
 	public void setUp(){
 		gc = new GameConfiguration();
 		gi = new GameInstance();
 		lm = new LanternMain();
+		
+		playerTypes = new Vector<String>();
+		
+		playerTypes.add("Greedy");
+		playerTypes.add("Random");
+		playerTypes.add("Friendly");
+		playerTypes.add("Human");
 	}
 	
 	@After
@@ -41,6 +49,7 @@ public class TestComponents {
 		gc = null;
         gi = null;
 		lm = null;
+		playerTypes = null;
 	}
 		
 	@Test
@@ -66,12 +75,16 @@ public class TestComponents {
 			
 			GameConfiguration c4 = new GameConfiguration(4);
 			
-			GameInstance gi4 = new GameInstance(c4);
-			Vector<LakeTiles> vlt = gi4.getGameTilesDrawPile();
+			GameInstance gi4 = new GameInstance(c4, playerTypes);
+			Vector<LakeTiles> drawTileAfterDeal = gi4.getGameTilesDrawPile();
 			
-			assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
-			assertFalse(vlt.size()==10);
-			assertNotNull(vlt.size());
+			int dealTilValueCheck = c4.NUM_OF_TILES_IN_DRAW_STACK - (4*3);
+			
+			assertEquals(dealTilValueCheck, drawTileAfterDeal.size());
+			
+			assertFalse(drawTileAfterDeal.size() == 10);
+			
+			assertNotNull(drawTileAfterDeal.size());
 			
 		}
 	
@@ -84,11 +97,18 @@ public class TestComponents {
 			
 			
 		GameConfiguration c3 = new GameConfiguration(3);
-        GameInstance gi3 = new GameInstance(c3);
-        Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
-	    assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
-		assertFalse(vlt.size()==10);
-		assertNotNull(vlt.size());
+        
+		GameInstance gi3 = new GameInstance(c3, playerTypes);
+        
+		Vector<LakeTiles> drawTileAfterDeal = gi3.getGameTilesDrawPile();
+		
+		int dealTilValueCheck = c3.NUM_OF_TILES_IN_DRAW_STACK - (3*3);
+	    
+		assertEquals(dealTilValueCheck, drawTileAfterDeal.size());
+		
+		assertFalse(drawTileAfterDeal.size()==10);
+		
+		assertNotNull(drawTileAfterDeal.size());
 		
 		}
 		
@@ -101,11 +121,18 @@ public class TestComponents {
 		public void testnoOfDrawTileInStackWithParamTwo() {
 			
 		GameConfiguration c2 = new GameConfiguration(2);
-	    GameInstance gi2 = new GameInstance(c2);
-	    Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
-	   	assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
-		assertFalse(vlt.size()==10);
-		assertNotNull(vlt.size());
+	    
+		GameInstance gi2 = new GameInstance(c2, playerTypes);
+	    
+		Vector<LakeTiles> drawTileAfterDeal = gi2.getGameTilesDrawPile();
+	   	
+		int dealTilValueCheck = c2.NUM_OF_TILES_IN_DRAW_STACK - (2*3);
+		
+		assertEquals(dealTilValueCheck, drawTileAfterDeal.size());
+		
+		assertFalse(drawTileAfterDeal.size()==11);
+		
+		assertNotNull(drawTileAfterDeal.size());
 		
 		       
 		}
@@ -120,7 +147,7 @@ public class TestComponents {
 		{
 			
 		GameConfiguration c3= new GameConfiguration(3);
-	    GameInstance gi3= new GameInstance(c3);
+	    GameInstance gi3= new GameInstance(c3, playerTypes);
 	    
 	    
 	  assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi3.getDefaultLanternCardSize());
@@ -141,7 +168,7 @@ public class TestComponents {
 		{
 			
 		GameConfiguration c4= new GameConfiguration(4);
-	    GameInstance gi4= new GameInstance(c4);
+	    GameInstance gi4= new GameInstance(c4, playerTypes);
 	    
 	  assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi4.getDefaultLanternCardSize());
 	  assertFalse(gi4.getDefaultLanternCardSize() == 10);
@@ -160,7 +187,7 @@ public class TestComponents {
 		{
 			
 		GameConfiguration c2= new GameConfiguration(2);
-	    GameInstance gi2= new GameInstance(c2);
+	    GameInstance gi2= new GameInstance(c2, playerTypes);
 	    
 	  assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR, gi2.getDefaultLanternCardSize());
 	  assertFalse(gi2.getDefaultLanternCardSize() == 10);
