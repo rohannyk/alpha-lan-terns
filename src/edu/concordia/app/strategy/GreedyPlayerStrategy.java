@@ -49,6 +49,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	public GreedyPlayerStrategy(GameInstance gameObj) {
 
 		this.gameObj = gameObj;
+		
 		super.name = "Greedy";
 	}
 
@@ -113,10 +114,26 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 				System.out.println("You don't have enough " + "cards to make a dedication.");
 			}
 		} else {
+			
+			System.out.println("--------------------------");
+
+			System.out.println("Please enter you choice:");
+
+			System.out.println("--------------------------");
+
+			System.out.println(); // for space
+
+			System.out.println("0 - Exchange a Lantern Card");
+
+			System.out.println(); // for space
+
+			System.out.println("1 - Make a dedication");
 
 			if ((opt1.contains("type1") || opt1.contains("type2") || opt1.contains("type3"))) {
 
 				System.out.println();
+
+				System.out.println("Player " + playing.getPlayerNumber() + " chooses: Make a Dedication");
 
 				int fourValue = gameObj.getNextDedicationTokenFour();
 
@@ -162,6 +179,9 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 				} else if ((colorPairs.size() > 2) || (sixValue > sevenValue && sixValue > fourValue)) {
 
+					System.out.println("Player " + playing.getPlayerNumber() + " has choosen Type 2 Dedication"
+							+ "(Three color pairs of Lantern Cards).");
+					
 					int pairCount = 0;
 
 					for (int i = 0; i < 3; i++) {
@@ -169,6 +189,10 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 						String color = colorPairs.get(i);
 
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player "
+								+ playing.getPlayerNumber() + "  dedicated "
+								+ color + " color.");
 
 						pairCount += 1;
 					}
@@ -197,11 +221,20 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 				} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
 
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " has choosen Type 1 Dedication"
+							+ "(Four same color pair of Lantern Cards).");
+					
 					int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 
 					String colorFour = fourUniqueColorPairs.get(randomNumber);
 
 					doDedicationFour(gameObj, colorFour, playing);
+					
+					System.out.println();
+
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ "  dedicated " + colorFour + " color.");
 
 				} else if (genericValue > sixValue && genericValue > fourValue && genericValue > sevenValue) {
 
@@ -213,7 +246,9 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 							System.out.println();
 
-							System.out.println("Player " + playing.getPlayerNumber() + " has choosen Type 3 Dedication"
+							System.out.println("Player "
+									+ playing.getPlayerNumber()
+									+ " has choosen Type 3 Dedication"
 									+ "(Seven unique Lantern Cards).");
 
 							DedicationTokens dedicationObj = gameObj.getDedicationTokens();
@@ -239,6 +274,10 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 					} else if (playing.getPossibleDedicationThreePairColor().size() > 3) {
 
 						if ((colorPairs.size() > 2)) {
+							
+							System.out.println("Player " + playing.getPlayerNumber()
+									+ " has choosen Type 2 Dedication"
+									+ "(Three color pairs of Lantern Cards).");
 
 							int pairCount = 0;
 
@@ -247,6 +286,12 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 								String color = colorPairs.get(i);
 
 								doDedicationSix(gameObj, color, playing);
+								
+								System.out.println();
+
+								System.out.println("Player "
+										+ playing.getPlayerNumber() + "  dedicated "
+										+ color + " color.");
 
 								pairCount += 1;
 							}
@@ -277,12 +322,21 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 					} else if (playing.getPossibleDedicationFourUniqueColor().size() > 0) {
 
 						if (fourUniqueColorPairs.size() > 0) {
+							
+							System.out.println("Player " + playing.getPlayerNumber()
+									+ " has choosen Type 1 Dedication"
+									+ "(Four same color pair of Lantern Cards).");
 
 							int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 
 							String colorFour = fourUniqueColorPairs.get(randomNumber);
 
 							doDedicationFour(gameObj, colorFour, playing);
+							
+							System.out.println();
+
+							System.out.println("Player " + playing.getPlayerNumber()
+									+ "  dedicated " + colorFour + " color.");
 						}
 
 					}
@@ -339,6 +393,9 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 		// while placing a lake tile if lantern count is greater than 12
 		if (playing.getLanternCardCount() > 12) {
 
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " has more than 12 Lantern Cards.");
+			
 			// abstract method in base class
 			// If lantern cards are more than 12
 			// filter them i.e. discard or make a dedication.
@@ -897,7 +954,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 				String result[] = combinationResult.split(":");
 
-				System.out.println(combinationResult);
+				//System.out.println(combinationResult);
 				String res = genValidationGreedy(gameObjs, playing, combinationResult);
 
 				if (res.contains("type")) {
@@ -971,19 +1028,39 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	 */
 	public static LakeTiles placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String comRes) {
 		String[] placingInformation = comRes.split(":");
-		System.out.println(placingInformation[0]);
+		
 
+		System.out.println("******** Player " + playing.getPlayerNumber() + " Lake Tiles details ********");
+		System.out.println();
+
+		System.out.println("No of Lake Tiles in hand: " + playing.getCurrentLakeTilesHold().size());
+
+		System.out.println();
+		
 		LakeTiles tileInHand = null;
 
 		for (Iterator<LakeTiles> iterator = playing.getCurrentLakeTilesHold().iterator(); iterator.hasNext();) {
 			LakeTiles tiles = (LakeTiles) iterator.next();
 
+			new LanternGameView().displayLakeTiles(gameObjs, tiles.getTilesId());
+			
 			if (tiles.getTilesId() == Integer.parseInt(placingInformation[0])) {
 				tileInHand = tiles;
 			}
 		}
 
 		tileInHand = PlayGame.rotateLakeTileByDegree(tileInHand, placingInformation[1]);
+		
+		System.out.println();
+		
+		System.out
+		.println("Do you want to rotate tile by"
+				+ " 90/180/270 clockwise or 0 degree: "
+				+ placingInformation[1]);
+		System.out.println();
+		
+		System.out.println("What tile adjacent to put it to: " + placingInformation[2]);
+		
 		int x = 0;
 		int y = 0;
 		for (int i = 0; i < 73; i++) {
@@ -995,14 +1072,23 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 				}
 			}
 		}
+		
+		System.out.println();
+
+		System.out.print("Please enter the available location: ");
+		
 		if (placingInformation[3].equals("L")) {
 			x = x - 1;
+			System.out.println("Left");
 		} else if (placingInformation[3].equals("R")) {
 			x = x + 1;
+			System.out.println("Right");
 		} else if (placingInformation[3].equals("T")) {
 			y = y - 1;
+			System.out.println("Top");
 		} else if (placingInformation[3].equals("B")) {
 			y = y + 1;
+			System.out.println("Bottom");
 		}
 		gameObjs.GameBoard[y][x] = tileInHand.getTilesId();
 
@@ -1949,11 +2035,30 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 		while (playing.getLanternCardCount() > 12) {
 			System.out.println("---------- Lantern Cards" + " Count Check -----------");
 
-			System.out.println("Player" + playing.getPlayerNumber() + " has more than 12 lantern cards.");
+			System.out.println();
+
+			System.out.println(
+					"Player" + playing.getPlayerNumber() + " lantern card count: " + playing.getLanternCardCount());
 
 			System.out.println();
 
-			System.out.println("Player" + playing.getPlayerNumber() + " will Make a dedication.");
+			System.out.println("You have following choices to move forward.");
+
+			System.out.println();
+
+			System.out.println("1: Make a dedication.");
+
+			System.out.println();
+
+			System.out.println("2: Discard Lantern Cards.");
+
+			System.out.println();
+
+			System.out.print("Please choose one option:");
+
+			System.out.println();
+
+			System.out.println("Player" + playing.getPlayerNumber() + " chooses: Make a dedication option.");
 
 			System.out.println();
 
@@ -1976,7 +2081,8 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 				System.out.println();
 
-				System.out.println("Player " + playing.getPlayerNumber() + " has choosen Type 3 Dedication"
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " has choosen Type 3 Dedication"
 						+ "(Seven unique Lantern Cards).");
 
 				DedicationTokens dedicationObj = gameObj.getDedicationTokens();
@@ -2002,12 +2108,21 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 			} else if ((colorPairs.size() > 2) || (sixValue > sevenValue && sixValue > fourValue)) {
 
 				int pairCount = 0;
+				
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " has choosen Type 2 Dedication "
+						+ "(Three pairs of unique color)");
 
 				for (int i = 0; i < 3; i++) {
 
 					String color = colorPairs.get(i);
 
 					doDedicationSix(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " chooses " + color + " color.");
+
+					System.out.println();
 
 					pairCount += 1;
 				}
@@ -2034,13 +2149,21 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 					}
 				}
 
-			} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
+			} else if (fourUniqueColorPairs.size() > 0 || (fourValue > sixValue && fourValue > sevenValue) ) {
 
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " chooses: Type 1 Dedication (Four cards of unique color.)");
+				System.out.println();
+				
 				int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 
 				String colorFour = fourUniqueColorPairs.get(randomNumber);
 
 				doDedicationFour(gameObj, colorFour, playing);
+				
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " chooses " + colorFour + " color.");
+				System.out.println();
 
 			} else if (genericValue > sixValue && genericValue > fourValue && genericValue > sevenValue) {
 
@@ -2052,7 +2175,9 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 
 						System.out.println();
 
-						System.out.println("Player " + playing.getPlayerNumber() + " has choosen Type 3 Dedication"
+						System.out.println("Player "
+								+ playing.getPlayerNumber()
+								+ " has choosen Type 3 Dedication"
 								+ "(Seven unique Lantern Cards).");
 
 						DedicationTokens dedicationObj = gameObj.getDedicationTokens();
@@ -2079,6 +2204,8 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 				} else if (playing.getPossibleDedicationThreePairColor().size() > 3) {
 
 					int pairCount = 0;
+					
+					System.out.println("Type 2 Dedication (Three pairs of unique color)");
 
 					if ((colorPairs.size() > 2)) {
 
@@ -2087,6 +2214,12 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 							String color = colorPairs.get(i);
 
 							doDedicationSix(gameObj, color, playing);
+							
+							System.out.println("Player "
+									+ playing.getPlayerNumber() + " chooses "
+									+ color + " color.");
+
+							System.out.println();
 
 							pairCount += 1;
 						}
@@ -2117,12 +2250,21 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 				} else if (playing.getPossibleDedicationFourUniqueColor().size() > 0) {
 
 					if (fourUniqueColorPairs.size() > 0) {
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " chooses: Type 1 Dedication (Four cards of unique color.)");
+						System.out.println();
 
 						int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 
 						String colorFour = fourUniqueColorPairs.get(randomNumber);
 
 						doDedicationFour(gameObj, colorFour, playing);
+						
+						System.out.println("Player "
+								+ playing.getPlayerNumber() + " chooses "
+								+ colorFour + " color.");
+						System.out.println();
 					}
 
 				}

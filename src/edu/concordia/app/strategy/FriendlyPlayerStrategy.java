@@ -2148,7 +2148,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerBlackLanternCardCount() >= cardCount) {
 				playing.setPlayerBlackLanternCardCount(playing.getPlayerBlackLanternCardCount() - cardCount);
 				gameObj.setGameBlackLanternCardCount(gameObj.getGameBlackLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2156,7 +2156,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerWhiteLanternCardCount() >= cardCount) {
 				playing.setPlayerWhiteLanternCardCount(playing.getPlayerWhiteLanternCardCount() - cardCount);
 				gameObj.setGameWhiteLanternCardCount(gameObj.getGameWhiteLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2164,7 +2164,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerBlueLanternCardCount() >= cardCount) {
 				playing.setPlayerBlueLanternCardCount(playing.getPlayerBlueLanternCardCount() - cardCount);
 				gameObj.setGameBlueLanternCardCount(gameObj.getGameBlueLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2172,7 +2172,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerGreenLanternCardCount() >= cardCount) {
 				playing.setPlayerGreenLanternCardCount(playing.getPlayerGreenLanternCardCount() - cardCount);
 				gameObj.setGameGreenLanternCardCount(gameObj.getGameGreenLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2180,7 +2180,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerOrangeLanternCardCount() >= cardCount) {
 				playing.setPlayerOrangeLanternCardCount(playing.getPlayerOrangeLanternCardCount() - cardCount);
 				gameObj.setGameOrangeLanternCardCount(gameObj.getGameOrangeLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2188,7 +2188,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerRedLanternCardCount() >= cardCount) {
 				playing.setPlayerRedLanternCardCount(playing.getPlayerRedLanternCardCount() - cardCount);
 				gameObj.setGameRedLanternCardCount(gameObj.getGameRedLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 
@@ -2196,7 +2196,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 			if (playing.getPlayerPurpleLanternCardCount() >= cardCount) {
 				playing.setPlayerPurpleLanternCardCount(playing.getPlayerPurpleLanternCardCount() - cardCount);
 				gameObj.setGamePurpleLanternCardCount(gameObj.getGamePurpleLanternCardCount() + cardCount);
-				// return true;
+				return playing;
 			}
 		}
 		return playing;

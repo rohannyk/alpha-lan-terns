@@ -38,6 +38,7 @@ public class NormalPlayerStrategy extends PlayerStrategy implements Serializable
 	 */
 	public NormalPlayerStrategy(GameInstance gameObj) {
 		this.gameObj = gameObj;
+		
 		super.name = "Human";
 	}
 
