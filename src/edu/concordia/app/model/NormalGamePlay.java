@@ -90,7 +90,7 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 					for (int i = 0; i < gameObj.getPlayersList().length; i++) {
 						Players player = gameObj.getPlayersList()[i];
 
-						System.out.println("tiles " + player.getCurrentLakeTilesHold().size());
+						//System.out.println("tiles " + player.getCurrentLakeTilesHold().size());
 
 						if (player.getCurrentLakeTilesHold().isEmpty()) {
 							tileHoldCount = tileHoldCount + 1;
@@ -251,11 +251,15 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 		Players[] gamePlayers = gameObj.getPlayersList();
 
 		System.out.println("Last turn of each player " + "after all LakeTiles are used.");
+		
+		System.out.println();	//for space
 
 		for (int i = 0; i < gamePlayers.length; i++) {
 			Players gamePlayer = gamePlayers[i];
 
 			System.out.println("--------- Player " + gamePlayer.getPlayerNumber() + " turn ---------");
+			
+			System.out.println();	//for space
 
 			String opt1 = genValidation(gameObj, gamePlayer);
 

@@ -53,10 +53,26 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 			}
 		} else {
 
+			System.out.println("--------------------------");
+			
+			System.out.println("Please enter you choice:");
+			
+			System.out.println("--------------------------");
+			
+			System.out.println();	//for space
+			
+			System.out.println("0 - Exchange a Lantern Card");
+			
+			System.out.println();	//for space
+			
+			System.out.println("1 - Make a dedication");
+			
 			if ((opt1.contains("type1") || opt1.contains("type2") || opt1
 					.contains("type3"))) {
 				
 				System.out.println();
+				
+				System.out.println("Player "+playing.getPlayerNumber()+" chooses: Make a Dedication");
 
 				int fourValue = gameObj.getNextDedicationTokenFour();
 
@@ -112,6 +128,9 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				} else if ((colorPairs.size() > 2)
 						|| (sixValue > sevenValue && sixValue > fourValue)) {
 
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " has choosen Type 2 Dedication"+"(Three color pairs of Lantern Cards).");
+					
 					int pairCount = 0;
 					
 					for (int i = 0; i < 3; i++) {
@@ -119,6 +138,10 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						String color = colorPairs.get(i);
 
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println();
+						
+						System.out.println("Player " + playing.getPlayerNumber()+"  dedicated "+color+" color.");
 						
 						pairCount += 1;
 					}
@@ -152,15 +175,22 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						}
 					}
 
-				} else if ((fourValue > sixValue && fourValue > sevenValue)
-						|| fourUniqueColorPairs.size() > 0) {
+				} else if (fourUniqueColorPairs.size() > 0
+						|| (fourValue > sixValue && fourValue > sevenValue)) {
 
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " has choosen Type 1 Dedication"+"(Four same color pair of Lantern Cards).");
+					
 					int randomNumber = getRandomNumber(fourUniqueColorPairs
 							.size());
 
 					String colorFour = fourUniqueColorPairs.get(randomNumber);
 
 					doDedicationFour(gameObj, colorFour, playing);
+					
+					System.out.println();
+					
+					System.out.println("Player " + playing.getPlayerNumber()+"  dedicated "+colorFour+" color.");
 
 				} else if (genericValue > sixValue && genericValue > fourValue
 						&& genericValue > sevenValue) {
@@ -311,6 +341,8 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 			//while placing a lake tile if lantern count is greater than 12 
 			if (playing.getLanternCardCount() > 12) {
 
+				System.out.println("Player "+playing.getPlayerNumber()+ " has more than 12 Lantern Cards.");
+				
 				//abstract method in base class
 				// If lantern cards are more than 12
 				// filter them i.e. discard or make a dedication.
@@ -337,7 +369,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				//arraylist contain lake tiles where adjacent lake tiles can be placed.
 				ArrayList<String> possibleAdjacentBoardLakeTiles = new ArrayList<String>();
 				
-				System.out.print("adjacent tiles: ");
+				//System.out.print("adjacent tiles: ");
 				
 				for (int i = startHorizontal; i < endHorizontal + 1; i++) {
 					for (int j = startVertial; j < endVertial + 1; j++) {
@@ -463,7 +495,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				
 				otherPlayerTilesPlacement  = new String(lakeTileChoice.getTilesId() +":"+ degree);
 				
-				System.out.println(degreeCombination[0]+" "+degreeCombination[1]);
+				
 				
 				int north = 0;
 				int south = 0;
@@ -523,7 +555,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				//otherPlayerTilesPlacement  ="";
 			}
 			
-			System.out.println("size "+tilePlacementCominationResults.size());
+			
 			
 			
 			// select possible combination result	
@@ -533,7 +565,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				
 				String result[] = combinationResult.split(":");
 				
-				System.out.println(combinationResult);
+				
 				
 				if(Integer.parseInt(result[3])+Integer.parseInt(result[5])+Integer.parseInt(result[7])+Integer.parseInt(result[9])<1)
 				{
@@ -661,14 +693,58 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	{
 		String [] placingInformation = comRes.split(":");
 		
-		System.out.println(placingInformation[0]);
+		//System.out.println(placingInformation[0]);
+		
+		System.out.println("******** Player " + playing.getPlayerNumber()
+				+ " Lake Tiles details ********");
+		System.out.println();
+		
+		System.out.println("No of Lake Tiles in hand: " + playing.getCurrentLakeTilesHold().size());
+		
+		System.out.println();
+
+		for (int j = 0; j < playing.getCurrentLakeTilesHold().size(); j++) {
+			LakeTiles tileHolded1 = playing.getCurrentLakeTilesHold().get(j);
+			
+			new LanternGameView().displayLakeTiles(gameObjs, tileHolded1.getTilesId());
+		}
+
+		System.out.println(); // for spacing
+
+		System.out.println("Please enter your Lake Tile number: "+placingInformation[0]);
 		
 		String [] adjTileInformation = adjTilePosition.split(":");
 		
-		System.out.println(adjTilePosition);
+		System.out.println();
+		
+		System.out.println("Do you want to rotate tile by"
+				+ " 90/180/270 clockwise or 0 degree: "+placingInformation[1]);
+		System.out.println();
+		
+		new LanternGameView().displayLakeTiles(gameObjs, Integer.parseInt(placingInformation[0]));
+		
+		//System.out.println(adjTilePosition);
+		
+		System.out.println();
+		
+		System.out.println("What tile adjacent to put it to: "+adjTileInformation[0]);
 		
 		int randomPlacePosValue = getRandomNumber(adjTileInformation.length - 1) +1;
 		String randomPlacePos = adjTileInformation[randomPlacePosValue];
+		
+		System.out.println();
+		
+		System.out.print("Please enter the available location: ");
+		
+		if(randomPlacePos.equalsIgnoreCase("L")){
+			System.out.println("Left");
+		}else if(randomPlacePos.equalsIgnoreCase("R")){
+			System.out.println("Right");
+		}else if(randomPlacePos.equalsIgnoreCase("T")){
+			System.out.println("Top");
+		}else if(randomPlacePos.equalsIgnoreCase("B")){
+			System.out.println("Bottom");
+		}
 		
 		LakeTiles tileInHand = null;
 		
@@ -907,6 +983,9 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 			
 			ArrayList<String> possibleThreePair = playing
 					.getPossibleDedicationThreePairColor();
+			
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " perform type 2 dedication(Three color pairs).");
 
 			int pairCount = 0;
 
@@ -922,10 +1001,16 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerBlackLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -936,10 +1021,16 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerWhiteLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -950,10 +1041,16 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerBlueLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -964,10 +1061,16 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerGreenLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -978,10 +1081,16 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 						
 					} else if (playing.getPlayerPurpleLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 						
@@ -992,9 +1101,15 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 					} else if (playing.getPlayerRedLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 					}
@@ -1004,9 +1119,15 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						// do dedication after exchange
 						doDedicationSix(gameObj, color, playing);
 						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
+						
 						pairCount = pairCount+1;
 					} else if (playing.getPlayerOrangeLanternCardCount() > 1) {
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player " + playing.getPlayerNumber()
+								+ " dedicated "+color);
 						
 						pairCount = pairCount+1;
 					}
@@ -1047,62 +1168,107 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 					.getPossibleDedicationFourUniqueColor();
 
 			String color = possibleFourUniqueColor.get(0);
+			
+			System.out.println("Player " + playing.getPlayerNumber()
+					+ " perform type 1 dedication(Four same color Lantern cards).");
 
 			if (color.equalsIgnoreCase("Black")) {
 				if (playing.getPlayerBlackLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Black");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerBlackLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("White")) {
 				if (playing.getPlayerWhiteLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "White");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerWhiteLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Blue")) {
 				if (playing.getPlayerBlueLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Blue");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerBlueLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Green")) {
 				if (playing.getPlayerGreenLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Green");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerGreenLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Purple")) {
 				if (playing.getPlayerPurpleLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Purple");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerPurpleLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Red")) {
 				if (playing.getPlayerRedLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Red");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerRedLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			} else if (color.equalsIgnoreCase("Orange")) {
 				if (playing.getPlayerOrangeLanternCardCount() == 3) {
 					doExchange(playing, gameObj, "Orange");
 					// do dedication after exchange
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				} else if (playing.getPlayerOrangeLanternCardCount() > 3) {
 					doDedicationFour(gameObj, color, playing);
+					
+					System.out.println("Player " + playing.getPlayerNumber()
+							+ " dedicated "+color);
 				}
 			}
 
@@ -1662,13 +1828,31 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 			System.out.println("---------- Lantern Cards"
 					+ " Count Check -----------");
 
+			System.out.println();
+
 			System.out.println("Player" + playing.getPlayerNumber()
-					+ " has more than 12 lantern cards.");
+					+ " lantern card count: "+playing.getLanternCardCount());
+
+			System.out.println();
+			
+			System.out.println("You have following choices to move forward.");
+			
+			System.out.println();
+			
+			System.out.println("1: Make a dedication.");
+			
+			System.out.println();
+
+			System.out.println("2: Discard Lantern Cards.");
+
+			System.out.println();
+
+			System.out.print("Please choose one option:");
 
 			System.out.println();
 			
 			System.out.println("Player" + playing.getPlayerNumber()
-					+ " will Make a dedication.");
+					+ " chooses: Make a dedication option.");
 
 			System.out.println();
 			
@@ -1728,11 +1912,18 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 								
 				int pairCount = 0;	
 				
+				System.out.println("Player " + playing.getPlayerNumber()
+						+ " has choosen Type 2 Dedication (Three pairs of unique color)");
+				
 				for (int i = 0; i < 3; i++) {
 						
 						String color = colorPairs.get(i);
 						
 						doDedicationSix(gameObj, color, playing);
+						
+						System.out.println("Player "+playing.getPlayerNumber()+" chooses "+color+" color.");
+						
+						System.out.println();
 						
 						pairCount +=1;
 					}		
@@ -1766,13 +1957,21 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 						}
 					}
 				
-			} else if ((fourValue > sixValue && fourValue > sevenValue) || fourUniqueColorPairs.size() > 0) {
+			} else if (fourUniqueColorPairs.size() > 0 || (fourValue > sixValue && fourValue > sevenValue)) {
 												
+				System.out.println("Player "+playing.getPlayerNumber()+" chooses: Type 1 Dedication (Four cards of unique color.)");
+				System.out.println();
+				
 				int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 				
 				String colorFour = fourUniqueColorPairs.get(randomNumber);
 					
 				doDedicationFour(gameObj, colorFour, playing);
+				
+				
+				
+				System.out.println("Player "+playing.getPlayerNumber()+" chooses "+colorFour+" color.");
+				System.out.println();
 				
 			} else if (genericValue > sixValue && genericValue > fourValue
 					&& genericValue > sevenValue) {
@@ -1824,6 +2023,10 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 					
 					int pairCount = 0;
 					
+					System.out.println("Type 2 Dedication (Three pairs of unique color)");
+					
+					System.out.println();
+					
 					if ((colorPairs.size() > 2)) {
 						
 						for (int i = 0; i < 3; i++) {
@@ -1831,6 +2034,10 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 							String color = colorPairs.get(i);
 							
 							doDedicationSix(gameObj, color, playing);
+							
+							System.out.println("Player "+playing.getPlayerNumber()+" chooses "+color+" color.");
+							
+							System.out.println();
 							
 							pairCount +=1;
 						}	
@@ -1869,12 +2076,20 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				}else if(playing.getPossibleDedicationFourUniqueColor().size() > 0){
 					
 					if(fourUniqueColorPairs.size() > 0) {
+						
+						System.out.println("Player "+playing.getPlayerNumber()+" chooses: Type 1 Dedication (Four cards of unique color.)");
+						System.out.println();
 												
 						int randomNumber = getRandomNumber(fourUniqueColorPairs.size());
 						
 						String colorFour = fourUniqueColorPairs.get(randomNumber);
 													
 						doDedicationFour(gameObj, colorFour, playing);
+						
+						
+						
+						System.out.println("Player "+playing.getPlayerNumber()+" chooses "+colorFour+" color.");
+						System.out.println();
 					}
 					
 				}
