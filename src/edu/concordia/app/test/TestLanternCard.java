@@ -26,7 +26,7 @@ public class TestLanternCard {
 
 	@Before
 	public void setUp() throws Exception {
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance();
 		gc = new GameConfiguration();
 	}
 
@@ -39,55 +39,51 @@ public class TestLanternCard {
 
 
 	/**
-	 * To test Lantern Card Configuration for three players
+	 * To test Total number of favor tokens initially on board for different players 
 	 */
 	@Test
-	public void testConfigWithLantern3()
+	public void testConfigWithFavor3()
 
-	{
+	{ 
 
 		GameConfiguration c3 = new GameConfiguration(3);
-		GameInstance gi3 = new GameInstance(c3);
+		GameInstance gi3 = new GameInstance();
 
-		assertEquals(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
-				gi3.getDefaultLanternCardSize());
+		assertEquals(c3.TOTAL_FAVOR_TOKEN,
+				20);
 
-		// System.out.println(c3.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
 
 	/**
 	 * To test Lantern Card Configuration for four players
 	 */
 	@Test
-	public void testConfigWithLantern4()
+	public void testConfigWithFavor2()
 
-	{
+	{ 
 
-		GameConfiguration c4 = new GameConfiguration(4);
-		GameInstance gi4 = new GameInstance(c4);
+		GameConfiguration c3 = new GameConfiguration(2);
+		GameInstance gi3 = new GameInstance();
 
-		assertEquals(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
-				gi4.getDefaultLanternCardSize());
+		assertEquals(c3.TOTAL_FAVOR_TOKEN,
+				20);
 
-		// System.out.println(c4.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
 
 	/**
 	 * To test Lantern Card Configuration for two players
 	 */
 	@Test
-	public void testConfigWithLantern2()
+	public void testConfigWithFavor4()
 
-	{
+	{ 
 
-		GameConfiguration c2 = new GameConfiguration(2);
-		GameInstance gi2 = new GameInstance(c2);
+		GameConfiguration c3 = new GameConfiguration(4);
+		GameInstance gi3 = new GameInstance();
 
-		assertEquals(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR,
-				gi2.getDefaultLanternCardSize());
+		assertEquals(c3.TOTAL_FAVOR_TOKEN,
+				20);
 
-		// System.out.println(c2.NUM_OF_LANTERN_CARDS_FOR_EVERY_COLOR);
 	}
-
 
 }
