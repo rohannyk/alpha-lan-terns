@@ -5,11 +5,10 @@ package edu.concordia.app.test;
 
 import static org.junit.Assert.*;
 
-
 import java.util.Arrays;
+import java.util.Vector;
 
 import org.hamcrest.Matcher;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,9 +31,17 @@ public class TestStartTile {
 	GameInstance gi;
 	GameConfiguration gc;
 	LanternMain lm;
+	Vector<String> playerTypes;
 	
 	@Before
 	public void setUp(){
+		
+		playerTypes = new Vector<String>();
+		
+		playerTypes.add("Greedy");
+		playerTypes.add("Random");
+		playerTypes.add("Friendly");
+		playerTypes.add("Human");
 		gc = new GameConfiguration();
 		gi = new GameInstance();
 		lm = new LanternMain();
@@ -45,6 +52,7 @@ public class TestStartTile {
 		gc = null;
         gi = null;
 		lm = null;
+		playerTypes = null;
 	}
 		
 
@@ -56,7 +64,7 @@ public class TestStartTile {
 	public void testPlayerGetsRedTileEdgeForThreePlayers() {
 
 		GameConfiguration c3 = new GameConfiguration(3);
-		GameInstance gi3 = new GameInstance(c3);
+		GameInstance gi3 = new GameInstance(c3, playerTypes);
 		String r = "RED";
 		// Players[] playersList ;
 
@@ -84,7 +92,7 @@ public class TestStartTile {
 	public void testPlayerGetsRedTileEdgeForTwoPlayers() {
 				
 		GameConfiguration c2= new GameConfiguration(2);
-	    GameInstance gi2= new GameInstance(c2);
+	    GameInstance gi2= new GameInstance(c2, playerTypes);
 	    String r ="RED";
 	   //Players[] playersList ;
 	    Players[] checkPlayerList = gi2.getPlayersList();
@@ -111,7 +119,7 @@ public class TestStartTile {
 	public void testPlayerGetsRedTileEdgeForFourPlayers() {
 
 		GameConfiguration c4 = new GameConfiguration(4);
-		GameInstance gi4 = new GameInstance(c4);
+		GameInstance gi4 = new GameInstance(c4, playerTypes);
 		String r = "RED";
 		// Players[] playersList ;
 		// Players[] getPlayersList();
