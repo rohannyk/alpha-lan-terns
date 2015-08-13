@@ -33,6 +33,8 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 */
 	private static final long serialVersionUID = -3305084357466452652L;
 	private GameInstance gameObj;
+	
+	public String name;
 
 	/**
 	 * Constructor
@@ -42,6 +44,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 */
 	public FriendlyPlayerStrategy(GameInstance gameObj) {
 		this.gameObj = gameObj;
+		super.name = "Friendly";
 	}
 
 	/**

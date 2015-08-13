@@ -39,7 +39,7 @@ import edu.concordia.app.strategy.*;
 
 		for (int i = 0; i < gi4.getPlayersList().length; i++) {
 			Players player = gi4.getPlayersList()[i];
-			assertTrue(player.getStrategy().name.equals(playerTypes.get(i)));
+			assertEquals(player.getStrategy().name,(playerTypes.get(i)));
 		}
 	}
 	/*
@@ -59,7 +59,7 @@ import edu.concordia.app.strategy.*;
 		for (int i = 0; i < gi4.getPlayersList().length; i++) {
 			Players player = gi4.getPlayersList()[i];
 			System.out.println("name "+player.getStrategy().name);
-			assertTrue(player.getStrategy().name.equals(playerTypes.get(i)));
+			assertEquals(player.getStrategy().name,(playerTypes.get(i)));
 		}
 	}
 
