@@ -29,19 +29,29 @@ public class TestPlayers {
 
 	GameInstance gi;
 	GameConfiguration  gc;
-		
+	Vector<String> playerTypes;
 	
 
 	@Before
 	public void setUp() throws Exception {
-		gi = new GameInstance(new GameConfiguration());
+		
+		playerTypes = new Vector<String>();
+		
+		playerTypes.add("Greedy");
+		playerTypes.add("Random");
+		playerTypes.add("Friendly");
+		playerTypes.add("Human");
+		
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		gc = new GameConfiguration();
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		gi = null;
 		gc = null;
+		playerTypes = null;
 	}
 
 /**
@@ -52,7 +62,7 @@ public class TestPlayers {
 
 		// if you enter two players
 		//GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration(2));
+		gi = new GameInstance(new GameConfiguration(2), playerTypes);
 
 		assertEquals( gi.getNoOfPlayers(),2);
 		assertTrue(gi.getNoOfPlayers() == 2);
@@ -66,7 +76,7 @@ public class TestPlayers {
 	public void testThreePlayers() {
 		// if you enter three players
 		//GameConfiguration gc2 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration(3));
+		gi = new GameInstance(new GameConfiguration(3), playerTypes);
 		
 		assertEquals(gi.getNoOfPlayers(),3);
 		assertTrue(gi.getNoOfPlayers() == 3);
@@ -80,7 +90,7 @@ public class TestPlayers {
 	public void testFourPlayers() {
 		// if you enter four players
 		//GameConfiguration gc3 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration(4));
+		gi = new GameInstance(new GameConfiguration(4), playerTypes);
 
 		
 			assertEquals(gi.getNoOfPlayers(), 4);
@@ -95,7 +105,7 @@ public class TestPlayers {
 	public void testPlayerPositionsforTwoPlayers() {
 
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 
 		Players player[] = gi.getPlayersList();
 
@@ -121,7 +131,7 @@ public class TestPlayers {
 	@Test
 	public void testPlayerPositionsforThreePlayers() {
 		GameConfiguration gc1 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 
 		Players player[] = gi.getPlayersList();
 		String plrPositions[] = gi.getPlayerPositions();
@@ -141,7 +151,7 @@ public class TestPlayers {
 	@Test
 	public void testPlayerPositionsforFourPlayers() {
 		GameConfiguration gc1 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 
 		Players player[] = gi.getPlayersList();
 		String plrPositions[] = gi.getPlayerPositions();
@@ -163,7 +173,7 @@ public class TestPlayers {
 	public void testPlayerRemoveLakeTileFromHand() {
 		
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -171,12 +181,12 @@ public class TestPlayers {
 		
 		
 		//create PlayGame class object
-		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
+		//PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
 		
 		//Call remove lake tile method
-		Players plrVal = play.removePlacedLakeTile(tileInHand, player[0]);
+		player[0].removePlacedLakeTile(tileInHand);
 		
-		assertEquals(plrVal.getCurrentLakeTilesHold().size(), 2);
+		assertEquals(player[0].getCurrentLakeTilesHold().size(), 2);
 		
 		
 	}
@@ -190,20 +200,17 @@ public class TestPlayers {
 	public void testPlayerReplenishLakeTileToPlayer() {
 		
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
-		player[0].getCurrentLakeTilesHold().remove(0);
-		
-		LakeTiles tileInHand = player[0].getCurrentLakeTilesHold().get(0);
-		
+		player[0].getCurrentLakeTilesHold().remove(0);		
 		
 		//create PlayGame class object
 		PlayGame play = new PlayGame(gi,new GameController(gc1, gi));
 		
 		//Call remove lake tile method
-		play.replenishLakeTilesInHand(gi, player[0]);
+		Players.replenishLakeTilesInHand(gi, player[0]);
 		
 		assertEquals(player[0].getCurrentLakeTilesHold().size(), 3);
 		
@@ -221,10 +228,10 @@ public class TestPlayers {
 		LakeTiles checkTile = gc1.GAME_TOTAL_TILE_SUITE.get(0);
 
 		// create PlayGame class object
-		PlayGame play = new PlayGame();
+		//PlayGame play = new PlayGame();
 
 		// Call remove lake tile method
-		LakeTiles returnTile = play.rotateLakeTileByDegree(checkTile,
+		LakeTiles returnTile = PlayGame.rotateLakeTileByDegree(checkTile,
 				new String("0"));
 
 		assertEquals(checkTile.getTopColor(), returnTile.getTopColor());
@@ -317,7 +324,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerInTwoPlayerDifferentScore(){
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -345,7 +352,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerInThreePlayerDifferentScore(){
 		GameConfiguration gc1 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -363,7 +370,7 @@ GameConfiguration gc1 = new GameConfiguration();
 		Vector<Players> winnerPlayer = play.validateWinner(player);
 		
 		
-		assertEquals(player[1], winnerPlayer.get(0));
+		assertEquals(player[1], winnerPlayer.get(1));
 		
 	}
 	
@@ -373,7 +380,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerInFourPlayerDifferentScore(){
 		GameConfiguration gc1 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -403,7 +410,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerTwoPlayerSameScoreDiffCard(){
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -433,7 +440,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerTwoPlayerSameScoreSameCardDiffFavor(){
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -464,7 +471,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerTwoPlayerSameScoreSameCardSameFavor(){
 		GameConfiguration gc1 = new GameConfiguration(2);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -495,7 +502,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerThreePlayerSameScoreDiffCard(){
 		GameConfiguration gc1 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -525,7 +532,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerThreePlayerSameScoreSameCardDiffFavor(){
 		GameConfiguration gc1 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -559,7 +566,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerThreePlayerSameScoreSameCardSameFavor(){
 		GameConfiguration gc1 = new GameConfiguration(3);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -593,7 +600,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerFourPlayerSameScoreDiffCard(){
 		GameConfiguration gc1 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -625,7 +632,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerFourPlayerSameScoreSameCardDiffFavor(){
 		GameConfiguration gc1 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
@@ -662,7 +669,7 @@ GameConfiguration gc1 = new GameConfiguration();
 	@Test
 	public void testWinnerFourPlayerSameScoreSameCardSameFavor(){
 		GameConfiguration gc1 = new GameConfiguration(4);
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance(new GameConfiguration(), playerTypes);
 		
 		Players player[] = gi.getPlayersList();
 		
