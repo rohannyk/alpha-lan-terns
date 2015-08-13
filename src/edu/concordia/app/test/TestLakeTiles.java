@@ -29,7 +29,7 @@ public class TestLakeTiles {
 
 	@Before
 	public void setUp() throws Exception {
-		gi = new GameInstance(new GameConfiguration());
+		gi = new GameInstance();
 		gc = new GameConfiguration();
 	}
 
@@ -46,9 +46,8 @@ public class TestLakeTiles {
 	public void testConfigWithParam4() {
 		
 		GameConfiguration c4 = new GameConfiguration(4);
-		GameInstance gi4 = new GameInstance(c4);
-		Vector<LakeTiles> vlt = gi4.getGameTilesDrawPile();
-		assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+		GameInstance gi4 = new GameInstance();
+		assertEquals(c4.NUM_OF_TILES_IN_DRAW_STACK, 20);
 		
 	}
 	
@@ -59,9 +58,8 @@ public class TestLakeTiles {
 	public void testConfigWithParam3() {
 
 		GameConfiguration c3 = new GameConfiguration(3);
-		GameInstance gi3 = new GameInstance(c3);
-		Vector<LakeTiles> vlt = gi3.getGameTilesDrawPile();
-		assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+		GameInstance gi3 = new GameInstance();
+		assertEquals(c3.NUM_OF_TILES_IN_DRAW_STACK, 18);
 	}
 
 	/**
@@ -71,9 +69,9 @@ public class TestLakeTiles {
 	public void testConfigWithParam2() {
 
 		GameConfiguration c2 = new GameConfiguration(2);
-		GameInstance gi2 = new GameInstance(c2);
+		GameInstance gi2 = new GameInstance();
 		Vector<LakeTiles> vlt = gi2.getGameTilesDrawPile();
-		assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK, vlt.size());
+		assertEquals(c2.NUM_OF_TILES_IN_DRAW_STACK,16);
 
 	}
 	
