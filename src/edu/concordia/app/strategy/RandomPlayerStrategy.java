@@ -251,12 +251,7 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 
 				this.exchageLaternCard(gameObj, playing);
 
-				opt = PlayGame.removeSubstring(new String("exchange"), opt);// to
-																			// mark
-																			// exchange
-																			// has
-																			// been
-																			// done.
+				opt = PlayGame.removeSubstring(new String("exchange"), opt);// to mark exchange has been done.
 
 			}
 			break;
@@ -405,8 +400,6 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 
 		String resultChoice[] = placementString.split(":");
 
-		System.out.println("langth " + resultChoice.length);
-
 		if (resultChoice.length == 1) {
 			return false;
 		}
@@ -419,7 +412,7 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 		// tile position (L/R/T/B)
 		String tilePlace = resultChoice[positionChoice];
 
-		System.out.println(tilePlace);
+		//System.out.println(tilePlace);
 
 		int x = 0;
 		int y = 0;
@@ -428,7 +421,7 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 				if (gameObjs.GameBoard[i][j] == Integer.parseInt(resultChoice[0])) {
 					y = i;
 					x = j;
-					System.out.println(y + "" + x);
+					
 					break;
 				}
 			}
@@ -446,7 +439,7 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 			y = y + 1;
 		}
 
-		System.out.println("changed " + y + "" + x);
+	
 		gameObjs.GameBoard[y][x] = tileInHand.getTilesId();
 
 		// distribute lantern cards
