@@ -104,7 +104,7 @@ public class GameController implements Serializable{
 	         out.writeObject(gameInstance);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /tmp/employee.ser");
+	         System.out.printf("Serialized data is saved in "+gameFile);
 	      }catch(IOException i)
 	      {
 	          i.printStackTrace();

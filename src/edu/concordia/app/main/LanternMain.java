@@ -15,6 +15,12 @@ import edu.concordia.app.model.NCardGamePlay;
 import edu.concordia.app.model.NHonorPointsGamePlay;
 import edu.concordia.app.model.NormalGamePlay;
 import edu.concordia.app.model.PlayGame;
+import edu.concordia.app.model.Players;
+import edu.concordia.app.strategy.FriendlyPlayerStrategy;
+import edu.concordia.app.strategy.GreedyPlayerStrategy;
+import edu.concordia.app.strategy.NormalPlayerStrategy;
+import edu.concordia.app.strategy.RandomPlayerStrategy;
+import edu.concordia.app.strategy.UnfriendlyPlayerStrategy;
 
 /**
  * @author Team E
@@ -269,16 +275,7 @@ public class LanternMain {
 				} else {
 					//gameController.showTextMode(instance);
 					
-					/*if(instance.getGameEndMode() instanceof NormalGamePlay){
-						System.out.println("normal");
-						instance.getGameEndMode().gameStart(scan);
-					}else if(instance.getGameEndMode() instanceof NCardGamePlay){
-						System.out.println("card");
-					}else if(instance.getGameEndMode() instanceof NHonorPointsGamePlay){
-						System.out.println("point");
-					}else if(instance.getGameEndMode() instanceof PlayGame){
-						System.out.println("default");
-					}*/
+					instance = updatePlayerStrategy(instance);
 					
 					instance.getGameEndMode().gameStart();
 
@@ -298,6 +295,58 @@ public class LanternMain {
 
 		}
 
+	}
+
+	/**
+	 * @param instance
+	 * @return
+	 */
+	private static GameInstance updatePlayerStrategy(GameInstance instance) {
+		
+		Players[]  playerList = instance.getPlayersList();
+		
+		for (int i = 0; i < playerList.length; i++) {
+			Players player = playerList[i];
+			
+			System.out.println("Please enter New Strategy for player "+player.getPlayerNumber());
+			
+			System.out.println("(0-Greedy/1-Unfriendly/"+"2-Random/3-Friendly/4-Human).");
+			
+			int strategyChoice = new LanternMain().scan.nextInt();
+			
+			switch (strategyChoice) {
+			case 0:
+				
+				player.setStrategy(new GreedyPlayerStrategy(instance));
+				break;
+				
+			case 1:
+				
+				player.setStrategy(new UnfriendlyPlayerStrategy(instance));
+				break;
+				
+			case 2:
+	
+				player.setStrategy(new RandomPlayerStrategy(instance));
+				break;
+	
+			case 3:
+	
+				player.setStrategy(new FriendlyPlayerStrategy(instance));
+				break;
+	
+			case 4:
+	
+				player.setStrategy(new NormalPlayerStrategy(instance));
+				break;
+
+			default:
+				break;
+			}
+			
+		}
+		
+		return instance;
 	}
 
 	/**
