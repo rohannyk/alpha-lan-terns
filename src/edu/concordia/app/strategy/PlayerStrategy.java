@@ -12,7 +12,8 @@ import edu.concordia.app.model.Players;
 
 @XmlRootElement
 /**
- * @author lovepreet
+ * This is the parent class for storing all player strategies.
+ * @author Team E
  *
  */
 public class PlayerStrategy {

@@ -16,8 +16,9 @@ import edu.concordia.app.model.Players;
 import edu.concordia.app.view.LanternGameView;
 
 /**
- * @author lovepreet
- *
+ * This class creates an object of random player strategy which is a sub-class of PlayerStrategy.java
+ * This class contains the logic for random player strategy.
+ * @author Team E
  */
 public class RandomPlayerStrategy extends PlayerStrategy implements Serializable {
 
