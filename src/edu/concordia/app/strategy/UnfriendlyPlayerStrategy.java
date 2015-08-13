@@ -465,40 +465,50 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 				
 				System.out.println(degreeCombination[0]+" "+degreeCombination[1]);
 				
+				int north = 0;
+				int south = 0;
+				int east = 0;
+				int west = 0;
+						
+				
 				for (int plyrCount=0; plyrCount < gameObjs.getPlayersList().length;plyrCount++)
 				{			
 					
 					if(gameObjs.getPlayersList()[plyrCount].getPlayerPosition().equalsIgnoreCase("North") && colorCount(lakeTileChoice.getTopColor(), gameObjs)>0 )
 					{
-								otherPlayerTilesPlacement +=":N:1";
+								//otherPlayerTilesPlacement +=":N:1";
+								north += 1;
 					}
 					else
 					{
-						otherPlayerTilesPlacement +=":N:0";
+						//otherPlayerTilesPlacement +=":N:0";
 					}
 					if(gameObjs.getPlayersList()[plyrCount].getPlayerPosition().equalsIgnoreCase("South") && colorCount(lakeTileChoice.getBottomColor(), gameObjs)>0 )
 					{
-								otherPlayerTilesPlacement +=":S:1";
+								//otherPlayerTilesPlacement +=":S:1";
+								south += 1;
 					}
 					else
 					{
-						otherPlayerTilesPlacement +=":S:0";
+						//otherPlayerTilesPlacement +=":S:0";
 					}
 					if(gameObjs.getPlayersList()[plyrCount].getPlayerPosition().equalsIgnoreCase("East") && colorCount(lakeTileChoice.getLeftColor(), gameObjs)>0 )
 					{
-								otherPlayerTilesPlacement +=":E:1";
+								//otherPlayerTilesPlacement +=":E:1";
+								east += 1;
 					}
 					else
 					{
-						otherPlayerTilesPlacement +=":E:0";
+						//otherPlayerTilesPlacement +=":E:0";
 					}
 					if(gameObjs.getPlayersList()[plyrCount].getPlayerPosition().equalsIgnoreCase("West") && colorCount(lakeTileChoice.getRightColor(), gameObjs)>0 )
 					{
-								otherPlayerTilesPlacement +=":W:1";
+								//otherPlayerTilesPlacement +=":W:1";
+								west += 1;
 					}
 					else
 					{
-						otherPlayerTilesPlacement +=":W:0";
+						//otherPlayerTilesPlacement +=":W:0";
 					}
 					
 //					tilePlacementCominationResults.add(otherPlayerTilesPlacement);
@@ -506,6 +516,8 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 					
 					
 				}
+				
+				otherPlayerTilesPlacement +=":N:"+north+":S:"+south+":E:"+east+":W:"+west;
 				
 				tilePlacementCominationResults.add(otherPlayerTilesPlacement);
 				//otherPlayerTilesPlacement  ="";
