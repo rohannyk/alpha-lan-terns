@@ -1212,8 +1212,9 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 * This method gets a random number.
 	 * 
 	 * @param number:
-	 *            int type
-	 * @return random: int type
+	 *            	int type
+	 * @return random: 
+	 * 				int type
 	 */
 	private int getRandomNumber(int number) {
 
