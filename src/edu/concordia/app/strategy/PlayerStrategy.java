@@ -10,14 +10,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import edu.concordia.app.model.GameInstance;
 import edu.concordia.app.model.Players;
 
-
+@XmlRootElement
 /**
  * This is the parent class for storing all player strategies.
- * 
  * @author Team E
+ *
  */
 public class PlayerStrategy {
 
+	public String name ="";
+	
 	public String makeAMove(GameInstance gameObjs, Players playing, String opt){
 		return opt;
 	}
