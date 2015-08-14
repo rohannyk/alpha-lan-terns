@@ -36,6 +36,7 @@ public class LakeTiles implements Serializable{
 
 	/**
 	 * This constructor will set the fields of LakeTiles class.
+	 * @param tilesId The tile id.
 	 * @param topColor The top color of lake tile.
 	 * @param leftColor The left color of lake tile.
 	 * @param rightColor The right color of lake tile.
@@ -223,6 +224,8 @@ public class LakeTiles implements Serializable{
 
 	/**
 	 * The method to rotate the lake tile 90 Degree clockwise
+	 * @return
+	 * 		The Lake Tile
 	 */
 	public LakeTiles rotateLakeTile() {
 		String TC = getTopColor();
