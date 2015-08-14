@@ -47,11 +47,8 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	public GreedyPlayerStrategy(GameInstance gameObj) {
 
 		this.gameObj = gameObj;
-<<<<<<< HEAD
-=======
-		
 		super.name = "Greedy";
->>>>>>> origin/master
+
 	}
 
 	private static Scanner scan = LanternMain.getValue();
