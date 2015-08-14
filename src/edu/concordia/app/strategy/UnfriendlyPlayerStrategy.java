@@ -27,7 +27,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	private static final long serialVersionUID = 8707943598805857983L;
 	private GameInstance gameObj;
 	
-	public String name;
+	public String name = "Unfriendly";;
 
 	/**
 	 * Constructor
@@ -45,7 +45,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	 * 
 	 * @param gameObj
 	 *            The GameInstance object
-	 * @param gamePlayer
+	 * @param playing
 	 *            The current player of the game.
 	 * @param opt1
 	 *            The string to save exchange or type1/type2/type3 for
@@ -578,6 +578,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	 *            The GameInstance object
 	 * @param color
 	 *            The color of the lantern card
+	 * @return The count of the Lantern card color.
 	 */
 	public static int colorCount(String color, GameInstance gameobj) {
 		int count = 0;
@@ -617,6 +618,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	 *            The combination result string
 	 * @param adjTilePosition
 	 *            The adjacent tile position string
+	 * @return The lake tile placed on the game board.
 	 */
 	public static LakeTiles placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String comRes,
 			String adjTilePosition) {
@@ -719,7 +721,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	/**
 	 * Method to return the possible dedication types
 	 * 
-	 * @param gameObjs
+	 * @param gameObj
 	 *            The GameInstance object
 	 * @param playing
 	 *            The current player of the game.
@@ -1703,10 +1705,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	 *            to user choice.
 	 * @param playing
 	 *            The current player of the game.
-	 * @param opt
-	 *            The string contain options that player can choose
-	 *            (Dedication/discard).
-	 * @return The string contain those choices that are not used by the user.
+	 *
 	 */
 	public static void filterExcessLanternCards(GameInstance gameObj, Players playing) {
 

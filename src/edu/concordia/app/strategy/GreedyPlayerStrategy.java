@@ -37,8 +37,6 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	private GameInstance gameObj;
 
 	private Players playing;
-	
-	public String name;
 
 	/**
 	 * Constructor
@@ -49,8 +47,11 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	public GreedyPlayerStrategy(GameInstance gameObj) {
 
 		this.gameObj = gameObj;
+<<<<<<< HEAD
+=======
 		
 		super.name = "Greedy";
+>>>>>>> origin/master
 	}
 
 	private static Scanner scan = LanternMain.getValue();
@@ -96,7 +97,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	 * 
 	 * @param gameObj
 	 *            The GameInstance object
-	 * @param gamePlayer
+	 * @param playing
 	 *            The current player of the game.
 	 * @param opt1
 	 *            The string to save exchange or type1/type2/type3 for
@@ -1023,8 +1024,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	 *            The current player of the game.
 	 * @param comRes
 	 *            The combination result string
-	 * @param adjTilePosition
-	 *            The adjacent tile position string
+	 * @return The lake tile placed on the game board.
 	 */
 	public static LakeTiles placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String comRes) {
 		String[] placingInformation = comRes.split(":");
@@ -1103,13 +1103,13 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	/**
 	 * Method to return the possible dedication types
 	 * 
-	 * @param gameObjs
-	 *            The GameInstance object
+	 * @param gameObj
+	 *            The GameInstance object.
 	 * @param playing
 	 *            The current player of the game.
 	 * @param combinationResult
-	 *            The combination result string
-	 * @return retStr The possible dedication types string
+	 *            The combination result string.
+	 * @return The possible options of player for exchange and dedication.
 	 */
 	public static String genValidationGreedy(GameInstance gameObj, Players playing, String combinationResult) {
 		boolean exahange = false;
@@ -2025,10 +2025,7 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	 *            to user choice.
 	 * @param playing
 	 *            The current player of the game.
-	 * @param opt
-	 *            The string contain options that player can choose
-	 *            (Dedication/discard).
-	 * @return The string contain those choices that are not used by the user.
+	 *.
 	 */
 	public static void filterExcessLanternCards(GameInstance gameObj, Players playing) {
 

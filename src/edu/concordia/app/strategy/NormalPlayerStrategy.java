@@ -27,8 +27,6 @@ public class NormalPlayerStrategy extends PlayerStrategy implements Serializable
 	private GameInstance gameObj;
 
 	private transient Scanner scan = new Scanner(System.in);
-	
-	public String name;
 
 	/**
 	 * Constructor
@@ -38,8 +36,11 @@ public class NormalPlayerStrategy extends PlayerStrategy implements Serializable
 	 */
 	public NormalPlayerStrategy(GameInstance gameObj) {
 		this.gameObj = gameObj;
+<<<<<<< HEAD
+=======
 		
 		super.name = "Human";
+>>>>>>> origin/master
 	}
 
 	/**
@@ -171,11 +172,11 @@ public class NormalPlayerStrategy extends PlayerStrategy implements Serializable
 
 	/**
 	 * Method to make a move
-	 * @param gameObjs
+	 * @param gameObj
 	 * 		The GameInstance object
 	 * @param playing
 	 * 		The current player of the game.
-	 * @param option
+	 * @param opt
 	 * 		The string for SEVEN/SIX/FOUR/GEN for dedication
 	 */
 	@Override

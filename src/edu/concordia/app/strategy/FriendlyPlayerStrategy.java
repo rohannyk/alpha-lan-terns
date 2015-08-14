@@ -33,8 +33,6 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 */
 	private static final long serialVersionUID = -3305084357466452652L;
 	private GameInstance gameObj;
-	
-	public String name;
 
 	/**
 	 * Constructor
@@ -44,7 +42,6 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 */
 	public FriendlyPlayerStrategy(GameInstance gameObj) {
 		this.gameObj = gameObj;
-		super.name = "Friendly";
 	}
 
 	/**
@@ -652,10 +649,11 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	/**
 	 * Method to count the number of lantern cards for a specific color
 	 * 
+	 *  @param color
+	 *            The color of the lantern card
 	 * @param gameobj
 	 *            The GameInstance object
-	 * @param color
-	 *            The color of the lantern card
+	 *@return The count of lantern cards of each color.
 	 */
 	public static int colorCount(String color, GameInstance gameobj) {
 		int count = 0;
@@ -695,6 +693,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 *            The combination result string
 	 * @param adjTilePosition
 	 *            The adjacent tile position string
+	 * @return The lake tile placed on the board.
 	 */
 	public static LakeTiles placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String comRes,
 			String adjTilePosition) {
@@ -797,7 +796,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	/**
 	 * Method to return the possible dedication types
 	 * 
-	 * @param gameObjs
+	 * @param gameObj
 	 *            The GameInstance object
 	 * @param playing
 	 *            The current player of the game.
@@ -1563,6 +1562,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 *            The current player of the game.
 	 * @param getColors
 	 *            The specified color.
+	 * @return true if exchange is performed otherwise false.
 	 */
 	public static String doExchange(Players playing, GameInstance gameObj, String getColors) {
 		// sendColor.. any color whose count is > 1
@@ -1799,7 +1799,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 *            to user choice.
 	 * @param playing
 	 *            The current player of the game.
-	 * @param opt
+	 * @param option
 	 *            The string contain options that player can choose
 	 *            (Dedication/discard).
 	 * @return The string contain those choices that are not used by the user.
@@ -2066,7 +2066,7 @@ public class FriendlyPlayerStrategy extends PlayerStrategy implements Serializab
 	 * @param gameObj
 	 *            The GameInstance object for updating the lantern cards of the
 	 *            game board.
-	 * @param playing
+	 * @param playing The current player of the game.
 	 */
 	public void discardLanternCards(GameInstance gameObj, Players playing) {
 
