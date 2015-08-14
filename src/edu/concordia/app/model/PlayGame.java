@@ -40,6 +40,8 @@ public class PlayGame {
 	 */
 	private transient Scanner scan = new Scanner(System.in);
 	
+	public String gameMode;
+	
 	/**
 	 * 
 	 */

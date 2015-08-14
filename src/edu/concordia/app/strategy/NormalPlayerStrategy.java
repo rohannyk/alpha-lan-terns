@@ -27,6 +27,8 @@ public class NormalPlayerStrategy extends PlayerStrategy implements Serializable
 	private GameInstance gameObj;
 
 	private transient Scanner scan = new Scanner(System.in);
+	
+	public String name;
 
 	/**
 	 * Constructor

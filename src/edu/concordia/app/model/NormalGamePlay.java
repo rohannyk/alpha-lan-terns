@@ -31,6 +31,8 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 	private GameController gameController;
 
 	private transient Scanner scan = new Scanner(System.in);
+	
+	protected String gameMode;
 
 	/**
 	 * Constructor
@@ -43,6 +45,8 @@ public class NormalGamePlay extends PlayGame implements Serializable{
 
 		this.gameObj = gameObj;
 		this.gameController = gameController;
+		
+		super.gameMode = "NormalGame";
 
 		//gameObj.setGameEndMode(this);
 	}

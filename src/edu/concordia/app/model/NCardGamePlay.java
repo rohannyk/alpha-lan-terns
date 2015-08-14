@@ -30,6 +30,8 @@ public class NCardGamePlay extends PlayGame implements Serializable {
 	private GameInstance gameObj;
 	private GameController gameController;
 	private int maxCardInput;
+	
+	protected String gameMode;
 
 	private transient Scanner scan = new Scanner(System.in);
 
@@ -45,6 +47,8 @@ public class NCardGamePlay extends PlayGame implements Serializable {
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 		this.maxCardInput = maxCardInput;
+		
+		super.gameMode = "NCardGame";
 
 		//gameObj.setGameEndMode(this);
 		// System.out.println(gameObj);

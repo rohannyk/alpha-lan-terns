@@ -58,7 +58,7 @@ import edu.concordia.app.strategy.*;
 
 		for (int i = 0; i < gi4.getPlayersList().length; i++) {
 			Players player = gi4.getPlayersList()[i];
-			System.out.println("name "+player.getStrategy().name);
+			
 			assertEquals(player.getStrategy().name,(playerTypes.get(i)));
 		}
 	}

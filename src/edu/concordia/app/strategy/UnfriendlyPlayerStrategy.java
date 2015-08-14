@@ -27,7 +27,7 @@ public class UnfriendlyPlayerStrategy extends PlayerStrategy implements Serializ
 	private static final long serialVersionUID = 8707943598805857983L;
 	private GameInstance gameObj;
 	
-	public String name = "Unfriendly";;
+	public String name;
 
 	/**
 	 * Constructor

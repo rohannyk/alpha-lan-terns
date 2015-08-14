@@ -37,6 +37,8 @@ public class GreedyPlayerStrategy extends PlayerStrategy implements Serializable
 	private GameInstance gameObj;
 
 	private Players playing;
+	
+	public String name;
 
 	/**
 	 * Constructor

@@ -14,6 +14,7 @@ import org.junit.Test;
 import edu.concordia.app.main.LanternMain;
 import edu.concordia.app.model.*;
 import edu.concordia.app.components.*;
+import edu.concordia.app.controller.GameController;
 import edu.concordia.app.strategy.*;
 
 /**
@@ -23,8 +24,6 @@ import edu.concordia.app.strategy.*;
  */
 public class TestMakeDedicationTest {
 
-	
-
 	/*
 	 * @Test public void test() {
 	 * 
@@ -33,55 +32,59 @@ public class TestMakeDedicationTest {
 	 * assertTrue(dedicationTokens.> 6); }
 	 */
 
-	@Test public void testStrategyChoiceForTwoPlayers() {
-
+	@Test
+	public void testNormalGameEndMode() {
+		
 		Vector<String> playerTypes = new Vector<String>();
 
 		playerTypes.add("Human");
 		playerTypes.add("Unfriendly");
-
+		
 		GameConfiguration c4 = new GameConfiguration(2);
 		GameInstance gi4 = new GameInstance(c4, playerTypes);
-
-		for (int i = 0; i < gi4.getPlayersList().length; i++) {
-			Players player = gi4.getPlayersList()[i];
-			assertTrue(player.getStrategy().name.equals(playerTypes.get(i)));
-		}
+		
+		GameController gameController = new GameController(c4, gi4);
+		
+		PlayGame pGame = new NormalGamePlay(gi4, gameController);
+		
+		assertTrue(pGame.gameMode.equals("NormalGame"));
 	}
 
-	@Test public void testStrategyChoiceForThreePlayers() {
-
+	@Test
+	public void testNCardGameEndMode() {
+		
 		Vector<String> playerTypes = new Vector<String>();
 
 		playerTypes.add("Human");
-		playerTypes.add("Greedy");
-		playerTypes.add("Random");
-
-		GameConfiguration c4 = new GameConfiguration(3);
+		playerTypes.add("Unfriendly");
+		
+		GameConfiguration c4 = new GameConfiguration(2);
 		GameInstance gi4 = new GameInstance(c4, playerTypes);
-
-		for (int i = 0; i < gi4.getPlayersList().length; i++) {
-			Players player = gi4.getPlayersList()[i];
-			System.out.println("name "+player.getStrategy().name);
-			assertTrue(player.getStrategy().name.equals(playerTypes.get(i)));
-		}
+		
+		GameController gameController = new GameController(c4, gi4);
+		
+		PlayGame pGame = new NCardGamePlay(gi4, gameController, 4);
+		
+		assertTrue(pGame.gameMode.equals("NCardGame"));
 	}
 
-	@Test public void testStrategyChoiceForFourPlayers() {
-
+	@Test
+	public void testNHonorPointGameEndMode() {
+		
 		Vector<String> playerTypes = new Vector<String>();
 
 		playerTypes.add("Human");
-		playerTypes.add("Greedy");
-		 playerTypes.add("Random");
-		 playerTypes.add("Friendly");
-
-		GameConfiguration c4 = new GameConfiguration(4);
+		playerTypes.add("Unfriendly");
+		
+		GameConfiguration c4 = new GameConfiguration(2);
 		GameInstance gi4 = new GameInstance(c4, playerTypes);
-
-		for (int i = 0; i < gi4.getPlayersList().length; i++) {
-			Players player = gi4.getPlayersList()[i];
-			assertTrue(player.getStrategy().name.equals(playerTypes.get(i)));
-		}
+		
+		GameController gameController = new GameController(c4, gi4);
+		
+		PlayGame pGame = new NHonorPointsGamePlay(gi4, gameController, 4);
+		
+		assertTrue(pGame.gameMode.equals("NHonorPointGame"));
 	}
+
+	
 }

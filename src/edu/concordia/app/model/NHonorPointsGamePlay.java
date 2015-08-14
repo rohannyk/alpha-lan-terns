@@ -31,6 +31,8 @@ public class NHonorPointsGamePlay extends PlayGame implements Serializable{
 	
 	private transient Scanner scan = new Scanner(System.in);
 	
+	protected String gameMode;
+	
 	/**
 	 * Constructor
 	 * @param gameObj
@@ -43,6 +45,8 @@ public class NHonorPointsGamePlay extends PlayGame implements Serializable{
 		this.gameObj = gameObj;
 		this.gameController = gameController;
 		this.gamePoint = gamePoint;
+		
+		super.gameMode = "NHonorPointGame";
 		
 		//gameObj.setGameEndMode(this);
 	}
