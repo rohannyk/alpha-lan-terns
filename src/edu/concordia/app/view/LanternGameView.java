@@ -29,8 +29,6 @@ public class LanternGameView {
 	 * 
 	 * @param gameObj
 	 *            The GameInstance object for updating game board array.
-	 * @param playing
-	 *            The current player of the game.
 	 */
 	public void displayLakeTileBoard(GameInstance gameObj) {
 
@@ -133,7 +131,8 @@ public class LanternGameView {
 	 * 
 	 * @param gameObj
 	 *            The GameInstance object for updating game board array.
-	 * @returnThe left horizontal array element which is not empty.
+	 * @return 
+	 * 			The left horizontal array element which is not empty.
 	 */
 	public static int getStartHorizontal(GameInstance gameObj) {
 		for (int i = 0; i < 73; i++) {
