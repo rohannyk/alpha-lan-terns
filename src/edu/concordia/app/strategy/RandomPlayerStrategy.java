@@ -180,8 +180,8 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 *            The GameInstance object
 	 * @param playing
 	 *            The current player of the game.
-	 * @param option
-	 *            The string for SEVEN/SIX/FOUR/GEN for dedication
+	 * @param opt
+	 *            The string for for dedication
 	 */
 	@Override
 	public String makeAMove(GameInstance gameObjs, Players playing, String opt) {
@@ -390,10 +390,12 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 *            The GameInstance object
 	 * @param playing
 	 *            The current player of the game.
-	 * @param comRes
-	 *            The combination result string
-	 * @param adjTilePosition
-	 *            The adjacent tile position string
+	 * @param placementString
+	 *            The placement string
+	 * @param tileInHand
+	 *            The tile in hand
+	 * @return
+	 * 				The boolean value
 	 */
 	public boolean placeALakeTileAndDistribute(GameInstance gameObjs, Players playing, String placementString,
 			LakeTiles tileInHand) {
@@ -683,11 +685,11 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 * the game. It will ask for the lantern cards to be discarded and discard
 	 * the selected cards
 	 * 
-	 * @see getLanterCardColorRemoval
 	 * @param gameObj
 	 *            The GameInstance object for updating the lantern cards of the
 	 *            game board.
 	 * @param playing
+	 * 				The current player
 	 */
 	public void discardLanternCards(GameInstance gameObj, Players playing) {
 
@@ -820,6 +822,8 @@ public class RandomPlayerStrategy extends PlayerStrategy implements Serializable
 	 *            the dedications.
 	 * @param opt
 	 *            The string to choose the type of dedication.
+	 * @param playing
+	 *            The current player
 	 */
 	public void makeADedication(GameInstance gameObj, String opt, Players playing) {
 
